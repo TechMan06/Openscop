@@ -50,7 +50,10 @@ func _process(delta):
 		if Input.is_action_just_pressed(\"pressed_right\") && selected_option!=pet_dictionary_keys.size()-1:
 			selected_option+=1
 			$cursor_move.play()
-	
+		if Input.is_action_just_pressed(\"pressed_select\"):
+			create_tween().tween_property($pink_fade,\"color:a\",1.0,0.25)
+			await get_tree().create_timer(0.4).timeout
+			queue_free()
 	selected_option=clamp(selected_option,0,pet_dictionary_keys.size()-1)
 	for buttons in get_node(\"pet_buttons\").get_children():
 		if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
