@@ -7,16 +7,31 @@ var peer
 func _ready():
 	multiplayer.peer_connected.connect(Peer)
 	multiplayer.peer_disconnected.connect(Peer)
-	multiplayer.connected_to_server.connect(PrintTest)
+	multiplayer.connected_to_server.connect(ConnectedServer)
 	multiplayer.connection_failed.connect(PrintTest)
 
 #server only
 func Peer(id):
 	print("Peer Interaction"+str(id))
 
-#client only	
+#client only
+func ConnectedServer():
+	print("Connected to Server!")
+	
 func PrintTest():
 	print("YES")
+	
+@rpc("any_peer","call_local")
+func send_player_general_info(name,id):
+	if !Global.players.has(id):
+		Global.players[id] = {
+			"username": name,
+			"id": id
+		}
+	if multiplayer.is_server():
+		for players in Global.players:
+			send_player_general_info.rpc(Global.players[players].name,players)
+	
 	
 func host():
 	peer = ENetMultiplayerPeer.new()
@@ -39,5 +54,5 @@ func join():
 func add_mock_player(id = 1):
 	var player = player_scene.instantiate()
 
-func setup():
+#func setup():
 	
