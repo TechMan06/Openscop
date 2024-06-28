@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbk5pkaihn6ya"]
+
+[ext_resource type="Script" path="res://scripts/network/network_main.gd" id="1_fdgld"]
+[ext_resource type="PackedScene" uid="uid://b6dqvpwqol87a" path="res://scenes/objects/setup/player/mock_player.tscn" id="2_g66xt"]
+
+[node name="Network" type="Node"]
+script = ExtResource("1_fdgld")
+player_scene = ExtResource("2_g66xt")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]

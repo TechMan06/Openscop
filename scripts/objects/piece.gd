@@ -33,7 +33,7 @@ func _on_piece_area_body_entered(body):
 	if body==get_tree().get_first_node_in_group("Player"):
 		collected=true
 		random_sound = randi_range(0,2)
-		Global.pieces_amount[Global.current_character]+=1
+		Global.pieces_amount+=1
 		if Global.piece_log.has(Global.room_name):
 			Global.piece_log[Global.room_name].push_back(get_parent().get_node(str(self.name)).get_index())
 		else:

@@ -14,12 +14,6 @@ var active_menu = [false,false,false,false,false]
 var spawned_menu = false
 var inMenu = false
 var piece_frame = 0
-func get_screen():
-	var viewport_feed: Viewport =  get_tree().root.get_viewport()
-	var screen_texture: Texture2D = viewport_feed.get_texture()
-	var screen_image: Image = screen_texture.get_image()
-	var screen: Texture2D = ImageTexture.create_from_image(screen_image)
-	return screen
 	
 
 func selection_sound(variable):
@@ -59,7 +53,6 @@ func _process(delta):
 	if Global.game_paused:
 		#$"../../recording_header".disappear()
 		#await $"../../recording_header".get_child(0).timeout
-		get_tree().paused = true
 		$main_pausemenu/visible_group.visible=true
 		$main_pausemenu/visible_group/piece_counter.text=str(Global.pieces_amount[Global.current_character]).pad_zeros(5)
 		if $screen_sprite.scale.x>MINI_SCREEN_SIZE:
@@ -77,7 +70,6 @@ func _process(delta):
 				$pause_sound2.play()
 			elif random==2:
 				$pause_sound3.play()
-			$screen_sprite.set_texture(get_screen())
 			$main_pausemenu/background1.visible = true
 			if $main_pausemenu/buttons_quit.get_child_count()==0 && !inMenu:
 				$main_pausemenu/buttons.visible = true
@@ -108,7 +100,6 @@ func _process(delta):
 			var screen_scaler = create_tween()
 			screen_scaler.tween_property($screen_sprite,"scale",Vector2(1.,1.),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
 			await screen_scaler.finished
-			get_tree().paused = false
 
 	if can_unpause && Global.game_paused && $current_menu.get_child_count()==0 && $main_pausemenu/buttons.visible && !get_tree().get_first_node_in_group("Nifty").visible:
 		if fade==0.0:

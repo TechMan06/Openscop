@@ -14,6 +14,7 @@ func _ready():
 
 func _process(_delta):
 	if visible:
+		Global.allow_walking=false
 		if !loaded:
 			if level.find_child("visual_mesh"):
 				texture_data = level.find_child("visual_mesh").get_child(0).get_surface_override_material(0).get_shader_parameter("albedoTex")
@@ -25,8 +26,8 @@ func _process(_delta):
 		if Input.is_action_pressed("pressed_start"):
 			pencil.position=Vector2i(32,240)
 			$nifty.play()
-			get_tree().paused = false
 			Global.can_pause=true
+			Global.allow_walking=true
 			for mesh_object in level.find_child("visual_mesh").get_children():
 				if mesh_object.get_class() == "MeshInstance3D" && mesh_object.get_child_count()==0:
 					mesh_object.get_surface_override_material(0).set_shader_parameter("albedoTex", ImageTexture.create_from_image(texture_image))

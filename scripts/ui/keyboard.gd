@@ -26,13 +26,13 @@ func _ready():
 		position.y=-240
 		$keyboard_background/keyboard_ui.frame_coords.x=0
 		$keyboard_background/keyboard_string.get_label_settings().set_font_color(Color.BLACK)
-		$keyboard_background/keyboard_string.text="Name file: "
+		$keyboard_background/keyboard_string.text="Display Name: "
 		$keyboard_background/keyboard_inner/selector.get_material().set_shader_parameter("invert",true)
 	var fade_in = create_tween()
 	fade_in.tween_property($fade,"color:a",float(has_fade),APPEAR_ANIM_SPEED)
 	await fade_in.finished
 	deactivate = false
-	get_tree().paused=true
+	Global.allow_walking=false
 	if background!=3:
 		create_tween().tween_property(self,"position:y",0.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 	else:
@@ -130,14 +130,14 @@ func _process(_delta):
 			if Global.keyboard_RAM=="":
 				if !ask:
 					if background==3:
-						Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-11))
+						Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-14))
 						Console.console_log(Global.keyboard_RAM)
 					else:
 						Global.keyboard_RAM=$keyboard_background/keyboard_string.text
 				else:
 					Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-5)).left(-1)
 			create_tween().tween_property($fade,"color:a",0.0,APPEAR_ANIM_SPEED)
-			get_tree().paused=false
+			Global.allow_walking=true
 			var disappear = create_tween()
 			disappear.tween_property(self,"position:y",240.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 			await disappear.finished

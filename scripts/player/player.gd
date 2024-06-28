@@ -15,7 +15,7 @@ const ACCELERATION = 8
 
 #ANIMATION PROPERTIES
 var first_frame = false
-const ANIMATION_SPEED = 8
+var animation_speed = 8
 const ANIMATION_THRESHOLD = 1.5
 @export var animation_direction = 0
 var current_frame = 0
@@ -50,18 +50,20 @@ func change_sound(sound):
 #PHYSICS PROCESS
 
 func _ready():
-	return_character()
 	position = Vector3(Global.player_array.x,Global.player_array.y,Global.player_array.z)
 	player_camera.position=position
 	animation_direction = int(Global.player_array.w)
-	if Global.retrace_steps:
-		movement_speed = movement_speed*-1
 	material.texture = material.get_material_override().get_shader_parameter("albedoTex")
-	if material.hframes!= material.texture.get_size().x/64:
-		material.hframes = material.texture.get_size().x/64
-		material.vframes = material.texture.get_size().y/64
 	if Global.gen<=2:
 		set_collision_mask(0)
+func on_floor():
+	if not is_on_floor():
+		if position.y>0.1:
+			return false
+		else:
+			return true
+	else:
+		return true
 
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
@@ -74,11 +76,13 @@ func _physics_process(delta):
 
 	var direction = Vector3()
 	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
-	if Global.control_mode==0 || Global.control_mode==4:
-		#CREATES MOVEMENT VECTORS
-		v = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
-		h = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
-		
+	
+	if Global.allow_walking && !Global.game_paused:
+		if Global.control_mode==0 || Global.control_mode==4:
+			#CREATES MOVEMENT VECTORS
+			v = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
+			h = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
+			
 	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		if material.hframes>1 && material.vframes>1:
@@ -90,7 +94,7 @@ func _physics_process(delta):
 			create_tween().tween_property(footstep_sound,"volume_db",80.0,0.5)
 		is_walking=true
 		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
-		if is_on_floor() || position.y==0.0:
+		if on_floor():
 			#CHECKS IF BELOW PLAYER THERE'S MESH WITH THESE NAMES
 			if footstep_controller.get_collider()!=null:
 				if str(footstep_controller.get_collider().name)=="grass":
@@ -186,17 +190,8 @@ func _physics_process(delta):
 		head.flip_h=true
 	else:
 		head.flip_h=false
-	
-#GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP
-	#if not is_on_floor():
-		#velocity.y -= gravity * delta
-	
-#HANDLES A BUNCH OF KEYBOARD SHORTCUTS
-	if Input.is_action_just_released("sheet_hotkey"):
-		get_node("../OpenSheets").show()
-	if Input.is_action_just_pressed("default_char"):
-		reset_sheet()
-	if Input.is_action_just_pressed("change_mode"):
+
+	if Input.is_action_just_pressed("change_mode") && !Global.game_paused:
 		if int(Global.control_mode)%2==0:
 			Global.control_mode+=1
 		else:
@@ -207,7 +202,7 @@ func _physics_process(delta):
 			get_node("mode_change").stop()
 			get_node("mode_change").play()
 #SUBMIT P2TOTALK WORD
-	if Input.is_action_just_pressed("pressed_select") && p2_talk.text!="" && can_submit:
+	if Input.is_action_just_pressed("pressed_select") && p2_talk.text!="" && can_submit  && !Global.game_paused:
 		if word!="":
 			word = word.erase(word.length()-1,1)
 		create_word()
@@ -218,11 +213,7 @@ func _physics_process(delta):
 
 #MOVES THE PLAYER
 	move_and_slide()
-		
-#GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP	
-	#if position.y <= 0:
-		#velocity.y = 0
-		#position.y = 0.01
+
 #IF PLAYER IS NOT WALKING
 	if material.hframes>1 && material.vframes>1:
 		if is_walking==false:
@@ -236,7 +227,7 @@ func _physics_process(delta):
 			#IF PLAYER IS WALKING
 			head.frame_coords= Vector2(0,0)
 			material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations
-			current_frame+=ANIMATION_SPEED*delta
+			current_frame+=animation_speed*delta
 			if current_frame>material.vframes:
 				current_frame=1
 		#UPDATE FRAMES
@@ -249,7 +240,7 @@ func _physics_process(delta):
 		prev_text=p2_talk.text
 
 #IF PLAYER IS ON P2TOTALK MODE
-	if Global.control_mode==1:
+	if Global.control_mode==1 && !Global.game_paused:
 	#CONVERTS INPUTS TO PHONETICS			
 		if Input.is_action_just_pressed("pressed_action"):
 			p2_talk.text+="5"
@@ -407,50 +398,3 @@ func create_word():
 			tween.tween_property(words, "position", Vector3(0, 1.0, 0), 1.0).set_trans(Tween.TRANS_LINEAR).as_relative()
 			tween.tween_callback(allow_typing)
 		child_index+=1
-
-#LOADS CUTSOM SHEETS
-func _on_open_sheets_file_selected(path):
-	#PNG HAS TO BE TURNED INTO TEXTURE AND LOADED INTO VRAM BEFORE BEING APPLIED
-	var image = Image.new()
-	image.load(path)
-	var image_texture = ImageTexture.new()
-	image_texture.set_image(image)
-	#CHECK IF HEADSHEET, OR ELSE ITS PLAYER HEADSHEET
-	if "head_.png" in path:
-		head.texture = image_texture
-		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
-		material.texture = load("res://graphics/sprites/player/headless.png")
-		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-	else:
-		head.texture = load("res://graphics/sprites/player/none.png")
-		material.texture = image_texture
-		material.hframes = image_texture.get_size().x/64
-		material.vframes = image_texture.get_size().y/64
-		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
-func return_character():
-	if Global.current_character==0:
-		if Global.gen<=2:
-			material.texture = load("res://graphics/sprites/player/gen_1.png")
-		else:
-			material.texture = load("res://graphics/sprites/player/guardian.png")
-	if Global.current_character==1 && Global.update_sheets:
-		material.texture = load("res://graphics/sprites/player/belle.png")
-	if Global.current_character==2:
-		if Global.update_sheets:
-			material.texture = load("res://graphics/sprites/player/marvin.png")
-		movement_speed = 6
-	else:
-		movement_speed = 5
-	character = Global.current_character
-	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-	#RESETS CHARACTER
-	
-			
-func reset_sheet():
-	material.hframes = 5
-	material.vframes = 5
-	return_character()
-	head.texture = load("res://graphics/sprites/player/none.png")
-	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-	head.get_material_override().set_shader_parameter("albedoTex", head.texture)

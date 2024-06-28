@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=63 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
@@ -18,11 +18,11 @@
 [ext_resource type="AudioStream" uid="uid://df3cskqopxqdo" path="res://sfx/draw.wav" id="10_nfgrt"]
 [ext_resource type="Texture2D" uid="uid://cigrkwlb1f6jt" path="res://graphics/sprites/ui/gift.png" id="11_7r1ny"]
 [ext_resource type="Shader" path="res://shaders/screen/transparent.gdshader" id="12_v53h8"]
+[ext_resource type="Texture2D" uid="uid://5ax0o2u38750" path="res://graphics/sprites/ui/player_frame.png" id="13_74ltg"]
 [ext_resource type="Texture2D" uid="uid://bnfrcvqe5fdrl" path="res://graphics/sprites/ui/ui_buttons.png" id="13_ii7lo"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="13_ux0ac"]
 [ext_resource type="Texture2D" uid="uid://bqurrtjharll2" path="res://graphics/sprites/ui/file_frame.png" id="14_0xn05"]
 [ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="15_xfy13"]
-[ext_resource type="Texture2D" uid="uid://db0o2h6o26u18" path="res://graphics/sprites/ui/panic.png" id="16_y530i"]
 [ext_resource type="FontFile" uid="uid://blsucq8kjvjgn" path="res://graphics/sprites/ui/title_counter.fnt" id="17_85u0m"]
 [ext_resource type="Texture2D" uid="uid://jhmvmjramd1o" path="res://graphics/sprites/ui/file_options.png" id="17_ie4qc"]
 [ext_resource type="Texture2D" uid="uid://cn84kgq0kgbp" path="res://graphics/sprites/ui/continue_cursor.png" id="18_sa4k6"]
@@ -56,17 +56,6 @@ shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("13_ux0ac")
 
-[sub_resource type="GDScript" id="GDScript_kk4fq"]
-script/source = "extends Sprite2D
-var current_frame = 1
-func _process(delta):
-	current_frame+=4*delta
-	if current_frame<=5:
-		self.frame_coords.y=current_frame
-	else:
-		current_frame=1
-"
-
 [sub_resource type="LabelSettings" id="LabelSettings_ho4vs"]
 font = ExtResource("17_85u0m")
 
@@ -92,22 +81,44 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jrkxk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ilxg"]
 atlas = ExtResource("13_ii7lo")
-region = Rect2(0, 34, 34, 34)
+region = Rect2(34, 34, 34, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qv4ut"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ip8d"]
 atlas = ExtResource("13_ii7lo")
-region = Rect2(136, 34, 34, 34)
+region = Rect2(170, 34, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ja172"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ilxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ip8d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwc65"]
+atlas = ExtResource("13_ii7lo")
+region = Rect2(0, 102, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0eut"]
+atlas = ExtResource("13_ii7lo")
+region = Rect2(136, 102, 34, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2pj45"]
 animations = [{
 "frames": [{
 "duration": 5.0,
-"texture": SubResource("AtlasTexture_jrkxk")
+"texture": SubResource("AtlasTexture_pwc65")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qv4ut")
+"texture": SubResource("AtlasTexture_m0eut")
 }],
 "loop": true,
 "name": &"default",
@@ -365,151 +376,55 @@ texture = ExtResource("5_ox8jy")
 centered = false
 vframes = 2
 
-[node name="file_select" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+[node name="menu_1" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
 texture_filter = 1
-position = Vector2(320, 0)
 
-[node name="files" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
+[node name="user_card" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1"]
 
-[node name="file0" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files"]
-
-[node name="file_select" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
-position = Vector2(26, 22)
+[node name="file_button" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/user_card"]
+position = Vector2(160, 75)
 texture = ExtResource("14_0xn05")
-centered = false
 
-[node name="file_name" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
-offset_left = 90.0
-offset_top = 67.0
-offset_right = 166.0
-offset_bottom = 86.0
-text = "Empty Game
+[node name="user_frame" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/user_card"]
+position = Vector2(160, 75)
+texture = ExtResource("13_74ltg")
+
+[node name="user_name" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/user_card"]
+offset_left = 26.0
+offset_top = 102.231
+offset_right = 126.0
+offset_bottom = 121.231
+text = "YourUsername
+
 "
 label_settings = SubResource("LabelSettings_3di54")
 
-[node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
+[node name="player_sprite" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/user_card"]
 material = SubResource("ShaderMaterial_awjvd")
-position = Vector2(57, 51)
+position = Vector2(158, 63.69)
 texture = ExtResource("13_ux0ac")
 hframes = 5
 vframes = 5
-script = SubResource("GDScript_kk4fq")
 
-[node name="corrupt" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
-visible = false
-position = Vector2(88, 48)
-texture = ExtResource("16_y530i")
-centered = false
-
-[node name="counter" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
-offset_left = 180.0
-offset_top = 68.0
-offset_right = 220.0
-offset_bottom = 83.0
+[node name="counter" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/user_card"]
+offset_left = 250.0
+offset_top = 103.0
+offset_right = 290.0
+offset_bottom = 118.0
 text = "00000"
 label_settings = SubResource("LabelSettings_ho4vs")
 
-[node name="piece" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
-position = Vector2(170, 73)
+[node name="piece" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/user_card"]
+position = Vector2(240, 110)
 texture = ExtResource("18_ynrnt")
 
-[node name="file1" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files"]
-position = Vector2(66, 37)
+[node name="buttons_group" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1"]
 
-[node name="file_select" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
-position = Vector2(26, 22)
-texture = ExtResource("14_0xn05")
-centered = false
-flip_h = true
-
-[node name="file_name" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
-offset_left = 77.0
-offset_top = 67.0
-offset_right = 164.0
-offset_bottom = 86.0
-text = "Empty Game
-"
-label_settings = SubResource("LabelSettings_3di54")
-horizontal_alignment = 2
-
-[node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
-material = SubResource("ShaderMaterial_awjvd")
-position = Vector2(194, 51)
-texture = ExtResource("13_ux0ac")
-hframes = 5
-vframes = 5
-script = SubResource("GDScript_kk4fq")
-
-[node name="corrupt" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
-visible = false
-position = Vector2(25, 48)
-texture = ExtResource("16_y530i")
-centered = false
-
-[node name="counter" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
-offset_left = 50.0
-offset_top = 68.0
-offset_right = 90.0
-offset_bottom = 83.0
-text = "00000"
-label_settings = SubResource("LabelSettings_ho4vs")
-
-[node name="piece" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
-position = Vector2(40, 73)
-texture = ExtResource("18_ynrnt")
-
-[node name="file2" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files"]
-position = Vector2(0, 74)
-
-[node name="file_select" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
-position = Vector2(26, 22)
-texture = ExtResource("14_0xn05")
-centered = false
-
-[node name="file_name" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
-offset_left = 90.0
-offset_top = 67.0
-offset_right = 166.0
-offset_bottom = 86.0
-text = "Empty Game
-"
-label_settings = SubResource("LabelSettings_3di54")
-
-[node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
-material = SubResource("ShaderMaterial_awjvd")
-position = Vector2(57, 51)
-texture = ExtResource("13_ux0ac")
-hframes = 5
-vframes = 5
-script = SubResource("GDScript_kk4fq")
-
-[node name="corrupt" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
-visible = false
-position = Vector2(88, 48)
-texture = ExtResource("16_y530i")
-centered = false
-
-[node name="counter" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
-visible = false
-offset_left = 180.0
-offset_top = 68.0
-offset_right = 220.0
-offset_bottom = 83.0
-text = "00000"
-label_settings = SubResource("LabelSettings_ho4vs")
-
-[node name="piece" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
-visible = false
-position = Vector2(170, 73)
-texture = ExtResource("18_ynrnt")
-
-[node name="buttons_group" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
-
-[node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group"]
+[node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group"]
 position = Vector2(210, 201)
 sprite_frames = SubResource("SpriteFrames_so3dh")
 
-[node name="Label2" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group/GoBack"]
+[node name="Label2" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group/GoBack"]
 offset_left = 11.0
 offset_top = -1.0
 offset_right = 112.0
@@ -519,29 +434,43 @@ theme_override_fonts/font = ExtResource("4_8pwy7")
 text = "Go Back"
 metadata/_edit_use_anchors_ = true
 
-[node name="SelectFile" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group"]
+[node name="ChangeUsername" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group"]
 position = Vector2(60, 201)
-sprite_frames = SubResource("SpriteFrames_2pj45")
-frame = 1
+sprite_frames = SubResource("SpriteFrames_ja172")
 
-[node name="SelectFile" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group/SelectFile"]
+[node name="Label2" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group/ChangeUsername"]
 offset_left = 11.0
 offset_top = -1.0
 offset_right = 112.0
 offset_bottom = 25.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_8pwy7")
-text = "Select File
+text = "Change Name
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Continue" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group"]
+position = Vector2(120, 180)
+sprite_frames = SubResource("SpriteFrames_2pj45")
+
+[node name="Continue" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group/Continue"]
+offset_left = 11.0
+offset_top = -1.0
+offset_right = 112.0
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_8pwy7")
+text = "Continue
 "
 
-[node name="buttons_group2" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
+[node name="buttons_group2" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1"]
 position = Vector2(0, 40)
 
-[node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2"]
+[node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group2"]
 position = Vector2(217, 205)
 sprite_frames = SubResource("SpriteFrames_so3dh")
 
-[node name="Label2" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/GoBack"]
+[node name="Label2" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group2/GoBack"]
 offset_left = 8.0
 offset_top = -1.0
 offset_right = 109.0
@@ -551,12 +480,11 @@ theme_override_fonts/font = ExtResource("4_8pwy7")
 text = "Go Back"
 metadata/_edit_use_anchors_ = true
 
-[node name="Select" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2"]
+[node name="Select" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group2"]
 position = Vector2(56, 204)
 sprite_frames = SubResource("SpriteFrames_2pj45")
-frame = 1
 
-[node name="Select" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select"]
+[node name="Select" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group2/Select"]
 offset_left = 9.0
 offset_right = 110.0
 offset_bottom = 28.0
@@ -564,11 +492,11 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_8pwy7")
 text = "Select"
 
-[node name="Finish" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2"]
+[node name="Finish" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group2"]
 position = Vector2(142, 204)
 sprite_frames = SubResource("SpriteFrames_d3c5o")
 
-[node name="Finish" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Finish"]
+[node name="Finish" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group2/Finish"]
 offset_left = 5.0
 offset_right = 106.0
 offset_bottom = 28.0
@@ -577,17 +505,17 @@ theme_override_fonts/font = ExtResource("4_8pwy7")
 text = "Finish
 "
 
-[node name="continue_menu" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+[node name="join_menu" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
 z_as_relative = false
-position = Vector2(0, -240)
+position = Vector2(320, 0)
 
-[node name="continue" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/continue_menu"]
+[node name="continue" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/join_menu"]
 z_index = 3
 position = Vector2(97, 83)
 texture = ExtResource("17_ie4qc")
 centered = false
 
-[node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/continue_menu"]
+[node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/join_menu"]
 z_index = 3
 position = Vector2(234, 92)
 texture = ExtResource("18_sa4k6")
@@ -675,6 +603,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_drlcc")
 
 [node name="song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("28_r2eg8")
+volume_db = -5.0
 bus = &"Music"
 
 [node name="pressed_start" type="AudioStreamPlayer" parent="."]
@@ -702,7 +631,4 @@ stream = ExtResource("33_1fxdv")
 volume_db = 2.0
 bus = &"HUD_SFX"
 
-[node name="demo_timer" type="Timer" parent="."]
-
-[connection signal="animation_looped" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select" to="." method="_on_select_animation_looped"]
-[connection signal="timeout" from="demo_timer" to="." method="_on_demo_timer_timeout"]
+[connection signal="animation_looped" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/menu_1/buttons_group2/Select" to="." method="_on_select_animation_looped"]

@@ -182,8 +182,7 @@ func _on_focus_entered():
 			InputMap.action_erase_events(button);
 
 func _on_focus_exited():
-	if !Record.replay:
-		InputMap.load_from_project_settings()
+	InputMap.load_from_project_settings()
 
 
 func _on_visibility_changed():
