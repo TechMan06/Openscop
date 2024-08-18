@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://dxlchg50tvisg"
+path="res://.godot/imported/gen_counter.fnt-5f9714cf1ef8355f26a5b5a68d21830b.fontdata"
+
+[deps]
+
+source_file="res://graphics/sprites/ui/gen_counter.fnt"
+dest_files=["res://.godot/imported/gen_counter.fnt-5f9714cf1ef8355f26a5b5a68d21830b.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true

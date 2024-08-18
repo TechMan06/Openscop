@@ -27,6 +27,7 @@ var key = false
 @export var head_sheet: CompressedTexture2D
 @export var character_sheet: CompressedTexture2D
 @export var marvin_speed = false
+@export var flip_input = false
 @export var flip_x_input = false
 @export var retrace_steps = false
 @export var animation_direction = 0
@@ -135,10 +136,10 @@ func _ready():
 	
 	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 	if use_recording_position:
-		global_position = Vector3(player_array.x,player_array.y,player_array.z)
+		position = Vector3(player_array.x,player_array.y,player_array.z)
 
 	animation_direction = int(player_array.w)
-	if retrace_steps:
+	if retrace_steps or flip_input:
 		movement_speed = movement_speed*-1
 	material.texture = material.get_material_override().get_shader_parameter("albedoTex")
 	if material.hframes!= material.texture.get_size().x/64:
@@ -191,9 +192,9 @@ func _physics_process(delta):
 			if recording_reader_p1<=recording_data["p1_data"].size()-1:
 				if recording_timer==int((recording_data["p1_data"][recording_reader_p1].split("_"))[0]):
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])!=0:
-						v = 1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[5]))
+						v = -1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[5]))
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])!=0:
-						v = -1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[6]))
+						v = 1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[6]))
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])!=0:
 						if flip_x_input:
 							h = 1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[7]))

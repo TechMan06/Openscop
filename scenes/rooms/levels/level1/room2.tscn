@@ -70,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
 warp_direction = 2
 scene = "res://scenes/rooms/levels/level1/room1.tscn"
 loading_preset = "evencare_noload"
-coordinate_and_direction = Vector4(15, 0, -4.9, 2)
+coordinate_and_direction = Vector4(16, 0, -4.9, 2)
 
 [node name="warp2" parent="." instance=ExtResource("8_6qfmk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, -2)

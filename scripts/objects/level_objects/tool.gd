@@ -7,6 +7,7 @@ var pink = false
 var went_down = false
 var answer_finished = false
 var answer = ""
+var current_answer = ""
 @onready var material = $answer_origin/answer
 
 func _process(delta):
@@ -20,17 +21,18 @@ func _process(delta):
 
 	if Global.keyboard_RAM!="":
 		answer_finished = false
-		if material.texture.get_path()!= answer:
+		if current_answer!=answer:
 			var go_up = create_tween()
 			go_up.tween_property($answer_origin,"position:y",10.0,ANIM_SPEEDS)
 			await go_up.finished
+			answer_processing(Global.keyboard_RAM)
 			material.texture = load(answer)
+			current_answer = answer
 			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 			$answer_wait.start()
 			went_down=false
-		#else:
-			#answer_processing(Global.keyboard_RAM)
-			#$answer_wait.start()
+		else:
+			$answer_wait.start()
 		Global.keyboard_RAM=""
 		
 	if pink:
@@ -44,25 +46,18 @@ func answer_processing(keyboard_answer):
 	if !pink:
 		if question=="where was the windmill":
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer()
 			answer = "res://graphics/sprites/objects/tool/answer_windmill.png"
 		elif !answer_finished:
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer()
 			answer = "res://graphics/sprites/objects/tool/answer_idontknow.png"
 	else:
 		if question=="poop":
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer()
 			answer = "res://graphics/sprites/objects/tool/answer_windmill.png"
 		elif !answer_finished:
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer()
 			answer = "res://graphics/sprites/objects/tool/answer_idontknow.png"
-			
-func set_answer():
-	answer_finished = true
-	
+
 func watch_windmill():
 	var go_up = create_tween()
 	go_up.tween_property($answer_origin,"position:y",5.0,ANIM_SPEEDS)
@@ -72,6 +67,6 @@ func watch_windmill():
 	create_tween().tween_property($answer_origin,"position:y",0.0,ANIM_SPEEDS).set_trans(Tween.TRANS_SINE)
 
 func _on_answer_wait_timeout():
-	#if !went_down:
-	create_tween().tween_property($answer_origin,"position:y",0.0,ANIM_SPEEDS).set_trans(Tween.TRANS_SINE)
-		#went_down=true
+	create_tween().tween_property($answer_origin,"global_position:y",0.0,ANIM_SPEEDS).set_trans(Tween.TRANS_SINE)
+	if !went_down:
+		went_down=true
