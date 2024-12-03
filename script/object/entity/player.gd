@@ -1,0 +1,346 @@
+@icon("res://icon/player.png")
+extends Entity
+class_name Player
+
+
+const SCHOOL_OVERLAY: PackedScene = preload("res://scene/ui/school_ui.tscn")
+const TERRAIN_TYPES: Array = [
+			"EvenCare", 
+			"Grass", 
+			"Cement", 
+			"Cement2", 
+			"Cement3", 
+			"School", 
+			"Sand"
+		]
+const FOOTSTEP_FADEIN_TIMES: Array = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+const FOOTSTEP_FADEOUT_TIMES: Array = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+
+
+var current_footstep: int:
+	set(value):
+		var _sound_path: String = "res://sfx/footstep/" + str(
+										TERRAIN_TYPES[value]
+									).to_lower() + ".wav"
+		
+		if _footstep_sound.stream.get_path() != _sound_path:
+			_footstep_sound.stream = load(_sound_path)
+
+var control_device: int
+var rotation_direction: Vector3
+var current_sheet: String = "res://asset/2d/sprite/player/guardian.png"
+
+@export var player_stats: PlayerStats
+@export var p2_talk_component: P2TalkComponent
+
+@onready var _terrain_detector: RayCast3D = $TerrainDetector
+@onready var _footstep_sound: AudioStreamPlayer3D = $FootstepSound
+
+
+func _ready() -> void:
+	GameManager.update_sheet.connect(update_sheet)
+	EventBus.p2talk_type.connect(_type_p2talk_key)
+	
+	_sprite = $PlayerSprite
+	_sprite_material = $PlayerSprite.get_material_override()
+	_terrain_detector = $TerrainDetector
+	_footstep_sound = $FootstepSound
+	_p2talk_text = $P2TalkOrigin/P2TalkButtons
+	_p2talk_origin = $P2TalkOrigin
+	_p2talk_button_sound = $ButtonSound
+	
+	if Global.global_data.gen <= 2:
+		set_collision_mask(0)
+		current_sheet = "res://asset/2d/sprite/player/gen_1.png"
+	
+	update_sheet()
+	
+	if player_stats.character_id > 2:
+		_movement_speed = 6.0
+
+	await get_tree().process_frame
+	
+	EventBus.player_spawned.emit(self)
+	
+	if control_mode == 1:
+		var _school_hud: Marker2D = SCHOOL_OVERLAY.instantiate()
+		
+		_school_hud.player = self
+		
+		add_child(_school_hud)
+
+
+func _input(event: InputEvent) -> void:
+	event.device = Global.current_controller
+	control_device = event.device
+
+
+func _process(_delta) -> void:
+	if player_stats.input_enabled:
+		_handle_input()
+	else:
+		_h = 0.0
+		_v = 0.0
+	
+	if is_walking:
+		if _sprite.hframes > 1 && _sprite.vframes > 1:
+			if !_footstep_sound.playing:
+				if _footstep_sound.stream_paused:
+					_footstep_sound.stream_paused=false
+				else:
+					_footstep_sound.playing=true
+			create_tween().tween_property(
+											_footstep_sound, 
+											"volume_db", 
+											80.0, 
+											FOOTSTEP_FADEIN_TIMES[current_footstep]
+										)
+		
+		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
+		if position.y == 0.0:
+			#CHECKS IF BELOW PLAYER THERE'S MESH WITH THESE NAMES
+			if (
+				_terrain_detector.get_collider() != null
+				and TERRAIN_TYPES.find(
+						_terrain_detector.get_collider().name
+					) 
+				> -1
+			):
+				current_footstep = TERRAIN_TYPES.find(_terrain_detector.get_collider().name)
+	else:
+		_current_frame = 0
+		create_tween().tween_property(
+					_footstep_sound, 
+					"volume_db", 
+					-80.0, 
+					FOOTSTEP_FADEOUT_TIMES[current_footstep]
+				)
+
+
+func _handle_input() -> void:
+	if (
+			Input.is_action_just_pressed("change_mode") 
+			and Global.global_data.gen > 2 
+			and player_stats.p2talk_enabled 
+			and control_mode == 0
+		):
+		Global.current_controller = int(!bool(Global.current_controller))
+		$P2TalkToggle.play()
+		
+	if Global.current_controller != 0:
+		_h = 0.0
+		_v = 0.0
+	
+	if control_device == 0 && control_mode < 2:
+		_v = (
+				(
+					Input.get_action_strength("pressed_down") 
+					- Input.get_action_strength("pressed_up")
+				)
+				* (
+					int(!player_stats.retrace_steps) - int(player_stats.retrace_steps)
+					)
+			)
+			
+		_h = (
+				(
+					Input.get_action_strength("pressed_right") 
+					- Input.get_action_strength("pressed_left")
+				)
+				* (
+					int(!player_stats.retrace_steps) - int(player_stats.retrace_steps)
+					)
+			)
+		
+	if control_device != 0 && player_stats.p2talk_enabled && control_mode == 0:
+		if Input.is_action_just_pressed("pressed_action"):
+			_p2talk_text.text += "5"
+			
+			if _last_press == "L1":
+				p2talk_word += "S "
+			elif _last_press == "L2":
+				p2talk_word += "M "
+			elif _last_press == "R1":
+				p2talk_word += "EY "
+			elif _last_press == "R2":
+				p2talk_word += "UW "
+			else:
+				p2talk_word += "AA "
+			
+			_last_press = ""
+			
+		if Input.is_action_just_pressed("pressed_triangle"):
+			_p2talk_text.text+="8"
+
+			if _last_press == "L1":
+				p2talk_word += "SH "
+			elif _last_press == "L2":
+				p2talk_word += "L "
+			elif _last_press == "R1":
+				p2talk_word += "IH "
+			elif _last_press == "R2":
+				p2talk_word += "B "
+			else:
+				p2talk_word += "AO "
+
+			_last_press = ""
+
+		if Input.is_action_just_pressed("pressed_circle"):
+			_p2talk_text.text += "7"
+
+			if _last_press == "L1":
+				p2talk_word += "ZH "
+			elif _last_press == "L2":
+				p2talk_word += "R "
+			elif _last_press == "R1":
+				p2talk_word += "IY "
+			elif _last_press == "R2":
+				p2talk_word += "T "
+			else:
+				p2talk_word += "AW "
+
+			_last_press = ""
+
+		if Input.is_action_just_pressed("pressed_square"):
+			_p2talk_text.text+="6"
+
+			if _last_press == "L1":
+				p2talk_word += "Z "
+			elif _last_press == "L2":
+				p2talk_word += "N "
+			elif _last_press == "R2":
+				p2talk_word += "P "
+			else:
+				p2talk_word += "AE "
+
+			_last_press = ""
+
+		if Input.is_action_just_pressed("pressed_up"):
+			_p2talk_text.text += "@"
+
+			if _last_press == "L1":
+				p2talk_word += "JH "
+			elif _last_press == "L2":
+				p2talk_word += "Y "
+			elif _last_press == "R1":
+				p2talk_word += "OW "
+			elif _last_press == "R2":
+				p2talk_word += "F "
+			else:
+				p2talk_word += "AY "
+
+			_last_press = ""
+
+		if Input.is_action_just_pressed("pressed_down"):
+			_p2talk_text.text += "#"
+
+			if _last_press == "L1":
+				p2talk_word += "K "
+			elif _last_press == "L2":
+				p2talk_word += "HH "
+			elif _last_press == "R1":
+				p2talk_word += "OY "
+			elif _last_press == "R2":
+				p2talk_word += "V "
+			else:
+				p2talk_word += "AE "
+
+			_last_press = ""
+
+		if Input.is_action_just_pressed("pressed_left"):
+			_p2talk_text.text += "9"
+
+			if _last_press == "L1":
+				p2talk_word += "NG "
+			elif _last_press == "L2":
+				p2talk_word += "UH "
+			elif _last_press == "R2":
+				p2talk_word += "TH "
+			else:
+				p2talk_word += "EH "
+
+			_last_press = ""
+
+		if Input.is_action_just_pressed("pressed_right"):
+			_p2talk_text.text += "!"
+
+			if _last_press == "L1":
+				p2talk_word += "G "
+			elif _last_press == "R1":
+				p2talk_word += "UH "
+			elif _last_press == "R2":
+				p2talk_word += "DH "
+			else:
+				p2talk_word += "ER "
+
+			_last_press = ""
+
+		if Input.is_action_just_pressed("pressed_start"):
+			_p2talk_text.text += "$"
+
+			if _last_press == "L1":
+				p2talk_word += "CH "
+			elif _last_press == "L2":
+				p2talk_word += "W "
+			elif _last_press == "R2":
+				p2talk_word += "D "
+			else:
+				p2talk_word += "AH "
+
+			_last_press = ""
+		
+		if Input.is_action_just_pressed("pressed_l1"):
+			_p2talk_text.text += "4"
+			_last_press="L1"
+
+		if Input.is_action_just_pressed("pressed_l2"):
+			_p2talk_text.text += "3"
+			_last_press="L2"
+
+		if Input.is_action_just_pressed("pressed_r1"):
+			_p2talk_text.text += "2"
+			_last_press="R1"
+
+		if Input.is_action_just_pressed("pressed_r2"):
+			_p2talk_text.text += "1"
+			_last_press="R2"
+	
+	if (Input.is_action_just_pressed("pressed_select") && _p2talk_text.text != "" && _can_submit):
+		if p2talk_word.length() > 0:
+			p2talk_word = p2talk_word.erase(p2talk_word.length() - 1, 1)
+			p2_talk_component._create_word()
+			p2talk_word = ""
+			_last_press = ""
+			_p2talk_text.text = ""
+			_can_submit = false
+
+
+func set_footstep_sound(sound_id: int = 0) -> void:
+	current_footstep = sound_id
+
+
+func update_sheet() -> void:
+	if Global.custom_sheet != null:
+		load_sheet(Global.custom_sheet)
+	else:
+		change_sheet(current_sheet)
+
+
+func change_sheet(path) -> void:
+	_sprite.texture = load(path)
+	_sprite.hframes = _sprite.texture.get_width() / 64.0
+	_sprite.vframes = _sprite.texture.get_height() / 64.0
+	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
+
+
+func load_sheet(sheet: ImageTexture) -> void:
+	_sprite.texture = sheet
+	_sprite.hframes = 5
+	_sprite.vframes = 5
+	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
+
+
+func _type_p2talk_key(word: String, buttons: String):
+	p2talk_word = word
+	_p2talk_text.text = buttons
+	

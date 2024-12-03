@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://cklrsj73ts2kt"]
+
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="1_5yto6"]
+[ext_resource type="Script" path="res://script/object/interactive/interaction_symbol.gd" id="1_bbuyp"]
+[ext_resource type="Texture2D" uid="uid://dxoyv5q4hjklf" path="res://asset/2d/sprite/object/interaction.png" id="2_nyrhg"]
+[ext_resource type="AudioStream" uid="uid://2my305c6q1pn" path="res://sfx/ui/interactpopup.wav" id="3_353nq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5tt23"]
+center_offset = Vector3(0, 0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5imj"]
+render_priority = 0
+shader = ExtResource("1_5yto6")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("2_nyrhg")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ex3k8"]
+radius = 2.5
+
+[node name="InteractionSymbol" type="Marker3D"]
+script = ExtResource("1_bbuyp")
+
+[node name="Height" type="Marker3D" parent="."]
+
+[node name="MeshOrigin" type="Marker3D" parent="Height"]
+
+[node name="InteractionMesh" type="MeshInstance3D" parent="Height/MeshOrigin"]
+mesh = SubResource("QuadMesh_5tt23")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_s5imj")
+
+[node name="InteractionSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_353nq")
+panning_strength = 4.0
+bus = &"SFX"
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="InteractionCollision" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("SphereShape3D_ex3k8")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_exited"]

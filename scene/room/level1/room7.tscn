@@ -1,0 +1,134 @@
+[gd_scene load_steps=20 format=3 uid="uid://kygho8mygh4t"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_k0qu1"]
+[ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_417hp"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_uwger"]
+[ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_og3x2"]
+[ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="5_1xidx"]
+[ext_resource type="ArrayMesh" uid="uid://b4vpdsyyv0fav" path="res://asset/3d/room/evencare/evencare7.obj" id="5_yh13w"]
+[ext_resource type="ArrayMesh" uid="uid://cr8vf5n3bq3d5" path="res://asset/3d/room/evencare/evencare7gen2.obj" id="6_qs3g5"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="8_2oxwp"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="9_mldxt"]
+[ext_resource type="ArrayMesh" uid="uid://c4optyemlx3b7" path="res://asset/3d/room/evencare/evencare7_umbrella.obj" id="10_vqk7t"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="11_7of8w"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="11_vcooa"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="13_wgv2c"]
+[ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="14_c8tg3"]
+[ext_resource type="ArrayMesh" uid="uid://dm46m75hu5jco" path="res://asset/3d/room/evencare/evencare_drawer.obj" id="14_i6px1"]
+[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="15_srhmi"]
+
+[sub_resource type="Resource" id="Resource_thkrr"]
+script = ExtResource("3_uwger")
+sky_color = Color(1, 1, 1, 1)
+texture = ExtResource("4_og3x2")
+scroll_speed = 0.25
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+enable_fog = false
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gd7f1"]
+render_priority = 0
+shader = ExtResource("11_vcooa")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8wcvc"]
+data = PackedVector3Array(11.5, 1, -6.5, 11.5, 0, -6.5, 6.5, 1, -6.5, 6.5, 1, -6.5, 11.5, 0, -6.5, 6.5, 0, -6.5, 3.5, 1, -15.5, 3.5, 0, -15.5, 1.7, 1, -15.5, 1.7, 1, -15.5, 3.5, 0, -15.5, 1.7, 0, -15.5, 6.5, 1, -10.5, 6.5, 1, -6.5, 6.5, 0, -10.5, 6.5, 0, -10.5, 6.5, 1, -6.5, 6.5, 0, -6.5, 4.5, 1, -11.5, 4.5, 1, -10.5, 4.5, 0, -11.5, 4.5, 0, -11.5, 4.5, 1, -10.5, 4.5, 0, -10.5, 0.3, 0, -18.5, 0.3, 0, -15.5, 0.3, 1, -18.5, 0.3, 1, -18.5, 0.3, 0, -15.5, 0.3, 1, -15.5, -0.5, 1, -15.5, -0.5, 0, -15.5, -0.5, 1, 1, -0.5, 1, 1, -0.5, 0, -15.5, -0.5, 0, 1, 1.7, 1, -18.5, 1.7, 1, -15.5, 1.7, 0, -18.5, 1.7, 0, -18.5, 1.7, 1, -15.5, 1.7, 0, -15.5, 3.5, 1, -11.5, 4.5, 1, -11.5, 3.5, 0, -11.5, 3.5, 0, -11.5, 4.5, 1, -11.5, 4.5, 0, -11.5, 11.5, 1, 1, 11.5, 0, 1, 11.5, 1, -6.5, 11.5, 1, -6.5, 11.5, 0, 1, 11.5, 0, -6.5, -0.5, 1, 1, -0.5, 0, 1, 11.5, 1, 1, 11.5, 1, 1, -0.5, 0, 1, 11.5, 0, 1, 4.5, 1, -10.5, 6.5, 1, -10.5, 4.5, 0, -10.5, 4.5, 0, -10.5, 6.5, 1, -10.5, 6.5, 0, -10.5, 3.5, 1, -11.5, 3.5, 0, -11.5, 3.5, 1, -15.5, 3.5, 1, -15.5, 3.5, 0, -11.5, 3.5, 0, -15.5, 0.3, 1, -15.5, 0.3, 0, -15.5, -0.5, 1, -15.5, -0.5, 1, -15.5, 0.3, 0, -15.5, -0.5, 0, -15.5)
+
+[node name="level1-room7" type="Node3D"]
+script = ExtResource("1_k0qu1")
+room_name = "level1-room7"
+loading_preset = ExtResource("2_417hp")
+background_music = 2
+camera_offset = Vector3(1.5, 0, 0)
+allow_front_movement = false
+camera_height = 4.75
+camera_distance = 11.0
+camera_angle = -20.0
+environment_settings = SubResource("Resource_thkrr")
+
+[node name="GenSpecific" type="Node" parent="."]
+script = ExtResource("5_1xidx")
+gens = Array[int]([1, 2, 3])
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="GenSpecific"]
+mesh = ExtResource("6_qs3g5")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("8_2oxwp")
+script = ExtResource("9_mldxt")
+
+[node name="GenSpecific2" type="Node" parent="."]
+script = ExtResource("5_1xidx")
+gens = Array[int]([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="GenSpecific2"]
+mesh = ExtResource("5_yh13w")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("8_2oxwp")
+script = ExtResource("9_mldxt")
+
+[node name="UmbrellaMesh" type="MeshInstance3D" parent="GenSpecific2"]
+mesh = ExtResource("10_vqk7t")
+surface_material_override/0 = SubResource("ShaderMaterial_gd7f1")
+
+[node name="LevelBody" type="StaticBody3D" parent="."]
+
+[node name="LevelCollision" type="CollisionShape3D" parent="LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_8wcvc")
+
+[node name="Warp" parent="." instance=ExtResource("13_wgv2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -16)
+warp_direction = 3
+scene = "res://scene/room/level1/room6.tscn"
+loading_preset = ExtResource("14_c8tg3")
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -17)
+script = ExtResource("15_srhmi")
+scene_path = "res://scene/room/level1/room6.tscn"
+
+[node name="PieceArea" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -10)
+
+[node name="PieceArea2" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -12)
+
+[node name="PieceArea3" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -14)
+
+[node name="PieceArea4" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -1)
+
+[node name="PieceArea5" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -1)
+
+[node name="PieceArea6" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -1)
+
+[node name="PieceArea7" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -5)
+
+[node name="PieceArea8" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -5)
+
+[node name="PieceArea9" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -5)
+
+[node name="PieceArea10" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -6)
+
+[node name="PieceArea11" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -6)
+
+[node name="PieceArea12" parent="." instance=ExtResource("11_7of8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -6)
+
+[node name="DrawerMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("14_i6px1")
+surface_material_override/0 = ExtResource("8_2oxwp")
+script = ExtResource("9_mldxt")

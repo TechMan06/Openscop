@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LoadingPreset" load_steps=3 format=3 uid="uid://dfvlriw2fctdw"]
+
+[ext_resource type="Texture2D" uid="uid://dwtb2n6lh2k75" path="res://asset/2d/loading_screen/gift_load.png" id="1_fm76e"]
+[ext_resource type="Script" path="res://script/resource/loading_resource.gd" id="2_b8r34"]
+
+[resource]
+script = ExtResource("2_b8r34")
+loading_image = ExtResource("1_fm76e")
+loading_timer = 5.0
+fade_color = Color(1, 1, 1, 1)

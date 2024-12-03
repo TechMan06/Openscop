@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dii53li7rpf61"
+path="res://.godot/imported/sorttest2.obj-b3e015934fda0d74e5631bc02dc8a469.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sorttest2.obj-b3e015934fda0d74e5631bc02dc8a469.mesh"]
+
+source_file="res://asset/3d/room/sort-test/sorttest2.obj"
+dest_files=["res://.godot/imported/sorttest2.obj-b3e015934fda0d74e5631bc02dc8a469.mesh", "res://.godot/imported/sorttest2.obj-b3e015934fda0d74e5631bc02dc8a469.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

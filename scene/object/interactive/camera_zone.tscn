@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmc5a5ano61b3"]
+
+[ext_resource type="Script" path="res://script/object/interactive/camera_zone.gd" id="1_7aoeq"]
+[ext_resource type="Shader" path="res://shader/spatial/solid_0_transparent.gdshader" id="2_nlt41"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="3_2hj5g"]
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="4_62bld"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vm5i8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vo5tp"]
+render_priority = 0
+shader = ExtResource("2_nlt41")
+shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xhjc"]
+render_priority = 0
+shader = ExtResource("3_2hj5g")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(0, 0.25098, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_62bld")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bas2"]
+render_priority = 0
+shader = ExtResource("3_2hj5g")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(0.266667, 0.447059, 0.0862745, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_62bld")
+
+[node name="ZoneArea" type="Area3D"]
+script = ExtResource("1_7aoeq")
+
+[node name="ZoneCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_j21mq")
+
+[node name="ZoneMesh" type="MeshInstance3D" parent="ZoneCollision"]
+mesh = SubResource("BoxMesh_vm5i8")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_vo5tp")
+
+[node name="CameraFocus" type="Marker3D" parent="."]
+transform = Transform3D(0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CamTarget1" type="Sprite3D" parent="."]
+top_level = true
+material_override = SubResource("ShaderMaterial_5xhjc")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("4_62bld")
+hframes = 5
+vframes = 5
+
+[node name="CamTarget2" type="Sprite3D" parent="."]
+top_level = true
+material_override = SubResource("ShaderMaterial_8bas2")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("4_62bld")
+hframes = 5
+vframes = 5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

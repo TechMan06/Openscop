@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba5w8ea6rho1l"]
+
+[ext_resource type="Script" path="res://script/ui/caught.gd" id="1_a7mjo"]
+[ext_resource type="Texture2D" uid="uid://ctfyr3nxt2l4g" path="res://asset/2d/ui/misc/caught.png" id="2_5w3x7"]
+[ext_resource type="AudioStream" uid="uid://dk65uc30j73b8" path="res://sfx/ui/caught.wav" id="3_1so3d"]
+
+[node name="Caught" type="Marker2D"]
+position = Vector2(160, 120)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_a7mjo")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -97.0
+offset_top = -21.0
+offset_right = 96.0
+offset_bottom = 22.0
+texture = ExtResource("2_5w3x7")
+
+[node name="CaughtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1so3d")
+autoplay = true
+bus = &"HUD_SFX"

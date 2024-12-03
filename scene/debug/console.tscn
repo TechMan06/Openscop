@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://4crjq77arrg5"]
+
+[ext_resource type="Texture2D" uid="uid://cwl6oafxi5qum" path="res://asset/2d/ui/misc/console_bg.png" id="1_b8b0u"]
+[ext_resource type="Script" path="res://script/debug/console.gd" id="1_jwuw3"]
+[ext_resource type="Theme" uid="uid://cy6e1gfj100a6" path="res://asset/2d/ui/debug/debug.tres" id="3_pnh51"]
+
+[node name="Console" type="Window" node_paths=PackedStringArray("console_input", "console_output")]
+process_mode = 3
+title = "Openscop - Developer Console"
+position = Vector2i(0, 36)
+size = Vector2i(320, 240)
+script = ExtResource("1_jwuw3")
+console_input = NodePath("ConsoleContainer/VBoxContainer/LineEdit")
+console_output = NodePath("ConsoleContainer/VBoxContainer/OutputBackground/ConsoleOutput")
+
+[node name="ConsoleBackground" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_b8b0u")
+expand_mode = 2
+
+[node name="ConsoleUI" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConsoleContainer" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_pnh51")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConsoleContainer"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="OutputBackground" type="ColorRect" parent="ConsoleContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="ConsoleOutput" type="RichTextLabel" parent="ConsoleContainer/VBoxContainer/OutputBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+scroll_following = true
+
+[node name="LineEdit" type="LineEdit" parent="ConsoleContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Type a Command..."
+caret_blink = true

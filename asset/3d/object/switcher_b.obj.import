@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bgqqifid6c4m3"
+path="res://.godot/imported/switcher_b.obj-7ba93fcbf2acc87f0184ee32fbf5ea42.mesh"
+
+[deps]
+
+files=["res://.godot/imported/switcher_b.obj-7ba93fcbf2acc87f0184ee32fbf5ea42.mesh"]
+
+source_file="res://asset/3d/object/switcher_b.obj"
+dest_files=["res://.godot/imported/switcher_b.obj-7ba93fcbf2acc87f0184ee32fbf5ea42.mesh", "res://.godot/imported/switcher_b.obj-7ba93fcbf2acc87f0184ee32fbf5ea42.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

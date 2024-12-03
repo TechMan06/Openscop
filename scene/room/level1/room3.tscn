@@ -1,0 +1,173 @@
+[gd_scene load_steps=26 format=3 uid="uid://n7ds5jq6om2d"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_cuoxg"]
+[ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_01f37"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_bxgob"]
+[ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_68pmb"]
+[ext_resource type="ArrayMesh" uid="uid://dbtotylqobgq2" path="res://asset/3d/room/evencare/evencare3.obj" id="5_qv4f5"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="6_x8tjl"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_h7a0g"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="8_oxal7"]
+[ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="9_u45pm"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="11_bpq11"]
+[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="12_rihe3"]
+[ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="15_bco4m"]
+[ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="15_dpmmn"]
+[ext_resource type="ArrayMesh" uid="uid://b384gdm6gapyu" path="res://asset/3d/room/evencare/evencare3_trophy1.obj" id="16_e1dgs"]
+[ext_resource type="Resource" uid="uid://by8kf70db6lcq" path="res://resource/textbox/default.tres" id="16_mt35j"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="17_6frob"]
+[ext_resource type="ArrayMesh" uid="uid://cnoyd2ww6r4yx" path="res://asset/3d/room/evencare/evencare3_trophy1gen2.obj" id="18_vknu1"]
+[ext_resource type="ArrayMesh" uid="uid://bts1jllwwsqau" path="res://asset/3d/room/evencare/evencare3_furniture.obj" id="19_sxud5"]
+[ext_resource type="ArrayMesh" uid="uid://cmkaxe5n4fss3" path="res://asset/3d/room/evencare/evencare3_trophy2.obj" id="20_1y88s"]
+[ext_resource type="PackedScene" uid="uid://cmc5a5ano61b3" path="res://scene/object/interactive/camera_zone.tscn" id="20_koyam"]
+
+[sub_resource type="Resource" id="Resource_thkrr"]
+script = ExtResource("3_bxgob")
+sky_color = Color(1, 1, 1, 1)
+texture = ExtResource("4_68pmb")
+scroll_speed = 0.25
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+enable_fog = false
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3pawu"]
+data = PackedVector3Array(8.5, 0, -9.5, 8.5, 1, -3.5, 8.5, 1, -9.5, -1.5, 1, -0.5, 5.5, 0, -0.5, -1.5, 0, -0.5, 8.5, 1, -3.5, 7.5, 0, -3.5, 7.5, 1, -3.5, 8.5, 1, 1, -1.5, 0, 1, 8.5, 0, 1, 7.5, 0, -3.5, 7.5, 1, -2.5, 7.5, 1, -3.5, 7.5, 1, -2.5, 6.5, 0, -2.5, 6.5, 1, -2.5, 6.5, 1, -2.5, 6.5, 0, -1.5, 6.5, 1, -1.5, 5.5, 1, -0.5, 5.5, 0, -1.5, 5.5, 0, -0.5, 5.5, 1, -9.5, 8.5, 0, -9.5, 8.5, 1, -9.5, 6.5, 1, -1.5, 5.5, 0, -1.5, 5.5, 1, -1.5, 6.5, 1, -27, 6.5, 0, -26, 6.5, 1, -26, 11.5, 1, -12, 12.5, 0, -12, 11.5, 0, -12, 12.5, 1, -24.5, 12.5, 0, -12, 12.5, 1, -12, 15.5, 1, -9.5, 15.5, 0, -26, 15.5, 1, -26, 12.5, 1, -9.5, 15.5, 0, -9.5, 15.5, 1, -9.5, 12.5, 1, -3.5, 12.5, 0, -9.5, 12.5, 1, -9.5, 13.5, 1, -3.5, 12.5, 0, -3.5, 12.5, 1, -3.5, 13.5, 1, -2.5, 13.5, 0, -3.5, 13.5, 1, -3.5, 14.5, 1, -2.5, 13.5, 0, -2.5, 13.5, 1, -2.5, 14.5, 1, -1.5, 14.5, 0, -2.5, 14.5, 1, -2.5, 15.5, 1, -1.5, 14.5, 0, -1.5, 14.5, 1, -1.5, 15.5, 1, -0.5, 15.5, 0, -1.5, 15.5, 1, -1.5, 20.5, 1, -0.5, 15.5, 0, -0.5, 15.5, 1, -0.5, 8.5, 0, -0.5, 8.5, 1, 1, 8.5, 0, 1, 9.3, 0, -0.5, 8.5, 1, -0.5, 8.5, 0, -0.5, 9.3, 1, 4.5, 9.3, 0, -0.5, 9.3, 0, 4.5, 5.5, 1, -26, 5.5, 0, -9.5, 5.5, 1, -9.5, 10.7, 0, -0.5, 10.7, 1, 4.5, 10.7, 0, 4.5, 11.5, 0, -0.5, 10.7, 1, -0.5, 10.7, 0, -0.5, 11.5, 0, 1, 11.5, 1, -0.5, 11.5, 0, -0.5, 20.5, 0, 1, 11.5, 1, 1, 11.5, 0, 1, 8.5, 0, -24.5, 8.5, 1, -12, 8.5, 0, -12, 12.5, 0, -24.5, 8.5, 1, -24.5, 8.5, 0, -24.5, 13.5, 1, -27, 14.5, 0, -27, 13.5, 0, -27, 6.5, 1, -26, 5.5, 0, -26, 5.5, 1, -26, 15.5, 1, -26, 14.5, 0, -26, 14.5, 1, -26, 14.5, 1, -26, 14.5, 0, -27, 14.5, 1, -27, 6.5, 1, -27, 7.5, 0, -27, 6.5, 0, -27, 7.5, 1, -26, 13.5, 0, -26, 7.5, 0, -26, 13.5, 1, -26, 13.5, 0, -27, 13.5, 0, -26, 7.5, 1, -27, 7.5, 0, -26, 7.5, 0, -27, 8.5, 1, -12, 9.5, 0, -12, 8.5, 0, -12, 11.5, 0, -11, 11.5, 1, -12, 11.5, 0, -12, 9.5, 1, -11, 11.5, 0, -11, 9.5, 0, -11, 9.5, 0, -11, 9.5, 1, -12, 9.5, 1, -11, 8.5, 0, -3.5, 8.5, 1, -3.5, 8.5, 0, -9.5, 5.5, 1, -0.5, 5.5, 0, -0.5, -1.5, 1, -0.5, 8.5, 0, -3.5, 7.5, 0, -3.5, 8.5, 1, -3.5, -1.5, 1, 1, -1.5, 0, 1, 8.5, 1, 1, 7.5, 0, -2.5, 7.5, 1, -2.5, 7.5, 0, -3.5, 7.5, 0, -2.5, 6.5, 0, -2.5, 7.5, 1, -2.5, 6.5, 0, -2.5, 6.5, 0, -1.5, 6.5, 1, -2.5, 5.5, 1, -1.5, 5.5, 0, -1.5, 5.5, 1, -0.5, 5.5, 0, -9.5, 8.5, 0, -9.5, 5.5, 1, -9.5, 6.5, 0, -1.5, 5.5, 0, -1.5, 6.5, 1, -1.5, 6.5, 0, -27, 6.5, 0, -26, 6.5, 1, -27, 12.5, 1, -12, 12.5, 0, -12, 11.5, 1, -12, 12.5, 0, -24.5, 12.5, 0, -12, 12.5, 1, -24.5, 15.5, 0, -9.5, 15.5, 0, -26, 15.5, 1, -9.5, 12.5, 0, -9.5, 15.5, 0, -9.5, 12.5, 1, -9.5, 12.5, 0, -3.5, 12.5, 0, -9.5, 12.5, 1, -3.5, 13.5, 0, -3.5, 12.5, 0, -3.5, 13.5, 1, -3.5, 13.5, 0, -2.5, 13.5, 0, -3.5, 13.5, 1, -2.5, 14.5, 0, -2.5, 13.5, 0, -2.5, 14.5, 1, -2.5, 14.5, 0, -1.5, 14.5, 0, -2.5, 14.5, 1, -1.5, 15.5, 0, -1.5, 14.5, 0, -1.5, 15.5, 1, -1.5, 15.5, 0, -0.5, 15.5, 0, -1.5, 15.5, 1, -0.5, 20.5, 0, -0.5, 15.5, 0, -0.5, 20.5, 1, -0.5, 8.5, 1, -0.5, 8.5, 1, 1, 8.5, 0, -0.5, 9.3, 1, -0.5, 8.5, 1, -0.5, 9.3, 0, -0.5, 9.3, 1, -0.5, 9.3, 0, -0.5, 9.3, 1, 4.5, 5.5, 0, -26, 5.5, 0, -9.5, 5.5, 1, -26, 10.7, 1, -0.5, 10.7, 1, 4.5, 10.7, 0, -0.5, 11.5, 1, -0.5, 10.7, 1, -0.5, 11.5, 0, -0.5, 11.5, 1, 1, 11.5, 1, -0.5, 11.5, 0, 1, 20.5, 1, 1, 11.5, 1, 1, 20.5, 0, 1, 8.5, 1, -24.5, 8.5, 1, -12, 8.5, 0, -24.5, 12.5, 1, -24.5, 8.5, 1, -24.5, 12.5, 0, -24.5, 14.5, 1, -27, 14.5, 0, -27, 13.5, 1, -27, 6.5, 0, -26, 5.5, 0, -26, 6.5, 1, -26, 15.5, 0, -26, 14.5, 0, -26, 15.5, 1, -26, 14.5, 0, -26, 14.5, 0, -27, 14.5, 1, -26, 7.5, 1, -27, 7.5, 0, -27, 6.5, 1, -27, 13.5, 1, -26, 13.5, 0, -26, 7.5, 1, -26, 13.5, 1, -27, 13.5, 0, -27, 13.5, 1, -26, 7.5, 1, -26, 7.5, 0, -26, 7.5, 1, -27, 9.5, 1, -12, 9.5, 0, -12, 8.5, 1, -12, 11.5, 1, -11, 11.5, 1, -12, 11.5, 0, -11, 11.5, 1, -11, 11.5, 0, -11, 9.5, 1, -11, 9.5, 0, -12, 9.5, 1, -12, 9.5, 0, -11)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wish3"]
+render_priority = 0
+shader = ExtResource("17_6frob")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8i41l"]
+render_priority = 0
+shader = ExtResource("17_6frob")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ern2l"]
+render_priority = 0
+shader = ExtResource("17_6frob")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[node name="level1-room3" type="Node3D"]
+script = ExtResource("1_cuoxg")
+room_name = "level1-room3"
+loading_preset = ExtResource("2_01f37")
+background_music = 2
+allow_front_movement = false
+camera_distance = 10.0
+limit_camera_horizontal = true
+horizontal_limit = Vector2(2.5, 14)
+environment_settings = SubResource("Resource_thkrr")
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("5_qv4f5")
+surface_material_override/0 = ExtResource("6_x8tjl")
+script = ExtResource("7_h7a0g")
+
+[node name="LevelBody" type="StaticBody3D" parent="."]
+
+[node name="LevelCollision" type="CollisionShape3D" parent="LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_3pawu")
+
+[node name="Warp" parent="." instance=ExtResource("8_oxal7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+warp_direction = 2
+scene = "res://scene/room/level1/room2.tscn"
+loading_preset = ExtResource("9_u45pm")
+
+[node name="Warp2" parent="." instance=ExtResource("8_oxal7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 1)
+scene = "res://scene/room/level1/room5.tscn"
+loading_preset = ExtResource("9_u45pm")
+
+[node name="Warp3" parent="." instance=ExtResource("8_oxal7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 0)
+warp_direction = 1
+scene = "res://scene/room/level1/room4.tscn"
+loading_preset = ExtResource("9_u45pm")
+
+[node name="PieceArea" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="PieceArea2" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="PieceArea3" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="PieceArea4" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="PieceArea5" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
+
+[node name="PieceArea6" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+script = ExtResource("12_rihe3")
+scene_path = "res://scene/room/level1/room2.tscn"
+
+[node name="SpawnClass2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+script = ExtResource("12_rihe3")
+scene_path = "res://scene/room/level1/room5.tscn"
+
+[node name="SpawnClass3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9148, 0, 0)
+script = ExtResource("12_rihe3")
+scene_path = "res://scene/room/level1/room4.tscn"
+
+[node name="DialogueTrigger2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -12)
+script = ExtResource("15_dpmmn")
+textbox_preset = ExtResource("16_mt35j")
+textbox_text = "evencare_4"
+trigger_area = 2.0
+height_offset = 2.5
+
+[node name="GenSpecific" type="Node" parent="."]
+script = ExtResource("15_bco4m")
+gens = Array[int]([5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+[node name="TrophyMesh" type="MeshInstance3D" parent="GenSpecific"]
+mesh = ExtResource("16_e1dgs")
+surface_material_override/0 = SubResource("ShaderMaterial_wish3")
+
+[node name="GenSpecific2" type="Node" parent="."]
+script = ExtResource("15_bco4m")
+gens = Array[int]([1, 2, 3, 4])
+
+[node name="TrophyMesh" type="MeshInstance3D" parent="GenSpecific2"]
+mesh = ExtResource("18_vknu1")
+surface_material_override/0 = SubResource("ShaderMaterial_8i41l")
+
+[node name="FurnitureMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("19_sxud5")
+surface_material_override/0 = SubResource("ShaderMaterial_ern2l")
+
+[node name="BallMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("20_1y88s")
+surface_material_override/0 = ExtResource("6_x8tjl")
+
+[node name="CameraZone" parent="." instance=ExtResource("20_koyam")]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 21, 10.5, 0, -17)
+target_pos_start = Vector3(10.5, 0, -11.3)
+anim_speed_start = Vector3(0.5, 1, 1)
+target_pos_end = Vector3(10.5, 0, 0)
+anim_speed_end = Vector3(0.5, 1, 1)

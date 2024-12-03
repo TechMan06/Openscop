@@ -1,0 +1,163 @@
+[gd_scene load_steps=15 format=3 uid="uid://cf0dgbbv434jf"]
+
+[ext_resource type="Script" path="res://script/ui/secret/recording_menu.gd" id="1_ogyyj"]
+[ext_resource type="AudioStream" uid="uid://6xc8aacvnaal" path="res://sfx/pause/petselect.wav" id="2_lp7tv"]
+[ext_resource type="AudioStream" uid="uid://bpvbvscg87h3n" path="res://sfx/pause/petselected.wav" id="3_677t1"]
+[ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="4_35tda"]
+[ext_resource type="Texture2D" uid="uid://bsovijq6ri3ux" path="res://output.png" id="5_c5nnu"]
+[ext_resource type="Texture2D" uid="uid://gnvq77ytspgo" path="res://asset/2d/ui/button_outline.png" id="6_1dhai"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gnury"]
+font = ExtResource("4_35tda")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_drkpm"]
+font = ExtResource("4_35tda")
+
+[sub_resource type="LabelSettings" id="LabelSettings_p5wps"]
+font = ExtResource("4_35tda")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_li21c"]
+font = ExtResource("4_35tda")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d21b1"]
+atlas = ExtResource("6_1dhai")
+region = Rect2(0, 0, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iluvo"]
+atlas = ExtResource("6_1dhai")
+region = Rect2(18, 0, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7oqx"]
+atlas = ExtResource("6_1dhai")
+region = Rect2(0, 0, 18, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_awwih"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d21b1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_iluvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7oqx")
+}],
+"loop": false,
+"name": &"pressed",
+"speed": 30.0
+}]
+
+[node name="RecordingMenu" type="Marker2D"]
+texture_filter = 1
+script = ExtResource("1_ogyyj")
+
+[node name="RecordingButtons" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(25, 33)
+
+[node name="CursorSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_lp7tv")
+bus = &"HUD_SFX"
+
+[node name="PetSelected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_677t1")
+bus = &"HUD_SFX"
+
+[node name="RecordingOptions" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="GenOption" type="Marker2D" parent="RecordingOptions"]
+position = Vector2(39, 96)
+
+[node name="Gen" type="Label" parent="RecordingOptions/GenOption"]
+offset_right = 27.0
+offset_bottom = 19.0
+text = "Gen"
+label_settings = SubResource("LabelSettings_gnury")
+
+[node name="OptionBackground" type="ColorRect" parent="RecordingOptions/GenOption"]
+offset_left = 178.0
+offset_top = 2.0
+offset_right = 200.0
+offset_bottom = 15.0
+color = Color(0, 0, 0, 1)
+
+[node name="GenNumber" type="Label" parent="RecordingOptions/GenOption"]
+unique_name_in_owner = true
+offset_left = 178.0
+offset_top = 2.0
+offset_right = 200.0
+offset_bottom = 21.0
+text = "00"
+label_settings = SubResource("LabelSettings_drkpm")
+
+[node name="RotOption" type="Marker2D" parent="RecordingOptions"]
+position = Vector2(39, 130)
+
+[node name="Demo" type="Label" parent="RecordingOptions/RotOption"]
+offset_right = 72.0
+offset_bottom = 19.0
+text = "Demo Rot."
+label_settings = SubResource("LabelSettings_p5wps")
+
+[node name="OptionBackground" type="ColorRect" parent="RecordingOptions/RotOption"]
+offset_left = 167.0
+offset_top = 3.0
+offset_right = 200.0
+offset_bottom = 16.0
+color = Color(0, 0, 0, 1)
+
+[node name="RotToggle" type="Label" parent="RecordingOptions/RotOption"]
+unique_name_in_owner = true
+offset_left = 167.0
+offset_top = 3.0
+offset_right = 200.0
+offset_bottom = 22.0
+text = "OFF"
+label_settings = SubResource("LabelSettings_drkpm")
+horizontal_alignment = 1
+
+[node name="PlayOption" type="Marker2D" parent="RecordingOptions"]
+position = Vector2(39, 165)
+
+[node name="Demo" type="Label" parent="RecordingOptions/PlayOption"]
+offset_right = 33.0
+offset_bottom = 19.0
+text = "Play"
+label_settings = SubResource("LabelSettings_li21c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+z_index = -4
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_c5nnu")
+
+[node name="OutlineButtons" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(181, 130)
+
+[node name="ButtonLeft" type="AnimatedSprite2D" parent="OutlineButtons"]
+unique_name_in_owner = true
+position = Vector2(86, 10)
+sprite_frames = SubResource("SpriteFrames_awwih")
+
+[node name="ButtonRightOffset" type="Marker2D" parent="OutlineButtons"]
+unique_name_in_owner = true
+position = Vector2(-11, 0)
+
+[node name="ButtonRight" type="AnimatedSprite2D" parent="OutlineButtons/ButtonRightOffset"]
+unique_name_in_owner = true
+position = Vector2(8, 10)
+sprite_frames = SubResource("SpriteFrames_awwih")
+flip_h = true

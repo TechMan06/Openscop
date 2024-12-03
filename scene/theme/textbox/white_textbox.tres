@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bhfq6qxb430u3"]
+
+[ext_resource type="Texture2D" uid="uid://dk5vrmeevfp8l" path="res://asset/2d/ui/textbox/white.png" id="1_5bro7"]
+[ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="2_pa3ks"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0n61q"]
+texture = ExtResource("1_5bro7")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_0n61q")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/fonts/bold_font = ExtResource("2_pa3ks")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_pa3ks")
+RichTextLabel/fonts/italics_font = ExtResource("2_pa3ks")
+RichTextLabel/fonts/mono_font = ExtResource("2_pa3ks")
+RichTextLabel/fonts/normal_font = ExtResource("2_pa3ks")

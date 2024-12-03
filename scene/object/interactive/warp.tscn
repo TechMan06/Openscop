@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn6hdyapwjmyp"]
+
+[ext_resource type="Script" path="res://script/object/interactive/warp.gd" id="1_gnr67"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_yolch"]
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_d4cf1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qy0te"]
+resource_local_to_scene = true
+size = Vector3(2, 2, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v268w"]
+render_priority = 0
+shader = ExtResource("2_yolch")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(0, 1, 0, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_d4cf1")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h7vq5"]
+resource_local_to_scene = true
+size = Vector3(2, 2, 0)
+
+[node name="Warp" type="Node3D"]
+script = ExtResource("1_gnr67")
+
+[node name="WarpArea" type="Area3D" parent="."]
+
+[node name="WarpCollision" type="CollisionShape3D" parent="WarpArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_qy0te")
+
+[node name="WarpSprite" type="Sprite3D" parent="."]
+material_override = SubResource("ShaderMaterial_v268w")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("3_d4cf1")
+hframes = 5
+vframes = 5
+
+[node name="BackupWarp" type="Marker3D" parent="."]
+
+[node name="WarpArea" type="Area3D" parent="BackupWarp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="WarpCollision" type="CollisionShape3D" parent="BackupWarp/WarpArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_h7vq5")
+
+[connection signal="body_entered" from="WarpArea" to="." method="_on_warp_area_body_entered"]
+[connection signal="body_entered" from="BackupWarp/WarpArea" to="." method="_on_warp_area_body_entered"]

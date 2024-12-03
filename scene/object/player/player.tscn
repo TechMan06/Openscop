@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://dp7ow0rvea7yv"]
+
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="1_6mpon"]
+[ext_resource type="Script" path="res://script/object/entity/player.gd" id="1_ttmsq"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="2_mramm"]
+[ext_resource type="AudioStream" uid="uid://ofcuxeh4uonv" path="res://sfx/footstep/evencare.wav" id="4_hddr1"]
+[ext_resource type="AudioStream" uid="uid://xxhrmfdie066" path="res://sfx/p2talk/p2button.wav" id="5_k8plh"]
+[ext_resource type="AudioStream" uid="uid://c3buylcimfgyf" path="res://sfx/p2talk/p2initialize.wav" id="7_14yd5"]
+[ext_resource type="FontFile" uid="uid://ddldh6buancqp" path="res://asset/2d/font/fnt/p2totalk.fnt" id="7_s0ikn"]
+[ext_resource type="Script" path="res://script/object/component/entity/common_entity.gd" id="8_vmbjn"]
+[ext_resource type="Script" path="res://script/object/component/management/p2talkcomponent.gd" id="9_c0wui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kov5n"]
+size = Vector3(1, 1.4, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_llohc"]
+render_priority = 0
+shader = ExtResource("2_mramm")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("1_6mpon")
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
+floor_block_on_wall = false
+script = ExtResource("1_ttmsq")
+p2_talk_component = NodePath("P2TalkComponent")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("BoxShape3D_kov5n")
+
+[node name="PlayerSprite" type="Sprite3D" parent="."]
+material_override = SubResource("ShaderMaterial_llohc")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("1_6mpon")
+hframes = 5
+vframes = 5
+
+[node name="TerrainDetector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.6, 0)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="FootstepSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_hddr1")
+attenuation_model = 3
+panning_strength = 4.0
+bus = &"SFX"
+
+[node name="ButtonSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_k8plh")
+attenuation_model = 3
+bus = &"HUD_SFX"
+
+[node name="P2TalkOrigin" type="Marker3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)
+
+[node name="P2TalkButtons" type="Label3D" parent="P2TalkOrigin"]
+offset = Vector2(0, 5)
+billboard = 1
+fixed_size = true
+texture_filter = 0
+font = ExtResource("7_s0ikn")
+
+[node name="P2TalkToggle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_14yd5")
+bus = &"HUD_SFX"
+
+[node name="EntityComponent" type="Node" parent="." node_paths=PackedStringArray("entity", "entity_sprite")]
+script = ExtResource("8_vmbjn")
+entity = NodePath("..")
+entity_sprite = NodePath("../PlayerSprite")
+
+[node name="P2TalkComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("9_c0wui")
+entity = NodePath("..")

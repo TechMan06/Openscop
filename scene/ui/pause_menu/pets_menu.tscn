@@ -1,0 +1,155 @@
+[gd_scene load_steps=23 format=3 uid="uid://g76vknb3n6cd"]
+
+[ext_resource type="Script" path="res://script/ui/pause_menu/pets.gd" id="1_l3pxi"]
+[ext_resource type="Resource" uid="uid://w06mrcdadgdp" path="res://resource/pet/amber.tres" id="2_nt3v8"]
+[ext_resource type="Resource" uid="uid://b1j6ft5an5yvy" path="res://resource/pet/randice.tres" id="3_kmm7x"]
+[ext_resource type="Resource" uid="uid://xxl522agj5lg" path="res://resource/pet/pen.tres" id="4_6y8dx"]
+[ext_resource type="Resource" uid="uid://dlpdeqtdkafkb" path="res://resource/pet/toneth.tres" id="5_vg681"]
+[ext_resource type="Resource" uid="uid://d3bfa51dn6j6x" path="res://resource/pet/roneth.tres" id="6_da0m4"]
+[ext_resource type="Resource" uid="uid://blq4lypr28kka" path="res://resource/pet/wavey.tres" id="7_jrq52"]
+[ext_resource type="Resource" uid="uid://f0uy2opif8uq" path="res://resource/pet/care_a.tres" id="8_3pojm"]
+[ext_resource type="Resource" uid="uid://dhpq0c4m8gk7e" path="res://resource/pet/care_b.tres" id="9_fqhjp"]
+[ext_resource type="Resource" uid="uid://dfy6qgqc2gy2s" path="res://resource/pet/care_nlm.tres" id="10_6hueh"]
+[ext_resource type="Resource" uid="uid://dyfjq10cy0ccs" path="res://resource/pet/rebirth.tres" id="11_u0ia8"]
+[ext_resource type="AudioStream" uid="uid://6xc8aacvnaal" path="res://sfx/pause/petselect.wav" id="12_4b61w"]
+[ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="12_p8u00"]
+[ext_resource type="AudioStream" uid="uid://bpvbvscg87h3n" path="res://sfx/pause/petselected.wav" id="13_4dloi"]
+[ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="14_yox3x"]
+[ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://asset/2d/ui/font/default.tres" id="16_to457"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibh5m"]
+atlas = ExtResource("14_yox3x")
+region = Rect2(0, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge7r2"]
+atlas = ExtResource("14_yox3x")
+region = Rect2(136, 34, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_354ix"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ibh5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge7r2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47htf"]
+atlas = ExtResource("14_yox3x")
+region = Rect2(102, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr88f"]
+atlas = ExtResource("14_yox3x")
+region = Rect2(238, 34, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlfhw"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_47htf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr88f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PetsMenu" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l3pxi")
+pets_array = Array[Resource("res://script/resource/pet_resource.gd")]([ExtResource("2_nt3v8"), ExtResource("3_kmm7x"), ExtResource("4_6y8dx"), ExtResource("5_vg681"), ExtResource("6_da0m4"), ExtResource("7_jrq52"), ExtResource("8_3pojm"), ExtResource("9_fqhjp"), ExtResource("10_6hueh"), ExtResource("11_u0ia8")])
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("12_p8u00")
+stretch_mode = 1
+
+[node name="ButtonsOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(13.5, 12.5)
+
+[node name="CursorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_4b61w")
+bus = &"HUD_SFX"
+
+[node name="PetSelected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_4dloi")
+bus = &"HUD_SFX"
+
+[node name="InfoButtonsOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CrossButton" type="AnimatedSprite2D" parent="InfoButtonsOrigin"]
+position = Vector2(60, 198)
+sprite_frames = SubResource("SpriteFrames_354ix")
+autoplay = "default"
+
+[node name="SelectPet" type="Label" parent="InfoButtonsOrigin"]
+offset_left = 71.0
+offset_top = 197.0
+offset_right = 147.0
+offset_bottom = 220.0
+text = "Select Pet"
+label_settings = ExtResource("16_to457")
+
+[node name="TriangleButton" type="AnimatedSprite2D" parent="InfoButtonsOrigin"]
+position = Vector2(194, 198)
+sprite_frames = SubResource("SpriteFrames_qlfhw")
+autoplay = "default"
+frame = 1
+
+[node name="GoBack" type="Label" parent="InfoButtonsOrigin"]
+offset_left = 205.0
+offset_top = 197.0
+offset_right = 281.0
+offset_bottom = 220.0
+text = "Go Back"
+label_settings = ExtResource("16_to457")
+
+[node name="InfoButtonsOrigin2" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 46)
+
+[node name="CrossButton2" type="AnimatedSprite2D" parent="InfoButtonsOrigin2"]
+unique_name_in_owner = true
+position = Vector2(57, 198)
+sprite_frames = SubResource("SpriteFrames_354ix")
+autoplay = "default"
+
+[node name="SelectPet" type="Label" parent="InfoButtonsOrigin2"]
+offset_left = 68.0
+offset_top = 197.0
+offset_right = 168.0
+offset_bottom = 220.0
+text = "Advance Text"
+label_settings = ExtResource("16_to457")
+
+[node name="TriangleButton2" type="AnimatedSprite2D" parent="InfoButtonsOrigin2"]
+unique_name_in_owner = true
+position = Vector2(207, 198)
+sprite_frames = SubResource("SpriteFrames_qlfhw")
+autoplay = "default"
+frame = 1
+
+[node name="GoBack" type="Label" parent="InfoButtonsOrigin2"]
+offset_left = 218.0
+offset_top = 197.0
+offset_right = 294.0
+offset_bottom = 220.0
+text = "Go Back"
+label_settings = ExtResource("16_to457")

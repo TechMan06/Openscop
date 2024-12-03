@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnvironmentResource" load_steps=2 format=3 uid="uid://cti154ru5blb"]
+
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="1_fgvpv"]
+
+[resource]
+script = ExtResource("1_fgvpv")
+enable_fog = false
+scroll_speed = 0.25
+sky_color = Color(1, 1, 1, 1)
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DebugSettingsResource" load_steps=2 format=3 uid="uid://p4ajq32lhj66"]
+
+[ext_resource type="Script" path="res://script/resource/management/debug_settings_resource.gd" id="1_772c0"]
+
+[resource]
+script = ExtResource("1_772c0")
+auto_record = true
+custom_sheet = ""

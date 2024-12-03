@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://cle2ne8r3essj"]
+
+[ext_resource type="Script" path="res://script/ui/keyboard.gd" id="1_laxgj"]
+[ext_resource type="Texture2D" uid="uid://bpxh27o01y1vn" path="res://asset/2d/ui/misc/keyboard.png" id="2_l21m7"]
+[ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="3_bi85e"]
+[ext_resource type="Texture2D" uid="uid://bfduicnt3sq7j" path="res://asset/2d/ui/misc/keyboard_arrow.png" id="4_q7apa"]
+[ext_resource type="AudioStream" uid="uid://dnouec53qg7wb" path="res://sfx/ui/keyboardmove.wav" id="6_8n1m1"]
+[ext_resource type="AudioStream" uid="uid://hy0krumx5w6w" path="res://sfx/ui/whoosh.wav" id="7_ndvq7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6o683"]
+font = ExtResource("3_bi85e")
+
+[node name="Keyboard" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_laxgj")
+
+[node name="Fade" type="ColorRect" parent="."]
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 0)
+
+[node name="Keyboard" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(47, 278)
+texture = ExtResource("2_l21m7")
+centered = false
+hframes = 4
+
+[node name="InputField" type="Label" parent="Keyboard"]
+unique_name_in_owner = true
+z_index = 1
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 50.0
+offset_bottom = 24.0
+label_settings = SubResource("LabelSettings_6o683")
+
+[node name="KeyboardArrow" type="TextureRect" parent="Keyboard"]
+unique_name_in_owner = true
+z_index = 1
+offset_left = 188.0
+offset_top = 138.0
+offset_right = 197.0
+offset_bottom = 149.0
+texture = ExtResource("4_q7apa")
+expand_mode = 1
+
+[node name="CursorOrigin" type="Marker2D" parent="Keyboard"]
+position = Vector2(8, 34)
+
+[node name="Cursor" type="ColorRect" parent="Keyboard/CursorOrigin"]
+unique_name_in_owner = true
+offset_right = 16.0
+offset_bottom = 19.0
+
+[node name="KeyboardLetters" type="Marker2D" parent="Keyboard"]
+unique_name_in_owner = true
+position = Vector2(11, 36)
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_8n1m1")
+volume_db = 5.0
+bus = &"HUD_SFX"
+
+[node name="WhooshSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ndvq7")
+volume_db = 2.0
+bus = &"HUD_SFX"

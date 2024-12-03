@@ -1,0 +1,167 @@
+[gd_scene load_steps=23 format=3 uid="uid://e4kh2vguned6"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_lwxw7"]
+[ext_resource type="ArrayMesh" uid="uid://b5knwwiu0fmi" path="res://asset/3d/room/evencare/evencare1.obj" id="2_cx80c"]
+[ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_egdq2"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="2_nd3hv"]
+[ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_vv46u"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="4_y663b"]
+[ext_resource type="ArrayMesh" uid="uid://toccg5whc1of" path="res://asset/3d/room/evencare/evencare1_furniture.obj" id="5_s07sf"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="6_ngm66"]
+[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="7_dp53j"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="7_eccxh"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="10_45o2d"]
+[ext_resource type="Resource" uid="uid://dfvlriw2fctdw" path="res://resource/loading_preset/gift_load_demo.tres" id="12_6l8xb"]
+[ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="13_7ny22"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="13_x1fpd"]
+[ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="14_xiwdi"]
+[ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="15_3ubyt"]
+[ext_resource type="Resource" uid="uid://by8kf70db6lcq" path="res://resource/textbox/default.tres" id="16_0uggr"]
+[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="16_asxlo"]
+
+[sub_resource type="Resource" id="Resource_thkrr"]
+script = ExtResource("2_nd3hv")
+sky_color = Color(1, 1, 1, 1)
+texture = ExtResource("4_vv46u")
+scroll_speed = 0.25
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+enable_fog = false
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmr2p"]
+render_priority = 0
+shader = ExtResource("6_ngm66")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("7_dp53j")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_35chp"]
+data = PackedVector3Array(-0.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 0, -0.5, 12.5, 0, 1, -0.5, 1, 1, -0.5, 0, 1, 4.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 4.5, 0, -12.5, 4.5, 0, -2.6, 2.5, 1, -0.5, 2.5, 0, -1.5, 2.5, 0, -0.5, 11, 1, -6.5, 14.5, 0, -6.5, 11, 0, -6.5, 17.5, 1, -4, 12.5, 0, -4, 17.5, 0, -4, 14.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 0, -5.5, 14.5, 0, -6.5, 14.5, 1, -5.5, 14.5, 0, -5.5, 12.5, 1, -4, 12.5, 0, -2, 12.5, 0, -4, 2.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 0, -1.5, 5.5, 1, -1.5, 5.5, 0, -2.6, 5.5, 0, -1.5, 5.5, 0, -2.6, 4.5, 1, -2.6, 4.5, 0, -2.6, 12.5, 1, -0.5, 12.5, 0, 1, 12.5, 0, -0.5, 11, 0, -0.5, 12.5, 1, -0.5, 12.5, 0, -0.5, 11, 0, -2, 11, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 12.5, 0, -2, 12.5, 1, -2, 7.5, 1, -5, 11, 0, -5, 7.5, 0, -5, 7.5, 1, -12.5, 7.5, 0, -5, 7.5, 0, -12.5, 11, 0, -5, 11, 1, -6.5, 11, 0, -6.5, 2.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 1, -0.5, 12.5, 1, 1, -0.5, 1, 1, 12.5, 0, 1, 7.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 1, -12.5, 4.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 2.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, -0.5, 14.5, 1, -6.5, 14.5, 0, -6.5, 11, 1, -6.5, 12.5, 1, -4, 12.5, 0, -4, 17.5, 1, -4, 17.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 1, -5.5, 14.5, 1, -6.5, 14.5, 1, -5.5, 14.5, 0, -6.5, 12.5, 1, -2, 12.5, 0, -2, 12.5, 1, -4, 5.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 1, -1.5, 5.5, 1, -2.6, 5.5, 0, -2.6, 5.5, 1, -1.5, 5.5, 1, -2.6, 4.5, 1, -2.6, 5.5, 0, -2.6, 12.5, 1, 1, 12.5, 0, 1, 12.5, 1, -0.5, 11, 1, -0.5, 12.5, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 11, 1, -0.5, 11, 0, -2, 11, 0, -2, 12.5, 0, -2, 11, 1, -2, 11, 1, -5, 11, 0, -5, 7.5, 1, -5, 7.5, 1, -5, 7.5, 0, -5, 7.5, 1, -12.5, 11, 1, -5, 11, 1, -6.5, 11, 0, -5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ymuvl"]
+render_priority = 0
+shader = ExtResource("10_45o2d")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[node name="EvenCareRoom1" type="Node3D"]
+script = ExtResource("1_lwxw7")
+room_name = "level1-room1"
+loading_preset = ExtResource("2_egdq2")
+background_music = 2
+allow_front_movement = false
+camera_height = 4.5
+camera_distance = 10.0
+camera_angle = -20.0
+limit_camera_horizontal = true
+horizontal_limit = Vector2(2.5, 14)
+environment_settings = SubResource("Resource_thkrr")
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_cx80c")
+surface_material_override/0 = SubResource("ShaderMaterial_wmr2p")
+script = ExtResource("4_y663b")
+
+[node name="LevelBody" type="StaticBody3D" parent="."]
+
+[node name="LevelCollision" type="CollisionShape3D" parent="LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_35chp")
+
+[node name="FurnitureMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("5_s07sf")
+surface_material_override/0 = SubResource("ShaderMaterial_ymuvl")
+
+[node name="Warp2" parent="." instance=ExtResource("7_eccxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -5)
+warp_direction = 1
+scene = "res://scene/room/level1/room2.tscn"
+loading_preset = ExtResource("13_7ny22")
+
+[node name="PieceArea" parent="." instance=ExtResource("13_x1fpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9)
+
+[node name="PieceArea2" parent="." instance=ExtResource("13_x1fpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -7)
+
+[node name="PieceArea3" parent="." instance=ExtResource("13_x1fpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -5)
+
+[node name="PieceArea4" parent="." instance=ExtResource("13_x1fpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)
+
+[node name="PieceArea5" parent="." instance=ExtResource("13_x1fpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -5)
+
+[node name="PieceArea6" parent="." instance=ExtResource("13_x1fpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -5)
+
+[node name="PieceArea7" parent="." instance=ExtResource("13_x1fpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -5)
+
+[node name="DialogueTrigger" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -1)
+script = ExtResource("15_3ubyt")
+textbox_preset = ExtResource("16_0uggr")
+textbox_text = "evencare_0"
+trigger_area = 0.5
+
+[node name="GenSpecific" type="Node" parent="."]
+script = ExtResource("14_xiwdi")
+gens = Array[int]([1, 2, 3, 4, 5, 6])
+
+[node name="DialogueTrigger" type="Marker3D" parent="GenSpecific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
+script = ExtResource("15_3ubyt")
+textbox_preset = ExtResource("16_0uggr")
+textbox_text = "This door is locked."
+trigger_area = 0.5
+
+[node name="GenSpecific2" type="Node" parent="."]
+script = ExtResource("14_xiwdi")
+gens = Array[int]([7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+[node name="DialogueTrigger" type="Marker3D" parent="GenSpecific2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
+script = ExtResource("15_3ubyt")
+textbox_preset = ExtResource("16_0uggr")
+textbox_text = "evencare_1"
+trigger_area = 0.5
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+script = ExtResource("16_asxlo")
+scene_path = "res://scene/room/gift_plane/gift_plane.tscn"
+
+[node name="SpawnClass2" type="Marker3D" parent="."]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 16, 0, -5)
+script = ExtResource("16_asxlo")
+scene_path = "res://scene/room/level1/room2.tscn"
+
+[node name="GenSpecific3" type="Node" parent="."]
+script = ExtResource("14_xiwdi")
+demo_exclusive = true
+
+[node name="Warp" parent="GenSpecific3" instance=ExtResource("7_eccxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+warp_direction = 2
+scene = "res://scene/room/gift_plane/gift_plane.tscn"
+loading_preset = ExtResource("12_6l8xb")
+
+[node name="GenSpecific4" type="Node" parent="."]
+script = ExtResource("14_xiwdi")
+non_demo_exclusive = true
+
+[node name="Warp" parent="GenSpecific4" instance=ExtResource("7_eccxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+warp_direction = 2
+scene = "res://scene/room/gift_plane/gift_plane.tscn"
+loading_preset = ExtResource("2_egdq2")

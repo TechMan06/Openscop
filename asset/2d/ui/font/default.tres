@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cb1c82a2dubgn"]
+
+[ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="1_srm5p"]
+
+[resource]
+font = ExtResource("1_srm5p")
+font_color = Color(0, 0, 0, 1)

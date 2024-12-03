@@ -1,0 +1,57 @@
+[gd_scene load_steps=11 format=3 uid="uid://h8v7konkyehn"]
+
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="1_7fawu"]
+[ext_resource type="Script" path="res://script/object/interactive/tool.gd" id="1_ej6pr"]
+[ext_resource type="ArrayMesh" uid="uid://5qxxi526na7h" path="res://asset/3d/room/under_nmp/tool_room/tool.obj" id="2_j50l6"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="3_husqi"]
+[ext_resource type="Texture2D" uid="uid://c72mmree6up6h" path="res://asset/2d/sprite/object/tool/idontknow.png" id="3_s3hse"]
+[ext_resource type="Texture2D" uid="uid://du86mofr7hxjk" path="res://asset/3d/room/under_nmp/tool_room/tool_texture.png" id="4_1cbsm"]
+[ext_resource type="Script" path="res://script/object/trigger/keyboard_trigger.gd" id="4_btswg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2vhha"]
+render_priority = 0
+shader = ExtResource("3_husqi")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("4_1cbsm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3aoxm"]
+size = Vector2(3, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nea35"]
+render_priority = 0
+shader = ExtResource("1_7fawu")
+shader_parameter/use_fog = false
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_s3hse")
+
+[node name="Tool" type="Marker3D"]
+script = ExtResource("1_ej6pr")
+
+[node name="ToolMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.250919)
+mesh = ExtResource("2_j50l6")
+surface_material_override/0 = SubResource("ShaderMaterial_2vhha")
+
+[node name="AnswerOrigin" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="AnswerMesh" type="MeshInstance3D" parent="AnswerOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
+mesh = SubResource("QuadMesh_3aoxm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_nea35")
+
+[node name="KeyboardTrigger" type="Marker3D" parent="." node_paths=PackedStringArray("attach_to")]
+script = ExtResource("4_btswg")
+attach_to = NodePath("..")
+height_offset = 2.5

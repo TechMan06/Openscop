@@ -1,0 +1,30 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cy6e1gfj100a6"]
+
+[ext_resource type="FontFile" uid="uid://fmb3ibu1na0d" path="res://asset/2d/font/ttf/console.ttf" id="1_e0oxj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpxw6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_er2aw"]
+bg_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7m3f"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqa60"]
+bg_color = Color(0, 0, 0, 0.501961)
+
+[resource]
+Button/fonts/font = ExtResource("1_e0oxj")
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_e0oxj")
+LineEdit/font_sizes/font_size = 8
+LineEdit/fonts/font = ExtResource("1_e0oxj")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_xpxw6")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_er2aw")
+RichTextLabel/font_sizes/normal_font_size = 8
+RichTextLabel/fonts/normal_font = ExtResource("1_e0oxj")
+TextEdit/font_sizes/font_size = 8
+TextEdit/fonts/font = ExtResource("1_e0oxj")
+TextEdit/styles/focus = SubResource("StyleBoxFlat_o7m3f")
+TextEdit/styles/normal = SubResource("StyleBoxFlat_eqa60")

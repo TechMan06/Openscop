@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PetResource" load_steps=4 format=3 uid="uid://blq4lypr28kka"]
+
+[ext_resource type="Texture2D" uid="uid://yaa82ugjyjui" path="res://asset/2d/ui/pause/pets/wavey.png" id="1_v8g13"]
+[ext_resource type="Texture2D" uid="uid://b5m60cmm4544n" path="res://asset/2d/ui/pause/pets/wavey_name.png" id="2_14aal"]
+[ext_resource type="Script" path="res://script/resource/pet_resource.gd" id="3_7va1w"]
+
+[resource]
+script = ExtResource("3_7va1w")
+pet_icon = ExtResource("1_v8g13")
+pet_name = ExtResource("2_14aal")
+pet_textbox = "wavey"
+pet_id_name = "wavey"

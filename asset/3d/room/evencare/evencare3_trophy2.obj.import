@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cmkaxe5n4fss3"
+path="res://.godot/imported/evencare3_trophy2.obj-fc6158300e68cc20ef81db6ea95fe005.mesh"
+
+[deps]
+
+files=["res://.godot/imported/evencare3_trophy2.obj-fc6158300e68cc20ef81db6ea95fe005.mesh"]
+
+source_file="res://asset/3d/room/evencare/evencare3_trophy2.obj"
+dest_files=["res://.godot/imported/evencare3_trophy2.obj-fc6158300e68cc20ef81db6ea95fe005.mesh", "res://.godot/imported/evencare3_trophy2.obj-fc6158300e68cc20ef81db6ea95fe005.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

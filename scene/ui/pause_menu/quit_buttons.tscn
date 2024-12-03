@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2ab5svx4su8p"]
+
+[ext_resource type="Script" path="res://script/ui/pause_menu/quit_buttons.gd" id="1_y0xeu"]
+[ext_resource type="Texture2D" uid="uid://0m8l44pwsobm" path="res://asset/2d/ui/pause/quit_button.png" id="2_lowrk"]
+[ext_resource type="AudioStream" uid="uid://mmkhc5kb3o70" path="res://sfx/pause/select1.wav" id="4_6yf1h"]
+[ext_resource type="AudioStream" uid="uid://b3ptbmyyksd43" path="res://sfx/pause/select2.wav" id="5_d2hie"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_euqln"]
+streams_count = 2
+playback_mode = 2
+random_pitch = 1.0
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("4_6yf1h")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_d2hie")
+stream_1/weight = 1.0
+
+[node name="QuitButtons" type="Marker2D"]
+texture_filter = 1
+script = ExtResource("1_y0xeu")
+
+[node name="Dont" type="Sprite2D" parent="."]
+position = Vector2(10, 0)
+texture = ExtResource("2_lowrk")
+centered = false
+hframes = 2
+vframes = 3
+frame = 1
+
+[node name="Save" type="Sprite2D" parent="."]
+position = Vector2(0, 17)
+texture = ExtResource("2_lowrk")
+centered = false
+hframes = 2
+vframes = 3
+frame = 2
+
+[node name="Quit" type="Sprite2D" parent="."]
+position = Vector2(0, 34)
+texture = ExtResource("2_lowrk")
+centered = false
+hframes = 2
+vframes = 3
+frame = 4
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_euqln")
+bus = &"HUD_SFX"

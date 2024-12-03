@@ -1,0 +1,263 @@
+[gd_scene load_steps=5 format=3 uid="uid://qp78wfs6tt"]
+
+[ext_resource type="Theme" uid="uid://e4dd06wrk1uf" path="res://asset/2d/ui/debug/petscop.tres" id="1_ak5bf"]
+[ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="2_gvgn6"]
+[ext_resource type="Script" path="res://script/management/debug.gd" id="2_ktk03"]
+[ext_resource type="AudioStream" uid="uid://bleelgyc2auge" path="res://music/bathroom-tomb.ogg" id="4_qcl5k"]
+
+[node name="Debug" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ak5bf")
+script = ExtResource("2_ktk03")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gvgn6")
+stretch_mode = 1
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="About" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="CreditsText" type="RichTextLabel" parent="TabContainer/About"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center] About Openscop[/center]
+
+[color=blue]Version:[/color] 2.0
+[color=blue]Godot Version:[/color] 4.1.1
+
+
+[center] 
+[color=#FF0000]T[/color][color=#FF4300]h[/color][color=#FF8500]e[/color] [color=#FFC800]B[/color][color=#F4FF00]o[/color][color=#B1FF00]o[/color][color=#6FFF00]k[/color] [color=#2CFF00]o[/color][color=#00FF16]f[/color] [color=#00FF59]D[/color][color=#00FF9B]e[/color][color=#00FFDE]v[/color][color=#00DEFF]e[/color][color=#009BFF]l[/color][color=#0059FF]o[/color][color=#0016FF]p[/color][color=#2C00FF]e[/color][color=#6F00FF]r[/color] [color=#B100FF]N[/color][color=#F400FF]a[/color][color=#FF00C8]m[/color][color=#FF0085]e[/color][color=#FF0043]s[/color]
+
+
+[color=purple]The Openscop Team:[/color]
+
+[color=#00FFFF]Sprite Recreation Team:[/color]
+Andrewidot
+Catapult
+Cheddar
+Geometricentric
+Ian
+Izzint
+JuanB7
+Lewgus
+ScrambledPaper22
+
+[color=#00FFFF]Model Recreation Team:[/color]
+Cheddar
+Izzint
+Lewgus
+Nitroyuash
+
+[color=#00FFFF]Level Recreation Team:[/color]
+Cheddar
+Geometricentric
+Izzint
+
+[color=#00FFFF]Sound/Music Ripping Team:[/color]
+Cheddar
+BrowserTG5
+Geometricentric
+Lewgus
+
+[color=#00FFFF]The Programmers:[/color]
+Cheddar
+Izzint
+WestCraft15
+
+[color=#00FFFF]Other Friendly Fellas:[/color]
+Algo
+TL/24
+Tom
+Wowzaboi
+
+[color=#00FFFF]Shoutouts to:[/color]
+ZLD1
+
+
+Shoutouts to you all! Y'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!
+
+
+[color=purple]Individual Asset Contribution Credits:[/color]
+
+[color=#00FFFF]Andrewidot:[/color]
+Belle
+Guardian
+Guardian History
+PanicSV Icon
+Pause Menu Buttons
+Pet Menu Names
+Title Screen UI
+
+[color=#00FFFF]Anthony Domenico:[/color]
+Care
+Bucket
+Loading Screens
+Music
+Textboxes
+SFX
+
+[color=#00FFFF]Catapult:[/color]
+PSX Buttons
+
+[color=#00FFFF]Cheddar:[/color]
+Care B
+Dialogue Previewer Tool
+Draw Mode Assets
+Even Care Furniture
+Even Care Level Mesh
+Even Care Tiles
+Even Care Sign
+Garalina FMV Sequence
+Garalina Loading Screen
+Gift Plane Decorations
+Gift Plane Level Mesh
+Gift Plane Tiles
+Green Pieces
+Loading Screens
+Pause Menu Numbers
+Pink Piece
+Purple Piece
+CMUDict to P2 to TALK Dictionary Conversion Tools
+Recording Menu Buttons
+sort-test Level Mesh
+Sprite Room Tiles
+Title Screen 3D
+Tool Model
+
+[color=#00FFFF]CMUDict:[/color]
+P2 to TALK Dictionary:
+[color=blue]https://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d[/color]
+
+[color=#00FFFF]Corpora:[/color]
+Most Common English Words Filter:
+[color=blue]https://github.com/dariusk/corpora[/color]
+
+[color=#00FFFF]Geometricentric:[/color]
+Amber
+Care A standing
+CAUGHT Sprite
+Cone Piece
+Console Background
+Editor Icons
+Even Care Level Mesh
+Garalina Logo SVG
+Gift Plane Tiles
+Gift Logo
+Interaction Symbol
+Keyboard
+Pen
+Sprite Room Level Mesh
+Sprite Room Tiles
+Tool Answers
+
+[color=#00FFFF]Giftscop Website:[/color]
+PetscopWide Font
+
+[color=#00FFFF]Ian:[/color]
+Belle
+CAUGHT Sprite
+Cone Piece Loading Screen
+Oeptos guardian
+PSX Buttons
+
+[color=#00FFFF]Izzint:[/color]
+Newmaker Plane Grass Texture
+
+[color=#00FFFF]JuanB7:[/color]
+Marvin
+Triangle
+
+[color=#00FFFF]Lewgus:[/color]
+Even Care Level Mesh
+Even Care Tiles
+
+[color=#00FFFF]Nitroyuash / Petscop Restored:[/color]
+Amber Cage Model
+Even Care Sign
+Gift Plane Decorations
+Gift Plane Sign
+Switch Model
+
+[color=#00FFFF]Sam Hayzen:[/color]
+P2 to TALK Phonetic to PSX Button Table
+
+[color=#00FFFF]Scrambled Paper22:[/color]
+Care A sitting
+Care NLM
+Care NLM Red
+House Note
+Randice
+
+[color=#00FFFF]WestCraft15:[/color]
+Logo Animation
+
+
+[color=purple]Petscop Megasheet Credits:[/color]
+
+[color=#80aab3]Noogai223:[/color]
+Pause Menu
+
+[color=#80aab3]Lad:[/color]
+Pause Menu Pets
+
+[color=#80aab3]Osyu:[/color]
+File Select
+Keyboard
+Pet Menu
+Pet Menu Boxes
+Pets
+PSX Buttons
+
+[color=#80aab3]Releskowitz:[/color]
+Pause Menu
+
+[color=#80aab3]The New Orchestra:[/color]
+File Select
+Keyboard
+Pause Menu
+
+[color=#80aab3]Ugng:[/color]
+Pause Menu
+
+[color=#80aab3]Wirelex:[/color]
+Pause Menu
+School HUD
+
+
+Without these people, this project wouldn't have been possible.
+Openscop (Rewrite) Version 2.0 was Programmed Between:
+[color=blue]November 9th 2024[/color]
+[color=blue]December 4th 2024[/color]
+"
+scroll_following = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qcl5k")
+autoplay = true
+bus = &"Music"

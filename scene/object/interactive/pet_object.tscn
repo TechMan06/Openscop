@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvts6yrhq4hnm"]
+
+[ext_resource type="Script" path="res://script/object/interactive/pet.gd" id="1_3hxus"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="2_bw11b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_floj4"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_bw11b")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = false
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qawgv"]
+
+[node name="PetObject" type="Marker3D"]
+script = ExtResource("1_3hxus")
+
+[node name="PetSprite" type="Sprite3D" parent="."]
+material_override = SubResource("ShaderMaterial_floj4")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+
+[node name="PetArea" type="Area3D" parent="."]
+collision_layer = 3
+
+[node name="PetCollision" type="CollisionShape3D" parent="PetArea"]
+shape = SubResource("BoxShape3D_qawgv")
+
+[node name="Cry" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 4.0
+bus = &"SFX"
+
+[node name="CaughtTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="PetArea" to="." method="_on_pet_area_body_entered"]
+[connection signal="timeout" from="CaughtTimer" to="." method="_on_caught_timer_timeout"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6kjmencvapkb"]
+
+[ext_resource type="Script" path="res://script/object/component/entity/common_entity.gd" id="1_gkv2x"]
+
+[node name="EntityComponent" type="Node"]
+script = ExtResource("1_gkv2x")

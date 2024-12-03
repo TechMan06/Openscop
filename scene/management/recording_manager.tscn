@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbx4b5mphfu3k"]
+
+[ext_resource type="Script" path="res://script/management/recording_manager.gd" id="1_rl447"]
+
+[node name="RecordingManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_rl447")

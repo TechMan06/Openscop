@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://db50wvqb2n0b8"]
+
+[ext_resource type="Script" path="res://script/object/interactive/piece.gd" id="1_p0th5"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="2_vvfn8"]
+[ext_resource type="Texture2D" uid="uid://8gu0ed7c55y6" path="res://asset/2d/sprite/object/pieces.png" id="3_cvlhu"]
+[ext_resource type="AudioStream" uid="uid://b4xgma56tgtv2" path="res://sfx/object/piece1.wav" id="4_ee2f7"]
+[ext_resource type="AudioStream" uid="uid://cgrc8c0y4e6i" path="res://sfx/object/piece2.wav" id="5_cjpwo"]
+[ext_resource type="AudioStream" uid="uid://bdptgpirfpj1k" path="res://sfx/object/piece3.wav" id="6_08kcw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y200a"]
+render_priority = 0
+shader = ExtResource("2_vvfn8")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = true
+shader_parameter/animation_frames = Vector2i(20, 5)
+shader_parameter/animation_speed = Vector2i(10, 0)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_cvlhu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cewfo"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m6ecn"]
+streams_count = 3
+playback_mode = 1
+random_pitch = 1.0
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("4_ee2f7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_cjpwo")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_08kcw")
+stream_2/weight = 1.0
+
+[node name="PieceArea" type="Area3D" groups=["piece"]]
+script = ExtResource("1_p0th5")
+
+[node name="PieceSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("ShaderMaterial_y200a")
+pixel_size = 0.03
+texture = ExtResource("3_cvlhu")
+hframes = 20
+vframes = 5
+
+[node name="PieceCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_cewfo")
+
+[node name="PieceSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+stream = SubResource("AudioStreamRandomizer_m6ecn")
+panning_strength = 4.0
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

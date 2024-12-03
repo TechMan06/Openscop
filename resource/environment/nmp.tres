@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnvironmentResource" load_steps=2 format=3 uid="uid://v3gcw1nk78p2"]
+
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="1_38mhe"]
+
+[resource]
+script = ExtResource("1_38mhe")
+sky_color = Color(0, 0, 0, 1)
+scroll_speed = 0.25
+ambient_color = Color(0.89, 0.89, 0.89, 1)
+environment_darkness = 0.73
+enable_fog = true
+fog_color = Color(0, 0, 0, 1)
+fog_radius = 13.5

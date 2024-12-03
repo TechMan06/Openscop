@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0wb6ggmsq8tf"]
+
+[ext_resource type="Script" path="res://script/ui/textbox.gd" id="1_gisvh"]
+[ext_resource type="Texture2D" uid="uid://cnhbg8inyi26p" path="res://asset/2d/ui/textbox/arrow.png" id="2_6x621"]
+[ext_resource type="AudioStream" uid="uid://dpl384schvmbb" path="res://sfx/ui/textboxdialogue.wav" id="3_6dam8"]
+[ext_resource type="AudioStream" uid="uid://dhyf1l4bln0n6" path="res://sfx/ui/textboxcontinue.wav" id="4_ioc3x"]
+[ext_resource type="AudioStream" uid="uid://cnjhe3r886qec" path="res://sfx/ui/textboxclose.wav" id="5_tq2l0"]
+
+[node name="TextboxPanel" type="Panel"]
+process_mode = 1
+script = ExtResource("1_gisvh")
+
+[node name="TextboxMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 760.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 9
+
+[node name="TextboxLabel" type="RichTextLabel" parent="TextboxMargin"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+
+[node name="Arrow" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 21)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_6x621")
+stretch_mode = 2
+
+[node name="ArrowTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="TypeSpeed" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="TypingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6dam8")
+volume_db = -80.0
+bus = &"HUD_SFX"
+
+[node name="ChangeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ioc3x")
+bus = &"HUD_SFX"
+
+[node name="ClosingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tq2l0")
+bus = &"HUD_SFX"
+
+[connection signal="timeout" from="ArrowTimer" to="." method="_on_arrow_timer_timeout"]
+[connection signal="timeout" from="TypeSpeed" to="." method="_on_type_speed_timeout"]

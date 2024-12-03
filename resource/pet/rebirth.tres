@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PetResource" load_steps=3 format=3 uid="uid://dyfjq10cy0ccs"]
+
+[ext_resource type="Texture2D" uid="uid://c3qa4rq8nbc0i" path="res://asset/2d/ui/pause/pets/rebirth_name.png" id="1_ui7se"]
+[ext_resource type="Script" path="res://script/resource/pet_resource.gd" id="3_xlg2c"]
+
+[resource]
+script = ExtResource("3_xlg2c")
+pet_name = ExtResource("1_ui7se")
+pet_textbox = "rebirth"
+pet_id_name = "rebirth"

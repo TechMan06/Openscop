@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdh62cdde1nl1"]
+
+[ext_resource type="Script" path="res://script/object/component/management/p2talkcomponent.gd" id="1_lt3e2"]
+
+[node name="P2TalkComponent" type="Node"]
+script = ExtResource("1_lt3e2")

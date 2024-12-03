@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TextboxResource" load_steps=3 format=3 uid="uid://by8kf70db6lcq"]
+
+[ext_resource type="Theme" uid="uid://bhfq6qxb430u3" path="res://scene/theme/textbox/white_textbox.tres" id="1_i6ca0"]
+[ext_resource type="Script" path="res://script/resource/textbox_resource.gd" id="1_j1l4i"]
+
+[resource]
+script = ExtResource("1_j1l4i")
+background = ExtResource("1_i6ca0")
+position = Vector2(30, 140)
+size = Vector2(260, 70)

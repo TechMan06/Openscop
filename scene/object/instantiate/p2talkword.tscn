@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvejuye55yhoj"]
+
+[ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="1_wkvku"]
+[ext_resource type="Script" path="res://script/object/instantiate/p2_word.gd" id="2_5gqec"]
+
+[node name="P2Word" type="Label3D"]
+billboard = 1
+fixed_size = true
+texture_filter = 0
+text = "Test"
+font = ExtResource("1_wkvku")
+font_size = 16
+outline_size = 0
+script = ExtResource("2_5gqec")
+
+[node name="p2talksound" type="AudioStreamPlayer3D" parent="."]
+attenuation_model = 3
+panning_strength = 4.0
+bus = &"SFX"

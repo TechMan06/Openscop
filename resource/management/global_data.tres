@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GlobalData" load_steps=2 format=3 uid="uid://b45assb0ylmd8"]
+
+[ext_resource type="Script" path="res://script/resource/save/global_save.gd" id="1_8l6e5"]
+
+[resource]
+script = ExtResource("1_8l6e5")
+gen = 8

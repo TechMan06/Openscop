@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://dtdn1qldur8b6"]
+
+[ext_resource type="Script" path="res://script/object/interactive/playback_player.gd" id="1_0yfa2"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="3_q6yhf"]
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="4_onfya"]
+[ext_resource type="Script" path="res://script/object/component/entity/common_entity.gd" id="6_kxg0q"]
+[ext_resource type="AudioStream" uid="uid://xxhrmfdie066" path="res://sfx/p2talk/p2button.wav" id="6_vn0kc"]
+[ext_resource type="FontFile" uid="uid://ddldh6buancqp" path="res://asset/2d/font/fnt/p2totalk.fnt" id="7_hbph4"]
+[ext_resource type="Script" path="res://script/object/component/management/p2talkcomponent.gd" id="7_pevpq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vl8ej"]
+size = Vector3(1, 1.4, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_llohc"]
+render_priority = 0
+shader = ExtResource("3_q6yhf")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_onfya")
+
+[node name="PlaybackPlayer" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
+floor_block_on_wall = false
+script = ExtResource("1_0yfa2")
+p2_talk_component = NodePath("P2TalkComponent")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("BoxShape3D_vl8ej")
+
+[node name="PlayerSprite" type="Sprite3D" parent="."]
+material_override = SubResource("ShaderMaterial_llohc")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("4_onfya")
+hframes = 5
+vframes = 5
+
+[node name="ButtonSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_vn0kc")
+attenuation_model = 3
+bus = &"HUD_SFX"
+
+[node name="P2TalkOrigin" type="Marker3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)
+
+[node name="P2TalkButtons" type="Label3D" parent="P2TalkOrigin"]
+offset = Vector2(0, 5)
+billboard = 1
+fixed_size = true
+texture_filter = 0
+font = ExtResource("7_hbph4")
+
+[node name="EntityComponent" type="Node" parent="." node_paths=PackedStringArray("entity", "entity_sprite")]
+script = ExtResource("6_kxg0q")
+entity = NodePath("..")
+entity_sprite = NodePath("../PlayerSprite")
+
+[node name="P2TalkComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("7_pevpq")
+entity = NodePath("..")

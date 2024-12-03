@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://dal3gfvriy3c5"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_1bq13"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="2_a8qjf"]
+[ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="2_qfidt"]
+[ext_resource type="ArrayMesh" uid="uid://debjdbajr3whi" path="res://asset/3d/room/sprite/sprite.obj" id="4_affl6"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="5_yx6bg"]
+[ext_resource type="Texture2D" uid="uid://daudftdydtlri" path="res://asset/3d/room/sprite/texture.png" id="6_lvi23"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_lr80v"]
+
+[sub_resource type="Resource" id="Resource_3wipe"]
+script = ExtResource("2_a8qjf")
+sky_color = Color(1, 1, 1, 1)
+scroll_speed = 0.25
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+enable_fog = false
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m51ce"]
+render_priority = 0
+shader = ExtResource("5_yx6bg")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("6_lvi23")
+
+[node name="sprite" type="Node3D"]
+script = ExtResource("1_1bq13")
+room_name = "sprite-room"
+loading_preset = ExtResource("2_qfidt")
+allow_recording = false
+environment_settings = SubResource("Resource_3wipe")
+
+[node name="SpriteMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_affl6")
+surface_material_override/0 = SubResource("ShaderMaterial_m51ce")
+script = ExtResource("7_lr80v")

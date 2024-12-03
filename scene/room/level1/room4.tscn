@@ -1,0 +1,67 @@
+[gd_scene load_steps=14 format=3 uid="uid://bl1uu813327tm"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_smfd6"]
+[ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_sdjm4"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_ja0f7"]
+[ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_0pm0j"]
+[ext_resource type="ArrayMesh" uid="uid://p87ajw2pmcuc" path="res://asset/3d/room/evencare/evencare4.obj" id="5_h0ugi"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="6_cvrse"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_46fc8"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="8_7sr27"]
+[ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="9_2pbgl"]
+[ext_resource type="Texture2D" uid="uid://d015y0vv4urm6" path="res://vlcsnap-2024-11-30-19h11m11s944.png" id="11_34qau"]
+[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="11_pkk0v"]
+
+[sub_resource type="Resource" id="Resource_thkrr"]
+script = ExtResource("3_ja0f7")
+sky_color = Color(1, 1, 1, 1)
+texture = ExtResource("4_0pm0j")
+scroll_speed = 0.25
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+enable_fog = false
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kkn0d"]
+data = PackedVector3Array(5.5, 0, -29.5, 5.5, 1, -17.5, 5.5, 0, -17.5, 2.5, 1, -17.5, 3.5, 0, -17.5, 2.5, 0, -17.5, 6.5, 1, 1, -1.5, 0, 1, 6.5, 0, 1, 3.5, 1, -1.5, 3.5, 0, -1.5, 3.5, 1, -0.5, 6.5, 0, 1, 6.5, 1, -17.5, 6.5, 1, 1, 5.5, 1, -17.5, 6.5, 0, -17.5, 5.5, 0, -17.5, 3.5, 1, -29.5, 3.5, 0, -17.5, 3.5, 1, -17.5, 3.5, 1, -29.5, 5.5, 0, -29.5, 3.5, 0, -29.5, 5.5, 1, -29.5, 5.5, 1, -17.5, 5.5, 0, -29.5, 3.5, 1, -17.5, 3.5, 0, -17.5, 2.5, 1, -17.5, -1.5, 1, 1, -1.5, 0, 1, 6.5, 1, 1, 6.5, 0, -17.5, 6.5, 1, -17.5, 6.5, 0, 1, 6.5, 1, -17.5, 6.5, 0, -17.5, 5.5, 1, -17.5, 3.5, 1, -0.5, 3.5, 0, -1.5, 3.5, 0, -0.5, 3.5, 0, -29.5, 3.5, 0, -17.5, 3.5, 1, -29.5, 5.5, 1, -29.5, 5.5, 0, -29.5, 3.5, 1, -29.5, 2.5, 1, -1.5, 2.5, 0, -17.5, 2.5, 0, -1.5, 3.5, 0, -1.5, 2.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, -17.5, 2.5, 0, -17.5, 2.5, 1, -1.5, -1.5, 1, -0.5, 3.5, 1, -0.5, 3.5, 0, -0.5, 3.5, 0, -0.5, -1.5, 0, -0.5, -1.5, 1, -0.5, 3.5, 1, -1.5, 2.5, 1, -1.5, 3.5, 0, -1.5)
+
+[node name="level1-room4" type="Node3D"]
+script = ExtResource("1_smfd6")
+room_name = "level1-room4"
+loading_preset = ExtResource("2_sdjm4")
+background_music = 2
+level_slogan = "We hope you are enjoying the game."
+spawn_camera_root = false
+environment_settings = SubResource("Resource_thkrr")
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("5_h0ugi")
+surface_material_override/0 = ExtResource("6_cvrse")
+script = ExtResource("7_46fc8")
+
+[node name="LevelBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_kkn0d")
+
+[node name="Warp" parent="." instance=ExtResource("8_7sr27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+warp_direction = 2
+scene = "res://scene/room/level1/room3.tscn"
+loading_preset = ExtResource("9_2pbgl")
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+script = ExtResource("11_pkk0v")
+scene_path = "res://scene/room/level1/room3.tscn"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 4.5, 5.125, 9.5)
+fov = 35.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.5)
+visible = false
+modulate = Color(1, 1, 1, 0.32549)
+texture = ExtResource("11_34qau")

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dm46m75hu5jco"
+path="res://.godot/imported/evencare_drawer.obj-4472a9f541a5f1c427bfae47d07302de.mesh"
+
+[deps]
+
+files=["res://.godot/imported/evencare_drawer.obj-4472a9f541a5f1c427bfae47d07302de.mesh"]
+
+source_file="res://asset/3d/room/evencare/evencare_drawer.obj"
+dest_files=["res://.godot/imported/evencare_drawer.obj-4472a9f541a5f1c427bfae47d07302de.mesh", "res://.godot/imported/evencare_drawer.obj-4472a9f541a5f1c427bfae47d07302de.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

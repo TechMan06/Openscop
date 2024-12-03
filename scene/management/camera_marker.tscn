@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://5xytxuw1xyjw"]
+
+[ext_resource type="Script" path="res://script/object/environment/camera_marker.gd" id="1_gk2uh"]
+
+[node name="CameraMarker" type="Marker3D"]
+top_level = true
+script = ExtResource("1_gk2uh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 35.0

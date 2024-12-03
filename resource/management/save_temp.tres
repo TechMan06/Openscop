@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SaveData" load_steps=2 format=3 uid="uid://b0fhmtw3lm5j"]
+
+[ext_resource type="Script" path="res://script/resource/save/save_resource.gd" id="2_t0fyn"]
+
+[resource]
+script = ExtResource("2_t0fyn")
+save_name = ""
+room_name = ""
+room_path = ""
+piece_log = {}
+pet = Array[String]([])
+corrupted = false

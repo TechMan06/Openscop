@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ptmsj1qs8mt2"
+path="res://.godot/imported/evencare6gen2.obj-e531ddf3da61a853f5ed9aa4572fe889.mesh"
+
+[deps]
+
+files=["res://.godot/imported/evencare6gen2.obj-e531ddf3da61a853f5ed9aa4572fe889.mesh"]
+
+source_file="res://asset/3d/room/evencare/evencare6gen2.obj"
+dest_files=["res://.godot/imported/evencare6gen2.obj-e531ddf3da61a853f5ed9aa4572fe889.mesh", "res://.godot/imported/evencare6gen2.obj-e531ddf3da61a853f5ed9aa4572fe889.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

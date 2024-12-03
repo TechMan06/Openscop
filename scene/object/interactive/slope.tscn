@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://itbo1loprmd5"]
+
+[ext_resource type="Script" path="res://script/object/interactive/slope.gd" id="1_wb1eb"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_17yav"]
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_dbgnb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rbmav"]
+render_priority = 0
+shader = ExtResource("2_17yav")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 0, 0, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_dbgnb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7req"]
+render_priority = 0
+shader = ExtResource("2_17yav")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(0, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_dbgnb")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5c50u"]
+size = Vector3(1, 1, 2)
+
+[node name="Slope" type="Marker3D"]
+script = ExtResource("1_wb1eb")
+
+[node name="SlopeStart" type="Marker3D" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="SlopeStart"]
+material_override = SubResource("ShaderMaterial_rbmav")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("3_dbgnb")
+hframes = 5
+vframes = 5
+frame = 10
+
+[node name="SlopeEnd" type="Marker3D" parent="."]
+
+[node name="Sprite" type="Sprite3D" parent="SlopeEnd"]
+material_override = SubResource("ShaderMaterial_j7req")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("3_dbgnb")
+hframes = 5
+vframes = 5
+frame = 10
+
+[node name="SlopeArea" type="Area3D" parent="."]
+
+[node name="SlopeCollision" type="CollisionShape3D" parent="SlopeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_5c50u")
+
+[connection signal="body_entered" from="SlopeArea" to="." method="_on_slope_area_body_entered"]
+[connection signal="body_exited" from="SlopeArea" to="." method="_on_slope_area_body_exited"]
