@@ -2,13 +2,15 @@ extends Node2D
 
 var started: bool = true
 var timer: float = 0.0
-var gen: int = load("user://savedata/global.tres").gen
+var gen: int
 
 @onready var logo = $LogoAnim
 @onready var logo2 = $Logo
 
 
 func _ready():
+	await Global.boot_game
+	
 	if ResourceLoader.exists("user://savedata/global.tres"):
 		gen = load("user://savedata/global.tres").gen
 	

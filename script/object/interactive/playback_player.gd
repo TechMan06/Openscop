@@ -62,21 +62,21 @@ func _ready() -> void:
 			recording_data = load("user://player_recordings/" + recording)
 		else:
 			recording_data = load("user://recordings/" + recording)
-	
-	if player_stats == null:
-		player_stats = PlayerStats.new()
-		player_stats = recording_data.save_data.player_data
-	
-	if use_recording_position && recording_data != null:
-		global_position = Vector3(
-									player_stats.player_pos.x,
-									player_stats.player_pos.y,
-									player_stats.player_pos.z
-								)
+	if recording_data != null:
+		if player_stats == null:
+			player_stats = PlayerStats.new()
+			player_stats = recording_data.save_data.player_data
 		
-		direction = player_stats.player_pos.w
+		if use_recording_position:
+			global_position = Vector3(
+										player_stats.player_pos.x,
+										player_stats.player_pos.y,
+										player_stats.player_pos.z
+									)
+			
+			direction = player_stats.player_pos.w
 	
-	if character_sheet == null:
+	if character_sheet == null && player_stats != null:
 		_sprite.texture = load(character_sheets[player_stats.character_id])
 		
 	else:
@@ -94,7 +94,8 @@ func _ready() -> void:
 	if recording_delay != 0.0:
 		await get_tree().create_timer(recording_delay).timeout
 	
-	replay = true
+	if recording_data != null:
+		replay = true
 
 
 func _physics_process(_delta):

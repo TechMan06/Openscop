@@ -199,7 +199,6 @@ scene = "res://scene/room/test.tscn"
 loading_preset = SubResource("Resource_1qxky")
 
 [node name="PlaybackPlayer" parent="." instance=ExtResource("21_750co")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -5, 0, -2)

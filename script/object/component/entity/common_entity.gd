@@ -37,16 +37,17 @@ func _process(delta) -> void:
 	else:
 		entity._current_frame = 0
 	
-	entity_sprite.get_material_override().set_shader_parameter(
-											"modulate_color", 
-											Color(
-													entity.player_stats.brightness, 
-													entity.player_stats.brightness, 
-													entity.player_stats.brightness
+	if entity.player_stats != null:
+		entity_sprite.get_material_override().set_shader_parameter(
+												"modulate_color", 
+												Color(
+														entity.player_stats.brightness, 
+														entity.player_stats.brightness, 
+														entity.player_stats.brightness
+													)
 												)
-											)
 	
-	entity_sprite.position.y = entity.entity_min + entity.player_stats.entity_y
+		entity_sprite.position.y = entity.entity_min + entity.player_stats.entity_y
 	
 	if entity.control_mode == 0:
 		entity.velocity.z = lerp(
@@ -61,7 +62,7 @@ func _process(delta) -> void:
 			entity._h /= _magnitude
 			entity._v /= _magnitude
 
-		if entity.player_stats.character_id == 2:
+		if entity.player_stats != null && entity.player_stats.character_id == 2:
 			entity.velocity.x = lerp(
 										entity.velocity.x, 
 										entity._h * -1.0 * entity._movement_speed, 

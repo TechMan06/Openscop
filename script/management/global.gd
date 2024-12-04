@@ -1,5 +1,7 @@
 extends Node
 
+signal boot_game
+
 var global_data: GlobalData = load("res://resource/management/global_data.tres")
 var custom_sheet: ImageTexture
 var is_game_paused: bool
@@ -33,10 +35,13 @@ func _ready() -> void:
 	
 	GameManager.file_dialog.set_root_subfolder("user://sheets")
 	
+	
 	if ResourceLoader.exists("user://savedata/global.tres"):
 		global_data = load("user://savedata/global.tres")
 	else:
 		save_global()
+
+	boot_game.emit()
 
 
 func save_global() -> void:
