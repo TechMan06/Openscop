@@ -31,7 +31,7 @@ var demos: Array[RecordingData]
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	var recording_list: PackedStringArray = DirAccess.get_files_at("user://recordings")
 	var allowed_recordings: RecordingData
 	
@@ -64,7 +64,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta) -> void:
 	timer += 1
 	logo_timer += delta
 	
@@ -257,13 +257,13 @@ func _process(delta):
 		files.get_child(selected_file).modulate = Color(1.0, 1.0, 1.0)
 
 
-func check_files():
+func check_files() -> void:
 	check_individual_file(0)
 	check_individual_file(1)
 	check_individual_file(2)
 
 
-func check_individual_file(slot: int):
+func check_individual_file(slot: int) -> void:
 	var file: Marker2D = files.get_child(slot)
 	
 	if FileAccess.file_exists("user://savedata/save"+ str(slot) +".tres"):
@@ -278,7 +278,7 @@ func check_individual_file(slot: int):
 		file.get_node("Panic").visible = false
 
 
-func select_file(up: bool = false):
+func select_file(up: bool = false) -> void:
 	var _bounce: Tween = create_tween()
 	
 	if up:
@@ -362,8 +362,8 @@ func _on_file_created(file_name: String, attach_node: Node) -> void:
 	create_tween().tween_property(file_select_buttons_2, "position:y", 50.0, 0.5).set_trans(Tween.TRANS_SINE)
 
 
-func _on_demo_timer_timeout():
-	if title_stage == 0:
+func _on_demo_timer_timeout() -> void:
+	if title_stage == 0 && demos != []:
 		var _picked_demo = demos.pick_random()
 		RecordingManager.demo = true
 		RecordingManager.load_recording(_picked_demo.name, _picked_demo.gen)
