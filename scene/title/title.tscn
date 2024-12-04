@@ -175,7 +175,7 @@ ambient_light_color = Color(0.501961, 0, 0.717647, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n176l"]
 render_priority = 0
 shader = ExtResource("4_2bndm")
-shader_parameter/use_fog = null
+shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
