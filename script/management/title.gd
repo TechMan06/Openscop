@@ -38,9 +38,10 @@ func _ready() -> void:
 	for recording in recording_list:
 		demos.append(load("user://recordings/" + recording))
 	
-	for demo in demos:
-		if !demo.rotation:
-			demos.erase(demo)
+	if demos != []:
+		for demo in demos:
+			if !demo.rotation:
+				demos.erase(demo)
 	
 	if BGMusic.get_stream_path() != "res://music/petscop.ogg":
 		BGMusic.stream_paused = true
