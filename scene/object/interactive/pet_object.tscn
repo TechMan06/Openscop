@@ -20,6 +20,7 @@ shader_parameter/alpha_color = Color(1, 0, 1, 1)
 
 [node name="PetObject" type="Marker3D"]
 script = ExtResource("1_3hxus")
+frames = Vector2(0, 0)
 
 [node name="PetSprite" type="Sprite3D" parent="."]
 material_override = SubResource("ShaderMaterial_floj4")

@@ -8,18 +8,10 @@ const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 @export var pet_name: String
 @export var cry_sound_file: AudioStream
 @export var pet_sprite: Texture2D
-@export var frames: Vector2:
+@export var frames: Vector2 = Vector2i(1, 1):
 	set(value):
-		pet_sprite3d.hframes = value.x
-		pet_sprite3d.vframes = value.y
-		
-		pet_sprite3d.get_material_override().set_shader_parameter(
-													"animation_frames", 
-													Vector2(
-																pet_sprite3d.hframes, 
-																pet_sprite3d.vframes
-															)
-		)
+		if Engine.is_editor_hint():
+			_update_frames()
 		
 		frames = value
 
@@ -30,12 +22,14 @@ const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 
 @export var animate: bool:
 	set(value):
-		pet_sprite3d.get_material_override().set_shader_parameter("animate", value)
+		if Engine.is_editor_hint():
+			_update_animation()
 		animate = value
 
 @export var animation_speed: Vector2:
 	set(value):
-		pet_sprite3d.get_material_override().set_shader_parameter("animation_speed", value)
+		if Engine.is_editor_hint():
+			_update_anim_speed()
 		animation_speed = value
 
 @onready var pet_sprite3d: Sprite3D = $PetSprite
@@ -49,12 +43,15 @@ func _ready() -> void:
 		pet_sprite3d.get_material_override().set_shader_parameter("albedoTex", pet_sprite3d.texture)
 		cry_sound.set_stream(cry_sound_file)
 		
+		_update_frames()
+		_update_animation()
+		_update_anim_speed()
 		
 		if SaveManager.get_data().pet.find(pet_name) != -1:
 			queue_free()
 
 
-func _process(_delta):
+func _process(_delta) -> void:
 	if Engine.is_editor_hint():
 		pet_sprite3d.set_texture(pet_sprite)
 		pet_sprite3d.get_material_override().set_shader_parameter("albedoTex", pet_sprite3d.texture)
@@ -90,6 +87,29 @@ func _on_pet_area_body_entered(body) -> void:
 			await _shrink_animator.finished
 
 
-func _on_caught_timer_timeout():
+func _on_caught_timer_timeout() -> void:
 	var _caught_instance: Marker2D = CAUGHT_SCENE.instantiate()
 	add_child(_caught_instance)
+
+
+func _update_frames() -> void:
+	if frames.x > 1:
+		pet_sprite3d.hframes = float(frames.x)
+	if frames.y > 1:
+		pet_sprite3d.vframes = float(frames.y)
+	
+	pet_sprite3d.get_material_override().set_shader_parameter(
+																"animation_frames", 
+																Vector2(
+																			pet_sprite3d.hframes, 
+																			pet_sprite3d.vframes
+																		)
+															)
+
+
+func _update_animation() -> void:
+	pet_sprite3d.get_material_override().set_shader_parameter("animate", animate)
+
+
+func _update_anim_speed() -> void:
+	pet_sprite3d.get_material_override().set_shader_parameter("animation_speed", animation_speed)
