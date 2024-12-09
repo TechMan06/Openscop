@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3sov8vsf3ey3"]
+[gd_scene load_steps=7 format=3 uid="uid://d3sov8vsf3ey3"]
 
 [ext_resource type="ArrayMesh" uid="uid://bpbox33uawn7g" path="res://asset/3d/object/cage.obj" id="1_f6uii"]
 [ext_resource type="Script" path="res://scene/object/interactive/cage.gd" id="1_qkmda"]
@@ -13,8 +13,10 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_csck6"]
-size = Vector3(3, 1, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_f57jv"]
+size = Vector3(2, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a7wyw"]
 
 [node name="AmberCage" type="Marker3D"]
 script = ExtResource("1_qkmda")
@@ -26,4 +28,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_kd2en")
 [node name="CageBody" type="StaticBody3D" parent="."]
 
 [node name="CageCollision" type="CollisionShape3D" parent="CageBody"]
-shape = SubResource("BoxShape3D_csck6")
+shape = SubResource("BoxShape3D_f57jv")
+
+[node name="CageCollision2" type="CollisionShape3D" parent="CageBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("CylinderShape3D_a7wyw")
+
+[node name="CageCollision3" type="CollisionShape3D" parent="CageBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("CylinderShape3D_a7wyw")
