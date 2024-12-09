@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bpbox33uawn7g"
+path="res://.godot/imported/cage.obj-5a7ed247c9bd3149d8a213674b6aab0e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cage.obj-5a7ed247c9bd3149d8a213674b6aab0e.mesh"]
+
+source_file="res://asset/3d/object/cage.obj"
+dest_files=["res://.godot/imported/cage.obj-5a7ed247c9bd3149d8a213674b6aab0e.mesh", "res://.godot/imported/cage.obj-5a7ed247c9bd3149d8a213674b6aab0e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

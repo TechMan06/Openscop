@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3sov8vsf3ey3"]
+
+[ext_resource type="ArrayMesh" uid="uid://bpbox33uawn7g" path="res://asset/3d/object/cage.obj" id="1_f6uii"]
+[ext_resource type="Script" path="res://scene/object/interactive/cage.gd" id="1_qkmda"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="2_m3d8k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd2en"]
+render_priority = 0
+shader = ExtResource("2_m3d8k")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_csck6"]
+size = Vector3(3, 1, 1)
+
+[node name="AmberCage" type="Marker3D"]
+script = ExtResource("1_qkmda")
+
+[node name="CageMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_f6uii")
+surface_material_override/0 = SubResource("ShaderMaterial_kd2en")
+
+[node name="CageBody" type="StaticBody3D" parent="."]
+
+[node name="CageCollision" type="CollisionShape3D" parent="CageBody"]
+shape = SubResource("BoxShape3D_csck6")

@@ -10,7 +10,7 @@ const ROTATION_LIMIT: float = 0.25
 const ROTATION_ANIM_SPEED: float = 1.5
 const GROW_ANIMATION_SPEED: float = 0.25
 
-var trigger_area: float = 2.5
+var enabled: bool
 var height_offset: float = 1.5
 var min_distance: float = 2.5
 var original_position: float
@@ -24,8 +24,8 @@ var player_inside_zone: bool
 
 
 func _ready() -> void:
-	$InteractionArea/InteractionCollision.get_shape().radius = trigger_area
-	
+	await get_tree().process_frame
+	$InteractionArea/InteractionCollision.get_shape().radius = min_distance
 	interaction_mesh.scale = Vector3.ZERO
 	height.position.y = height_offset
 	original_position = interaction_mesh.position.y
@@ -34,6 +34,8 @@ func _ready() -> void:
 	
 	if Global.global_data.gen<=2:
 		queue_free()
+
+	enabled = true
 
 
 func animate() -> void:
@@ -81,7 +83,7 @@ func _process(_delta) -> void:
 
 
 func _on_interaction_area_entered(body) -> void:
-	if body is Player:
+	if body is Player && enabled:
 		interaction_sound.play()
 		in_area.emit(true)
 		player_inside_zone = true

@@ -5,7 +5,6 @@ class_name TriggerClass
 const TRIGGER_SCENE: PackedScene = preload("res://scene/object/interactive/interaction_symbol.tscn")
 
 @export_category("General Properties")
-@export var trigger_area: float = 2.5
 @export var destroy_after_interaction: bool = false
 @export_category("Symbol Properties")
 @export var height_offset: float = 2.0
@@ -14,7 +13,6 @@ const TRIGGER_SCENE: PackedScene = preload("res://scene/object/interactive/inter
 
 func _ready() -> void:
 	var _trigger: Marker3D = TRIGGER_SCENE.instantiate()
-	_trigger.trigger_area = trigger_area
 	_trigger.height_offset = height_offset
 	_trigger.min_distance = min_distance
 	_trigger.triggered.connect(_on_trigger)
