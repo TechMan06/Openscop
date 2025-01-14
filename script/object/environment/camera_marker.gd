@@ -1,7 +1,14 @@
 extends Marker3D
 class_name CameraMarker
 
-@export_enum("Copy", "Follow", "POV", "Lerp") var camera_mode: int = 0
+@export var camera_mode: CameraModes = CameraModes.FOLLOW
+
+enum CameraModes {
+	COPY, 
+	FOLLOW, 
+	POV,
+	LERP
+}
 
 var focus_node: Node3D
 var marker_rotation: float
@@ -20,6 +27,7 @@ func _ready() -> void:
 	EventBus.camera_spawned.emit(self)
 	EventBus.camera_zone_spawned.connect(_on_camera_zone_spawned)
 
+
 func _anchor_camera() -> void:
 	get_child(0).position = Vector3(0.0, camera_distance.y, camera_distance.x)
 	get_child(0).rotation.x = deg_to_rad(camera_rotation)
@@ -29,13 +37,13 @@ func _anchor_camera() -> void:
 func _process(delta) -> void:
 	if focus_node != null:
 		match camera_mode:
-			0:
+			CameraModes.COPY:
 				_anchor_camera()
 				
 				if focus_node != null:
 					global_position = focus_node.global_position
 			
-			1:
+			CameraModes.FOLLOW:
 				_anchor_camera()
 				
 				
@@ -70,7 +78,7 @@ func _process(delta) -> void:
 					if limits[1].x != 0.0 || limits[1].y != 0.0:
 						global_position.y = clamp(global_position.y, limits[1].x, limits[1].y)
 			
-			2:
+			CameraModes.POV:
 				get_child(0).position = Vector3.ZERO
 				get_child(0).rotation.x = 0.0
 				
@@ -86,7 +94,7 @@ func _process(delta) -> void:
 					else:
 						global_position = focus_node.global_position
 			
-			3:
+			CameraModes.LERP:
 				_anchor_camera()
 				
 				if focus_node != null:
@@ -101,8 +109,8 @@ func set_focus(node: Node3D) -> void:
 	focus_node = node
 
 
-func set_mode(mode_id: int = 1) -> void:
-	camera_mode = mode_id
+func set_mode(mode: CameraModes) -> void:
+	camera_mode = mode
 
 
 func get_mode() -> int:

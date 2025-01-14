@@ -75,6 +75,7 @@ script = ExtResource("1_y30j2")
 loading_preset = ExtResource("2_e4std")
 allow_recording = false
 level_slogan = "If you wanna be my lover, you gotta gotta be my friend"
+school_preset = true
 footstep_sound = 1
 environment_settings = ExtResource("2_we153")
 

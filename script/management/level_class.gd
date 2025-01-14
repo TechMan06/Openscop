@@ -10,7 +10,6 @@ const DRAW_MODE: PackedScene = preload("res://scene/ui/draw_mode.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scene/object/player/player.tscn")
 
 var environment_obj: WorldEnvironment = WorldEnvironment.new()
-var player: Player
 var room_texture: Image
 var background_texture: Image
 
@@ -40,7 +39,7 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export var spawn_camera_root: bool = true
 @export var focus_on_player: bool = true
 @export var camera_focus: Node3D
-@export var camera_mode: int = 1
+@export_enum("Copy:0", "Follow:1", "Pov:2", "Lerp:3") var camera_mode: int = 1
 @export_subgroup("Camera_Properties")
 @export var place_camera_at: Vector3
 @export var camera_offset: Vector3
@@ -58,7 +57,7 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export var front_limit: Vector2
 @export var limit_camera_vertical: bool
 @export var vertical_limit: Vector2
-@export var max_distance_from_guardian: Vector3
+@export var max_distance_from_guardian: Vector3 = Vector3(2.0, 2.0, 2.0)
 @export_subgroup("Environment_properties")
 @export var environment_settings: EnvironmentResource
 @export var fog_focus_on_player: bool = true
@@ -174,9 +173,9 @@ func _ready() -> void:
 			
 			_player_camera.focus_node = _player_instance
 			if !school_preset:
-				_player_camera.set_mode(1)
+				_player_camera.set_mode(_player_camera.CameraModes.FOLLOW)
 			else:
-				_player_camera.set_mode(2)
+				_player_camera.set_mode(_player_camera.CameraModes.POV)
 			
 			add_child(_player_camera)
 			
@@ -204,7 +203,15 @@ func _ready() -> void:
 		_camera.global_position = _camera.global_position + camera_offset
 		_camera.focus_node = camera_focus
 		
-		_camera.set_mode(camera_mode) 
+		match camera_mode:
+			0:
+				_camera.set_mode(_camera.CameraModes.COPY)
+			1:
+				_camera.set_mode(_camera.CameraModes.FOLLOW)
+			2:
+				_camera.set_mode(_camera.CameraModes.POV)
+			3:
+				_camera.set_mode(_camera.CameraModes.LERP)
 		
 		add_child(_camera)
 	
@@ -300,7 +307,7 @@ func create_camera() -> CameraMarker:
 	if limit_camera_front:
 		_camera_marker.set_limit(2, front_limit)
 	
-	_camera_marker.distance_limit = Vector3(2.0, 2.0, 2.0)
+	_camera_marker.distance_limit = max_distance_from_guardian
 	_camera_marker.setup_camera(Vector2(camera_distance, camera_height), camera_angle)
 	
 	return _camera_marker
