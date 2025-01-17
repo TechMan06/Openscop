@@ -39,10 +39,10 @@ render_priority = 0
 shader = SubResource("Shader_v7qnu")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("6_8nylf")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/albedoTex = ExtResource("6_8nylf")
 
 [sub_resource type="QuadMesh" id="QuadMesh_mnjs5"]
 size = Vector2(2, 2)
@@ -52,13 +52,13 @@ render_priority = 0
 shader = ExtResource("10_s4fo3")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("11_imvms")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = Vector2i(0, 0)
 shader_parameter/animation_speed = null
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("11_imvms")
 
 [sub_resource type="Resource" id="Resource_1qxky"]
 script = ExtResource("18_je81u")

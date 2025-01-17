@@ -10,6 +10,7 @@ global uniform float fog_size;
 
 varying float fog_amount;
 
+group_uniforms Material_Properties;
 uniform bool use_fog = true;
 uniform vec4 modulate_color : source_color = vec4(1.0);
 #ifndef LIT
@@ -32,22 +33,27 @@ render_mode	blend_mix;
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 #endif
 
+#if defined(SPRITE) || defined(USE_ALPHA)
+uniform vec3 alpha_color: source_color = vec3(1.0, 0.0, 1.0);
+#endif
+
+
 #if !defined(NO_TEXTURE) && !defined(METAL) && !defined(SPRITE)  // METAL doesn't use UV, so no need for panning properties
+group_uniforms UV_Properties;
 uniform vec2 uv_scale = vec2(1.0, 1.0);
 uniform vec2 uv_offset = vec2(.0, .0);
 uniform vec2 uv_pan_velocity = vec2(0.0);
+group_uniforms;
 #endif
 
 #ifdef SPRITE
+group_uniforms Sprite_Properties;
 uniform bool billboard = false;
 uniform bool y_billboard = false;
 uniform bool animate;
 uniform ivec2 animation_frames;
 uniform ivec2 animation_speed;
-#endif
-
-#if defined(SPRITE) || defined(USE_ALPHA)
-uniform vec3 alpha_color: source_color = vec3(1.0, 0.0, 1.0);
+group_uniforms;
 #endif
 
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
