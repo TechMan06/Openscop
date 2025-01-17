@@ -19,7 +19,7 @@ func set_data(data: SaveData) -> void:
 	_data = data.duplicate(true)
 
 
-func load_data(path) -> void:
+func load_data(path: String) -> void:
 	if ResourceLoader.exists(path):
 		_data = load(path)
 

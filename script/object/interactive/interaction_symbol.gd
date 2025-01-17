@@ -10,11 +10,11 @@ const ROTATION_LIMIT: float = 0.25
 const ROTATION_ANIM_SPEED: float = 1.5
 const GROW_ANIMATION_SPEED: float = 0.25
 
-var enabled: bool
+var enabled: bool = false
 var height_offset: float = 1.5
 var min_distance: float = 2.5
-var original_position: float
-var player_inside_zone: bool
+var original_position: float = 0.0
+var player_inside_zone: bool = false
 
 @onready var interaction_mesh = $Height/MeshOrigin/InteractionMesh
 @onready var height = $Height
@@ -25,7 +25,9 @@ var player_inside_zone: bool
 
 func _ready() -> void:
 	await get_tree().process_frame
+	
 	$InteractionArea/InteractionCollision.get_shape().radius = min_distance
+	
 	interaction_mesh.scale = Vector3.ZERO
 	height.position.y = height_offset
 	original_position = interaction_mesh.position.y
@@ -77,12 +79,12 @@ func animate() -> void:
 							).set_trans(Tween.TRANS_SINE)
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pressed_action") && player_inside_zone:
 		triggered.emit()
 
 
-func _on_interaction_area_entered(body) -> void:
+func _on_interaction_area_entered(body: Node3D) -> void:
 	if body is Player && enabled:
 		interaction_sound.play()
 		in_area.emit(true)
@@ -95,7 +97,7 @@ func _on_interaction_area_entered(body) -> void:
 									)
 
 
-func _on_interaction_area_exited(body) -> void:
+func _on_interaction_area_exited(body: Node3D) -> void:
 	if body is Player:
 		_disable()
 

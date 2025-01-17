@@ -23,7 +23,7 @@ func _ready() -> void:
 		sprite.visible = GameManager.debug_settings.debug
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if !all_directions:
 		sprite.frame_coords.x = clamp(warp_direction, 0, 3)
 	
@@ -50,7 +50,7 @@ func _process(_delta) -> void:
 	warp_direction = clamp(warp_direction, 0, 3)
 
 
-func _on_warp_area_body_entered(body) -> void:
+func _on_warp_area_body_entered(body: Node3D) -> void:
 	if body is Player:
 		if diagonal_entrance:
 			if body.direction == directions.x || body.direction == directions.y:

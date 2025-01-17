@@ -24,9 +24,9 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export var room_name: String = ""
 @export var loading_preset: LoadingPreset
 @export_enum("None:0", "GiftPlane:1", "EvenCare:2", "Level 2:3") var background_music: int = 0
-@export var allow_recording = true
-@export_multiline var level_slogan = ""
-@export var school_preset: bool
+@export var allow_recording: bool = true
+@export_multiline var level_slogan: String = ""
+@export var school_preset: bool = false
 @export var spawn_player: bool = true
 @export_enum("EvenCare", 
 			"Grass", 
@@ -34,36 +34,36 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 			"Cement2", 
 			"Cement3", 
 			"School", 
-			"Sand") var footstep_sound: int
+			"Sand") var footstep_sound: int = 0
 @export_subgroup("General Camera Properties")
 @export var spawn_camera_root: bool = true
 @export var focus_on_player: bool = true
 @export var camera_focus: Node3D
 @export_enum("Copy:0", "Follow:1", "Pov:2", "Lerp:3") var camera_mode: int = 1
 @export_subgroup("Camera_Properties")
-@export var place_camera_at: Vector3
-@export var camera_offset: Vector3
+@export var place_camera_at: Vector3 = Vector3.ZERO
+@export var camera_offset: Vector3 = Vector3.ZERO
 @export var allow_horizontal_movement: bool = true
 @export var allow_front_movement: bool = true
 @export var allow_vertical_movement = true
 @export var camera_height: float = 4.0
 @export var camera_distance: float = 12.0
 @export var camera_angle: float = -18.0
-@export var camera_root_offset_y: float
+@export var camera_root_offset_y: float = 0.0
 @export_subgroup("Limit Camera")
-@export var limit_camera_horizontal: bool
-@export var horizontal_limit: Vector2
-@export var limit_camera_front: bool
-@export var front_limit: Vector2
-@export var limit_camera_vertical: bool
-@export var vertical_limit: Vector2
+@export var limit_camera_horizontal: bool = false
+@export var horizontal_limit: Vector2 = Vector2.ZERO
+@export var limit_camera_front: bool = false
+@export var front_limit: Vector2 = Vector2.ZERO
+@export var limit_camera_vertical: bool = false
+@export var vertical_limit: Vector2 = Vector2.ZERO
 @export var max_distance_from_guardian: Vector3 = Vector3(2.0, 2.0, 2.0)
 @export_subgroup("Environment_properties")
 @export var environment_settings: EnvironmentResource
 @export var fog_focus_on_player: bool = true
 @export var fog_focus: Node3D
-@export var fog_offset: Vector3 = Vector3(0.0, 0.0, 0.0)
-#@export_enum("None:0", "EvenCare:1") var hardcoded_preset: int = 0
+@export var fog_offset: Vector3 = Vector3.ZERO
+
 
 func _ready() -> void:
 	EventBus.playback_player_spawned.connect(_on_playback_player_spawn)
@@ -72,7 +72,6 @@ func _ready() -> void:
 	EventBus.nifty_upload.connect(_on_texture_upload)
 	EventBus.nifty_finished.connect(_store_background)
 	Console.nifty.connect(_nifty)
-
 	
 	SaveManager.get_data().room_name = room_name
 	SaveManager.get_data().loading_preset = loading_preset
@@ -90,7 +89,6 @@ func _ready() -> void:
 			environment_settings = null
 		
 		environment_settings = EnvironmentResource.new()
-
 	
 	environment_obj.environment = Environment.new()
 	
@@ -163,13 +161,12 @@ func _ready() -> void:
 														_player_instance.player_stats.player_pos.z
 													)
 			
-			_player_instance.direction = _player_instance.player_stats.player_pos.w
-		
+			_player_instance.direction = int(_player_instance.player_stats.player_pos.w)
 		
 		_player_instance.player_stats.scene_info == []
 		
 		if spawn_camera_root && focus_on_player:
-			var _player_camera = create_camera()
+			var _player_camera: CameraMarker = create_camera()
 			
 			_player_camera.focus_node = _player_instance
 			if !school_preset:
@@ -227,7 +224,7 @@ func _ready() -> void:
 		RecordingManager.stop_recording()
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pressed_start"):
 		if Global.can_pause && Global.global_data.gen > 2:
 			var _pause_instance: Control = PAUSE_SCENE.instantiate()
@@ -262,6 +259,7 @@ func _process(_delta):
 				_nifty()
 		else:
 			input_counter = 0
+
 
 func _on_playback_player_spawn(playback_player_obj: PlaybackPlayer) -> void:
 	playback_player_obj.add_collision_exception_with(_player_instance)

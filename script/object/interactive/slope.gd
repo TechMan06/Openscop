@@ -4,7 +4,7 @@ extends Marker3D
 
 const DARKENER_SCENE: PackedScene = preload("res://scene/object/interactive/darkener.tscn")
 
-var inside_slope: bool
+var inside_slope: bool = false
 var entity: Entity
 
 @export_subgroup("Slope Settings:")
@@ -26,11 +26,13 @@ func _ready() -> void:
 		
 		if change_brightness:
 			var _darkener_instance: Marker3D = DARKENER_SCENE.instantiate()
+			
 			_darkener_instance.darkener_direction = slope_direction
+			
 			add_child(_darkener_instance)
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	match slope_direction:
 		0:
 			slope_end.position.z = slope_length
@@ -82,12 +84,12 @@ func _process(_delta) -> void:
 						entity.player_stats.entity_y = 0.
 	
 
-func _on_slope_area_body_entered(body) -> void:
+func _on_slope_area_body_entered(body: Node3D) -> void:
 	if body is Entity && !Engine.is_editor_hint():
 		inside_slope = true
 		entity = body
 
 
-func _on_slope_area_body_exited(body) -> void:
+func _on_slope_area_body_exited(body: Node3D) -> void:
 	if body is Entity && !Engine.is_editor_hint():
 		inside_slope = false

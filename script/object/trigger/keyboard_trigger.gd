@@ -8,6 +8,7 @@ class_name KeyboardTrigger
 @export var attach_to: Node
 @export var enabled: bool = true
 
+
 func _on_trigger() -> void:
 	if enabled:
 		HUD.create_keyboard(background, ask, has_fade, false, attach_to)

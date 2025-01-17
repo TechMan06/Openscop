@@ -1,7 +1,7 @@
 extends Label
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if visible:
 		var viewport_feed: Viewport =  get_tree().root.get_viewport().get_viewport()
 		var screen_texture: Texture2D = viewport_feed.get_texture()

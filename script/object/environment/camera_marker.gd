@@ -11,13 +11,13 @@ enum CameraModes {
 }
 
 var focus_node: Node3D
-var marker_rotation: float
-var camera_rotation: float
-var camera_distance: Vector2
+var marker_rotation: float = 0.0
+var camera_rotation: float = 0.0
+var camera_distance: Vector2 = Vector2.ZERO
 var limits: Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
-var distance_limit: Vector3
+var distance_limit: Vector3 = Vector3.ZERO
 var can_move: Array = [true, true, true]
-var camera_speed: float
+var camera_speed: float = 0.0
 
 
 func _ready() -> void:
@@ -34,7 +34,7 @@ func _anchor_camera() -> void:
 	rotation.y = deg_to_rad(marker_rotation)
 
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	if focus_node != null:
 		match camera_mode:
 			CameraModes.COPY:

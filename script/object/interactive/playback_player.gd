@@ -3,8 +3,8 @@ class_name PlaybackPlayer
 
 @export_category("Recording Playback Properties")
 @export var main_recording_folder: bool = true
-@export var recording: String
-@export var recording_delay: float
+@export var recording: String = ""
+@export var recording_delay: float = 0.0
 @export var player_stats: PlayerStats
 @export var character_sheet: Texture2D
 @export var destroy_after_end: bool = false
@@ -15,7 +15,7 @@ class_name PlaybackPlayer
 @export var flip_x: bool = false
 @export var p2_talk_component: P2TalkComponent
 
-var recording_timer = 0
+var recording_timer: int = 0
 var recording_data: RecordingData
 var character_sheets: Array[String] = [
 										"res://asset/2d/sprite/player/default.png",
@@ -42,7 +42,7 @@ func _ready() -> void:
 
 	if recording == "":
 		if main_recording_folder:
-			var _recording_list: Array
+			var _recording_list: Array = []
 			
 			for file in DirAccess.get_files_at("user://recordings/"):
 				_recording_list.append(file)
@@ -50,7 +50,7 @@ func _ready() -> void:
 			if _recording_list != []:
 				recording_data = load("user://recordings/" + _recording_list.pick_random())
 		else:
-			var _recording_list: Array
+			var _recording_list: Array = []
 			
 			for file in DirAccess.get_files_at("user://recordings/"):
 				_recording_list.append(file)
@@ -74,7 +74,7 @@ func _ready() -> void:
 										player_stats.player_pos.z
 									)
 			
-			direction = player_stats.player_pos.w
+			direction = int(player_stats.player_pos.w)
 	
 	if character_sheet == null && player_stats != null:
 		_sprite.texture = load(character_sheets[player_stats.character_id])
@@ -98,7 +98,7 @@ func _ready() -> void:
 		replay = true
 
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	if input_sim_select && _p2talk_text.text != "" && _can_submit:
 		if p2talk_word.length() > 0:
 			p2talk_word = p2talk_word.erase(p2talk_word.length() - 1, 1)
@@ -109,7 +109,7 @@ func _physics_process(_delta):
 			_can_submit = false
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_end"):
 		visible = true
 		replay = true
@@ -198,9 +198,8 @@ func _process(_delta) -> void:
 						Console.console_log("[color=green]PLAYER NPC CONTROL 2[/color][color=yellow]Frame: " + str(recording_timer) + " Data: [/color][color=red]NONE[/color]")
 
 
-func number_parser(number):
+func number_parser(number: int) -> float:
 	if number==1:
 		return 1.0
-	
-	if number==2:
+	else:
 		return 0.0

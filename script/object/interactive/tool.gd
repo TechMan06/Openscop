@@ -5,7 +5,7 @@ const ANIM_SPEED: float = 2.0
 const I_DONT_KNOW_SPRITE: String = "res://asset/2d/sprite/object/tool/idontknow.png"
 const WATCH_SPRITE: String = "res://asset/2d/sprite/object/tool/watch.png"
 
-@export var pink: bool:
+@export var pink: bool = false:
 	set(value):
 		EventBus.change_keyboard_bg.emit(int(value))
 		if !value:
@@ -51,7 +51,8 @@ func _ready() -> void:
 	else:
 		tool_mesh.set_shader_parameter("modulate_color", Color(1.0, 0.6, 1.0))
 
-func _process(_delta) -> void:
+
+func _process(_delta: float) -> void:
 	keyboard_trigger.background = int(pink)
 
 

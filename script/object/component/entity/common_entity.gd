@@ -5,7 +5,7 @@ class_name EntityComponent
 @export var entity_sprite: Sprite3D
 
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	if Vector3(entity.velocity.x, 0,entity.velocity.z).length() > entity._ANIMATION_THRESHOLD:
 		entity.is_walking = true
 	else:
@@ -56,7 +56,7 @@ func _process(delta) -> void:
 							delta * entity._ACCELERATION
 						)
 
-		var _magnitude = sqrt(entity._h * entity._h + entity._v * entity._v)
+		var _magnitude: float = sqrt(entity._h * entity._h + entity._v * entity._v)
 
 		if _magnitude > 1:
 			entity._h /= _magnitude
@@ -76,7 +76,7 @@ func _process(delta) -> void:
 									)
 	
 	if entity.control_mode == 1:
-		var entity_speed = entity._v * entity._movement_speed * -1.0
+		var entity_speed: float = entity._v * entity._movement_speed * -1.0
 		
 		entity.rotation.y += entity._h * -1/ 25
 		entity._angle = entity.rotation.y

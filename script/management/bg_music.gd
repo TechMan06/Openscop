@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
-const _EXTENSION = ".ogg"
-const _TRACKS = [
+const _EXTENSION: String = ".ogg"
+const _TRACKS: Array[String] = [
 	"",
 	"res://music/gift_plane",
 	"res://music/level1",
@@ -9,7 +9,7 @@ const _TRACKS = [
 ]
 
 
-func set_track(track_id) -> void:
+func set_track(track_id: int) -> void:
 	if track_id != 0:
 		if stream != null:
 			if str(stream.get_path()) != _TRACKS[track_id] + _EXTENSION:
@@ -20,7 +20,7 @@ func set_track(track_id) -> void:
 		stop()
 
 
-func play_track(track_id) -> void:
+func play_track(track_id: int) -> void:
 	if track_id != 0:
 		
 		if stream != null:

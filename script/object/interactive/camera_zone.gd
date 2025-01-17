@@ -4,10 +4,10 @@ class_name CameraZone
 
 
 @export_category("General Properties")
-@export var target_pos_start: Vector3
-@export var anim_speed_start = Vector3(1.0, 1.0, 1.0)
-@export var target_pos_end: Vector3
-@export var anim_speed_end = Vector3(1.0, 1.0, 1.0)
+@export var target_pos_start: Vector3 = Vector3.ZERO
+@export var anim_speed_start: Vector3 = Vector3(1.0, 1.0, 1.0)
+@export var target_pos_end: Vector3 = Vector3.ZERO
+@export var anim_speed_end: Vector3 = Vector3(1.0, 1.0, 1.0)
 @export_category("Parallel Animations")
 @export var move_parallel_start: bool = false
 @export var move_parallel_end: bool = false
@@ -34,7 +34,7 @@ func _ready() -> void:
 		visible = GameManager.debug_settings.debug
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		$CamTarget1.global_position = target_pos_start
 		$CamTarget2.global_position = target_pos_end
@@ -48,13 +48,12 @@ func get_anim_speed(target_pos: Vector3) -> float:
 	return percentage
 
 
-
-func _on_body_entered(body) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	if !Engine.is_editor_hint():
 		if body is Player && camera_marker.camera_mode != 0:
 			_original_pos = camera_marker.global_position
 			camera_focus.global_position = _original_pos
-			camera_marker.camera_mode = 0
+			camera_marker.camera_mode = camera_marker.CameraModes.COPY
 			camera_marker.set_focus(camera_focus)
 			_animation_flags = [false, false, false]
 			
@@ -123,7 +122,8 @@ func _on_body_entered(body) -> void:
 				
 				_animation_flags = [true, true, true]
 
-func _on_body_exited(body) -> void:
+
+func _on_body_exited(body: Node3D) -> void:
 	if !Engine.is_editor_hint():
 		if body is Player:
 			
@@ -183,6 +183,6 @@ func _on_body_exited(body) -> void:
 				reset_camera(body)
 
 
-func reset_camera(body) -> void:
+func reset_camera(body: Node3D) -> void:
 	camera_marker.set_focus(body)
-	camera_marker.camera_mode = 1
+	camera_marker.camera_mode = camera_marker.CameraModes.FOLLOW

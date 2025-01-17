@@ -11,6 +11,7 @@ center_offset = Vector3(0, 0.5, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s5imj"]
 render_priority = 0
 shader = ExtResource("1_5yto6")
+shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)

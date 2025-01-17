@@ -1,7 +1,7 @@
 extends FileDialog
 
 
-func _on_sheet_selected(path) -> void:
+func _on_sheet_selected(path: String) -> void:
 	var image: Image = Image.new()
 	var image_texture: ImageTexture = ImageTexture.new()
 	

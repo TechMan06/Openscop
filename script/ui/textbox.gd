@@ -2,7 +2,7 @@ extends Panel
 #TEXTBOX OBJECT
 
 #TYPEWRITER SPEEDS
-const _DEFAULT_WAIT = 0.025
+const _DEFAULT_WAIT: float = 0.025
 const _PUNCTUATION_WAIT: float = 0.150
 const _TYPING_SOUND_FADE: float = 0.25
 const _TYPING_SOUND_VOLUME: float = 5.0
@@ -11,11 +11,11 @@ var preset: TextboxResource
 var text: Array = ["No Text"]
 var clean_text: Array = []
 #AMOUNT OF CHARS ON DISPLAY, PAGE OF TEXTBOX.
-var _chars: int
-var _textbox: int
+var _chars: int = 0
+var _textbox: int = 0
 #CHARACTERS THAT MAKE TYPEWRITER SLOWER
 var _slowchars: String ="!.?,;"
-var _disabled: bool
+var _disabled: bool = false
 
 @onready var _textbox_label: RichTextLabel = %TextboxLabel
 @onready var _typing_sound: AudioStreamPlayer = $TypingSound
@@ -64,7 +64,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	#IF DIDN'T FINISH TYPING EVERYTHING, KEEP TYPING, IF IT DID, STOP PLAYING TYPING SOUND
 	if _textbox_label.text != "":
 		if _textbox_label.visible_characters < clean_text[_textbox].length() && Global.global_data.gen > 2:

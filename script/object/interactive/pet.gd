@@ -15,18 +15,18 @@ const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 		
 		frames = value
 
-@export var frame_coords: Vector2:
+@export var frame_coords: Vector2 = Vector2.ZERO:
 	set(value):
 		pet_sprite3d.frame_coords = value
 		frame_coords = value
 
-@export var animate: bool:
+@export var animate: bool = false:
 	set(value):
 		if Engine.is_editor_hint():
 			_update_animation()
 		animate = value
 
-@export var animation_speed: Vector2:
+@export var animation_speed: Vector2 = Vector2.ZERO:
 	set(value):
 		if Engine.is_editor_hint():
 			_update_anim_speed()
@@ -51,13 +51,13 @@ func _ready() -> void:
 			queue_free()
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		pet_sprite3d.set_texture(pet_sprite)
 		pet_sprite3d.get_material_override().set_shader_parameter("albedoTex", pet_sprite3d.texture)
 
 
-func _on_pet_area_body_entered(body) -> void:
+func _on_pet_area_body_entered(body: Node3D) -> void:
 	if !Engine.is_editor_hint():
 		if body is Entity:
 			cry_sound.play()

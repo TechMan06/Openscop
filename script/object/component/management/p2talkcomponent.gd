@@ -8,7 +8,8 @@ const _P2TALK_SPEED: float = 1.0
 
 
 func _create_word() -> void:
-	var _word_instance = _P2TALK_WORD_OBJECT.instantiate()
+	var _word_instance: Label3D = _P2TALK_WORD_OBJECT.instantiate()
+	
 	_word_instance.text = get_p2talk_word(entity.p2talk_word)
 	_word_instance.sound_id = entity.player_stats.character_id
 	entity._p2talk_origin.add_child(_word_instance)
@@ -29,7 +30,7 @@ func _create_word() -> void:
 				entity._can_submit = true
 
 
-func get_p2talk_word(word) -> String:
+func get_p2talk_word(word: String) -> String:
 	var _treated_word: String = word.rstrip(" ")
 	var _numbers: Array = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	var _final_word: String = ""

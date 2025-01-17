@@ -2,13 +2,13 @@ extends Node2D
 
 var started: bool = true
 var timer: float = 0.0
-var gen: int
+var gen: int = 1
 
-@onready var logo = $LogoAnim
-@onready var logo2 = $Logo
+@onready var logo: Sprite2D = $LogoAnim
+@onready var logo2: Sprite2D = $Logo
 
 
-func _ready():
+func _ready() -> void:
 	await Global.boot_game
 	
 	if ResourceLoader.exists("user://savedata/global.tres"):

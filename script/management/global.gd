@@ -4,7 +4,7 @@ signal boot_game
 
 var global_data: GlobalData = load("res://resource/management/global_data.tres")
 var custom_sheet: ImageTexture
-var is_game_paused: bool
+var is_game_paused: bool = false
 var p2talk_dict: Dictionary = JSON.parse_string(
 								(FileAccess.open("res://json/p2_talk_data.json", 
 								FileAccess.READ)
@@ -16,7 +16,7 @@ var dialogue_dict: Dictionary = JSON.parse_string(
 							).get_as_text()
 						)
 var can_pause: bool = true
-var can_unpause: bool
+var can_unpause: bool = false
 var current_slot: int = 0
 var current_controller: int = 0
 
@@ -69,13 +69,13 @@ func strip_bbcode(source: String) -> String:
 	return _regex.sub(source, "", true)
 
 
-func sort_ascending(a, b):
+func sort_ascending(a, b) -> bool:
 	if a[0] < b[0]:
 		return true
 	return false
 
 
-func sort_descending(a, b):
+func sort_descending(a, b) -> bool:
 	if a[0] > b[0]:
 		return true
 	return false

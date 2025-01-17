@@ -1,6 +1,7 @@
 extends Marker2D
 
-func _ready():
+
+func _ready() -> void:
 	BGMusic.decrease_volume()
 	
 	var _scale_animation = create_tween()

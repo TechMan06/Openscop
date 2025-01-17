@@ -4,8 +4,8 @@ extends Control
 @export var background_image: Image
 
 @onready var pixel_origin: Marker2D = $PixelOrigin
-@onready var room_texture = $TextureOrigin/RoomTexture
-@onready var bg_texture = $TextureOrigin/BGTexture
+@onready var room_texture: TextureRect = $TextureOrigin/RoomTexture
+@onready var bg_texture: TextureRect = $TextureOrigin/BGTexture
 @onready var draw_sound: AudioStreamPlayer = $DrawSound
 
 
@@ -18,6 +18,7 @@ func _ready() -> void:
 	BGMusic.decrease_volume()
 
 	if background_image == null:
+		# TO-DO: REPLACE ARGUMENT 4 WITH PROPER ENUM
 		background_image = Image.create(
 											int(str(texture.get_width() / 257.0)[0])  + 256, 
 											int(str(texture.get_height() / 257.0)[0]) + 256, 

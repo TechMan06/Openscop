@@ -6,7 +6,7 @@ const APPEAR_ANIM_SPEED: float = 0.5
 @export var background: int = 0
 @export var ask: bool = true
 @export var has_fade: bool = true
-@export var file_select: bool
+@export var file_select: bool = false
 @export var attach_to: Node
 
 var cursor_pos: Vector2i:
@@ -57,7 +57,7 @@ var cursor_pos: Vector2i:
 										)
 		
 var offsets: Vector2i = Vector2i(1,2)
-var loaded: bool
+var loaded: bool = false
 var disabled: bool = true
 var characters: Array[Array] = [
 		[["A"],["B"],["C"],["D"],["E"],["F"],["G"],["H"],["I"],["J"],["K"],["L"],["M"]],
@@ -67,19 +67,18 @@ var characters: Array[Array] = [
 		[["0"],["1"],["2"],["3"],["4"],["5"],["6"],["7"],["8"],["9"],[" "],["."],["!"]],
 		[["?"],[","],[";"],[":"],['"'],["'"],["("],[")"],["/"],["-"],["+"],[""],[" "]],
 	]
-var _offset_letters_1 = [1, 2, 5, 7, 10]
-var _offset_letters_2 = [0, 4, 5, 6, 7]
+var _offset_letters_1: Array[int] = [1, 2, 5, 7, 10]
 var _theme_color: Color = (Color.BLACK if background == 3 else Color.WHITE)
 var _inverted_theme_color: Color = (Color.WHITE if background == 3 else Color.BLACK)
 
 @onready var cursor: ColorRect = %Cursor
 @onready var input_field: Label = %InputField
-@onready var keyboard = $Keyboard
-@onready var fade = $Fade
-@onready var select_sound = $SelectSound
-@onready var whoosh_sound = $WhooshSound
-@onready var keyboard_letters = %KeyboardLetters
-@onready var keyboard_arrow = %KeyboardArrow
+@onready var keyboard: Sprite2D = $Keyboard
+@onready var fade: ColorRect = $Fade
+@onready var select_sound: AudioStreamPlayer = $SelectSound
+@onready var whoosh_sound: AudioStreamPlayer = $WhooshSound
+@onready var keyboard_letters: Marker2D = %KeyboardLetters
+@onready var keyboard_arrow: TextureRect = %KeyboardArrow
 
 
 
@@ -196,6 +195,7 @@ func _ready() -> void:
 	
 	cursor.color = (_theme_color if background != 3 else _inverted_theme_color)
 	keyboard_arrow.modulate = (_theme_color if background != 3 else _inverted_theme_color)
+	
 	if background != 3:
 		input_field.get_label_settings().set_font_color(_theme_color)
 	else:
@@ -234,12 +234,13 @@ func _ready() -> void:
 										23.0, 
 										APPEAR_ANIM_SPEED
 									).set_trans(Tween.TRANS_SINE)
+	
 	if ask:
 		input_field.text="Ask: ?"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	
 	if cursor_pos.x > 12:
 		if cursor_pos.y != 5:
@@ -376,7 +377,7 @@ func _process(_delta) -> void:
 		queue_free()
 
 
-func _change_background(color_id: int):
+func _change_background(color_id: int) -> void:
 	keyboard.frame_coords.x = color_id
 
 	for letter in keyboard_letters.get_children():

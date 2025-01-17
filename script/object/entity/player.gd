@@ -4,7 +4,7 @@ class_name Player
 
 
 const SCHOOL_OVERLAY: PackedScene = preload("res://scene/ui/school_ui.tscn")
-const TERRAIN_TYPES: Array = [
+const TERRAIN_TYPES: Array[String] = [
 			"EvenCare", 
 			"Grass", 
 			"Cement", 
@@ -13,11 +13,11 @@ const TERRAIN_TYPES: Array = [
 			"School", 
 			"Sand"
 		]
-const FOOTSTEP_FADEIN_TIMES: Array = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-const FOOTSTEP_FADEOUT_TIMES: Array = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+const FOOTSTEP_FADEIN_TIMES: Array[float] = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+const FOOTSTEP_FADEOUT_TIMES: Array[float] = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 
 
-var current_footstep: int:
+var current_footstep: int = 0:
 	set(value):
 		var _sound_path: String = "res://sfx/footstep/" + str(
 										TERRAIN_TYPES[value]
@@ -26,8 +26,8 @@ var current_footstep: int:
 		if _footstep_sound.stream.get_path() != _sound_path:
 			_footstep_sound.stream = load(_sound_path)
 
-var control_device: int
-var rotation_direction: Vector3
+var control_device: int = 0
+var rotation_direction: Vector3 = Vector3.ZERO
 var current_sheet: String = "res://asset/2d/sprite/player/guardian.png"
 
 @export var player_stats: PlayerStats
@@ -75,13 +75,13 @@ func _input(event: InputEvent) -> void:
 	control_device = event.device
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if player_stats.input_enabled:
 		_handle_input()
 	else:
 		_h = 0.0
 		_v = 0.0
-	
+
 	if is_walking:
 		if _sprite.hframes > 1 && _sprite.vframes > 1:
 			if !_footstep_sound.playing:
@@ -115,6 +115,11 @@ func _process(_delta) -> void:
 					-80.0, 
 					FOOTSTEP_FADEOUT_TIMES[current_footstep]
 				)
+	
+	player_stats.player_pos.x = global_position.x
+	player_stats.player_pos.y = global_position.y
+	player_stats.player_pos.z = global_position.z
+	player_stats.player_pos.w = direction
 
 
 func _handle_input() -> void:
@@ -326,10 +331,10 @@ func update_sheet() -> void:
 		change_sheet(current_sheet)
 
 
-func change_sheet(path) -> void:
+func change_sheet(path: String) -> void:
 	_sprite.texture = load(path)
-	_sprite.hframes = _sprite.texture.get_width() / 64.0
-	_sprite.vframes = _sprite.texture.get_height() / 64.0
+	_sprite.hframes = _sprite.texture.get_width() / 64
+	_sprite.vframes = _sprite.texture.get_height() / 64
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 
 
@@ -340,7 +345,7 @@ func load_sheet(sheet: ImageTexture) -> void:
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 
 
-func _type_p2talk_key(word: String, buttons: String):
+func _type_p2talk_key(word: String, buttons: String) -> void:
 	p2talk_word = word
 	_p2talk_text.text = buttons
 	

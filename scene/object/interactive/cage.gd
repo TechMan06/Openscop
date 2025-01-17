@@ -2,8 +2,8 @@ extends Marker3D
 
 signal allow_toggle
 
-@export var open: bool
-@export var flip: bool
+@export var open: bool = false
+@export var flip: bool = false
 @export_range(0, 100) var move_to: float = 3.0
 
 

@@ -1,15 +1,15 @@
 extends Control
 
-const BUTTON_ANIM_SPEED = 1
-const BUTTON_OFFSET = 10
-const SCREEN_ANIM_TIME = 1.0
-const MINI_SCREEN_SIZE = 0.5
-const PETS_MENU = preload("res://scene/ui/pause_menu/pets_menu.tscn")
-const QUIT_MENU = preload("res://scene/ui/pause_menu/quit_buttons.tscn")
+const BUTTON_ANIM_SPEED: float = 1
+const BUTTON_OFFSET: float = 10
+const SCREEN_ANIM_TIME: float = 1.0
+const MINI_SCREEN_SIZE: float = 0.5
+const PETS_MENU: PackedScene = preload("res://scene/ui/pause_menu/pets_menu.tscn")
+const QUIT_MENU: PackedScene = preload("res://scene/ui/pause_menu/quit_buttons.tscn")
 
 var level_slogan: String = ""
-var _in_menu: bool
-var _selected_option: int:
+var _in_menu: bool = false
+var _selected_option: int = 0:
 	set(value):
 		button_sound.play()
 		_selected_option = value
@@ -70,7 +70,7 @@ func _ready() -> void:
 	Global.is_game_paused = true
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if !_in_menu && Global.can_unpause:
 		if Input.is_action_just_pressed("pressed_start") && Global.can_unpause:
 			unpause_game()

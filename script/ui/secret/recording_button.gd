@@ -2,7 +2,7 @@ extends Marker2D
 
 
 var recording_resource: RecordingData
-var focused: bool:
+var focused: bool = false:
 	set(value):
 		if !value:
 			$ButtonFace.play(&"RESET")

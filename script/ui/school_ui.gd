@@ -10,7 +10,7 @@ func _ready() -> void:
 	update_sheet()
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if player != null:
 		if (
 				player._sprite.frame_coords.x 

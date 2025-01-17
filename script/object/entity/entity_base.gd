@@ -10,7 +10,7 @@ const _ANIMATION_THRESHOLD: float = 1.5
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # PUBLIC VARIABLES
 var control_mode: int = 0
-var entity_min: float
+var entity_min: float = 0.0
 var p2talk_word: String = "":
 	set(value):
 		_p2talk_button_sound.play()

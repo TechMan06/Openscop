@@ -1,9 +1,9 @@
 extends Marker2D
 
-const BUTTON_ANIM_SPEED = 1
-const BUTTON_OFFSET = 10
+const BUTTON_ANIM_SPEED: int = 1
+const BUTTON_OFFSET: int = 10
 
-var _selected_option: int:
+var _selected_option: int = 0:
 	set(value):
 		button_sound.play()
 		_selected_option = value
@@ -16,7 +16,7 @@ func _ready() -> void:
 		button_sound.move_stream(0, 1)
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	for button in get_children():
 		if button is Sprite2D:
 			if button.get_index() != _selected_option:

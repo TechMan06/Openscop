@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://4me8yyhhjy42"]
+[gd_scene load_steps=8 format=3 uid="uid://4me8yyhhjy42"]
 
 [ext_resource type="ArrayMesh" uid="uid://bvoytwwvqkwh" path="res://asset/3d/room/nmp/grass.obj" id="1_otb4p"]
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_xubgh"]
 [ext_resource type="Resource" uid="uid://v3gcw1nk78p2" path="res://resource/environment/nmp.tres" id="2_yoyrk"]
 [ext_resource type="Texture2D" uid="uid://btivirpmmqn8" path="res://asset/3d/room/nmp/grass.png" id="3_htr22"]
-[ext_resource type="PackedScene" uid="uid://dp7ow0rvea7yv" path="res://scene/object/player/player.tscn" id="4_6qf5p"]
 [ext_resource type="Script" path="res://script/object/environment/grass.gd" id="4_pg4oa"]
 
 [sub_resource type="Shader" id="Shader_v7qnu"]
@@ -21,6 +20,7 @@ code = "shader_type spatial;
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p61yp"]
 render_priority = 0
 shader = SubResource("Shader_v7qnu")
+shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -32,69 +32,58 @@ script = ExtResource("1_xubgh")
 footstep_sound = 1
 environment_settings = ExtResource("2_yoyrk")
 
-[node name="Player" parent="." instance=ExtResource("4_6qf5p")]
-
 [node name="GrassObject" type="Node3D" parent="."]
 script = ExtResource("4_pg4oa")
 
 [node name="Grass" type="MeshInstance3D" parent="GrassObject"]
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass2" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 0)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass3" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 0)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass4" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass5" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 29)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass6" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 29)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass7" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass8" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -29)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 
 [node name="Grass9" type="MeshInstance3D" parent="GrassObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, -29)
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
-skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")

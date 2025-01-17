@@ -1,6 +1,6 @@
 extends Control
 
-@onready var credits_text = %CreditsText
+@onready var credits_text: RichTextLabel = %CreditsText
 
 
 func _ready() -> void:

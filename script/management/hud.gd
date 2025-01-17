@@ -8,12 +8,12 @@ const KEYBOARD_SCENE: PackedScene = preload("res://scene/ui/keyboard.tscn")
 const DEFAULT_TEXTBOX: TextboxResource = preload("res://resource/textbox/default.tres")
 const FADE_SPEED: float = 0.5
 
-@onready var fade = %Fade
-@onready var loading_image = %LoadingImage
-@onready var dialogue_boxes = $DialogueBoxes
-@onready var demo_card = %DemoCard
-@onready var counter = %Counter
-@onready var piece_counter = %PieceCounter
+@onready var fade: ColorRect = %Fade
+@onready var loading_image: TextureRect = %LoadingImage
+@onready var dialogue_boxes: Node = $DialogueBoxes
+@onready var demo_card: AnimatedSprite2D = %DemoCard
+@onready var counter: Label = %Counter
+@onready var piece_counter: TextureRect = %PieceCounter
 
 
 func _ready() -> void:
@@ -45,7 +45,7 @@ func create_textbox(preset: TextboxResource = DEFAULT_TEXTBOX, text: String = "N
 	return
 
 
-func show_label(show_label: bool, recording: String, gen: int):
+func show_label(show_label: bool, recording: String, gen: int) -> void:
 	$RecordingLabel.visible = show_label
 	
 	if show:
@@ -117,8 +117,8 @@ func _on_scene_transition(preset: LoadingPreset) -> void:
 	create_tween().tween_property(fade, "color:a", 0.0, FADE_SPEED)
 
 
-func create_keyboard(background: int = 0, ask: bool = true, use_fade: bool = true, file_select: bool = false, attach_to: Node = null):
-	var keyboard_instance = KEYBOARD_SCENE.instantiate()
+func create_keyboard(background: int = 0, ask: bool = true, use_fade: bool = true, file_select: bool = false, attach_to: Node = null) -> void:
+	var keyboard_instance: CanvasLayer = KEYBOARD_SCENE.instantiate()
 	
 	keyboard_instance.background = background
 	keyboard_instance.ask = ask

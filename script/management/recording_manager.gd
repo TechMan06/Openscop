@@ -15,7 +15,7 @@ var recording_reader_p1: int = 0
 var recording_reader_p2: int = 0
 var recording_data: RecordingData
 
-var input_sim: Array
+var input_sim: Array[InputEventAction]
 var input_array: Array[String] = [
 				"pressed_r1", 
 				"pressed_r2", 
@@ -39,7 +39,7 @@ func _ready() -> void:
 	Console.load_recording.connect(load_recording)
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
 	if recording:
 		recording_timer+=1
@@ -116,7 +116,7 @@ func _process(_delta) -> void:
 
 func _parse_input(index: int) -> void:
 	if recording_data.p1_data[recording_reader_p1][index] != 0:
-		var _parsed_button = _number_parser(recording_data.p1_data[recording_reader_p1][index])
+		var _parsed_button: bool = _number_parser(recording_data.p1_data[recording_reader_p1][index])
 		input_sim[index - 1].set_pressed(_parsed_button)
 		Input.parse_input_event(input_sim[index - 1])
 
@@ -142,10 +142,10 @@ func stop_recording() -> void:
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
 
 
-func _number_parser(number):
+func _number_parser(number: int) -> bool:
 	if number==1:
 		return true
-	if number==2:
+	else:
 		return false
 
 
@@ -185,13 +185,13 @@ func check_input() -> bool:
 		return false
 
 
-func _check_input_type(key):
+func _check_input_type(key: String) -> int:
 	if Input.is_action_just_pressed(key):
 		return 1
 	if Input.is_action_just_released(key):
 		return 2
-	if !Input.is_action_just_pressed(key) && !Input.is_action_just_released(key):
-		return 0
+	
+	return 0
 
 
 func _on_p2talk_pressed(p2talkword: String, p2talkbuttons: String) -> void:
@@ -263,7 +263,13 @@ func is_recording() -> bool:
 func recording_name() -> String:
 	var counter: int = 0
 	var recording_filename: String = ""
-	var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"]
+	var letters: Array[String] = [
+									"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+									"p","q","r","s","t","u","v","w","x","y","z","A","B","C","D",
+									"E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
+									"T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7",
+									"8","9"
+								]
 	
 	while counter < 8:
 		recording_filename += letters.pick_random()

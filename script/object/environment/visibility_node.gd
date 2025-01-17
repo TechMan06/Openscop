@@ -6,7 +6,7 @@ class_name GenSpecific
 @export var demo_exclusive: bool = false
 @export var non_demo_exclusive: bool = false
 
-func _ready():
+func _ready() -> void:
 	if gens.find(Global.global_data.gen) == -1:
 		queue_free()
 		

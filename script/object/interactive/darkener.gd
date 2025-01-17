@@ -3,18 +3,18 @@ extends Marker3D
 
 
 @export_subgroup("Darkener Settings:")
-@export var darkener_width = 1.
+@export var darkener_width: float = 1.
 @export_range(0, 3) var darkener_direction: int = 0
 
 var entity: Entity
-var inside_darkener: bool
+var inside_darkener: bool = false
 
 @onready var darkener_collision = $DarkenerArea/DarkenerCollision
 @onready var darkener_sprite = $DarkenerSprite
 @onready var darkener_area = $DarkenerArea
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	darkener_sprite.frame_coords.x = darkener_direction
 	
 	if !Engine.is_editor_hint():
@@ -95,13 +95,13 @@ func _process(_delta) -> void:
 														)
 
 
-func _on_darkener_area_body_entered(body) -> void:
+func _on_darkener_area_body_entered(body: Node3D) -> void:
 	if body is Entity && !Engine.is_editor_hint():
 		inside_darkener = true
 		entity = body
 
 
-func _on_darkener_area_body_exited(body) -> void:
+func _on_darkener_area_body_exited(body: Node3D) -> void:
 	if body is Entity && !Engine.is_editor_hint():
 		inside_darkener = false
 		body.player_stats.brightness = round(body.player_stats.brightness)

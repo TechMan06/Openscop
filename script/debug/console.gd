@@ -20,9 +20,9 @@ func _ready() -> void:
 	#console_log("\n[color=yellow]For information and commands list, check the Docs![/color]")
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") && console_input.text != "":
-		var command_array = console_input.text.split(" ")
+		var command_array: Array[String] = console_input.text.split(" ")
 		console_input.text = ""
 		_parse_command(command_array)
 
@@ -106,7 +106,7 @@ func _parse_command(input : Array) -> void:
 			console_log("[color=red]Invalid Command![/color]")
 
 
-func console_log(input) -> void:
+func console_log(input: String) -> void:
 	console_output.append_text(input)
 	console_output.newline()
 	console_input.clear()

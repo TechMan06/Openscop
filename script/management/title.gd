@@ -13,21 +13,21 @@ var enable_selection: bool = true
 var game_started: bool = false
 var demos: Array[RecordingData]
 
-@onready var logo_gift = %LogoGift
-@onready var start_button = %StartButton
-@onready var card_timer = $CardTimer
-@onready var demo_timer = $DemoTimer
-@onready var title = $Title
-@onready var logo_origin = %LogoOrigin
-@onready var file_select = %FileSelect
-@onready var files = %Files
-@onready var move_perm = %MovePermission
-@onready var continue_btn = %Continue
-@onready var color_overlay = %ColorOverlay
-@onready var file_select_buttons = %FileSelectButtons
-@onready var file_select_buttons_2 = %FileSelectButtons2
-@onready var logo_mesh = %LogoMesh
-@onready var road_mesh = %RoadMesh
+@onready var logo_gift: Sprite3D = %LogoGift
+@onready var start_button: Sprite2D = %StartButton
+@onready var card_timer: Timer = $CardTimer
+@onready var demo_timer: Timer = $DemoTimer
+@onready var title: Marker2D = $Title
+@onready var logo_origin: Marker3D = %LogoOrigin
+@onready var file_select: Marker2D = %FileSelect
+@onready var files: Marker2D = %Files
+@onready var move_perm: Timer = %MovePermission
+@onready var continue_btn: TextureRect = %Continue
+@onready var color_overlay: ColorRect = %ColorOverlay
+@onready var file_select_buttons: Marker2D = %FileSelectButtons
+@onready var file_select_buttons_2: Marker2D = %FileSelectButtons2
+@onready var logo_mesh: MeshInstance3D = %LogoMesh
+@onready var road_mesh: MeshInstance3D = %RoadMesh
 
 
 # Called when the node enters the scene tree for the first time.
@@ -65,7 +65,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	timer += 1
 	logo_timer += delta
 	
@@ -134,7 +134,7 @@ func _process(delta) -> void:
 				
 				create_tween().tween_property(continue_btn, "position:y", 83.0, 0.5).set_trans(Tween.TRANS_SINE)
 				
-				var overlay_move = create_tween()
+				var overlay_move: Tween = create_tween()
 				
 				overlay_move.tween_property(color_overlay, "color:a", 0.5, 0.5)
 				
@@ -269,6 +269,7 @@ func check_individual_file(slot: int) -> void:
 	
 	if FileAccess.file_exists("user://savedata/save"+ str(slot) +".tres"):
 		var _save_slot: SaveData = load("user://savedata/save"+ str(slot) +".tres")
+		
 		file.get_node("FileName").text = _save_slot.save_name
 		file.get_node("CounterOrigin").visible = true
 		file.get_node("CounterOrigin/Counter").text = str(_save_slot.player_data.piece_amount).pad_zeros(5)
@@ -365,6 +366,7 @@ func _on_file_created(file_name: String, attach_node: Node) -> void:
 
 func _on_demo_timer_timeout() -> void:
 	if title_stage == 0 && demos != []:
-		var _picked_demo = demos.pick_random()
+		var _picked_demo: RecordingData = demos.pick_random()
+		
 		RecordingManager.demo = true
 		RecordingManager.load_recording(_picked_demo.name, _picked_demo.gen)

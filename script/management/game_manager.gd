@@ -7,7 +7,7 @@ const DEBUG_FILE: String = "user://debug_settings.tres"
 var fullscreen: bool = false
 var debug_settings: DebugSettingsResource = load("res://resource/management/debug_settings.tres")
 
-@onready var file_dialog = $FileDialog
+@onready var file_dialog: FileDialog = $FileDialog
 
 
 func _ready() -> void:
@@ -17,7 +17,7 @@ func _ready() -> void:
 		ResourceSaver.save(debug_settings, DEBUG_FILE)
 
 
-func _process(delta) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("screenshot"):
 		var viewport_feed: Viewport =  get_tree().root.get_viewport()
 		var screen_texture: Texture2D = viewport_feed.get_texture()
@@ -73,6 +73,7 @@ func reset_game() -> void:
 	EventBus.destroy_hud.emit()
 
 
+#SYSTEM NOTIF CLASS IS UNKNOWN
 func _notification(system_notif) -> void:
 	if system_notif == NOTIFICATION_WM_CLOSE_REQUEST:
 		ResourceSaver.save(debug_settings, DEBUG_FILE)

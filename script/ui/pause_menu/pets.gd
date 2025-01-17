@@ -7,9 +7,9 @@ const INFO_SPEED: float = 0.5
 @export var pets_array: Array[PetResource]
 
 var selected_option: int = 0
-var reading_bio: bool
-var original_button_pos: Vector2
-var returning: bool
+var reading_bio: bool = false
+var original_button_pos: Vector2 = Vector2.ZERO
+var returning: bool = false
 var can_select: bool = true
 var can_leave: bool = true
 var can_return: bool = false
@@ -40,7 +40,7 @@ func _ready() -> void:
 		_row += 0.5
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if selected_option > 5:
 		buttons_origin.position.y = -267.5
 	else:

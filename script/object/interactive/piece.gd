@@ -8,7 +8,7 @@ const VER_SPEED: int = 5
 
 var global_data: GlobalData = load("res://resource/management/global_data.tres")
 var current_frame: int = 0
-var collected: bool
+var collected: bool = false
 var type_array: Array[int] = [
 								0,1,2,3,4,
 								4,0,2,1,3,
@@ -41,7 +41,7 @@ func _ready() -> void:
 	EventBus.piece_spawned.emit(get_tree().get_nodes_in_group("piece").find(self))
 
 
-func _on_body_entered(body) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	if body is Player:
 		piece_sound.play()
 		
