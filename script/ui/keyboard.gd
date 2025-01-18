@@ -11,6 +11,8 @@ const APPEAR_ANIM_SPEED: float = 0.5
 
 var cursor_pos: Vector2i:
 	set(_value):
+		cursor_pos = _value
+		
 		create_tween().tween_property(
 										cursor, 
 										"position", 

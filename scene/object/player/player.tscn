@@ -18,13 +18,13 @@ render_priority = 0
 shader = ExtResource("2_mramm")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("1_6mpon")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("1_6mpon")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
 floor_block_on_wall = false

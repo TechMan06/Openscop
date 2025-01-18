@@ -9,12 +9,12 @@ render_priority = 0
 shader = ExtResource("2_bw11b")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = false
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qawgv"]
 

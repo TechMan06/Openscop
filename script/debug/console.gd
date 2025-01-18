@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") && console_input.text != "":
-		var command_array: Array[String] = console_input.text.split(" ")
+		var command_array: PackedStringArray = console_input.text.split(" ")
 		console_input.text = ""
 		_parse_command(command_array)
 
