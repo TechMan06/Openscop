@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://qp78wfs6tt"]
 
-[ext_resource type="Theme" uid="uid://e4dd06wrk1uf" path="res://asset/2d/ui/debug/petscop.tres" id="1_ak5bf"]
+[ext_resource type="Theme" uid="uid://e4dd06wrk1uf" path="res://resource/theme/debug/petscop.tres" id="1_ak5bf"]
 [ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="2_gvgn6"]
 [ext_resource type="Script" path="res://script/management/debug.gd" id="2_ktk03"]
 [ext_resource type="AudioStream" uid="uid://bleelgyc2auge" path="res://music/bathroom-tomb.ogg" id="4_qcl5k"]
+
 
 [node name="Debug" type="Control"]
 layout_mode = 3

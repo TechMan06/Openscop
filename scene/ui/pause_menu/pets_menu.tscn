@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="12_p8u00"]
 [ext_resource type="AudioStream" uid="uid://bpvbvscg87h3n" path="res://sfx/pause/petselected.wav" id="13_4dloi"]
 [ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="14_yox3x"]
-[ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://asset/2d/ui/font/default.tres" id="16_to457"]
+[ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="16_ntrkb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibh5m"]
 atlas = ExtResource("14_yox3x")
@@ -105,7 +105,7 @@ offset_top = 197.0
 offset_right = 147.0
 offset_bottom = 220.0
 text = "Select Pet"
-label_settings = ExtResource("16_to457")
+label_settings = ExtResource("16_ntrkb")
 
 [node name="TriangleButton" type="AnimatedSprite2D" parent="InfoButtonsOrigin"]
 position = Vector2(194, 198)
@@ -119,7 +119,7 @@ offset_top = 197.0
 offset_right = 281.0
 offset_bottom = 220.0
 text = "Go Back"
-label_settings = ExtResource("16_to457")
+label_settings = ExtResource("16_ntrkb")
 
 [node name="InfoButtonsOrigin2" type="Marker2D" parent="."]
 unique_name_in_owner = true
@@ -137,7 +137,7 @@ offset_top = 197.0
 offset_right = 168.0
 offset_bottom = 220.0
 text = "Advance Text"
-label_settings = ExtResource("16_to457")
+label_settings = ExtResource("16_ntrkb")
 
 [node name="TriangleButton2" type="AnimatedSprite2D" parent="InfoButtonsOrigin2"]
 unique_name_in_owner = true
@@ -152,4 +152,4 @@ offset_top = 197.0
 offset_right = 294.0
 offset_bottom = 220.0
 text = "Go Back"
-label_settings = ExtResource("16_to457")
+label_settings = ExtResource("16_ntrkb")

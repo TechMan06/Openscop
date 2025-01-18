@@ -10,7 +10,7 @@
 [ext_resource type="Shader" path="res://shader/canvas/transparency.gdshader" id="8_brav4"]
 [ext_resource type="Texture2D" uid="uid://8gu0ed7c55y6" path="res://asset/2d/sprite/object/pieces.png" id="9_dy3p8"]
 [ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="10_rnp0l"]
-[ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://asset/2d/ui/font/default.tres" id="11_brp8c"]
+[ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="11_4gcpi"]
 [ext_resource type="Texture2D" uid="uid://bgc8pts52viad" path="res://asset/2d/ui/pause/pausemenu_overlay.png" id="12_14wp1"]
 [ext_resource type="AudioStream" uid="uid://cd33hjua20ryu" path="res://sfx/pause/pause1.wav" id="13_c67kn"]
 [ext_resource type="AudioStream" uid="uid://dki2uq8a0y47" path="res://sfx/pause/pause2.wav" id="14_fdwfv"]
@@ -415,7 +415,7 @@ frame_progress = 0.279387
 [node name="Resume" type="Label" parent="Main/InfoContainer/InfoVBox/ResumeHBox"]
 layout_mode = 2
 text = "Resume"
-label_settings = ExtResource("11_brp8c")
+label_settings = ExtResource("11_4gcpi")
 
 [node name="SelectHBox" type="HBoxContainer" parent="Main/InfoContainer/InfoVBox"]
 layout_mode = 2
@@ -430,7 +430,7 @@ frame_progress = 0.784935
 [node name="Resume" type="Label" parent="Main/InfoContainer/InfoVBox/SelectHBox"]
 layout_mode = 2
 text = "Select"
-label_settings = ExtResource("11_brp8c")
+label_settings = ExtResource("11_4gcpi")
 
 [node name="FadeOverlay" type="Sprite2D" parent="Main"]
 unique_name_in_owner = true

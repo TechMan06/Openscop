@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="TextboxResource" load_steps=3 format=3 uid="uid://gfo0wlqeaucv"]
 
-[ext_resource type="Theme" uid="uid://bhfq6qxb430u3" path="res://scene/theme/textbox/white_textbox.tres" id="1_v62gh"]
+[ext_resource type="Theme" uid="uid://bhfq6qxb430u3" path="res://resource/theme/textbox/white_textbox.tres" id="1_v62gh"]
 [ext_resource type="Script" path="res://script/resource/textbox_resource.gd" id="2_0sl7h"]
+
 
 [resource]
 script = ExtResource("2_0sl7h")

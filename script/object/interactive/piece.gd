@@ -36,7 +36,7 @@ func _ready() -> void:
 	else:
 		piece_sprite.frame_coords.y = randi_range(0, 4)
 	
-	await get_tree().process_frame
+	await self.tree_entered
 	
 	EventBus.piece_spawned.emit(get_tree().get_nodes_in_group("piece").find(self))
 

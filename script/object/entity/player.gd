@@ -58,7 +58,7 @@ func _ready() -> void:
 	if player_stats.character_id > 2:
 		_movement_speed = 6.0
 
-	await get_tree().process_frame
+	await self.tree_entered
 	
 	EventBus.player_spawned.emit(self)
 	

@@ -11,7 +11,7 @@ signal nifty
 ## The [RichTextLabel] to display Console output.
 @export var console_output: RichTextLabel
 
-var recording_parse: bool = true
+var recording_parse: bool = false
 
 
 func _ready() -> void:
