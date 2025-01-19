@@ -12,10 +12,14 @@ export_presets.cfg
 
 # Mono-specific ignores
 .mono/
-asset/3d/room/nmp/grass.png
-asset/3d/room/nmp/grass.png.import
 data_*/
 mono_crash.*.json
 
 # MacOS Files
 .DS_Store
+
+# TexBuild Ignores
+# Please, do not mess around with these, you can break your game.
+# If someone is found redistributing these files, they will be given an immediate ban from the discord server.
+asset/3d/room/nmp/grass.png
+asset/3d/room/nmp/grass.png.import
