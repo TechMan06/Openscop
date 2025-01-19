@@ -12,8 +12,8 @@ export_presets.cfg
 
 # Mono-specific ignores
 .mono/
-.asset/3d/room/nmp/grass.png
-.asset/2d/room/nmp/grass.png
+asset/3d/room/nmp/grass.png
+asset/3d/room/nmp/grass.png.import
 data_*/
 mono_crash.*.json
 
