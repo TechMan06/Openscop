@@ -1,4 +1,5 @@
 @tool
+#DO NOT TOUCH THIS NODE OR THINGS WILL BREAK ONCE YOU DECIDE TO UPLOAD YOUR REPO.
 extends Node
 class_name TextureLoader
 
