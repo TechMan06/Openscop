@@ -29,18 +29,18 @@ ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 enable_fog = true
 fog_color = Color(1, 1, 1, 1)
-fog_radius = 19.0
+fog_radius = 17.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0rtbp"]
 render_priority = 0
 shader = ExtResource("4_0nbml")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("5_twqjy")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("5_twqjy")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r05k5"]
 render_priority = 0
@@ -188,7 +188,7 @@ allow_front_movement = false
 limit_camera_horizontal = true
 horizontal_limit = Vector2(3, 999)
 environment_settings = SubResource("Resource_tgied")
-fog_offset = Vector3(0, 0.5, 0)
+fog_offset = Vector3(0, 0.25, 0)
 
 [node name="GiftPlaneMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("3_4f57q")
@@ -214,7 +214,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -1)
 script = ExtResource("13_r885y")
 textbox_preset = ExtResource("14_y344j")
 textbox_text = "giftplane"
-trigger_area = 1.0
 
 [node name="LogoMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.981574, 0, 0.191083, 0, 1, 0, -0.191083, 0, 0.981574, 12.8929, 2.74956, -0.1382)

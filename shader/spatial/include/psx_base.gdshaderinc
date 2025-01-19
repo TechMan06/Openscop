@@ -13,6 +13,7 @@ varying float fog_amount;
 group_uniforms Material_Properties;
 uniform bool use_fog = true;
 uniform vec4 modulate_color : source_color = vec4(1.0);
+
 #ifndef LIT
 render_mode	unshaded;
 #endif
@@ -72,10 +73,14 @@ vec4 get_snapped_pos(vec4 base_pos)
 void vertex()
 {
 	COLOR.rgb = COLOR.rgb * COLOR.rgb * COLOR.rgb;
+	
 #ifdef LIT
 	if (fog_enabled && use_fog) {
-		fog_amount = length((fog_pos - NODE_POSITION_WORLD) - VERTEX) / fog_size;
-		if (fog_amount > 1.0) fog_amount = 1.0;
+		fog_amount = length(fog_pos - (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz) / fog_size;
+		
+		if (fog_amount > 1.0) {
+			fog_amount = 1.0;
+		}
 	}
 #endif
 	

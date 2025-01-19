@@ -11,7 +11,8 @@ func _ready() -> void:
 	
 	var _texture_image: Image = texture.get_image()
 	
-	await get_tree().process_frame
+	await self.tree_entered
+	
 	EventBus.nifty_upload.emit(_texture_image)
 
 

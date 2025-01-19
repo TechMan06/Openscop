@@ -5,8 +5,8 @@
 [ext_resource type="Resource" uid="uid://v3gcw1nk78p2" path="res://resource/environment/nmp.tres" id="2_we153"]
 [ext_resource type="Script" path="res://script/object/environment/grass.gd" id="4_y6pfu"]
 [ext_resource type="ArrayMesh" uid="uid://bvoytwwvqkwh" path="res://asset/3d/room/nmp/grass.obj" id="5_joga8"]
-[ext_resource type="Texture2D" uid="uid://btivirpmmqn8" path="res://asset/3d/room/nmp/grass.png" id="6_8nylf"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="6_cvigc"]
+[ext_resource type="Texture2D" uid="uid://btivirpmmqn8" path="res://asset/3d/room/nmp/grass_placeholder.png" id="7_2wfty"]
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="7_dxr20"]
 [ext_resource type="Resource" uid="uid://by8kf70db6lcq" path="res://resource/textbox/default.tres" id="8_6bp8r"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="9_rhasm"]
@@ -29,7 +29,7 @@ render_priority = 0
 shader = ExtResource("6_cvigc")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/albedoTex = ExtResource("6_8nylf")
+shader_parameter/albedoTex = ExtResource("7_2wfty")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
