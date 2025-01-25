@@ -7,9 +7,11 @@
 render_priority = 0
 shader = ExtResource("1_cxrqi")
 shader_parameter/use_fog = true
+shader_parameter/absolute_depth = false
+shader_parameter/depth_offset = 0.0
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("2_3nqib")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("2_3nqib")

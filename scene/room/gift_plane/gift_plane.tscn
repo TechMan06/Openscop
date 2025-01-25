@@ -237,6 +237,7 @@ scene_path = "res://scene/room/level1/room1.tscn"
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 16, 23.5, 0, -11.5)
 target_pos_start = Vector3(23.5, 0, -7.5)
 target_pos_end = Vector3(23.5, 0, 0)
+anim_speed_end = Vector3(0.5, 1, 1)
 move_parallel_start = true
 move_parallel_end = true
 

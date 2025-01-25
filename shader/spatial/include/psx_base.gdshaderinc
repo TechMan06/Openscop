@@ -1,6 +1,6 @@
 //MODIFIED FROM:
 //https://github.com/MenacingMecha/godot-psx-style-demo
-render_mode shadows_disabled, specular_disabled, depth_draw_always;
+render_mode shadows_disabled, specular_disabled, depth_draw_opaque;
 
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
 global uniform bool fog_enabled;
@@ -119,6 +119,7 @@ void vertex()
 
 void fragment()
 {
+
 #ifdef METAL
 	vec2 texture_uv = vec2(NORMAL.x / 2.0 + 0.5, (-NORMAL.y) / 2.0 + 0.5);  // Special thanks to Adam McLaughlan
 #elif !defined(NO_TEXTURE)
@@ -155,7 +156,7 @@ void fragment()
 #elif defined(ALPHA_BLEND)
 	ALPHA = texture_color.a * color_base.a;
 #endif
-
+	
 #if defined(SPRITE) || defined(USE_ALPHA)
 	ALPHA_SCISSOR_THRESHOLD = 0.25;
 	
@@ -163,4 +164,5 @@ void fragment()
 		ALPHA = 0.0;
 	}
 #endif
+
 }
