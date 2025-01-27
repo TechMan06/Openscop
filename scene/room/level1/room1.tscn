@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://e4kh2vguned6"]
+[gd_scene load_steps=21 format=3 uid="uid://e4kh2vguned6"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_lwxw7"]
 [ext_resource type="ArrayMesh" uid="uid://b5knwwiu0fmi" path="res://asset/3d/room/evencare/evencare1.obj" id="2_cx80c"]
@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_vv46u"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="4_y663b"]
 [ext_resource type="ArrayMesh" uid="uid://toccg5whc1of" path="res://asset/3d/room/evencare/evencare1_furniture.obj" id="5_s07sf"]
-[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="6_ngm66"]
-[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="7_dp53j"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="6_me583"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="7_eccxh"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="10_45o2d"]
 [ext_resource type="Resource" uid="uid://dfvlriw2fctdw" path="res://resource/loading_preset/gift_load_demo.tres" id="12_6l8xb"]
@@ -30,18 +29,6 @@ enable_fog = false
 fog_color = Color(1, 1, 1, 1)
 fog_radius = 13.5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmr2p"]
-render_priority = 0
-shader = ExtResource("6_ngm66")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("7_dp53j")
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/use_depth = true
-
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_35chp"]
 data = PackedVector3Array(-0.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 0, -0.5, 12.5, 0, 1, -0.5, 1, 1, -0.5, 0, 1, 4.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 4.5, 0, -12.5, 4.5, 0, -2.6, 2.5, 1, -0.5, 2.5, 0, -1.5, 2.5, 0, -0.5, 11, 1, -6.5, 14.5, 0, -6.5, 11, 0, -6.5, 17.5, 1, -4, 12.5, 0, -4, 17.5, 0, -4, 14.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 0, -5.5, 14.5, 0, -6.5, 14.5, 1, -5.5, 14.5, 0, -5.5, 12.5, 1, -4, 12.5, 0, -2, 12.5, 0, -4, 2.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 0, -1.5, 5.5, 1, -1.5, 5.5, 0, -2.6, 5.5, 0, -1.5, 5.5, 0, -2.6, 4.5, 1, -2.6, 4.5, 0, -2.6, 12.5, 1, -0.5, 12.5, 0, 1, 12.5, 0, -0.5, 11, 0, -0.5, 12.5, 1, -0.5, 12.5, 0, -0.5, 11, 0, -2, 11, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 12.5, 0, -2, 12.5, 1, -2, 7.5, 1, -5, 11, 0, -5, 7.5, 0, -5, 7.5, 1, -12.5, 7.5, 0, -5, 7.5, 0, -12.5, 11, 0, -5, 11, 1, -6.5, 11, 0, -6.5, 2.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 1, -0.5, 12.5, 1, 1, -0.5, 1, 1, 12.5, 0, 1, 7.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 1, -12.5, 4.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 2.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, -0.5, 14.5, 1, -6.5, 14.5, 0, -6.5, 11, 1, -6.5, 12.5, 1, -4, 12.5, 0, -4, 17.5, 1, -4, 17.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 1, -5.5, 14.5, 1, -6.5, 14.5, 1, -5.5, 14.5, 0, -6.5, 12.5, 1, -2, 12.5, 0, -2, 12.5, 1, -4, 5.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 1, -1.5, 5.5, 1, -2.6, 5.5, 0, -2.6, 5.5, 1, -1.5, 5.5, 1, -2.6, 4.5, 1, -2.6, 5.5, 0, -2.6, 12.5, 1, 1, 12.5, 0, 1, 12.5, 1, -0.5, 11, 1, -0.5, 12.5, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 11, 1, -0.5, 11, 0, -2, 11, 0, -2, 12.5, 0, -2, 11, 1, -2, 11, 1, -5, 11, 0, -5, 7.5, 1, -5, 7.5, 1, -5, 7.5, 0, -5, 7.5, 1, -12.5, 11, 1, -5, 11, 1, -6.5, 11, 0, -5)
 
@@ -53,7 +40,9 @@ shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/use_depth = true
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [node name="EvenCareRoom1" type="Node3D"]
 script = ExtResource("1_lwxw7")
@@ -70,7 +59,7 @@ environment_settings = SubResource("Resource_thkrr")
 
 [node name="EvenCareMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_cx80c")
-surface_material_override/0 = SubResource("ShaderMaterial_wmr2p")
+surface_material_override/0 = ExtResource("6_me583")
 script = ExtResource("4_y663b")
 
 [node name="LevelBody" type="StaticBody3D" parent="."]

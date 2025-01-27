@@ -5,7 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://5rvihyjlrayj" path="res://asset/3d/room/sort-test/sorttest1.obj" id="3_1tveq"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_mx2sf"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="4_2euv6"]
-[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="5_bt3kt"]
+[ext_resource type="Material" uid="uid://dsbhgneeo4h22" path="res://asset/3d/material/sort-test.tres" id="5_ljfyo"]
 [ext_resource type="ArrayMesh" uid="uid://dii53li7rpf61" path="res://asset/3d/room/sort-test/sorttest2.obj" id="7_3pcv6"]
 [ext_resource type="ArrayMesh" uid="uid://lp85oqw3k5en" path="res://asset/3d/room/sort-test/sorttest3.obj" id="8_mslmh"]
 
@@ -30,15 +30,15 @@ environment_settings = SubResource("Resource_5w3d5")
 
 [node name="NiftyMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("3_1tveq")
-surface_material_override/0 = ExtResource("5_bt3kt")
+surface_material_override/0 = ExtResource("5_ljfyo")
 script = ExtResource("4_2euv6")
 
 [node name="NiftyMesh2" type="MeshInstance3D" parent="."]
 mesh = ExtResource("7_3pcv6")
-surface_material_override/0 = ExtResource("5_bt3kt")
+surface_material_override/0 = ExtResource("5_ljfyo")
 script = ExtResource("4_2euv6")
 
 [node name="NiftyMesh3" type="MeshInstance3D" parent="."]
 mesh = ExtResource("8_mslmh")
-surface_material_override/0 = ExtResource("5_bt3kt")
+surface_material_override/0 = ExtResource("5_ljfyo")
 script = ExtResource("4_2euv6")

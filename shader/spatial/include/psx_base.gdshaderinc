@@ -62,6 +62,11 @@ uniform bool tile_mode = false;
 uniform ivec2 tile = ivec2(0, 0);
 const vec2 tile_size = vec2(32.0, 32.0);
 
+group_uniforms Depth_Properties;
+uniform bool use_depth = false;
+varying float depth;
+
+
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
 const vec2 base_snap_res = vec2(160.0, 120.0);
 vec4 get_snapped_pos(vec4 base_pos)
@@ -127,6 +132,19 @@ void vertex()
 		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
 	}
 #endif
+
+#ifdef SPRITE
+	if (use_depth) {
+		vec4 clip = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(TANGENT, 1.0);
+		depth = clip.z / clip.w;
+	}
+#else
+	if (use_depth) {
+		vec4 clip = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(TANGENT, 1.0);
+		depth = clip.z / clip.w;
+	}
+#endif
+
 }
 
 void fragment()
@@ -176,4 +194,19 @@ void fragment()
 		ALPHA = 0.0;
 	}
 #endif
+
+#if defined(SPRITE)
+	if (use_depth) {
+		DEPTH = depth;
+	} else {
+		DEPTH = FRAGCOORD.z;
+	}
+#else
+	if (use_depth) {
+		DEPTH = depth;
+	} else {
+		DEPTH = FRAGCOORD.z;
+	}
+#endif
+
 }
