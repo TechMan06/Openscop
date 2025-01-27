@@ -79,3 +79,163 @@ func sort_descending(a, b) -> bool:
 	if a[0] > b[0]:
 		return true
 	return false
+
+
+func sort_mesh(mesh: Mesh) -> Mesh:
+	#This is complicated, so this will have plenty of comments
+	
+	#First we will convert the mesh into an ArrayMesh so we can use it in MeshDataTool
+	var meshinstance_array: Array = mesh.surface_get_arrays(0)
+	var arraymesh: ArrayMesh = ArrayMesh.new()
+	
+	arraymesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, meshinstance_array)
+	
+	#Now we can easily read the Mesh's data using MeshDataTool
+	var mesh_data: MeshDataTool = MeshDataTool.new()
+	
+	mesh_data.create_from_surface(arraymesh, 0)
+	
+	#Now we will create a new mesh identical to the original
+	#This mesh will contain vertex color attributes (yet to implement)
+	#It will also allow for face-based sorting, check sort-test.tscn
+	var output_array: Array = []
+	output_array.resize(Mesh.ARRAY_MAX)
+	
+	var verts = PackedVector3Array()
+	var uvs = PackedVector2Array()
+	var normals = PackedVector3Array()
+	var color = PackedColorArray()
+	var face_center = PackedFloat32Array()
+	
+	#So far the new mesh is empty, here we will build the data for it
+	var face_count: int = mesh_data.get_face_count()
+	var face_iterate: int = 0
+	var total_vertex_iterate: int = 0
+	var face_vertex_iterate: int = 0
+	
+	while face_iterate < face_count:
+		if face_vertex_iterate <= 2:
+			verts.push_back(	
+							mesh_data.get_vertex(
+													mesh_data.get_face_vertex(
+																				face_iterate, 
+																				face_vertex_iterate
+																			)
+												)
+						)
+			
+			uvs.push_back(	
+							mesh_data.get_vertex_uv(
+														mesh_data.get_face_vertex(
+																					face_iterate, 
+																					face_vertex_iterate
+																				)
+										)
+						)
+			
+			normals.push_back(	
+							mesh_data.get_vertex_normal(
+														mesh_data.get_face_vertex(
+																					face_iterate, 
+																					face_vertex_iterate
+																				)
+										)
+						)
+			
+			color.push_back(	
+							mesh_data.get_vertex_color(
+														mesh_data.get_face_vertex(
+																					face_iterate, 
+																					face_vertex_iterate
+																				)
+										)
+						)
+			
+			face_vertex_iterate += 1
+		else:
+			face_iterate += 1
+			face_vertex_iterate = 0
+	
+	var face_iterate_2: int = 0
+	
+	while face_iterate_2 < face_count:
+		var vector3_average: Vector3 = vector3_average(
+															[
+																mesh_data.get_vertex(
+																						mesh_data.get_face_vertex(
+																										face_iterate_2, 
+																										0
+																									)
+																),
+																mesh_data.get_vertex(
+																						mesh_data.get_face_vertex(
+																										face_iterate_2, 
+																										1
+																									)
+																),
+																mesh_data.get_vertex(
+																						mesh_data.get_face_vertex(
+																										face_iterate_2, 
+																										2
+																									)
+																)
+															]
+														)
+		face_center.push_back(vector3_average.x)
+		face_center.push_back(vector3_average.y)
+		face_center.push_back(vector3_average.z)
+		face_center.push_back(1.0)
+		face_center.push_back(vector3_average.x)
+		face_center.push_back(vector3_average.y)
+		face_center.push_back(vector3_average.z)
+		face_center.push_back(1.0)
+		face_center.push_back(vector3_average.x)
+		face_center.push_back(vector3_average.y)
+		face_center.push_back(vector3_average.z)
+		face_center.push_back(1.0)
+		
+		face_iterate_2 += 1
+	
+	var vertex_count: int = mesh_data.get_vertex_count()
+	var vertex_iterate: int = 0
+
+	output_array[Mesh.ARRAY_VERTEX] = verts
+	output_array[Mesh.ARRAY_TEX_UV] = uvs
+	output_array[Mesh.ARRAY_NORMAL] = normals
+	output_array[Mesh.ARRAY_COLOR] = color
+	output_array[Mesh.ARRAY_TANGENT] = face_center
+	print(mesh_data.get_vertex_count())
+	print(output_array[Mesh.ARRAY_VERTEX].size())
+	print(output_array[Mesh.ARRAY_TEX_UV].size())
+	print(output_array[Mesh.ARRAY_NORMAL].size())
+	print(output_array[Mesh.ARRAY_COLOR].size())
+	print(output_array[Mesh.ARRAY_TANGENT].size())
+	
+	var new_mesh: ArrayMesh = ArrayMesh.new() 
+	
+	new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, output_array)
+	
+	var surface: int = 0
+	
+	while surface < mesh.get_surface_count():
+		new_mesh.surface_set_material(surface, mesh.surface_get_material(surface))
+		surface += 1
+
+	return new_mesh
+
+
+func vector3_average(vector_array: Array[Vector3]) -> Vector3:
+	var x: float = 0.0
+	var y: float = 0.0
+	var z: float = 0.0
+	
+	for vector in vector_array:
+		x += vector.x
+		y += vector.y
+		z += vector.z
+	
+	x = x / vector_array.size() + 1
+	y = y / vector_array.size() + 1
+	z = z / vector_array.size() + 1
+	
+	return Vector3(x, y, z)

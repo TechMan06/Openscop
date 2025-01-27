@@ -30,10 +30,6 @@ shader_parameter/albedoTex = ExtResource("9_vk2xw")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/absolute_depth = false
-shader_parameter/depth_offset = 0.0
-shader_parameter/near = 0.0
-shader_parameter/far = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_057h7"]
 render_priority = 0
@@ -45,10 +41,6 @@ shader_parameter/albedoTex = ExtResource("9_vk2xw")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/absolute_depth = false
-shader_parameter/depth_offset = 0.0
-shader_parameter/near = 0.5
-shader_parameter/far = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7swy"]
 render_priority = 0
@@ -60,10 +52,6 @@ shader_parameter/albedoTex = ExtResource("9_vk2xw")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/absolute_depth = false
-shader_parameter/depth_offset = 0.0
-shader_parameter/near = 0.0
-shader_parameter/far = 0.0
 
 [node name="sort-test" type="Node3D"]
 script = ExtResource("1_03txg")
@@ -78,11 +66,13 @@ surface_material_override/0 = SubResource("ShaderMaterial_88075")
 script = ExtResource("4_2euv6")
 
 [node name="NiftyMesh2" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("7_3pcv6")
 surface_material_override/0 = SubResource("ShaderMaterial_057h7")
 script = ExtResource("4_2euv6")
 
 [node name="NiftyMesh3" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("8_mslmh")
 surface_material_override/0 = SubResource("ShaderMaterial_u7swy")
 script = ExtResource("4_2euv6")
