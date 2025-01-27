@@ -1,14 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://168otmke2y6b"]
+[gd_scene load_steps=10 format=3 uid="uid://168otmke2y6b"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_03txg"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_txv6a"]
 [ext_resource type="ArrayMesh" uid="uid://5rvihyjlrayj" path="res://asset/3d/room/sort-test/sorttest1.obj" id="3_1tveq"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_mx2sf"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="4_2euv6"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="5_bt3kt"]
 [ext_resource type="ArrayMesh" uid="uid://dii53li7rpf61" path="res://asset/3d/room/sort-test/sorttest2.obj" id="7_3pcv6"]
-[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="8_l5ybj"]
 [ext_resource type="ArrayMesh" uid="uid://lp85oqw3k5en" path="res://asset/3d/room/sort-test/sorttest3.obj" id="8_mslmh"]
-[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="9_vk2xw"]
 
 [sub_resource type="Resource" id="Resource_5w3d5"]
 script = ExtResource("3_mx2sf")
@@ -20,39 +19,6 @@ enable_fog = false
 fog_color = Color(1, 1, 1, 1)
 fog_radius = 13.5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_88075"]
-render_priority = 0
-shader = ExtResource("8_l5ybj")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("9_vk2xw")
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_057h7"]
-render_priority = 0
-shader = ExtResource("8_l5ybj")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("9_vk2xw")
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7swy"]
-render_priority = 0
-shader = ExtResource("8_l5ybj")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("9_vk2xw")
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-
 [node name="sort-test" type="Node3D"]
 script = ExtResource("1_03txg")
 room_name = "sort-test"
@@ -62,17 +28,15 @@ environment_settings = SubResource("Resource_5w3d5")
 
 [node name="NiftyMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("3_1tveq")
-surface_material_override/0 = SubResource("ShaderMaterial_88075")
+surface_material_override/0 = ExtResource("5_bt3kt")
 script = ExtResource("4_2euv6")
 
 [node name="NiftyMesh2" type="MeshInstance3D" parent="."]
-visible = false
 mesh = ExtResource("7_3pcv6")
-surface_material_override/0 = SubResource("ShaderMaterial_057h7")
+surface_material_override/0 = ExtResource("5_bt3kt")
 script = ExtResource("4_2euv6")
 
 [node name="NiftyMesh3" type="MeshInstance3D" parent="."]
-visible = false
 mesh = ExtResource("8_mslmh")
-surface_material_override/0 = SubResource("ShaderMaterial_u7swy")
+surface_material_override/0 = ExtResource("5_bt3kt")
 script = ExtResource("4_2euv6")

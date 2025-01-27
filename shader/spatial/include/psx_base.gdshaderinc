@@ -57,6 +57,7 @@ uniform ivec2 animation_speed;
 group_uniforms;
 #endif
 
+
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
 const vec2 base_snap_res = vec2(160.0, 120.0);
 vec4 get_snapped_pos(vec4 base_pos)
@@ -164,5 +165,4 @@ void fragment()
 		ALPHA = 0.0;
 	}
 #endif
-
 }

@@ -25,6 +25,7 @@ shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
+shader_parameter/use_depth = true
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
 floor_block_on_wall = false
