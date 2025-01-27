@@ -23,6 +23,8 @@ fog_radius = 13.5
 script = ExtResource("1_03txg")
 room_name = "sort-test"
 loading_preset = ExtResource("2_txv6a")
+allow_front_movement = false
+allow_vertical_movement = false
 camera_distance = 11.0
 environment_settings = SubResource("Resource_5w3d5")
 
