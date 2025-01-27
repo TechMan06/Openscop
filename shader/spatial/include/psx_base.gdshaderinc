@@ -57,6 +57,10 @@ uniform ivec2 animation_speed;
 group_uniforms;
 #endif
 
+group_uniforms Tile_Mode;
+uniform bool tile_mode = false;
+uniform ivec2 tile = ivec2(0, 0);
+const vec2 tile_size = vec2(32.0, 32.0);
 
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
 const vec2 base_snap_res = vec2(160.0, 120.0);
@@ -86,8 +90,15 @@ void vertex()
 #endif
 	
 #if !defined(NO_TEXTURE) && !defined(METAL) && !defined(SPRITE)  // METAL doesn't use UV, so no need to pan UVs
-	UV = UV * uv_scale + uv_offset;
-	UV += uv_pan_velocity * TIME;
+	if (tile_mode) {
+		vec2 texSize = vec2(textureSize(albedoTex, 0));
+	    vec2 tileUvScale = tile_size / texSize;
+	    vec2 tileUvTranslate = vec2(tile);
+	    UV = (UV + tileUvTranslate) * tileUvScale;
+	} else {
+		UV = UV * uv_scale + uv_offset;
+		UV += uv_pan_velocity * TIME;
+	}
 #endif
 
 #ifdef SPRITE
