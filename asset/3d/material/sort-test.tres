@@ -1,15 +1,15 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bdce4owxtgw6r"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dsbhgneeo4h22"]
 
-[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="1_cxrqi"]
-[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="2_3nqib"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="1_jo3qp"]
+[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="2_4kivt"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_cxrqi")
+shader = ExtResource("1_jo3qp")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("2_3nqib")
+shader_parameter/albedoTex = ExtResource("2_4kivt")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
