@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://qp78wfs6tt"]
+[gd_scene load_steps=7 format=3 uid="uid://qp78wfs6tt"]
 
 [ext_resource type="Theme" uid="uid://e4dd06wrk1uf" path="res://resource/theme/debug/petscop.tres" id="1_ak5bf"]
 [ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="2_gvgn6"]
 [ext_resource type="Script" path="res://script/management/debug.gd" id="2_ktk03"]
+[ext_resource type="LabelSettings" uid="uid://cy4uy321mabg7" path="res://resource/theme/font/white.tres" id="4_kmg78"]
 [ext_resource type="AudioStream" uid="uid://bleelgyc2auge" path="res://music/bathroom-tomb.ogg" id="4_qcl5k"]
-
+[ext_resource type="FontFile" uid="uid://fmb3ibu1na0d" path="res://asset/2d/font/ttf/console.ttf" id="5_ydm7n"]
 
 [node name="Debug" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +36,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Hello" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="HelloVBox" type="VBoxContainer" parent="TabContainer/Hello"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HelloText" type="RichTextLabel" parent="TabContainer/Hello/HelloVBox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Hello! This is the Debug Menu for Openscop, here you can find the Credits list, with the names of all people who made this project possible, and the Debug variables, which contain tools that can be used to aid your development / video-making process.
+
+[center]If you've already finished setting the Debug variables up and would like to return to the game, type \"[color=blue]!reset_game[/color]\" into the Console."
+fit_content = true
+scroll_following = true
+
 [node name="About" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="CreditsText" type="RichTextLabel" parent="TabContainer/About"]
@@ -99,6 +122,12 @@ Wowzaboi
 
 [color=#00FFFF]Shoutouts to:[/color]
 ZLD1
+
+[color=#00FFFF]I would also like to give a very huge thanks to Nenad2d (@nenad2d) from the Godot Server specifically for helping out with the mesh-sorting system, the Tile Editor, and teaching me how yo use the ArrayMesh.[/color]
+
+[color=#00FFFF]Nenad2d's contribution to the project lasted between:[/color]
+[color=blue]January 25th 2024[/color]
+[color=blue]January 28th 2024[/color]
 
 
 Shoutouts to you all! Y'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!
@@ -258,7 +287,83 @@ Openscop (Rewrite) Version 2.0 was Programmed Between:
 "
 scroll_following = true
 
+[node name="Debug" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Debug"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="DebugVBox" type="VBoxContainer" parent="TabContainer/Debug/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DebugToggleVBox" type="VBoxContainer" parent="TabContainer/Debug/ScrollContainer/DebugVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DebugToggleHBox" type="HBoxContainer" parent="TabContainer/Debug/ScrollContainer/DebugVBox/DebugToggleVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="DebugLabel" type="Label" parent="TabContainer/Debug/ScrollContainer/DebugVBox/DebugToggleVBox/DebugToggleHBox"]
+layout_mode = 2
+text = "Enable Debug:"
+label_settings = ExtResource("4_kmg78")
+
+[node name="DebugToggle" type="CheckButton" parent="TabContainer/Debug/ScrollContainer/DebugVBox/DebugToggleVBox/DebugToggleHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Debug/ScrollContainer/DebugVBox/DebugToggleVBox"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_ydm7n")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "This variable enables/disables the debug mode. The debug mode is used for debugging parts of the game such as ArrayMesh building, warps, slopes, etc. Please disable it on your Fangame when exporting it to .exe or when filming your YT videos.
+The variable responsible for this toggle can be found on [color=green]GameManager[/color][color=lightblue].debug_settings.debug[/color]."
+fit_content = true
+
+[node name="AutoRecToggleVBox" type="VBoxContainer" parent="TabContainer/Debug/ScrollContainer/DebugVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AutoRecToggleHBox" type="HBoxContainer" parent="TabContainer/Debug/ScrollContainer/DebugVBox/AutoRecToggleVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="AutoRecLabel" type="Label" parent="TabContainer/Debug/ScrollContainer/DebugVBox/AutoRecToggleVBox/AutoRecToggleHBox"]
+layout_mode = 2
+text = "Enable Autorec:"
+label_settings = ExtResource("4_kmg78")
+
+[node name="AutoRecToggle" type="CheckButton" parent="TabContainer/Debug/ScrollContainer/DebugVBox/AutoRecToggleVBox/AutoRecToggleHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Debug/ScrollContainer/DebugVBox/AutoRecToggleVBox"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_ydm7n")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "This variable enables/disables the [color=red]Auto[/color]matic [color=red]Rec[/color]ording ([color=red]AutoRec[/color]) mode. Automatic Recording makes the game start a recording automatically as soon as you start the game up until you either access the secret menu or Save & Quit the game.
+This feature has the purpose of allowing fan-video creators to be able to make recordings of their inputs that they may want to replay later as ghosts or in the secret menu in their series, without having to use the console to start recording as soon as you enter a room. You may want to disable this if you want your fangame to not start recordings automatically or while playtesting/debugging the game before recording videos.
+The variable responsible for this toggle can be found on [color=green]GameManager[/color][color=lightblue].debug_settings.auto_record[/color]."
+fit_content = true
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qcl5k")
 autoplay = true
 bus = &"Music"
+
+[connection signal="toggled" from="TabContainer/Debug/ScrollContainer/DebugVBox/DebugToggleVBox/DebugToggleHBox/DebugToggle" to="." method="_on_debug_toggle_toggled"]
+[connection signal="toggled" from="TabContainer/Debug/ScrollContainer/DebugVBox/AutoRecToggleVBox/AutoRecToggleHBox/AutoRecToggle" to="." method="_on_debug_toggle_toggled"]

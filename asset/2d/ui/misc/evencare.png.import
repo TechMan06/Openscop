@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d21du64n13ci3"
-path.s3tc="res://.godot/imported/evencare.png-1e72bf2529d211a0e4286918839e4cca.s3tc.ctex"
+path="res://.godot/imported/evencare.png-1e72bf2529d211a0e4286918839e4cca.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://asset/2d/ui/misc/evencare.png"
-dest_files=["res://.godot/imported/evencare.png-1e72bf2529d211a0e4286918839e4cca.s3tc.ctex"]
+dest_files=["res://.godot/imported/evencare.png-1e72bf2529d211a0e4286918839e4cca.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

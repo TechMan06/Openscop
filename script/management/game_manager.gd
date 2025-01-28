@@ -14,7 +14,7 @@ func _ready() -> void:
 	if ResourceLoader.exists(DEBUG_FILE):
 		debug_settings = load(DEBUG_FILE)
 	else:
-		ResourceSaver.save(debug_settings, DEBUG_FILE)
+		save_debug_settings()
 
 
 func _process(_delta: float) -> void:
@@ -57,6 +57,7 @@ func _process(_delta: float) -> void:
 
 
 func reset_game() -> void:
+	GameManager.save_debug_settings()
 	Global.current_controller = 0
 	Global.can_pause = true
 	Global.can_unpause = false
@@ -73,8 +74,12 @@ func reset_game() -> void:
 	EventBus.destroy_hud.emit()
 
 
+func save_debug_settings() -> void:
+	ResourceSaver.save(debug_settings, DEBUG_FILE)
+
+
 #SYSTEM NOTIF CLASS IS UNKNOWN
 func _notification(system_notif) -> void:
 	if system_notif == NOTIFICATION_WM_CLOSE_REQUEST:
-		ResourceSaver.save(debug_settings, DEBUG_FILE)
+		save_debug_settings()
 		get_tree().quit() # default behavior

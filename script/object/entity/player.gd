@@ -49,6 +49,8 @@ func _ready() -> void:
 	_p2talk_origin = $P2TalkOrigin
 	_p2talk_button_sound = $ButtonSound
 	
+	await get_tree().process_frame
+	
 	if Global.global_data.gen <= 2:
 		set_collision_mask(0)
 		current_sheet = "res://asset/2d/sprite/player/gen_1.png"
@@ -57,10 +59,6 @@ func _ready() -> void:
 	
 	if player_stats.character_id > 2:
 		_movement_speed = 6.0
-
-	await self.tree_entered
-	
-	EventBus.player_spawned.emit(self)
 	
 	if control_mode == 1:
 		var _school_hud: Marker2D = SCHOOL_OVERLAY.instantiate()
@@ -68,6 +66,10 @@ func _ready() -> void:
 		_school_hud.player = self
 		
 		add_child(_school_hud)
+	
+	await self.tree_entered
+	
+	EventBus.player_spawned.emit(self)
 
 
 func _input(event: InputEvent) -> void:

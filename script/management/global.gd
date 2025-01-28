@@ -154,7 +154,7 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 					else:
 						color.push_back(Color(0.5, 0.5, 0.5, 1.0))
 				
-				if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3] && Global.gen > 3:
+				if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3] && global_data.gen > 3:
 					color.push_back(	
 									mesh_data.get_vertex_color(
 																mesh_data.get_face_vertex(
@@ -244,7 +244,7 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 		output_array[Mesh.ARRAY_TEX_UV] = uvs
 		output_array[Mesh.ARRAY_NORMAL] = normals
 		
-		if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3] && Global.gen > 3:
+		if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3] && global_data.gen > 3:
 			output_array[Mesh.ARRAY_COLOR] = color
 		
 		if GameManager.debug_settings.debug:

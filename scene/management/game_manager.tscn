@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/management/game_manager.gd" id="1_vlvl6"]
 [ext_resource type="Theme" uid="uid://e4dd06wrk1uf" path="res://resource/theme/debug/petscop.tres" id="2_0ks65"]
-[ext_resource type="Script" path="res://scene/management/sheet_manager.gd" id="3_v2gac"]
+[ext_resource type="Script" path="res://script/management/sheet_manager.gd" id="3_6dofb"]
 
 [node name="GameManager" type="Control"]
 process_mode = 3
@@ -29,6 +29,6 @@ mode_overrides_title = false
 file_mode = 0
 access = 1
 filters = PackedStringArray("*.png")
-script = ExtResource("3_v2gac")
+script = ExtResource("3_6dofb")
 
 [connection signal="file_selected" from="FileDialog" to="FileDialog" method="_on_sheet_selected"]

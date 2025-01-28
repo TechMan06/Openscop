@@ -55,7 +55,7 @@ collide_with_areas = true
 [node name="FootstepSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_hddr1")
 attenuation_model = 3
-panning_strength = 4.0
+panning_strength = 2.0
 bus = &"SFX"
 
 [node name="ButtonSound" type="AudioStreamPlayer3D" parent="."]

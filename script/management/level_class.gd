@@ -142,10 +142,10 @@ func _ready() -> void:
 		_fog_focus.offset = fog_offset
 
 	if spawn_player:
-		add_child(_player_instance)
-		
 		if school_preset:
 			_player_instance.control_mode = 1
+		
+		add_child(_player_instance)
 		
 		_player_instance.set_footstep_sound(footstep_sound)
 
@@ -169,6 +169,7 @@ func _ready() -> void:
 			var _player_camera: CameraMarker = create_camera()
 			
 			_player_camera.focus_node = _player_instance
+			
 			if !school_preset:
 				_player_camera.set_mode(_player_camera.CameraModes.FOLLOW)
 			else:

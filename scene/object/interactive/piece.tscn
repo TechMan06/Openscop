@@ -12,13 +12,16 @@ render_priority = 0
 shader = ExtResource("2_vvfn8")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_cvlhu")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = true
 shader_parameter/animation_frames = Vector2i(20, 5)
 shader_parameter/animation_speed = Vector2i(10, 0)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_cvlhu")
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cewfo"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -53,7 +56,7 @@ shape = SubResource("BoxShape3D_cewfo")
 [node name="PieceSound" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = SubResource("AudioStreamRandomizer_m6ecn")
-panning_strength = 4.0
+panning_strength = 2.0
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
