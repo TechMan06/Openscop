@@ -35,7 +35,7 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = true
+shader_parameter/use_depth = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_mnjs5"]
 size = Vector2(2, 2)
