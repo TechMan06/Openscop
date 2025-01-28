@@ -148,7 +148,13 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 											)
 							)
 				
-				if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3]:
+				if GameManager.debug_settings.debug:
+					if face_iterate == 2 || face_iterate == 3:
+						color.push_back(Color(1.0, 0.0, 0.0, 1.0))
+					else:
+						color.push_back(Color(0.5, 0.5, 0.5, 1.0))
+				
+				if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3] && Global.gen > 3:
 					color.push_back(	
 									mesh_data.get_vertex_color(
 																mesh_data.get_face_vertex(
@@ -165,6 +171,7 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 		
 		var face_iterate_2: int = 0
 		var face_vertex_iterate_2: int = 0
+		var quad_iterate: int = 0
 		
 		while face_iterate_2 < face_count:
 			if face_vertex_iterate_2 <= 2:
@@ -190,12 +197,42 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 																		)
 																	]
 																)
-				face_center.push_back(vector3_average.x)
-				face_center.push_back(vector3_average.y)
-				face_center.push_back(vector3_average.z)
-				face_center.push_back(1.0)
+				if face_iterate_2 + 1 >= face_count:
+					face_center.push_back(vector3_average.x)
+					face_center.push_back(vector3_average.y)
+					face_center.push_back(vector3_average.z)
+					face_center.push_back(1.0)
 
-				face_vertex_iterate_2 += 1
+					face_vertex_iterate_2 += 1
+				else:
+					var vector3_average_1: Vector3 = vector3_average(
+																		[
+																			mesh_data.get_vertex(
+																									mesh_data.get_face_vertex(
+																													face_iterate_2 + 1, 
+																													0
+																												)
+																			),
+																			mesh_data.get_vertex(
+																									mesh_data.get_face_vertex(
+																													face_iterate_2 + 1, 
+																													1
+																												)
+																			),
+																			mesh_data.get_vertex(
+																									mesh_data.get_face_vertex(
+																													face_iterate_2 + 1, 
+																													2
+																												)
+																			)
+																		]
+																	)
+					face_center.push_back((vector3_average.x + vector3_average_1.x) / 2)
+					face_center.push_back((vector3_average.y + vector3_average_1.y) / 2)
+					face_center.push_back((vector3_average.z + vector3_average_1.z) / 2)
+					face_center.push_back(1.0)
+
+					face_vertex_iterate_2 += 1
 			else:
 				face_iterate_2 += 1
 				face_vertex_iterate_2 = 0
@@ -207,7 +244,10 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 		output_array[Mesh.ARRAY_TEX_UV] = uvs
 		output_array[Mesh.ARRAY_NORMAL] = normals
 		
-		if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3]:
+		if mesh_instance_3d.mesh.surface_get_arrays(surface_index)[3] && Global.gen > 3:
+			output_array[Mesh.ARRAY_COLOR] = color
+		
+		if GameManager.debug_settings.debug:
 			output_array[Mesh.ARRAY_COLOR] = color
 		
 		output_array[Mesh.ARRAY_TANGENT] = face_center

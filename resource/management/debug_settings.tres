@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_772c0")
+debug = false
 auto_record = true
 custom_sheet = ""
