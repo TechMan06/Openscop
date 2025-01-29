@@ -23,4 +23,5 @@ func _on_body_exited(body):
 
 func _physics_process(_delta):
 	if touched_body != null:
-		apply_central_impulse(touched_body.velocity)
+		apply_central_force(touched_body.velocity)
+	

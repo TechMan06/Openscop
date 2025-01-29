@@ -142,6 +142,8 @@ void vertex()
 	if (use_depth) {
 		vec4 clip = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(TANGENT, 1.0);
 		depth = clip.z / clip.w;
+		//vec3 world_camera = (INV_VIEW_MATRIX * vec4(vec3(0.0), 1.0)).xyz;
+		//depth = clamp(distance(TANGENT.xyz, world_camera), -0.9, 0.9);
 	}
 #endif
 

@@ -205,28 +205,35 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 
 					face_vertex_iterate_2 += 1
 				else:
+					var add_or_subtract: int = 0
+					
+					if face_iterate_2 % 2 != 0:
+						add_or_subtract = -1
+					else:
+						add_or_subtract = 1
+					
 					var vector3_average_1: Vector3 = vector3_average(
-																		[
-																			mesh_data.get_vertex(
-																									mesh_data.get_face_vertex(
-																													face_iterate_2 + 1, 
-																													0
-																												)
-																			),
-																			mesh_data.get_vertex(
-																									mesh_data.get_face_vertex(
-																													face_iterate_2 + 1, 
-																													1
-																												)
-																			),
-																			mesh_data.get_vertex(
-																									mesh_data.get_face_vertex(
-																													face_iterate_2 + 1, 
-																													2
-																												)
-																			)
-																		]
-																	)
+																	[
+																		mesh_data.get_vertex(
+																								mesh_data.get_face_vertex(
+																												face_iterate_2 + add_or_subtract, 
+																												0
+																											)
+																		),
+																		mesh_data.get_vertex(
+																								mesh_data.get_face_vertex(
+																												face_iterate_2 + add_or_subtract, 
+																												1
+																											)
+																		),
+																		mesh_data.get_vertex(
+																								mesh_data.get_face_vertex(
+																												face_iterate_2 + add_or_subtract, 
+																												2
+																											)
+																		)
+																	]
+																)
 					face_center.push_back((vector3_average.x + vector3_average_1.x) / 2)
 					face_center.push_back((vector3_average.y + vector3_average_1.y) / 2)
 					face_center.push_back((vector3_average.z + vector3_average_1.z) / 2)
