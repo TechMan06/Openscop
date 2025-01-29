@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://script/object/interactive/bucket.gd" id="1_n5wfk"]
 [ext_resource type="ArrayMesh" uid="uid://pyekwcve55qw" path="res://asset/3d/object/bucket.obj" id="2_5wl3t"]
-[ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="3_o76i5"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="3_c74fj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u135j"]
 render_priority = 0
-shader = ExtResource("3_o76i5")
+shader = ExtResource("3_c74fj")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -20,7 +20,6 @@ shader_parameter/use_depth = false
 
 [node name="Bucket" type="RigidBody3D"]
 disable_mode = 1
-collision_mask = 0
 axis_lock_linear_x = true
 axis_lock_linear_y = true
 axis_lock_linear_z = true

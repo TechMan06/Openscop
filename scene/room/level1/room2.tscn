@@ -38,6 +38,9 @@ shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [node name="EvenCareRoom2" type="Node3D"]
 script = ExtResource("1_ey0xe")
@@ -117,7 +120,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
 script = ExtResource("14_i1lxw")
 textbox_preset = ExtResource("15_h6hy7")
 textbox_text = "evencare_2"
-trigger_area = 2.0
 height_offset = 2.5
 
 [node name="DialogueTrigger3" type="Marker3D" parent="."]
@@ -125,6 +127,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1)
 script = ExtResource("14_i1lxw")
 textbox_preset = ExtResource("15_h6hy7")
 textbox_text = "evencare_3"
-trigger_area = 2.0
 height_offset = 2.5
 min_distance = 1.0

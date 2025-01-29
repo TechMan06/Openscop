@@ -172,6 +172,7 @@ void fragment()
 	#endif
 #else
 	vec4 texture_color = texture(albedoTex, texture_uv);
+	
 	#ifdef LIT
 		if (fog_enabled) {
 			ALBEDO = (color_base * texture_color).rgb * (1.0 - fog_amount) + fog_color * fog_amount;
@@ -180,7 +181,9 @@ void fragment()
 		}
 	#else
 		ALBEDO = (color_base * texture_color).rgb;
+		//ALBEDO = vec3(COLOR.a, 1.0, 1.0);
 	#endif
+	
 #endif
 
 #ifdef LIGHT_VOLUME
