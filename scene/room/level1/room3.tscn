@@ -45,6 +45,9 @@ shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8i41l"]
 render_priority = 0
@@ -54,6 +57,9 @@ shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ern2l"]
 render_priority = 0
@@ -63,6 +69,9 @@ shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [node name="level1-room3" type="Node3D"]
 script = ExtResource("1_cuoxg")
@@ -119,6 +128,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
 
 [node name="PieceArea6" parent="." instance=ExtResource("11_bpq11")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+
+[node name="PieceArea7" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -24.5)
+
+[node name="PieceArea8" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -24.5)
+
+[node name="PieceArea9" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -24.5)
+
+[node name="PieceArea10" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -25.5)
+
+[node name="PieceArea11" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -25.5)
+
+[node name="PieceArea12" parent="." instance=ExtResource("11_bpq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -25.5)
 
 [node name="SpawnClass" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
