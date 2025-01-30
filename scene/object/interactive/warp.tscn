@@ -38,10 +38,6 @@ script = ExtResource("1_gnr67")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_qy0te")
 
-[node name="WarpCollision2" type="CollisionShape3D" parent="WarpArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-shape = SubResource("BoxShape3D_qy0te")
-
 [node name="WarpSprite" type="Sprite3D" parent="."]
 material_override = SubResource("ShaderMaterial_v268w")
 offset = Vector2(0, 32)
@@ -50,14 +46,22 @@ texture = ExtResource("3_d4cf1")
 hframes = 5
 vframes = 5
 
-[node name="BackupWarp" type="Marker3D" parent="."]
+[node name="BackupWarps" type="Marker3D" parent="."]
 
-[node name="WarpArea" type="Area3D" parent="BackupWarp"]
+[node name="WarpArea" type="Area3D" parent="BackupWarps"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="WarpCollision" type="CollisionShape3D" parent="BackupWarp/WarpArea"]
+[node name="WarpCollision" type="CollisionShape3D" parent="BackupWarps/WarpArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_h7vq5")
+
+[node name="WarpArea2" type="Area3D" parent="BackupWarps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="WarpCollision" type="CollisionShape3D" parent="BackupWarps/WarpArea2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_h7vq5")
 
 [connection signal="body_entered" from="WarpArea" to="." method="_on_warp_area_body_entered"]
-[connection signal="body_entered" from="BackupWarp/WarpArea" to="." method="_on_warp_area_body_entered"]
+[connection signal="body_entered" from="BackupWarps/WarpArea" to="." method="_on_warp_area_body_entered"]
+[connection signal="body_entered" from="BackupWarps/WarpArea2" to="." method="_on_warp_area_body_entered"]

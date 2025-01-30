@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm4yflotftl33"
-path="res://.godot/imported/amber.png-1863a6f39e5994b76ef4d88b0eaae303.ctex"
+uid="uid://ckxk4njwl2xl2"
+path="res://.godot/imported/amber.png-6a323dea542ee5acbac05b73cb08c83e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/2d/ui/pause/pets/amber.png"
-dest_files=["res://.godot/imported/amber.png-1863a6f39e5994b76ef4d88b0eaae303.ctex"]
+source_file="res://asset/2d/sprite/object/pet/amber.png"
+dest_files=["res://.godot/imported/amber.png-6a323dea542ee5acbac05b73cb08c83e.ctex"]
 
 [params]
 

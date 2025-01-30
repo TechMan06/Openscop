@@ -21,3 +21,5 @@ texture = ExtResource("2_5w3x7")
 stream = ExtResource("3_1so3d")
 autoplay = true
 bus = &"HUD_SFX"
+
+[connection signal="finished" from="CaughtSound" to="." method="_on_sound_finished"]

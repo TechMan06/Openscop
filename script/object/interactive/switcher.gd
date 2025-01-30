@@ -1,7 +1,7 @@
 extends Marker3D
 class_name SwitcherClass
 
-signal switched
+signal switched(value: bool)
 
 @export_category("Trigger Properties")
 @export var min_distance: float = 0.25
@@ -45,6 +45,7 @@ func allow_toggle() -> void:
 func _on_interaction_symbol_triggered() -> void:
 	if can_trigger:
 		turned_on = !turned_on
+		switched.emit(turned_on)
 		can_trigger = false
 		
 		if connect_to != null:

@@ -10,19 +10,27 @@
 render_priority = 0
 shader = ExtResource("3_xars0")
 shader_parameter/use_fog = true
+shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bevel"]
 render_priority = 0
 shader = ExtResource("3_xars0")
 shader_parameter/use_fog = true
+shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [node name="SwitcherObject" type="Marker3D"]
 script = ExtResource("1_1apn4")

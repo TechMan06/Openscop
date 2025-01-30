@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://n7ds5jq6om2d"]
+[gd_scene load_steps=29 format=3 uid="uid://n7ds5jq6om2d"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_cuoxg"]
 [ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_01f37"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cmc5a5ano61b3" path="res://scene/object/interactive/camera_zone.tscn" id="20_koyam"]
 [ext_resource type="PackedScene" uid="uid://cya7cxf4t8pi3" path="res://scene/object/interactive/switcher.tscn" id="21_a6he0"]
 [ext_resource type="PackedScene" uid="uid://d3sov8vsf3ey3" path="res://scene/object/interactive/cage.tscn" id="22_ac13p"]
+[ext_resource type="PackedScene" uid="uid://ddg1r775hmlih" path="res://scene/object/pet/amber.tscn" id="23_tvf8q"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_bxgob")
@@ -177,6 +178,7 @@ scene_path = "res://scene/room/level1/room2.tscn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
 script = ExtResource("12_rihe3")
 scene_path = "res://scene/room/level1/room5.tscn"
+player_direction = 3
 
 [node name="SpawnClass3" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9148, 0, 0)
@@ -226,7 +228,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -15)
 connect_to = NodePath("../AmberCage")
 
 [node name="SwitcherObject2" parent="." node_paths=PackedStringArray("connect_to") instance=ExtResource("21_a6he0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -14)
 connect_to = NodePath("../AmberCage2")
 
 [node name="AmberCage" parent="." instance=ExtResource("22_ac13p")]
@@ -235,3 +237,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -19)
 [node name="AmberCage2" parent="." instance=ExtResource("22_ac13p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -19)
 flip = true
+
+[node name="AmberPet" parent="." node_paths=PackedStringArray("switch_a", "switch_b") instance=ExtResource("23_tvf8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -22)
+pos_a = Vector3i(7, 0, -22)
+pos_b = Vector3i(14, 0, -22)
+switch_a = NodePath("../SwitcherObject")
+switch_b = NodePath("../SwitcherObject2")

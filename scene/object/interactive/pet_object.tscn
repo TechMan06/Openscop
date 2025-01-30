@@ -8,6 +8,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_bw11b")
 shader_parameter/use_fog = true
+shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/billboard = true
@@ -15,11 +16,15 @@ shader_parameter/y_billboard = false
 shader_parameter/animate = false
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qawgv"]
 
 [node name="PetObject" type="Marker3D"]
 script = ExtResource("1_3hxus")
+was_caught = null
 
 [node name="PetSprite" type="Sprite3D" parent="."]
 material_override = SubResource("ShaderMaterial_floj4")
@@ -33,7 +38,8 @@ collision_layer = 3
 shape = SubResource("BoxShape3D_qawgv")
 
 [node name="Cry" type="AudioStreamPlayer3D" parent="."]
-panning_strength = 4.0
+unit_size = 20.0
+panning_strength = 2.0
 bus = &"SFX"
 
 [node name="CaughtTimer" type="Timer" parent="."]

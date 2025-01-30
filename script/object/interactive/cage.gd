@@ -16,7 +16,7 @@ func _on_trigger() -> void:
 								self, 
 								"position:x", 
 								negative_or_not * move_to * flip_or_not, 
-								abs(move_to)
+								abs(move_to) * 0.75
 							).as_relative()
 	
 	await move_anim.finished

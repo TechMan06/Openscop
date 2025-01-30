@@ -47,7 +47,6 @@ func _ready() -> void:
 							).set_trans(Tween.TRANS_SINE).set_delay(0.5)
 	
 	await _animation.finished
-	
 	queue_free()
 
 

@@ -8,6 +8,7 @@
 render_priority = 0
 shader = ExtResource("2_m3d8k")
 shader_parameter/use_fog = true
+shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -16,8 +17,8 @@ shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/use_depth = false
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_suhf6"]
-data = PackedVector3Array(1, 1, 0.5, 1, 0, 0.5, -1, 1, 0.5, -1, 1, 0.5, 1, 0, 0.5, -1, 0, 0.5, 1, 1, -0.5, 1, 0, -0.5, 1.5, 1, 0, 1.5, 1, 0, 1, 0, -0.5, 1.5, 0, 0, 1, 0, -0.5, 1, 1, -0.5, -1, 0, -0.5, -1, 0, -0.5, 1, 1, -0.5, -1, 1, -0.5, -1, 0, -0.5, -1, 1, -0.5, -1.5, 0, 0, -1.5, 0, 0, -1, 1, -0.5, -1.5, 1, 0, -1, 1, 0.5, -1, 0, 0.5, -1.5, 1, 0, -1.5, 1, 0, -1, 0, 0.5, -1.5, 0, 0, 1, 0, 0.5, 1, 1, 0.5, 1.5, 0, 0, 1.5, 0, 0, 1, 1, 0.5, 1.5, 1, 0)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sy50b"]
+data = PackedVector3Array(0.5, 1, 0.5, 0.5, 0, 0.5, -0.5, 1, 0.5, -0.5, 1, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 1, -0.5, 0.5, 0, -0.5, 1.5, 1, 0, 1.5, 1, 0, 0.5, 0, -0.5, 1.5, 0, 0, 0.5, 0, -0.5, 0.5, 1, -0.5, -0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 1, -0.5, -0.5, 1, -0.5, -0.5, 0, -0.5, -0.5, 1, -0.5, -1.5, 0, 0, -1.5, 0, 0, -0.5, 1, -0.5, -1.5, 1, 0, -0.5, 1, 0.5, -0.5, 0, 0.5, -1.5, 1, 0, -1.5, 1, 0, -0.5, 0, 0.5, -1.5, 0, 0, 0.5, 0, 0.5, 0.5, 1, 0.5, 1.5, 0, 0, 1.5, 0, 0, 0.5, 1, 0.5, 1.5, 1, 0)
 
 [node name="AmberCage" type="Marker3D"]
 script = ExtResource("1_hifba")
@@ -29,4 +30,4 @@ surface_material_override/0 = SubResource("ShaderMaterial_kd2en")
 [node name="CageBody" type="StaticBody3D" parent="."]
 
 [node name="CageCollision" type="CollisionShape3D" parent="CageBody"]
-shape = SubResource("ConcavePolygonShape3D_suhf6")
+shape = SubResource("ConcavePolygonShape3D_sy50b")

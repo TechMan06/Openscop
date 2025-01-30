@@ -15,7 +15,7 @@ class_name WarpClass
 
 @onready var sprite = $WarpSprite
 @onready var warp_area = $WarpArea/WarpCollision
-@onready var backup_warp = $BackupWarp
+@onready var backup_warps = $BackupWarps
 
 
 func _ready() -> void:
@@ -35,16 +35,16 @@ func _process(_delta: float) -> void:
 			warp_area.get_shape().size = Vector3(2., 2., 0.)
 			
 			if warp_direction == 3:
-				backup_warp.rotation.y = deg_to_rad(180)
+				backup_warps.rotation.y = deg_to_rad(180)
 			else:
-				backup_warp.rotation.y = 0.0
+				backup_warps.rotation.y = 0.0
 		elif warp_direction == 1 || warp_direction == 2:
 			warp_area.get_shape().size = Vector3(0., 2., 2.)
 			
 			if warp_direction == 2:
-				backup_warp.rotation.y = deg_to_rad(-90)
+				backup_warps.rotation.y = deg_to_rad(-90)
 			else:
-				backup_warp.rotation.y = deg_to_rad(90)
+				backup_warps.rotation.y = deg_to_rad(90)
 	
 	
 	warp_direction = clamp(warp_direction, 0, 3)

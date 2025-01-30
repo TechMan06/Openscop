@@ -223,6 +223,10 @@ func _ready() -> void:
 			RecordingManager.start_recording()
 	else:
 		RecordingManager.stop_recording()
+		
+	await self.tree_entered
+	
+	EventBus.room_started.emit(room_name)
 
 
 func _process(_delta: float) -> void:

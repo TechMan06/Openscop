@@ -11,6 +11,16 @@ enum CameraModes {
 	FREE
 }
 
+var shake_amount: float = 0.1
+var shake_progress: float = 0.0
+var quake_enabled: float = 0.0:
+	set(value):
+		quake_enabled = value
+		
+		if value < 0.25:
+			shake_amount = 0.1
+var shake_speed: float = 1.0
+
 var focus_node: Node3D
 var marker_rotation: float = 0.0
 var camera_rotation: float = 0.0
@@ -21,22 +31,33 @@ var can_move: Array = [true, true, true]
 var camera_speed: float = 0.0
 
 
+@onready var shake_offset: Marker3D = %ShakeOffset
+
+
 func _ready() -> void:
 	if focus_node != null:
 		global_position = focus_node.global_position
 	
 	EventBus.camera_spawned.emit(self)
 	EventBus.camera_zone_spawned.connect(_on_camera_zone_spawned)
+	EventBus.camera_earthquake.connect(do_earthquake)
+	EventBus.camera_shake_amount.connect(set_shake_amount)
+	EventBus.camera_shake_speed.connect(set_shake_speed)
 	Console.set_camera.connect(set_mode)
 
 
 func _anchor_camera() -> void:
-	get_child(0).position = Vector3(0.0, camera_distance.y, camera_distance.x)
-	get_child(0).rotation.x = deg_to_rad(camera_rotation)
+	get_child(0).get_child(0).position = Vector3(0.0, camera_distance.y, camera_distance.x)
+	get_child(0).get_child(0).rotation.x = deg_to_rad(camera_rotation)
 	rotation.y = deg_to_rad(marker_rotation)
 
 
 func _process(delta: float) -> void:
+	
+	if quake_enabled:
+		shake_progress += 100.0 * delta
+		shake_offset.position.y = (sin(shake_progress * shake_speed) + cos(shake_progress * shake_speed)) * shake_amount * quake_enabled
+	
 	if focus_node != null:
 		match camera_mode:
 			CameraModes.COPY:
@@ -81,8 +102,8 @@ func _process(delta: float) -> void:
 						global_position.y = clamp(global_position.y, limits[1].x, limits[1].y)
 			
 			CameraModes.POV:
-				get_child(0).position = Vector3.ZERO
-				get_child(0).rotation.x = 0.0
+				get_child(0).get_child(0).position = Vector3.ZERO
+				get_child(0).get_child(0).rotation.x = 0.0
 				
 				if focus_node != null:
 					global_rotation.y = focus_node.global_rotation.y + deg_to_rad(180.0)
@@ -109,34 +130,34 @@ func _process(delta: float) -> void:
 			CameraModes.FREE:
 				if Input.is_action_pressed("shift"):
 					if Input.is_action_pressed("ui_up"):
-						get_child(0).global_rotation.x -= 0.1
+						get_child(0).get_child(0).global_rotation.x -= 0.1
 					
 					if Input.is_action_pressed("ui_down"):
-						get_child(0).global_rotation.x += 0.1
+						get_child(0).get_child(0).global_rotation.x += 0.1
 					
 					if Input.is_action_pressed("ui_left"):
-						get_child(0).global_rotation.y += 0.1
+						get_child(0).get_child(0).global_rotation.y += 0.1
 					
 					if Input.is_action_pressed("ui_right"):
-						get_child(0).global_rotation.y -= 0.1
+						get_child(0).get_child(0).global_rotation.y -= 0.1
 				else:
 					if Input.is_action_pressed("ui_up"):
-						get_child(0).global_position.z -= 0.1
+						get_child(0).get_child(0).global_position.z -= 0.1
 					
 					if Input.is_action_pressed("ui_down"):
-						get_child(0).global_position.z += 0.1
+						get_child(0).get_child(0).global_position.z += 0.1
 					
 					if Input.is_action_pressed("ui_left"):
-						get_child(0).global_position.x -= 0.1
+						get_child(0).get_child(0).global_position.x -= 0.1
 					
 					if Input.is_action_pressed("ui_right"):
-						get_child(0).global_position.x += 0.1
+						get_child(0).get_child(0).global_position.x += 0.1
 					
 					if Input.is_action_pressed("ui_page_up"):
-						get_child(0).global_position.y += 0.1
+						get_child(0).get_child(0).global_position.y += 0.1
 					
 					if Input.is_action_pressed("ui_page_down"):
-						get_child(0).global_position.y -= 0.1
+						get_child(0).get_child(0).global_position.y -= 0.1
 
 
 func set_focus(node: Node3D) -> void:
@@ -179,3 +200,18 @@ func set_speed(value: float) -> void:
 
 func _on_camera_zone_spawned(camera_zone: CameraZone) -> void:
 	camera_zone.camera_marker = self
+
+
+func do_earthquake(enable: bool) -> void:
+	if enable:
+		create_tween().tween_property(self, "quake_enabled", 1.0, 0.25)
+	else:
+		create_tween().tween_property(self, "quake_enabled", 0.0, 0.25)
+
+
+func set_shake_amount(value: float) -> void:
+	shake_amount = value
+
+
+func set_shake_speed(value: float) -> void:
+	shake_speed = value

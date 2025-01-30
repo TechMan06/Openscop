@@ -1,0 +1,167 @@
+[gd_scene load_steps=16 format=3 uid="uid://ddg1r775hmlih"]
+
+[ext_resource type="PackedScene" uid="uid://bvts6yrhq4hnm" path="res://scene/object/interactive/pet_object.tscn" id="1_dncr3"]
+[ext_resource type="Script" path="res://script/object/pet/amber.gd" id="1_xopa3"]
+[ext_resource type="AudioStream" uid="uid://fjq4d38a4kgm" path="res://sfx/pets/amber_cry.wav" id="2_g3u3y"]
+[ext_resource type="Texture2D" uid="uid://ckxk4njwl2xl2" path="res://asset/2d/sprite/object/pet/amber.png" id="3_77lqw"]
+[ext_resource type="AudioStream" uid="uid://6i8km1tdt2lg" path="res://sfx/pets/amber_jump.wav" id="5_j7ak1"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="5_s3gba"]
+[ext_resource type="AudioStream" uid="uid://lyvdc6ua0v8p" path="res://sfx/pets/amber_land.wav" id="6_0q7yp"]
+
+[sub_resource type="Animation" id="Animation_qj5cu"]
+resource_name = "jump"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.25, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0w2ie"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m13h3"]
+_data = {
+"RESET": SubResource("Animation_0w2ie"),
+"jump": SubResource("Animation_qj5cu")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_37uxc"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8271l"]
+render_priority = 0
+shader = ExtResource("5_s3gba")
+shader_parameter/use_fog = false
+shader_parameter/alpha_vertex_color = false
+shader_parameter/modulate_color = Color(0, 0, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_77lqw")
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
+
+[sub_resource type="Shader" id="Shader_yj6u1"]
+code = "shader_type spatial;
+
+#define CULL cull_back
+#define BLEND blend_mix
+#define SPRITE
+
+#include \"res://shader/spatial/include/psx_base.gdshaderinc\"
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hf861"]
+load_path = "res://.godot/imported/amber.png-6a323dea542ee5acbac05b73cb08c83e.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tf1iy"]
+render_priority = 0
+shader = SubResource("Shader_yj6u1")
+shader_parameter/use_fog = false
+shader_parameter/alpha_vertex_color = false
+shader_parameter/modulate_color = Color(1, 0, 0, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = SubResource("CompressedTexture2D_hf861")
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
+
+[node name="AmberPet" type="Marker3D"]
+script = ExtResource("1_xopa3")
+jump_height = 4.0
+
+[node name="AmberOrigin" type="Marker3D" parent="."]
+unique_name_in_owner = true
+
+[node name="JumpOffset" type="Marker3D" parent="AmberOrigin"]
+unique_name_in_owner = true
+
+[node name="PetObject" parent="AmberOrigin/JumpOffset" instance=ExtResource("1_dncr3")]
+unique_name_in_owner = true
+pet_name = "amber"
+cry_sound_file = ExtResource("2_g3u3y")
+pet_sprite = ExtResource("3_77lqw")
+was_caught = false
+sprite_size = 0.04
+frames = Vector2(3, 1)
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="AmberOrigin/JumpOffset/PetObject"]
+unique_name_in_owner = true
+stream = ExtResource("5_j7ak1")
+bus = &"SFX"
+
+[node name="LandSound" type="AudioStreamPlayer" parent="AmberOrigin/JumpOffset/PetObject"]
+unique_name_in_owner = true
+stream = ExtResource("6_0q7yp")
+bus = &"SFX"
+
+[node name="JumpAnim" type="AnimationPlayer" parent="AmberOrigin"]
+unique_name_in_owner = true
+root_node = NodePath("../JumpOffset")
+speed_scale = 2.75
+libraries = {
+"": SubResource("AnimationLibrary_m13h3")
+}
+
+[node name="AmberArea" type="Area3D" parent="AmberOrigin"]
+unique_name_in_owner = true
+
+[node name="AmberCollision" type="CollisionShape3D" parent="AmberOrigin/AmberArea"]
+shape = SubResource("BoxShape3D_37uxc")
+
+[node name="AmberPosA" type="Marker3D" parent="."]
+unique_name_in_owner = true
+top_level = true
+
+[node name="AmberSprite" type="Sprite3D" parent="AmberPosA"]
+material_override = SubResource("ShaderMaterial_8271l")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("3_77lqw")
+hframes = 3
+
+[node name="AmberPosB" type="Marker3D" parent="."]
+unique_name_in_owner = true
+top_level = true
+
+[node name="AmberSprite" type="Sprite3D" parent="AmberPosB"]
+material_override = SubResource("ShaderMaterial_tf1iy")
+offset = Vector2(0, 32)
+pixel_size = 0.03
+texture = ExtResource("3_77lqw")
+hframes = 3
+
+[node name="QuakeTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="body_entered" from="AmberOrigin/AmberArea" to="." method="_on_amber_area_entered"]
+[connection signal="timeout" from="QuakeTimer" to="." method="_on_quake_timer_timeout"]

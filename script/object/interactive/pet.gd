@@ -3,34 +3,49 @@
 extends Marker3D
 class_name Pet
 
+signal caught
+
 const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 
+@export_category("General Settings")
 @export var pet_name: String
 @export var cry_sound_file: AudioStream
 @export var pet_sprite: Texture2D
+@export var disable_collection: bool = false
+@export var hitbox_size: float = 1.0
+@export var was_caught: bool = false
+@export_category("Sprite Settings")
+@export var sprite_size: float = 0.03:
+	set(value):
+		sprite_size = value
+		if Engine.is_editor_hint():
+			pet_sprite3d.pixel_size = value
+
 @export var frames: Vector2 = Vector2i(1, 1):
 	set(value):
+		frames = value
+		
 		if Engine.is_editor_hint():
 			_update_frames()
-		
-		frames = value
 
 @export var frame_coords: Vector2 = Vector2.ZERO:
 	set(value):
-		pet_sprite3d.frame_coords = value
 		frame_coords = value
+		pet_sprite3d.frame_coords = value
 
 @export var animate: bool = false:
 	set(value):
+		animate = value
+		
 		if Engine.is_editor_hint():
 			_update_animation()
-		animate = value
 
 @export var animation_speed: Vector2 = Vector2.ZERO:
 	set(value):
+		animation_speed = value
+		
 		if Engine.is_editor_hint():
 			_update_anim_speed()
-		animation_speed = value
 
 @onready var pet_sprite3d: Sprite3D = $PetSprite
 @onready var pet_area: Area3D = $PetArea
@@ -39,6 +54,7 @@ const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
+		pet_sprite3d.pixel_size = sprite_size
 		pet_sprite3d.set_texture(pet_sprite)
 		pet_sprite3d.get_material_override().set_shader_parameter("albedoTex", pet_sprite3d.texture)
 		cry_sound.set_stream(cry_sound_file)
@@ -46,6 +62,8 @@ func _ready() -> void:
 		_update_frames()
 		_update_animation()
 		_update_anim_speed()
+		
+		$PetArea/PetCollision.get_shape().size = Vector3(hitbox_size, hitbox_size, hitbox_size)
 		
 		if SaveManager.get_data().pet.find(pet_name) != -1:
 			queue_free()
@@ -55,11 +73,14 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		pet_sprite3d.set_texture(pet_sprite)
 		pet_sprite3d.get_material_override().set_shader_parameter("albedoTex", pet_sprite3d.texture)
+		_update_frames()
 
 
 func _on_pet_area_body_entered(body: Node3D) -> void:
 	if !Engine.is_editor_hint():
-		if body is Entity:
+		if body is Entity && !disable_collection:
+			caught.emit()
+			was_caught = true
 			cry_sound.play()
 			pet_sprite3d.get_material_override().set_shader_parameter("billboard", false)
 			
