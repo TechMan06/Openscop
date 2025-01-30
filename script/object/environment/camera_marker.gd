@@ -7,7 +7,8 @@ enum CameraModes {
 	COPY, 
 	FOLLOW, 
 	POV,
-	LERP
+	LERP,
+	FREE
 }
 
 var focus_node: Node3D
