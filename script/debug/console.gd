@@ -2,6 +2,7 @@ extends Window
 
 signal load_recording(filename: String)
 signal nifty
+signal set_camera(cam_mode: int)
 
 #SHOUTOUTS TO IZZINT
 # TODO: fix tooltips
@@ -10,6 +11,7 @@ signal nifty
 @export var console_input: LineEdit
 ## The [RichTextLabel] to display Console output.
 @export var console_output: RichTextLabel
+@export var parse_button: Button
 
 var recording_parse: bool = false
 
@@ -18,13 +20,18 @@ func _ready() -> void:
 	visible = false
 	console_log("\n\n[color=red]Welcome to the [color=purple]Openscop[/color] Console/Developer Menu.\nThis special menu contains a lot of tools that can help you with debugging Openscop's source code, toggle variables without having to edit the code, trigger events, and debug the game. It can also be used as an aid during the process of making your fangame or fan video.\nI'd like to thank Izzint for first implementing this into Openscop![/color]")
 	#console_log("\n[color=yellow]For information and commands list, check the Docs![/color]")
+	parse_button.pressed.connect(_submit_command)
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") && console_input.text != "":
-		var command_array: PackedStringArray = console_input.text.split(" ")
-		console_input.text = ""
-		_parse_command(command_array)
+		_submit_command()
+
+
+func _submit_command() -> void:
+	var command_array: PackedStringArray = console_input.text.split(" ")
+	console_input.text = ""
+	_parse_command(command_array)
 
 
 func _parse_command(input : Array) -> void:
@@ -102,6 +109,21 @@ func _parse_command(input : Array) -> void:
 			else:
 				console_log("[color=red]Command \"!load_game\" is missing argument \"Data Slot\"[/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!load_game 0[/color]")
+		"!set_camera":
+			match input[1]:
+				"copy":
+					set_camera.emit(0)
+				"follow":
+					set_camera.emit(1)
+				"pov":
+					set_camera.emit(2)
+				"lerp":
+					set_camera.emit(3)
+				"free":
+					set_camera.emit(4)
+				_:
+					console_log("[color=red]This Camera Mode does not exist[/color]")
+					console_log("[color=red]Valid Modes:[/color] [color=yellow]copy[/color], [color=yellow]follow[/color], [color=yellow]pov[/color], [color=yellow]lerp[/color], [color=yellow]free[/color].")
 		_:
 			console_log("[color=red]Invalid Command![/color]")
 

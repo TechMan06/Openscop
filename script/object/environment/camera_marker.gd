@@ -27,6 +27,7 @@ func _ready() -> void:
 	
 	EventBus.camera_spawned.emit(self)
 	EventBus.camera_zone_spawned.connect(_on_camera_zone_spawned)
+	Console.set_camera.connect(set_mode)
 
 
 func _anchor_camera() -> void:
@@ -104,6 +105,38 @@ func _process(delta: float) -> void:
 												focus_node.global_position, 
 												camera_speed * delta
 											)
+			
+			CameraModes.FREE:
+				if Input.is_action_pressed("shift"):
+					if Input.is_action_pressed("ui_up"):
+						get_child(0).global_rotation.x -= 0.1
+					
+					if Input.is_action_pressed("ui_down"):
+						get_child(0).global_rotation.x += 0.1
+					
+					if Input.is_action_pressed("ui_left"):
+						get_child(0).global_rotation.y += 0.1
+					
+					if Input.is_action_pressed("ui_right"):
+						get_child(0).global_rotation.y -= 0.1
+				else:
+					if Input.is_action_pressed("ui_up"):
+						get_child(0).global_position.z -= 0.1
+					
+					if Input.is_action_pressed("ui_down"):
+						get_child(0).global_position.z += 0.1
+					
+					if Input.is_action_pressed("ui_left"):
+						get_child(0).global_position.x -= 0.1
+					
+					if Input.is_action_pressed("ui_right"):
+						get_child(0).global_position.x += 0.1
+					
+					if Input.is_action_pressed("ui_page_up"):
+						get_child(0).global_position.y += 0.1
+					
+					if Input.is_action_pressed("ui_page_down"):
+						get_child(0).global_position.y -= 0.1
 
 
 func set_focus(node: Node3D) -> void:

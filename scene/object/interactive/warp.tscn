@@ -12,14 +12,18 @@ size = Vector3(2, 2, 0)
 render_priority = 0
 shader = ExtResource("2_yolch")
 shader_parameter/use_fog = true
+shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(0, 1, 0, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_d4cf1")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_d4cf1")
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h7vq5"]
 resource_local_to_scene = true
@@ -32,6 +36,10 @@ script = ExtResource("1_gnr67")
 
 [node name="WarpCollision" type="CollisionShape3D" parent="WarpArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_qy0te")
+
+[node name="WarpCollision2" type="CollisionShape3D" parent="WarpArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 shape = SubResource("BoxShape3D_qy0te")
 
 [node name="WarpSprite" type="Sprite3D" parent="."]

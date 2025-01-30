@@ -15,6 +15,7 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0, 0, 0, 0.501961)
 
 [resource]
+Button/font_sizes/font_size = 8
 Button/fonts/font = ExtResource("1_e0oxj")
 Label/font_sizes/font_size = 8
 Label/fonts/font = ExtResource("1_e0oxj")

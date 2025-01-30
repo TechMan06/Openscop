@@ -12,6 +12,7 @@ varying float fog_amount;
 
 group_uniforms Material_Properties;
 uniform bool use_fog = true;
+uniform bool alpha_vertex_color = false;
 uniform vec4 modulate_color : source_color = vec4(1.0);
 
 #ifndef LIT
@@ -65,6 +66,7 @@ const vec2 tile_size = vec2(32.0, 32.0);
 group_uniforms Depth_Properties;
 uniform bool use_depth = false;
 varying float depth;
+varying vec3 has_color;
 
 
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
@@ -82,7 +84,20 @@ vec4 get_snapped_pos(vec4 base_pos)
 
 void vertex()
 {
-	COLOR.rgb = COLOR.rgb * COLOR.rgb * COLOR.rgb;
+	if (alpha_vertex_color) {
+		//float color_average = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
+		float color_average = 0.0;
+
+		if (COLOR.r != 1.0 && COLOR.g != 1.0 && COLOR.b != 1.0) {
+			has_color = vec3(0.0);
+		} else {
+			has_color = vec3(1.0);
+		}
+		//has_color = mix(vec3(0.0, 0.0, 0.0), vec3(2.0, 2.0, 2.0), color_average);
+		//has_color = clamp(has_color, 0.0, 1.0);
+	} else {
+		COLOR.rgb = COLOR.rgb * COLOR.rgb * COLOR.rgb;
+	}
 	
 #ifdef LIT
 	if (fog_enabled && use_fog) {
@@ -157,8 +172,11 @@ void fragment()
 #elif !defined(NO_TEXTURE)
 	vec2 texture_uv = UV;
 #endif
-
-	vec4 color_base = COLOR * modulate_color;
+	vec4 color_base = vec4(0.0, 0.0, 0.0, 0.0);
+	
+	color_base = COLOR * modulate_color;
+	
+	
 
 #ifdef NO_TEXTURE
 	#ifdef LIT
@@ -180,8 +198,27 @@ void fragment()
 			ALBEDO = (color_base * texture_color).rgb;
 		}
 	#else
+	
+	#if defined(USE_ALPHA)
+		if (alpha_vertex_color) {
+			if (texture_color.rgb != alpha_color.rgb) {
+				texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.r);
+				texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.g);
+				texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.b);
+			}
+		}
+	#else
+		if (alpha_vertex_color) {	
+			//texture_color.rgb = mix(texture_color.rgb, vec3(1.0, 1.0, 1.0), has_color);
+			texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.r);
+			texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.g);
+			texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.b);
+		}
+	#endif
+			
 		ALBEDO = (color_base * texture_color).rgb;
 		//ALBEDO = vec3(COLOR.a, 1.0, 1.0);
+
 	#endif
 	
 #endif

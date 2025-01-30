@@ -7,6 +7,7 @@
 render_priority = 0
 shader = ExtResource("1_jo3qp")
 shader_parameter/use_fog = true
+shader_parameter/multiply_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("2_4kivt")

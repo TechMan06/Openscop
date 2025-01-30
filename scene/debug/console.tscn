@@ -2,16 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://cwl6oafxi5qum" path="res://asset/2d/ui/misc/console_bg.png" id="1_b8b0u"]
 [ext_resource type="Script" path="res://script/debug/console.gd" id="1_jwuw3"]
-[ext_resource type="Theme" uid="uid://cy6e1gfj100a6" path="res://asset/2d/ui/debug/debug.tres" id="3_pnh51"]
+[ext_resource type="Theme" uid="uid://cy6e1gfj100a6" path="res://resource/theme/debug/debug.tres" id="3_pnh51"]
 
-[node name="Console" type="Window" node_paths=PackedStringArray("console_input", "console_output")]
+[node name="Console" type="Window" node_paths=PackedStringArray("console_input", "console_output", "parse_button")]
 process_mode = 3
 title = "Openscop - Developer Console"
 position = Vector2i(0, 36)
 size = Vector2i(320, 240)
 script = ExtResource("1_jwuw3")
-console_input = NodePath("ConsoleContainer/VBoxContainer/LineEdit")
+console_input = NodePath("ConsoleContainer/VBoxContainer/LineHBox/LineEdit")
 console_output = NodePath("ConsoleContainer/VBoxContainer/OutputBackground/ConsoleOutput")
+parse_button = NodePath("ConsoleContainer/VBoxContainer/LineHBox/ParseButton")
 
 [node name="ConsoleBackground" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -67,7 +68,16 @@ grow_vertical = 2
 bbcode_enabled = true
 scroll_following = true
 
-[node name="LineEdit" type="LineEdit" parent="ConsoleContainer/VBoxContainer"]
+[node name="LineHBox" type="HBoxContainer" parent="ConsoleContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LineEdit" type="LineEdit" parent="ConsoleContainer/VBoxContainer/LineHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "Type a Command..."
 caret_blink = true
+
+[node name="ParseButton" type="Button" parent="ConsoleContainer/VBoxContainer/LineHBox"]
+layout_mode = 2
+text = "Parse Command"

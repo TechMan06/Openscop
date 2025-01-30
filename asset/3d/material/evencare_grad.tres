@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://t8j6f1icucog"]
+
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="1_6igcy"]
+[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="2_2v8so"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6igcy")
+shader_parameter/use_fog = true
+shader_parameter/alpha_vertex_color = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("2_2v8so")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
