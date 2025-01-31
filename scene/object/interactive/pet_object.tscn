@@ -24,7 +24,6 @@ shader_parameter/use_depth = false
 
 [node name="PetObject" type="Marker3D"]
 script = ExtResource("1_3hxus")
-was_caught = null
 
 [node name="PetSprite" type="Sprite3D" parent="."]
 material_override = SubResource("ShaderMaterial_floj4")

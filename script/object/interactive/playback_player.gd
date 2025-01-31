@@ -121,7 +121,7 @@ func _process(_delta: float) -> void:
 			replay_setup = true
 		
 		if replay_setup:
-			recording_timer+=1
+			recording_timer += 1
 		
 		if recording_data.p1_data[recording_reader_p1][1] == null:
 			Console.console_log("[color=red]RECORDING IS OVER[/color]")
@@ -199,5 +199,4 @@ func _process(_delta: float) -> void:
 func number_parser(number: int) -> float:
 	if number==1:
 		return 1.0
-	else:
-		return 0.0
+	return 0.0

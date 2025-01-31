@@ -59,6 +59,7 @@ func _process(_delta: float) -> void:
 				recording_data.p1_data.push_back(
 													_frame_array
 												)
+				print(_frame_array)
 	
 	if replay:
 		if !replay_setup:
@@ -150,39 +151,12 @@ func _number_parser(number: int) -> bool:
 
 
 func check_input() -> bool:
-	if (
-			Input.is_action_just_pressed("pressed_l1") 
-			or Input.is_action_just_pressed("pressed_l2") 
-			or Input.is_action_just_pressed("pressed_r1") 
-			or Input.is_action_just_pressed("pressed_r2") 
-			or Input.is_action_just_pressed("pressed_action") 
-			or Input.is_action_just_pressed("pressed_triangle") 
-			or Input.is_action_just_pressed("pressed_square") 
-			or Input.is_action_just_pressed("pressed_circle") 
-			or Input.is_action_just_pressed("pressed_select") 
-			or Input.is_action_just_pressed("pressed_start") 
-			or Input.is_action_just_pressed("pressed_left") 
-			or Input.is_action_just_pressed("pressed_right") 
-			or Input.is_action_just_pressed("pressed_up") 
-			or Input.is_action_just_pressed("pressed_down") 
-			or Input.is_action_just_released("pressed_l1") 
-			or Input.is_action_just_released("pressed_l2") 
-			or Input.is_action_just_released("pressed_r1") 
-			or Input.is_action_just_released("pressed_r2") 
-			or Input.is_action_just_released("pressed_action") 
-			or Input.is_action_just_released("pressed_triangle") 
-			or Input.is_action_just_released("pressed_square") 
-			or Input.is_action_just_released("pressed_circle") 
-			or Input.is_action_just_released("pressed_select") 
-			or Input.is_action_just_released("pressed_start") 
-			or Input.is_action_just_released("pressed_left") 
-			or Input.is_action_just_released("pressed_right")
-			or Input.is_action_just_released("pressed_up")
-			or Input.is_action_just_released("pressed_down")
-		):
-		return true
-	else:
-		return false
+	for action in InputMap.get_actions():
+		if input_array.find(action) != -1:
+			if Input.is_action_just_pressed(action) or Input.is_action_just_released(action):
+				return true
+
+	return false
 
 
 func _check_input_type(key: String) -> int:
