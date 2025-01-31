@@ -84,7 +84,7 @@ func _ready() -> void:
 	
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 	
-	await get_tree().process_frame
+	await get_tree().physics_frame
 	
 	EventBus.playback_player_spawned.emit(self)
 	
@@ -98,7 +98,7 @@ func _ready() -> void:
 		replay = true
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if input_sim_select && _p2talk_text.text != "" && _can_submit:
 		if p2talk_word.length() > 0:
 			p2talk_word = p2talk_word.erase(p2talk_word.length() - 1, 1)
@@ -163,15 +163,15 @@ func _process(_delta: float) -> void:
 							_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
 					
 					if recording_data.p1_data[recording_reader_p1][9] != 0:	
-						await get_tree().process_frame
+						await get_tree().physics_frame
 						input_sim_action = true
-						await get_tree().process_frame
+						await get_tree().physics_frame
 						input_sim_action = false
 					
 					if recording_data.p1_data[recording_reader_p1][13] !=0:	
-						await get_tree().process_frame
+						await get_tree().physics_frame
 						input_sim_select = true
-						await get_tree().process_frame
+						await get_tree().physics_frame
 						input_sim_select = false
 					
 					recording_reader_p1 += 1

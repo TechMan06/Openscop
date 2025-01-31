@@ -5,7 +5,7 @@ class_name EntityComponent
 @export var entity_sprite: Sprite3D
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Vector3(entity.velocity.x, 0,entity.velocity.z).length() > entity._ANIMATION_THRESHOLD:
 		entity.is_walking = true
 	else:

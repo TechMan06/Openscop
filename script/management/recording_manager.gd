@@ -39,7 +39,7 @@ func _ready() -> void:
 	Console.load_recording.connect(load_recording)
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
 	if recording:
 		recording_timer+=1

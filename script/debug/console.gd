@@ -41,12 +41,12 @@ func _parse_command(input : Array) -> void:
 		"!toggle_parse":
 			recording_parse=!recording_parse
 			console_log("[color=purple]Toggled Print Recording to:[/color] [color=yellow]" + str(recording_parse).to_upper() + "[/color]")
-		"!start_recording":
+		"!start_rec":
 			if !RecordingManager.replay:
 				RecordingManager.start_recording()
 			else:
 				console_log("[color=red]Cannot Record during Replay.[/color]")
-		"!stop_recording":
+		"!stop_rec":
 			if !RecordingManager.replay:
 				RecordingManager.stop_recording()
 			else:
@@ -72,7 +72,7 @@ func _parse_command(input : Array) -> void:
 			else:
 				console_log("[color=red]Invalid Character! Choose between [/color][color=yellow]0 = Paul[/color][color=red], [/color][color=yellow]1 = Belle[/color][color=red], [/color][color=yellow]2 = Marvin[/color][color=red]![/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!set_char 0[/color]")
-		"!load_recording":
+		"!load_rec":
 			if input[1] != "":
 				load_recording.emit(input[1])
 			else:

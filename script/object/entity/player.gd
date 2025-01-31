@@ -49,7 +49,7 @@ func _ready() -> void:
 	_p2talk_origin = $P2TalkOrigin
 	_p2talk_button_sound = $ButtonSound
 	
-	await get_tree().process_frame
+	await get_tree().physics_frame
 	
 	if Global.global_data.gen <= 2:
 		set_collision_mask(0)
@@ -77,7 +77,7 @@ func _input(event: InputEvent) -> void:
 	control_device = event.device
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player_stats.input_enabled:
 		_handle_input()
 	else:
