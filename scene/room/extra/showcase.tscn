@@ -1,0 +1,153 @@
+[gd_scene load_steps=16 format=3 uid="uid://ch1vbitw3youg"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_ev5n8"]
+[ext_resource type="ArrayMesh" uid="uid://dv50ttefvtbn3" path="res://asset/3d/room/extra/showcase/showcase_room.obj" id="2_p28mk"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="2_vy1ks"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="3_ciayn"]
+[ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="3_fdvv4"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="5_bskyo"]
+[ext_resource type="PackedScene" uid="uid://h8v7konkyehn" path="res://scene/object/interactive/tool.tscn" id="7_4bql3"]
+[ext_resource type="PackedScene" uid="uid://d3sov8vsf3ey3" path="res://scene/object/interactive/cage.tscn" id="8_l1mx2"]
+[ext_resource type="PackedScene" uid="uid://cya7cxf4t8pi3" path="res://scene/object/interactive/switcher.tscn" id="9_voxda"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="10_hb1br"]
+[ext_resource type="PackedScene" uid="uid://dtdn1qldur8b6" path="res://scene/object/interactive/playback_player.tscn" id="11_bq377"]
+[ext_resource type="PackedScene" uid="uid://ddg1r775hmlih" path="res://scene/object/pet/amber.tscn" id="11_qwf1q"]
+[ext_resource type="PackedScene" uid="uid://cmc5a5ano61b3" path="res://scene/object/interactive/camera_zone.tscn" id="12_llf3k"]
+[ext_resource type="PackedScene" uid="uid://bckcmwn6qmafx" path="res://scene/object/interactive/darkener.tscn" id="14_qij82"]
+
+[sub_resource type="Resource" id="Resource_mm28k"]
+script = ExtResource("2_vy1ks")
+sky_color = Color(1, 1, 1, 1)
+texture = ExtResource("3_fdvv4")
+scroll_speed = 0.25
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+enable_fog = false
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+
+[node name="ShowcaseRoom" type="Node3D"]
+script = ExtResource("1_ev5n8")
+background_music = 3
+allow_front_movement = false
+limit_camera_horizontal = true
+horizontal_limit = Vector2(0, 50)
+environment_settings = SubResource("Resource_mm28k")
+
+[node name="NiftyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_p28mk")
+surface_material_override/0 = ExtResource("5_bskyo")
+script = ExtResource("3_ciayn")
+
+[node name="Tool" parent="." instance=ExtResource("7_4bql3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 6.5)
+
+[node name="AmberCage" parent="." instance=ExtResource("8_l1mx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 6)
+
+[node name="AmberCage2" parent="." instance=ExtResource("8_l1mx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 6)
+flip = true
+
+[node name="SwitcherObject" parent="." node_paths=PackedStringArray("connect_to") instance=ExtResource("9_voxda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5, 0, 6.5)
+connect_to = NodePath("../AmberCage")
+rotate_y = 180.0
+
+[node name="SwitcherObject2" parent="." node_paths=PackedStringArray("connect_to") instance=ExtResource("9_voxda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 6.5)
+connect_to = NodePath("../AmberCage2")
+
+[node name="PieceArea" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="PieceArea2" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="PieceArea3" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="PieceArea5" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 10)
+
+[node name="PieceArea6" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 10)
+
+[node name="PieceArea7" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 10)
+
+[node name="PieceArea8" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 4)
+
+[node name="PieceArea9" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 4)
+
+[node name="PieceArea10" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, 4)
+
+[node name="PieceArea11" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 2.5)
+
+[node name="PieceArea12" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 2.5)
+
+[node name="PieceArea13" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, 2.5)
+
+[node name="PieceArea14" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 1)
+
+[node name="PieceArea15" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 1)
+
+[node name="PieceArea16" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, 1)
+
+[node name="PieceArea17" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0, 4)
+
+[node name="PieceArea18" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 4)
+
+[node name="PieceArea19" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, 4)
+
+[node name="PieceArea20" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0, 2.5)
+
+[node name="PieceArea21" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 2.5)
+
+[node name="PieceArea22" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, 2.5)
+
+[node name="PieceArea23" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0, 1)
+
+[node name="PieceArea24" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 1)
+
+[node name="PieceArea25" parent="." instance=ExtResource("10_hb1br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, 1)
+
+[node name="PlaybackPlayer" parent="." instance=ExtResource("11_bq377")]
+invisible_until_playback = true
+
+[node name="AmberPet" parent="." node_paths=PackedStringArray("switch_a", "switch_b") instance=ExtResource("11_qwf1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 2)
+pos_a = Vector3i(32, 0, 2)
+pos_b = Vector3i(40, 0, 2)
+switch_a = NodePath("../SwitcherObject")
+switch_b = NodePath("../SwitcherObject2")
+
+[node name="ZoneArea" parent="." instance=ExtResource("12_llf3k")]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 2)
+target_pos_start = Vector3(0, 0, -3)
+target_pos_end = Vector3(0, 0, 7)
+move_x = false
+move_y = false
+
+[node name="Darkener" parent="." instance=ExtResource("14_qij82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 7)
+darkener_width = 2.0
+darkener_direction = 3

@@ -38,7 +38,7 @@ collision_layer = 3
 shape = SubResource("BoxShape3D_qawgv")
 
 [node name="Cry" type="AudioStreamPlayer3D" parent="."]
-unit_size = 20.0
+unit_size = 30.0
 panning_strength = 2.0
 bus = &"SFX"
 

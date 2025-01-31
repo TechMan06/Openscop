@@ -76,3 +76,7 @@ func get_stream_path() -> String:
 		return stream.get_path()
 	else:
 		return "NONE"
+
+
+func set_pitch(value: float = 1.0) -> void:
+	set_pitch_scale(value)

@@ -8,7 +8,7 @@ var inside_slope: bool = false
 var entity: Entity
 
 @export_subgroup("Slope Settings:")
-@export var slope_length: float = 0.
+@export var slope_length: float = 1.
 @export var slope_width: float = 1.
 @export_range(0, 3) var slope_direction: int = 0
 @export var slope_up: bool = true
@@ -70,6 +70,21 @@ func _process(_delta: float) -> void:
 					entity.player_stats.entity_y = abs(
 														abs(entity.global_position.z) 
 														- slope_start.global_position.z
+													) * (1.0 if slope_up else -1.0)
+				1:
+					entity.player_stats.entity_y = abs(
+														abs(entity.global_position.x) 
+														- slope_start.global_position.x
+													) * (1.0 if slope_up else -1.0)
+				2:
+					entity.player_stats.entity_y = abs(
+														abs(slope_start.global_position.x) 
+														- entity.global_position.x
+													) * (1.0 if slope_up else -1.0)
+				3:
+					entity.player_stats.entity_y = abs(
+														abs(slope_start.global_position.z) 
+														- entity.global_position.z
 													) * (1.0 if slope_up else -1.0)
 		else:
 			if entity!= null:
