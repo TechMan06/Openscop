@@ -50,36 +50,37 @@ func _physics_process(delta: float) -> void:
 		entity_sprite.position.y = entity.entity_min + entity.player_stats.entity_y
 	
 	if entity.control_mode == 0:
+		var normalized_h_v: Vector2 = Vector2(entity._h, entity._v).normalized()
+		
 		entity.velocity.z = lerp(
 							entity.velocity.z, 
-							entity._v * entity._movement_speed, 
+							normalized_h_v.y * entity._movement_speed, 
 							delta * entity._ACCELERATION
 						)
-
-		var _magnitude: float = sqrt(entity._h * entity._h + entity._v * entity._v)
-
-		if _magnitude > 1:
-			entity._h /= _magnitude
-			entity._v /= _magnitude
-
+		
 		if entity.player_stats != null && entity.player_stats.character_id == 2:
 			entity.velocity.x = lerp(
 										entity.velocity.x, 
-										entity._h * -1.0 * entity._movement_speed, 
+										normalized_h_v.x * -1.0 * entity._movement_speed, 
 										delta * entity._ACCELERATION
 									)
 		else:
 			entity.velocity.x = lerp(
 										entity.velocity.x, 
-										entity._h * entity._movement_speed, 
+										normalized_h_v.x * entity._movement_speed, 
 										delta * entity._ACCELERATION
 									)
 	
+#		if Vector2(entity.velocity.x, entity.velocity.z) > Vector2(1.0, 1.0):
+#			entity.velocity = Vector3((entity.velocity.normalized()).x, entity.velocity.y, (entity.velocity.normalized()).z)
+		
 	if entity.control_mode == 1:
 		var entity_speed: float = entity._v * entity._movement_speed * -1.0
 		
 		entity.rotation.y += entity._h * -1/ 25
 		entity._angle = entity.rotation.y
 		entity.velocity = Vector3(0, 0, entity_speed).rotated(Vector3.UP, entity._angle)
+	
+	print(entity.velocity)
 	
 	entity.move_and_slide()
