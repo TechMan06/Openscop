@@ -1,0 +1,70 @@
+[gd_scene load_steps=13 format=3 uid="uid://jqnw2iuqkhsr"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_dyuyl"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="2_7cs2q"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="4_osyqt"]
+[ext_resource type="ArrayMesh" uid="uid://dv50ttefvtbn3" path="res://asset/3d/room/extra/showcase/showcase_room.obj" id="4_tq5cp"]
+[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="5_kh8dd"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="6_bpxt5"]
+[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="8_h86um"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="9_pyacl"]
+[ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="10_opovm"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="10_rl6ph"]
+
+[sub_resource type="Resource" id="Resource_ehccx"]
+script = ExtResource("2_7cs2q")
+sky_color = Color(0, 0, 0, 1)
+scroll_speed = 0.25
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+enable_fog = true
+fog_color = Color(0, 0, 0, 1)
+fog_radius = 6.75
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwk7b"]
+render_priority = 0
+shader = ExtResource("4_osyqt")
+shader_parameter/use_fog = true
+shader_parameter/alpha_vertex_color = false
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("5_kh8dd")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/use_depth = false
+
+[node name="ShowcaseRoom" type="Node3D"]
+script = ExtResource("1_dyuyl")
+allow_recording = false
+school_preset = true
+allow_front_movement = false
+limit_camera_horizontal = true
+horizontal_limit = Vector2(0, 50)
+environment_settings = SubResource("Resource_ehccx")
+
+[node name="NiftyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_tq5cp")
+surface_material_override/0 = SubResource("ShaderMaterial_bwk7b")
+script = ExtResource("6_bpxt5")
+
+[node name="PieceArea" parent="." instance=ExtResource("10_rl6ph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="PieceArea2" parent="." instance=ExtResource("10_rl6ph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="PieceArea3" parent="." instance=ExtResource("10_rl6ph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+script = ExtResource("8_h86um")
+scene_path = "res://scene/room/extra/showcase.tscn"
+
+[node name="Warp" parent="." instance=ExtResource("9_pyacl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 9)
+warp_direction = 2
+scene = "res://scene/room/extra/showcase.tscn"
+loading_preset = ExtResource("10_opovm")

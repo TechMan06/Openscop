@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ch1vbitw3youg"]
+[gd_scene load_steps=21 format=3 uid="uid://ch1vbitw3youg"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_ev5n8"]
 [ext_resource type="ArrayMesh" uid="uid://dv50ttefvtbn3" path="res://asset/3d/room/extra/showcase/showcase_room.obj" id="2_p28mk"]
@@ -14,6 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://ddg1r775hmlih" path="res://scene/object/pet/amber.tscn" id="11_qwf1q"]
 [ext_resource type="PackedScene" uid="uid://cmc5a5ano61b3" path="res://scene/object/interactive/camera_zone.tscn" id="12_llf3k"]
 [ext_resource type="PackedScene" uid="uid://bckcmwn6qmafx" path="res://scene/object/interactive/darkener.tscn" id="14_qij82"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="15_70vss"]
+[ext_resource type="Texture2D" uid="uid://chn15usc0p4g4" path="res://asset/2d/loading_screen/piece_load.png" id="16_pwkd1"]
+[ext_resource type="Script" path="res://script/resource/loading_resource.gd" id="17_567kr"]
+[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="18_rbem4"]
 
 [sub_resource type="Resource" id="Resource_mm28k"]
 script = ExtResource("2_vy1ks")
@@ -25,6 +29,12 @@ environment_darkness = 1.0
 enable_fog = false
 fog_color = Color(1, 1, 1, 1)
 fog_radius = 13.5
+
+[sub_resource type="Resource" id="Resource_jm4p3"]
+script = ExtResource("17_567kr")
+loading_image = ExtResource("16_pwkd1")
+loading_timer = 5.0
+fade_color = Color(0, 0, 0, 1)
 
 [node name="ShowcaseRoom" type="Node3D"]
 script = ExtResource("1_ev5n8")
@@ -131,7 +141,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, 1)
 
 [node name="PlaybackPlayer" parent="." instance=ExtResource("11_bq377")]
-invisible_until_playback = true
 
 [node name="AmberPet" parent="." node_paths=PackedStringArray("switch_a", "switch_b") instance=ExtResource("11_qwf1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 2)
@@ -151,3 +160,14 @@ move_y = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 7)
 darkener_width = 2.0
 darkener_direction = 3
+
+[node name="Warp" parent="." instance=ExtResource("15_70vss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 9)
+warp_direction = 2
+scene = "res://scene/room/extra/showcase-dark.tscn"
+loading_preset = SubResource("Resource_jm4p3")
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 9)
+script = ExtResource("18_rbem4")
+scene_path = "res://scene/room/extra/showcase-dark.tscn"

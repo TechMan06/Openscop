@@ -98,7 +98,7 @@ func _ready() -> void:
 		replay = true
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if input_sim_select && _p2talk_text.text != "" && _can_submit:
 		if p2talk_word.length() > 0:
 			p2talk_word = p2talk_word.erase(p2talk_word.length() - 1, 1)
@@ -108,8 +108,6 @@ func _physics_process(_delta: float) -> void:
 			_p2talk_text.text = ""
 			_can_submit = false
 
-
-func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_end"):
 		visible = true
 		replay = true
