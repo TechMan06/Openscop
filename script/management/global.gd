@@ -24,6 +24,7 @@ var current_controller: int = 0
 func _ready() -> void:
 	var _directory = DirAccess.open("user://")
 	var _directories = ["sheets", "savedata", "screenshots", "recordings"]
+	
 	for _folder in _directories:
 		if !_directory.dir_exists(_folder):
 			_directory.make_dir(_folder)

@@ -313,13 +313,12 @@ func _handle_input() -> void:
 			_last_press="R2"
 	
 	if (Input.is_action_just_pressed("pressed_select") && _p2talk_text.text != "" && _can_submit):
-		if p2talk_word.length() > 0:
-			p2talk_word = p2talk_word.erase(p2talk_word.length() - 1, 1)
-			p2_talk_component._create_word()
-			p2talk_word = ""
-			_last_press = ""
-			_p2talk_text.text = ""
-			_can_submit = false
+		p2_talk_component._create_word()
+		_last_press = ""
+		EventBus.p2talk_key.emit(p2talk_word, _p2talk_text.text)
+		p2talk_word = ""
+		_p2talk_text.text = ""
+		_can_submit = false
 
 
 func set_footstep_sound(sound_id: int = 0) -> void:

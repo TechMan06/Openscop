@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TextboxResource" load_steps=3 format=3 uid="uid://c2ybn3215t54p"]
+
+[ext_resource type="Theme" uid="uid://v52wq2ri36fv" path="res://resource/theme/textbox/dark_textbox.tres" id="1_65wxm"]
+[ext_resource type="Script" path="res://script/resource/textbox_resource.gd" id="2_i33ii"]
+
+[resource]
+script = ExtResource("2_i33ii")
+background = ExtResource("1_65wxm")
+position = Vector2(30, 140)
+size = Vector2(260, 70)
+mute = false
+destructible = false
+arrow_color = Color(1, 1, 1, 1)

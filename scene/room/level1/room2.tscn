@@ -34,7 +34,6 @@ data = PackedVector3Array(2.5, 0, -0.5, -0.5, 0, -0.5, 2.5, 1, -0.5, 2.5, 1, -0.
 render_priority = 0
 shader = ExtResource("14_5d1dj")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)

@@ -3,7 +3,7 @@ class_name DialogueTrigger
 
 @export_category("Dialogue Properties")
 @export var textbox_preset: TextboxResource
-@export var textbox_text: String
+@export_multiline var textbox_text: String
 
 
 func _on_trigger() -> void:

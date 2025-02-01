@@ -3,9 +3,11 @@
 [ext_resource type="Theme" uid="uid://bhfq6qxb430u3" path="res://resource/theme/textbox/white_textbox.tres" id="1_i6ca0"]
 [ext_resource type="Script" path="res://script/resource/textbox_resource.gd" id="1_j1l4i"]
 
-
 [resource]
 script = ExtResource("1_j1l4i")
 background = ExtResource("1_i6ca0")
 position = Vector2(30, 140)
 size = Vector2(260, 70)
+mute = false
+destructible = false
+arrow_color = Color(0, 0, 0, 1)

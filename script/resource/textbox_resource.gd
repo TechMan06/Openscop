@@ -6,3 +6,4 @@ class_name TextboxResource
 @export var size: Vector2
 @export var mute: bool = false
 @export var destructible: bool = false
+@export var arrow_color: Color = Color.BLACK

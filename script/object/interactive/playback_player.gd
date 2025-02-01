@@ -13,8 +13,8 @@ class_name PlaybackPlayer
 @export var use_recording_character: bool = false
 @export var use_recording_position: bool = true
 @export var flip_x: bool = false
-@export var p2_talk_component: P2TalkComponent
 
+var p2_talk_component: P2TalkComponent
 var recording_timer: int = 0
 var recording_data: RecordingData
 var character_sheets: Array[String] = [
@@ -39,6 +39,7 @@ func _ready() -> void:
 	_p2talk_text = $P2TalkOrigin/P2TalkButtons
 	_p2talk_origin = $P2TalkOrigin
 	_p2talk_button_sound = $ButtonSound
+	p2_talk_component = $P2TalkComponent
 
 	if recording == "":
 		if main_recording_folder:
@@ -62,6 +63,7 @@ func _ready() -> void:
 			recording_data = load("user://player_recordings/" + recording)
 		else:
 			recording_data = load("user://recordings/" + recording)
+	
 	if recording_data != null:
 		if player_stats == null:
 			player_stats = PlayerStats.new()
@@ -100,13 +102,9 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if input_sim_select && _p2talk_text.text != "" && _can_submit:
-		if p2talk_word.length() > 0:
-			p2talk_word = p2talk_word.erase(p2talk_word.length() - 1, 1)
-			p2_talk_component._create_word()
-			p2talk_word = ""
-			_last_press = ""
-			_p2talk_text.text = ""
-			_can_submit = false
+		p2_talk_component._create_word()
+		_p2talk_text.text = ""
+		_can_submit = false
 
 	if Input.is_action_just_pressed("ui_end"):
 		visible = true
@@ -184,6 +182,7 @@ func _physics_process(_delta: float) -> void:
 			
 			if recording_reader_p2 <= recording_data.p2_data.size()-1:
 				if recording_timer == recording_data.p2_data[recording_reader_p2][0]:
+					_p2talk_button_sound.play()
 					p2talk_word = recording_data.p2_data[recording_reader_p2][1]
 					_p2talk_text.text = recording_data.p2_data[recording_reader_p2][2]
 					

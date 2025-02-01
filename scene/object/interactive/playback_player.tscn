@@ -15,7 +15,6 @@ size = Vector3(1, 1.4, 1)
 render_priority = 0
 shader = ExtResource("3_q6yhf")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("4_onfya")
@@ -28,10 +27,9 @@ shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/use_depth = false
 
-[node name="PlaybackPlayer" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
+[node name="PlaybackPlayer" type="CharacterBody3D"]
 floor_block_on_wall = false
 script = ExtResource("1_0yfa2")
-p2_talk_component = NodePath("P2TalkComponent")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

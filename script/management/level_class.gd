@@ -35,6 +35,9 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 			"Cement3", 
 			"School", 
 			"Sand") var footstep_sound: int = 0
+@export_category("Starting Textbox Settings")
+@export_multiline var textbox: String = ""
+@export var textbox_preset: TextboxResource
 @export_subgroup("General Camera Properties")
 @export var spawn_camera_root: bool = true
 @export var focus_on_player: bool = true
@@ -230,6 +233,14 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if textbox != "":
+		if textbox_preset != null:
+			await HUD.transition_end
+			HUD.create_textbox(textbox_preset, textbox)
+		else:
+			printerr("Starting TextboxPreset is missing!")
+	
+	
 	if Input.is_action_just_pressed("pressed_start"):
 		if Global.can_pause && Global.global_data.gen > 2:
 			var _pause_instance: Control = PAUSE_SCENE.instantiate()

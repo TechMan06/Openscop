@@ -39,7 +39,7 @@ func _ready() -> void:
 	_textbox_label.visible_characters = 0
 	
 	visible = false
-	_arrow.modulate = Color.BLACK
+	_arrow.modulate = preset.arrow_color
 	_arrow.visible = false
 
 	#WAITS UNTIL HALF THE TIME HAS BEEN COMPLETED TO SHOW THE TEXTBOX BACKGROUND.

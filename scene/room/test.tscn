@@ -29,7 +29,6 @@
 render_priority = 0
 shader = ExtResource("6_cvigc")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/albedoTex = ExtResource("7_2wfty")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -46,7 +45,6 @@ size = Vector2(2, 2)
 render_priority = 0
 shader = ExtResource("10_s4fo3")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("11_imvms")

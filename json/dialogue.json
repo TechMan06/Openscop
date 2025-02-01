@@ -1,9 +1,17 @@
 {
 	"textbox_1": [
-		"Hi! Welcome to the Openscop\nShowcase!",
+		"Hello! Welcome to the 2nd \nOpenscop Showcase!",
+		"This was originally meant to be a continuation of the original \n\"Openscop Showcase\" video.",
+		"However, in-between when that \nvideo was made and now, I \nrewrote Openscop's source-code.",
+		"This rewrite happened in \nNovember and December 2024.", 
+		"This rewrite brought performance improvements, new features, \nmore readable code, ect.",
+		"All that led me to the decision of\nre-making the showcase video.",
+		"So I get to showcase the new \ncodebase the new features and \nintroduce Openscop to people.",
+		"All that being said, no more \nceremonies, let's get started!",
 		"Openscop is an open-source\nrecreation of [color=#FF00FF]Petscop[/color]!",
-		"This project runs on Godot 4.1.1 and is the result of the work of \nwonderful folks.",
-		"It is meant to be used for \nmaking fan videos and also \n[color=#FF00FF]Petscop[/color] fangames.",
+		"Openscop runs on Godot 4.1.1, \nhowever it's fully compatible with \nnewer versions.",
+		"Openscop is the result of the \nwork of amazing folks. Their \nnames are in the GitHub Wiki.",
+		"Openscop is meant to be used for \nmaking fan videos and also \n[color=#FF00FF]Petscop[/color] fangames.",
 		"What you see here is a small room\nthat showcases most features \nOpenscop can offer.",
 		"Let's start the demonstration...",
 		"P.S: NTSC filter was added on\npost production."
@@ -11,9 +19,7 @@
 
 	"dots_test": [
 		"Wow... What a dark room!\nAnd what a huge textbox, that's\nquite interesting.\nHow much text can fit in here?",
-		"This room was modeled by\n@geometricentric (twitter)\nWho has allowed me to use it for\nthis demo.",
-		"Here we've got some fog,\nand Care is here too.",
-		"Let's investigate this room \ntogether."
+		"There's nothing here though, so we better get outta here."
 	],
 
 	"textbox_2": [
@@ -23,12 +29,12 @@
 		"Openscop can be downloaded at:\ngithub.com/TechMan06/Openscop",
 		"Documentation links and project \ncredits can also be found there.",
 		"We hope you enjoy and create\ninteresting fan content with this\nproject.",
-		"We would like to thank you for \nwatching.\nAnd we see you soon!"
-	
+		"We would like to thank you for \nwatching.\nAnd we see you soon!",
+		"Though maybe there's still one last thing..."
 	],
 
 	"textbox_3": [
-		"What you're about to see is the \n\"darkener\" object, it can be \nused to darken the brightness of \nthe player in a dark path.",
+		"This is the \"darkener\" object, it darkens the brightness of the \nplayer in a dark path.",
 		"Can you become a shadow\nmonster man?"
 	],
 

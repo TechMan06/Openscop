@@ -12,7 +12,6 @@ varying float fog_amount;
 
 group_uniforms Material_Properties;
 uniform bool use_fog = true;
-uniform bool alpha_vertex_color = false;
 uniform vec4 modulate_color : source_color = vec4(1.0);
 
 #ifndef LIT
@@ -84,20 +83,7 @@ vec4 get_snapped_pos(vec4 base_pos)
 
 void vertex()
 {
-	if (alpha_vertex_color) {
-		//float color_average = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
-		float color_average = 0.0;
-
-		if (COLOR.r != 1.0 && COLOR.g != 1.0 && COLOR.b != 1.0) {
-			has_color = vec3(0.0);
-		} else {
-			has_color = vec3(1.0);
-		}
-		//has_color = mix(vec3(0.0, 0.0, 0.0), vec3(2.0, 2.0, 2.0), color_average);
-		//has_color = clamp(has_color, 0.0, 1.0);
-	} else {
-		COLOR.rgb = COLOR.rgb * COLOR.rgb * COLOR.rgb;
-	}
+	COLOR.rgba = COLOR.rgba * COLOR.rgba * COLOR.rgba;
 	
 #ifdef LIT
 	if (fog_enabled && use_fog) {
@@ -191,6 +177,8 @@ void fragment()
 #else
 	vec4 texture_color = texture(albedoTex, texture_uv);
 	
+	texture_color.rgba = mix(vec4(1.0, 1.0, 1.0, texture_color.a), texture_color.rgba, COLOR.a);
+	
 	#ifdef LIT
 		if (fog_enabled) {
 			ALBEDO = (color_base * texture_color).rgb * (1.0 - fog_amount) + fog_color * fog_amount;
@@ -198,26 +186,8 @@ void fragment()
 			ALBEDO = (color_base * texture_color).rgb;
 		}
 	#else
-	
-	#if defined(USE_ALPHA)
-		if (alpha_vertex_color) {
-			if (texture_color.rgb != alpha_color.rgb) {
-				texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.r);
-				texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.g);
-				texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.b);
-			}
-		}
-	#else
-		if (alpha_vertex_color) {	
-			//texture_color.rgb = mix(texture_color.rgb, vec3(1.0, 1.0, 1.0), has_color);
-			texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.r);
-			texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.g);
-			texture_color.rgb = mix(vec3(1.0, 1.0, 1.0), texture_color.rgb, COLOR.b);
-		}
-	#endif
-			
 		ALBEDO = (color_base * texture_color).rgb;
-		//ALBEDO = vec3(COLOR.a, 1.0, 1.0);
+		//ALBEDO = vec3(COLOR.a, COLOR.a, COLOR.a);
 
 	#endif
 	

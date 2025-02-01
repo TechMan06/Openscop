@@ -94,6 +94,7 @@ func _physics_process(delta: float) -> void:
 						current_position = 0
 
 					amber_state = AmberStates.JUMP
+			
 			AmberStates.JUMP:
 				pet_object.frame_coords.x = 2
 				frame_count = 0

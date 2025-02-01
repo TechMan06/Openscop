@@ -59,7 +59,6 @@ func _physics_process(_delta: float) -> void:
 				recording_data.p1_data.push_back(
 													_frame_array
 												)
-				print(_frame_array)
 	
 	if replay:
 		if !replay_setup:

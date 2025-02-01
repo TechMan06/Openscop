@@ -74,6 +74,19 @@ func reset_game() -> void:
 	EventBus.destroy_hud.emit()
 
 
+func hard_reset_game() -> void:
+	GameManager.save_debug_settings()
+	Global.current_controller = 0
+	Global.can_pause = true
+	Global.can_unpause = false
+	Global.is_game_paused = false
+	
+	HUD.show_label(false, "", 0)
+	EventBus.destroy_hud.emit()
+	Global.save_global()
+	get_tree().change_scene_to_file("res://scene/title/garalina.tscn")
+
+
 func save_debug_settings() -> void:
 	ResourceSaver.save(debug_settings, DEBUG_FILE)
 

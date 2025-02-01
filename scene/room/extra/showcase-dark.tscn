@@ -1,15 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://jqnw2iuqkhsr"]
+[gd_scene load_steps=16 format=3 uid="uid://jqnw2iuqkhsr"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_dyuyl"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="2_7cs2q"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="4_osyqt"]
 [ext_resource type="ArrayMesh" uid="uid://dv50ttefvtbn3" path="res://asset/3d/room/extra/showcase/showcase_room.obj" id="4_tq5cp"]
-[ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="5_kh8dd"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="6_bpxt5"]
 [ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="8_h86um"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="9_pyacl"]
+[ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="10_o8b3e"]
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="10_opovm"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="10_rl6ph"]
+[ext_resource type="Resource" uid="uid://c2ybn3215t54p" path="res://resource/textbox/dark.tres" id="11_8y0pk"]
+[ext_resource type="Resource" uid="uid://cma1tpqw0num6" path="res://resource/textbox/darkest.tres" id="11_xpyra"]
 
 [sub_resource type="Resource" id="Resource_ehccx"]
 script = ExtResource("2_7cs2q")
@@ -21,14 +23,16 @@ enable_fog = true
 fog_color = Color(0, 0, 0, 1)
 fog_radius = 6.75
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwk7b"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_plhf1"]
+load_path = "res://.godot/imported/texture.png-30f2a65bc0379bdfb4d7034cabfa56b6.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5e33"]
 render_priority = 0
 shader = ExtResource("4_osyqt")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("5_kh8dd")
+shader_parameter/albedoTex = SubResource("CompressedTexture2D_plhf1")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
@@ -39,7 +43,10 @@ shader_parameter/use_depth = false
 [node name="ShowcaseRoom" type="Node3D"]
 script = ExtResource("1_dyuyl")
 allow_recording = false
+level_slogan = "dots_test"
 school_preset = true
+textbox = "dots_test"
+textbox_preset = ExtResource("11_8y0pk")
 allow_front_movement = false
 limit_camera_horizontal = true
 horizontal_limit = Vector2(0, 50)
@@ -47,7 +54,7 @@ environment_settings = SubResource("Resource_ehccx")
 
 [node name="NiftyMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("4_tq5cp")
-surface_material_override/0 = SubResource("ShaderMaterial_bwk7b")
+surface_material_override/0 = SubResource("ShaderMaterial_b5e33")
 script = ExtResource("6_bpxt5")
 
 [node name="PieceArea" parent="." instance=ExtResource("10_rl6ph")]
@@ -68,3 +75,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 9)
 warp_direction = 2
 scene = "res://scene/room/extra/showcase.tscn"
 loading_preset = ExtResource("10_opovm")
+
+[node name="DialogueTrigger" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 9)
+script = ExtResource("10_o8b3e")
+textbox_preset = ExtResource("11_xpyra")
+textbox_text = "Do you believe in ghosts? Maybe \\nyou should..."

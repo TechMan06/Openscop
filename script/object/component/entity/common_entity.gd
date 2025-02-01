@@ -71,16 +71,11 @@ func _physics_process(delta: float) -> void:
 										delta * entity._ACCELERATION
 									)
 	
-#		if Vector2(entity.velocity.x, entity.velocity.z) > Vector2(1.0, 1.0):
-#			entity.velocity = Vector3((entity.velocity.normalized()).x, entity.velocity.y, (entity.velocity.normalized()).z)
-		
 	if entity.control_mode == 1:
 		var entity_speed: float = entity._v * entity._movement_speed * -1.0
 		
 		entity.rotation.y += entity._h * -1/ 25
 		entity._angle = entity.rotation.y
 		entity.velocity = Vector3(0, 0, entity_speed).rotated(Vector3.UP, entity._angle)
-	
-	print(entity.velocity)
 	
 	entity.move_and_slide()

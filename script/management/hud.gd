@@ -1,6 +1,7 @@
 extends Control
 
 signal transition_middle
+signal transition_end
 
 const PAUSE_SCENE: PackedScene = preload("res://scene/ui/pause_menu/pause_menu.tscn")
 const TEXTBOX_SCENE: PackedScene = preload("res://scene/ui/textbox.tscn")
@@ -114,7 +115,13 @@ func _on_scene_transition(preset: LoadingPreset) -> void:
 	get_tree().paused = false
 	Global.can_pause = true
 	
-	create_tween().tween_property(fade, "color:a", 0.0, FADE_SPEED)
+	var _fade_out_tween: Tween = create_tween()
+	
+	_fade_out_tween.tween_property(fade, "color:a", 0.0, FADE_SPEED)
+	
+	await _fade_out_tween.finished
+	
+	transition_end.emit()
 
 
 func create_keyboard(background: int = 0, ask: bool = true, use_fade: bool = true, file_select: bool = false, attach_to: Node = null) -> void:

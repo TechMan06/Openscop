@@ -39,7 +39,7 @@ func get_p2talk_word(word: String) -> String:
 		if _treated_word=="OW K EY":
 			return "OK"
 		else:
-			_final_word = Global.p2talk_dict.find_key(word)
+			_final_word = Global.p2talk_dict.find_key(_treated_word)
 			_final_word = _final_word.to_lower().capitalize()
 			
 			for number in _numbers:
