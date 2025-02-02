@@ -138,6 +138,8 @@ func _physics_process(_delta: float) -> void:
 					await get_tree().create_timer(recording_delay).timeout
 				
 				replay = true
+			else:
+				self.process_mode = Node.PROCESS_MODE_DISABLED
 		
 		else:
 			if recording_reader_p1 <= recording_data.p1_data.size() - 1:

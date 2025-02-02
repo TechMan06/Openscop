@@ -50,9 +50,9 @@ grow_vertical = 2
 [node name="HelloText" type="RichTextLabel" parent="TabContainer/Hello/HelloVBox"]
 layout_mode = 2
 bbcode_enabled = true
-text = "Hello! This is the Debug Menu for Openscop, here you can find the Credits list, with the names of all people who made this project possible, and the Debug variables, which contain tools that can be used to aid your development / video-making process.
+text = "	Hello! This is the Debug Menu for Openscop, here you can find the Credits list, with the names of all people who made this project possible, and the Debug variables, which contain tools that can be used to aid your development / video-making process.
 
-[center]If you've already finished setting the Debug variables up and would like to return to the game, type \"[color=blue]!reset_game[/color]\" into the Console."
+[center]If you've already finished setting the Debug variables up and would like to return to the game, type \"[color=blue]!reset_game[/color]\" or \"[color=blue]!hard_reset[/color]\" into the Console."
 fit_content = true
 scroll_following = true
 
@@ -252,6 +252,12 @@ Logo Animation
 
 [color=purple]Petscop Megasheet Credits:[/color]
 
+[color=#80aab3]Algo:[/color]
+Amber bouncing
+
+[color=#80aab3]Joseph:[/color]
+Amber bouncing
+
 [color=#80aab3]Noogai223:[/color]
 Pause Menu
 
@@ -362,6 +368,34 @@ This feature has the purpose of allowing fan-video creators to be able to make r
 The variable responsible for this toggle can be found on [color=green]GameManager[/color][color=lightblue].debug_settings.auto_record[/color]."
 fit_content = true
 
+[node name="BootScreenToggleVBox" type="VBoxContainer" parent="TabContainer/Debug/ScrollContainer/DebugVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BootScreenToggleHBox" type="HBoxContainer" parent="TabContainer/Debug/ScrollContainer/DebugVBox/BootScreenToggleVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="BootScreenLabel" type="Label" parent="TabContainer/Debug/ScrollContainer/DebugVBox/BootScreenToggleVBox/BootScreenToggleHBox"]
+layout_mode = 2
+text = "Enable Boot Screen:"
+label_settings = ExtResource("4_kmg78")
+
+[node name="BootScreenToggle" type="CheckButton" parent="TabContainer/Debug/ScrollContainer/DebugVBox/BootScreenToggleVBox/BootScreenToggleHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Debug/ScrollContainer/DebugVBox/BootScreenToggleVBox"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_ydm7n")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "This variable enables/disables the boot screen at the beginning of the game.
+This screen prevents the game from starting straight away, so you can set up your recording software and etc. to record your video so you get to record the Garalina screen.
+The variable responsible for this toggle can be found on [color=green]GameManager[/color][color=lightblue].debug_settings.boot_screen[/color]."
+fit_content = true
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_qcl5k")
 autoplay = true
@@ -369,3 +403,4 @@ bus = &"Music"
 
 [connection signal="toggled" from="TabContainer/Debug/ScrollContainer/DebugVBox/DebugToggleVBox/DebugToggleHBox/DebugToggle" to="." method="_on_debug_toggle_toggled"]
 [connection signal="toggled" from="TabContainer/Debug/ScrollContainer/DebugVBox/AutoRecToggleVBox/AutoRecToggleHBox/AutoRecToggle" to="." method="_on_debug_toggle_toggled"]
+[connection signal="toggled" from="TabContainer/Debug/ScrollContainer/DebugVBox/BootScreenToggleVBox/BootScreenToggleHBox/BootScreenToggle" to="." method="_on_debug_toggle_toggled"]

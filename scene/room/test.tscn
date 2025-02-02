@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c2kbimvwm18bt"]
+[gd_scene load_steps=30 format=3 uid="uid://c2kbimvwm18bt"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_y30j2"]
 [ext_resource type="Resource" uid="uid://fqixpor1kacn" path="res://resource/loading_preset/default.tres" id="2_e4std"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://cya7cxf4t8pi3" path="res://scene/object/interactive/switcher.tscn" id="22_8hvac"]
 [ext_resource type="Texture2D" uid="uid://yxr6iwtlt5tm" path="res://asset/2d/sprite/object/pet/care_b.png" id="22_arvv6"]
 [ext_resource type="PackedScene" uid="uid://dvte0cq377kvg" path="res://scene/object/interactive/bucket.tscn" id="23_bqeen"]
-[ext_resource type="PackedScene" uid="uid://dtdn1qldur8b6" path="res://scene/object/interactive/playback_player.tscn" id="25_hiill"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p61yp"]
 render_priority = 0
@@ -214,5 +213,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
 
 [node name="Bucket" parent="." instance=ExtResource("23_bqeen")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
-[node name="PlaybackPlayer" parent="." instance=ExtResource("25_hiill")]

@@ -50,6 +50,7 @@ expand_mode = 1
 flip_h = true
 
 [node name="TextureOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(32, 0)
 
 [node name="RoomTexture" type="TextureRect" parent="TextureOrigin"]

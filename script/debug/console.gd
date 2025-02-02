@@ -51,6 +51,11 @@ func _parse_command(input : Array) -> void:
 				RecordingManager.stop_recording()
 			else:
 				console_log("[color=red]Cannot stop Recording during Replay.[/color]")
+		"!cancel_rec":
+			if !RecordingManager.replay:
+				RecordingManager.cancel_recording()
+			else:
+				console_log("[color=red]Cannot cancel Recording during Replay.[/color]")
 		"!reset_game":
 			GameManager.reset_game()
 		"!hard_reset":

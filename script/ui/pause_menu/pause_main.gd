@@ -13,6 +13,7 @@ var _selected_option: int = 0:
 	set(value):
 		button_sound.play()
 		_selected_option = value
+var allow_input: bool = true
 
 @onready var main_menu: Control = %Main
 @onready var buttons_origin: Marker2D = %ButtonsOrigin
@@ -75,12 +76,13 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("pressed_start") && Global.can_unpause:
 			unpause_game()
 		
-		if Input.is_action_just_pressed("pressed_up") && _selected_option > 0:
+		if Input.is_action_just_pressed("pressed_up") && _selected_option > 0 && allow_input:
 			_selected_option -= 1
 				
 		if (
 				Input.is_action_just_pressed("pressed_down") 
 				and _selected_option < buttons_origin.get_child_count() - 1
+				and allow_input
 			):
 			_selected_option += 1
 		
@@ -88,6 +90,7 @@ func _process(_delta: float) -> void:
 			if _selected_option == 0:
 				unpause_game()
 			elif _selected_option < 4:
+				allow_input = false
 				$SelectSound.play()
 				fade_overlay.frame_coords.x = _selected_option - 1
 				create_tween().tween_property(fade_overlay, "modulate:a", 1.0, HUD.FADE_SPEED)
@@ -162,6 +165,7 @@ func unpause_game() -> void:
 
 func _on_return_to_pause() -> void:
 	_in_menu = false
+	allow_input = true
 	main_menu.visible = true
 	buttons_origin.visible = true
 	

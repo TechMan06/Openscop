@@ -1,9 +1,12 @@
 extends Control
 
+var draw_offset: Vector2i = Vector2i.ZERO
+
 @export var texture: Image
 @export var background_image: Image
 
 @onready var pixel_origin: Marker2D = $PixelOrigin
+@onready var texture_origin = %TextureOrigin
 @onready var room_texture: TextureRect = $TextureOrigin/RoomTexture
 @onready var bg_texture: TextureRect = $TextureOrigin/BGTexture
 @onready var draw_sound: AudioStreamPlayer = $DrawSound
@@ -20,8 +23,8 @@ func _ready() -> void:
 	if background_image == null:
 		# TO-DO: REPLACE ARGUMENT 4 WITH PROPER ENUM
 		background_image = Image.create(
-											int(str(texture.get_width() / 257.0)[0])  + 256, 
-											int(str(texture.get_height() / 257.0)[0]) + 256, 
+											int(str(texture.get_width() / 257.0)[0])  + 512, 
+											int(str(texture.get_height() / 257.0)[0]) + 512, 
 											false, 
 											4
 										)
@@ -41,14 +44,8 @@ func _process(_delta) -> void:
 		BGMusic.increase_volume()
 		queue_free()
 	
-	var x: float = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
-	var y: float = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
-	
-	var magnitude = sqrt(x*x + y*y)
-	
-	if magnitude > 1:
-		x /= magnitude
-		y /= magnitude
+	var x: float = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left") * int(!Input.is_action_pressed("pressed_triangle"))
+	var y: float = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up") * int(!Input.is_action_pressed("pressed_triangle"))
 
 	pixel_origin.position.x += x
 	pixel_origin.position.y += y
@@ -58,15 +55,50 @@ func _process(_delta) -> void:
 										round(clamp(pixel_origin.position.y,0,240))
 									)
 	
+	texture_origin.position = Vector2(draw_offset.x + 32, draw_offset.y)
+	
 	if Input.is_action_pressed("pressed_action"):
 		if !draw_sound.playing:
 			draw_sound.play()
 		
-		if (pixel_origin.position.x < room_texture.texture.get_width() + 32) && (pixel_origin.position.y < room_texture.texture.get_height()):
-			texture.set_pixel(pixel_origin.position.x-32, pixel_origin.position.y, Color.html("#FFCEE5"))
+		if (
+				(pixel_origin.position.x < room_texture.texture.get_width() + 32 + draw_offset.x) 
+				and (pixel_origin.position.y < room_texture.texture.get_height() + draw_offset.y)
+			):
+			texture.set_pixel(
+									pixel_origin.position.x - 32 - draw_offset.x, 
+									pixel_origin.position.y - draw_offset.y, 
+									Color.html("#FFCEE5")
+								)
+			
 			room_texture.set_texture(ImageTexture.create_from_image(texture))
 		else:
-			background_image.set_pixel(pixel_origin.position.x-32, pixel_origin.position.y, Color.html("#FFCEE5"))
+			background_image.set_pixel(
+											pixel_origin.position.x  - 32 - draw_offset.x, 
+											pixel_origin.position.y - draw_offset.y, 
+											Color.html("#FFCEE5")
+										)
+			
 			bg_texture.texture = ImageTexture.create_from_image(background_image)
 	else:
 		draw_sound.stop()
+	
+	
+	if Input.is_action_pressed("pressed_triangle"):
+		if (
+				Input.is_action_just_pressed("pressed_right") and 
+				abs(draw_offset.x - 32) < room_texture.texture.get_width()
+			) :
+			draw_offset.x -= 32
+		
+		if Input.is_action_just_pressed("pressed_left") and draw_offset.x < 0:
+			draw_offset.x += 32
+		
+		if (
+				Input.is_action_just_pressed("pressed_down") and 
+				abs(draw_offset.y - 32) < room_texture.texture.get_height()
+			):
+			draw_offset.y -= 32
+		
+		if Input.is_action_just_pressed("pressed_up") and draw_offset.y < 0:
+			draw_offset.y += 32
