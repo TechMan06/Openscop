@@ -76,14 +76,15 @@ func reset_game() -> void:
 
 func hard_reset_game() -> void:
 	GameManager.save_debug_settings()
+	
+	Global.save_global()
+	get_tree().paused = false
+	BGMusic.stream_paused = true
 	Global.current_controller = 0
 	Global.can_pause = true
 	Global.can_unpause = false
 	Global.is_game_paused = false
 	
-	HUD.show_label(false, "", 0)
-	EventBus.destroy_hud.emit()
-	Global.save_global()
 	get_tree().change_scene_to_file("res://scene/title/garalina.tscn")
 
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://jqnw2iuqkhsr"]
+[gd_scene load_steps=18 format=3 uid="uid://jqnw2iuqkhsr"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_dyuyl"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="2_7cs2q"]
+[ext_resource type="Theme" uid="uid://v52wq2ri36fv" path="res://resource/theme/textbox/dark_textbox.tres" id="2_nrko8"]
+[ext_resource type="Script" path="res://script/resource/textbox_resource.gd" id="3_sjclm"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="4_osyqt"]
 [ext_resource type="ArrayMesh" uid="uid://dv50ttefvtbn3" path="res://asset/3d/room/extra/showcase/showcase_room.obj" id="4_tq5cp"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="6_bpxt5"]
@@ -10,8 +12,16 @@
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="10_o8b3e"]
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="10_opovm"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="10_rl6ph"]
-[ext_resource type="Resource" uid="uid://c2ybn3215t54p" path="res://resource/textbox/dark.tres" id="11_8y0pk"]
 [ext_resource type="Resource" uid="uid://cma1tpqw0num6" path="res://resource/textbox/darkest.tres" id="11_xpyra"]
+
+[sub_resource type="Resource" id="Resource_m1j5u"]
+script = ExtResource("3_sjclm")
+background = ExtResource("2_nrko8")
+position = Vector2(25, 86)
+size = Vector2(270, 98)
+mute = false
+destructible = false
+arrow_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_ehccx"]
 script = ExtResource("2_7cs2q")
@@ -46,7 +56,7 @@ allow_recording = false
 level_slogan = "dots_test"
 school_preset = true
 textbox = "dots_test"
-textbox_preset = ExtResource("11_8y0pk")
+textbox_preset = SubResource("Resource_m1j5u")
 allow_front_movement = false
 limit_camera_horizontal = true
 horizontal_limit = Vector2(0, 50)
@@ -80,4 +90,5 @@ loading_preset = ExtResource("10_opovm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 9)
 script = ExtResource("10_o8b3e")
 textbox_preset = ExtResource("11_xpyra")
-textbox_text = "Do you believe in ghosts? Maybe \\nyou should..."
+textbox_text = "Do you believe in ghosts? Maybe 
+you should consider believing..."

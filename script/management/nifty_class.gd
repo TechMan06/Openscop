@@ -13,8 +13,7 @@ func _ready() -> void:
 	EventBus.nifty_finished.connect(_update_textures)
 	
 	var _texture_image: Image = texture.get_image()
-	
-	await self.tree_entered
+
 	await get_tree().process_frame
 	
 	EventBus.nifty_upload.emit(_texture_image)

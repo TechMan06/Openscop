@@ -66,7 +66,7 @@ func _on_finish_typing(answer: String, _attach_node: Node) -> void:
 	
 		var lift_mesh: Tween = create_tween()
 	
-		lift_mesh.tween_property(answer_origin, "position:y", 5.0, ANIM_SPEED)
+		lift_mesh.tween_property(answer_origin, "position:y", 5.0, ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 	
 		await lift_mesh.finished
 	
@@ -80,7 +80,7 @@ func _on_finish_typing(answer: String, _attach_node: Node) -> void:
 	
 		var low_mesh: Tween = create_tween()
 		
-		low_mesh.tween_property(answer_origin, "position:y", 0.0, ANIM_SPEED)
+		low_mesh.tween_property(answer_origin, "position:y", 0.0, ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 		
 		await low_mesh.finished
 		

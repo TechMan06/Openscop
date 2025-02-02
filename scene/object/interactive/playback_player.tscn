@@ -54,6 +54,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)
 [node name="P2TalkButtons" type="Label3D" parent="P2TalkOrigin"]
 offset = Vector2(0, 5)
 billboard = 1
+no_depth_test = true
 fixed_size = true
 texture_filter = 0
 font = ExtResource("7_hbph4")

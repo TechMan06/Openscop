@@ -9,8 +9,6 @@ var gen: int = 1
 
 
 func _ready() -> void:
-	await Global.boot_game
-	
 	if ResourceLoader.exists("user://savedata/global.tres"):
 		gen = load("user://savedata/global.tres").gen
 	

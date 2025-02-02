@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bnqbare5xne5y"]
+[gd_scene load_steps=23 format=3 uid="uid://bnqbare5xne5y"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_ev5n8"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_5kt3e"]
@@ -20,7 +20,6 @@
 [ext_resource type="Script" path="res://script/resource/loading_resource.gd" id="17_567kr"]
 [ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="18_rbem4"]
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="20_lref4"]
-[ext_resource type="Resource" uid="uid://gfo0wlqeaucv" path="res://resource/textbox/pet.tres" id="21_36nob"]
 
 [sub_resource type="Resource" id="Resource_mm28k"]
 script = ExtResource("2_vy1ks")
@@ -211,7 +210,7 @@ textbox_text = "textbox_3"
 min_distance = 1.5
 
 [node name="DialogueTrigger5" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 script = ExtResource("20_lref4")
 textbox_preset = ExtResource("2_rko41")
 textbox_text = "textbox_1"
@@ -230,10 +229,3 @@ script = ExtResource("20_lref4")
 textbox_preset = ExtResource("2_rko41")
 textbox_text = "textbox_2"
 min_distance = 2.0
-
-[node name="DialogueTrigger4" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 8)
-script = ExtResource("20_lref4")
-textbox_preset = ExtResource("21_36nob")
-textbox_text = "dots_test"
-min_distance = 1.0

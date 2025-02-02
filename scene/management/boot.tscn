@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://b88rpkpye0cd2"]
+
+[ext_resource type="Script" path="res://script/management/boot.gd" id="1_gvqvj"]
+[ext_resource type="FontFile" uid="uid://fmb3ibu1na0d" path="res://asset/2d/font/ttf/console.ttf" id="2_r1td3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s1wet"]
+font = ExtResource("2_r1td3")
+font_size = 8
+
+[node name="BootScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gvqvj")
+
+[node name="BootBG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.219608, 0, 1)
+
+[node name="BootCenter" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BootLabel" type="Label" parent="BootCenter"]
+layout_mode = 2
+text = "Openscop boot screen
+Press any key to proceed"
+label_settings = SubResource("LabelSettings_s1wet")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -181,6 +181,7 @@ func _jump_curve(p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, t: float):
 
 func _disable() -> void:
 	amber_area.queue_free()
+	amber_state = AmberStates.NO_CODE
 
 
 func _on_quake_timer_timeout():

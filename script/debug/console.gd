@@ -53,7 +53,7 @@ func _parse_command(input : Array) -> void:
 				console_log("[color=red]Cannot stop Recording during Replay.[/color]")
 		"!reset_game":
 			GameManager.reset_game()
-		"!hard_reset_game":
+		"!hard_reset":
 			GameManager.hard_reset_game()
 		"!nifty":
 			nifty.emit()
