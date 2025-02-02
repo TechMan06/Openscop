@@ -48,6 +48,7 @@ func _physics_process(_delta: float) -> void:
 				check_input() 
 				and Global.current_controller == 0
 				and SaveManager.get_data().player_data.input_enabled
+				and !Global.draw_mode
 				or Input.is_action_just_pressed("pressed_select") 
 				or Input.is_action_just_released("pressed_select")
 			):
@@ -140,6 +141,15 @@ func stop_recording() -> void:
 	recording_data = null
 	
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
+
+
+func cancel_recording() -> void:
+	recording = false
+	recording_timer = 0
+	recording_setup = false
+	recording_data = null
+	
+	Console.console_log("[color=blue]Recording was discarded.[/color]")
 
 
 func _number_parser(number: int) -> bool:

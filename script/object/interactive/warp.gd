@@ -52,13 +52,14 @@ func _process(_delta: float) -> void:
 
 func _on_warp_area_body_entered(body: Node3D) -> void:
 	if body is Player:
-		if diagonal_entrance:
-			if body.direction == directions.x || body.direction == directions.y:
-				Global.warp_to(scene, loading_preset)
-		else:
-			if body.direction == warp_direction || all_directions || body.control_mode == 1:
-				body.player_stats.scene_info = [get_tree().get_current_scene().scene_file_path, warp_id]
-				Global.warp_to(scene, loading_preset)
+		if body.velocity.x != 0.0 || body.velocity.z != 0.0:
+			if diagonal_entrance:
+				if body.direction == directions.x || body.direction == directions.y:
+					Global.warp_to(scene, loading_preset)
+			else:
+				if body.direction == warp_direction || all_directions || body.control_mode == 1:
+					body.player_stats.scene_info = [get_tree().get_current_scene().scene_file_path, warp_id]
+					Global.warp_to(scene, loading_preset)
 		
 		if y_offset != 0.0:
 			body.entity_y = y_offset

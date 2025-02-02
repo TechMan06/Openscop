@@ -1,16 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cya7cxf4t8pi3"]
+[gd_scene load_steps=9 format=3 uid="uid://cya7cxf4t8pi3"]
 
 [ext_resource type="Script" path="res://script/object/interactive/switcher.gd" id="1_1apn4"]
 [ext_resource type="ArrayMesh" uid="uid://cbp1baiurox11" path="res://asset/3d/object/switcher_a.obj" id="2_gjc6t"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="3_xars0"]
 [ext_resource type="ArrayMesh" uid="uid://bgqqifid6c4m3" path="res://asset/3d/object/switcher_b.obj" id="4_h6fcd"]
 [ext_resource type="PackedScene" uid="uid://cklrsj73ts2kt" path="res://scene/object/interactive/interaction_symbol.tscn" id="5_tn7av"]
+[ext_resource type="AudioStream" uid="uid://d3y3n626m57w" path="res://sfx/object/switch.wav" id="6_7jjn5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kn0g6"]
 render_priority = 0
 shader = ExtResource("3_xars0")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -23,7 +23,6 @@ shader_parameter/use_depth = false
 render_priority = 0
 shader = ExtResource("3_xars0")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -50,5 +49,11 @@ surface_material_override/0 = SubResource("ShaderMaterial_bevel")
 
 [node name="InteractionSymbol" parent="LeverOrigins" instance=ExtResource("5_tn7av")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="SwitchSound" type="AudioStreamPlayer3D" parent="LeverOrigins"]
+stream = ExtResource("6_7jjn5")
+unit_size = 20.0
+panning_strength = 2.0
+bus = &"SFX"
 
 [connection signal="triggered" from="LeverOrigins/InteractionSymbol" to="." method="_on_interaction_symbol_triggered"]

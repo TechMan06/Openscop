@@ -44,6 +44,7 @@ func allow_toggle() -> void:
 
 func _on_interaction_symbol_triggered() -> void:
 	if can_trigger:
+		$LeverOrigins/SwitchSound.play()
 		turned_on = !turned_on
 		switched.emit(turned_on)
 		can_trigger = false

@@ -19,6 +19,7 @@ var can_pause: bool = true
 var can_unpause: bool = false
 var current_slot: int = 0
 var current_controller: int = 0
+var draw_mode: bool = false
 
 
 func _ready() -> void:

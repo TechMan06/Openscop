@@ -1,27 +1,79 @@
-extends RigidBody3D
+extends CharacterBody3D
 
-var touched_body: Entity
-var touching: bool = false
+const ACCELERATION: int = 9
+const BUCKET_HITBOX: float = 1.2
 
-func _on_body_entered(body):
-	if body is Player:
-		touching = true
-		touched_body = body
-		
-		if body.direction == 0 || body.direction == 3:
-			set_axis_lock(PhysicsServer3D.BODY_AXIS_LINEAR_X, true)
-			set_axis_lock(PhysicsServer3D.BODY_AXIS_LINEAR_Z, false)
+var player: Player
+var direction_vector: Vector3
+var collider_iterator
+
+@onready var bucket_sound = %BucketSound
+
+
+func _physics_process(delta: float) -> void:
+	if player != null:
+		#if is_near_bucket():
+		if (	
+				player.global_position.x < self.global_position.x + BUCKET_HITBOX and
+				player.velocity.x < 0.0 and 
+				player.global_position.x > self.global_position.x or
+				player.global_position.x > self.global_position.x - BUCKET_HITBOX and
+				player.velocity.x > 0.0 and 
+				player.global_position.x < self.global_position.x
+			):
+			self.velocity.x = player.velocity.x * direction_vector.x
+		elif (
+				player.global_position.z < self.global_position.z + BUCKET_HITBOX and
+				player.velocity.z < 0.0 and 
+				player.global_position.z > self.global_position.z or
+				player.global_position.z > self.global_position.z - BUCKET_HITBOX and
+				player.velocity.z > 0.0 and 
+				player.global_position.z < self.global_position.z
+			):
+			self.velocity.z = player.velocity.z * direction_vector.z
 		else:
-			set_axis_lock(PhysicsServer3D.BODY_AXIS_LINEAR_X, false)
-			set_axis_lock(PhysicsServer3D.BODY_AXIS_LINEAR_Z, true)
-
-
-func _on_body_exited(body):
-	touching = false
-	touched_body = null
-
-
-func _physics_process(_delta):
-	if touched_body != null:
-		apply_central_force(touched_body.velocity)
+			self.velocity.x = lerp(self.velocity.x, 0.0, ACCELERATION * delta)
+			self.velocity.z = lerp(self.velocity.z, 0.0, ACCELERATION * delta)
+			bucket_sound.stop()
 	
+	if velocity.length() > 1.5:
+		if !bucket_sound.playing:
+			bucket_sound.play()
+	else:
+		bucket_sound.stop()
+	
+	move_and_slide()
+
+
+func is_near_bucket() -> bool:
+	if (
+			player.global_position.x < self.global_position.x + BUCKET_HITBOX and
+			player.global_position.x > self.global_position.x - BUCKET_HITBOX
+		):
+			return true
+	return false
+
+
+func _on_bucket_area_body_entered(body):
+	if body is Player:
+		player = body
+
+
+func _on_front_area_entered(body):
+	if body is Player && direction_vector.x == 0.0:
+		direction_vector.z = 1.0
+
+
+func _on_front_area_exited(body):
+	if body is Player:
+		direction_vector.z = 0.0
+
+
+func _on_side_area_entered(body):
+	if body is Player && direction_vector.z == 0.0:
+		direction_vector.x = 1.0
+
+
+func _on_side_area_exited(body):
+	if body is Player:
+		direction_vector.x = 0.0

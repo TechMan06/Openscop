@@ -42,6 +42,7 @@ func _process(_delta) -> void:
 		EventBus.nifty_finished.emit(texture, background_image)
 		HUD.play_nifty()
 		BGMusic.increase_volume()
+		Global.draw_mode = false
 		queue_free()
 	
 	var x: float = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left") * int(!Input.is_action_pressed("pressed_triangle"))

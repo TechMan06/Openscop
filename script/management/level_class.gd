@@ -347,5 +347,5 @@ func _nifty() -> void:
 	
 	Global.can_pause = false
 	Global.is_game_paused = true
-	
+	Global.draw_mode = true
 	add_child(_draw_instance)
