@@ -69,9 +69,9 @@ func _process(delta: float) -> void:
 	timer += 1
 	logo_timer += delta
 	
-	logo_mesh.rotation.z = -sin(1 * logo_timer * PI) * cos(logo_timer * PI / 5) * 0.25
-	logo_mesh.rotation.y = -cos(1 * (logo_timer + 0.25) * PI) * sin(logo_timer * PI / 5) * 0.4
-	logo_gift.rotation.z = cos(2 * logo_timer * PI) * 0.2
+	logo_mesh.rotation.z = -sin(1.5 * logo_timer * PI) * cos(logo_timer * PI / 5) * 0.25
+	logo_mesh.rotation.y = -cos(1.5 * (logo_timer + 0.25) * PI) * sin(logo_timer * PI / 5) * 0.4
+	logo_gift.rotation.z = cos(2.5 * logo_timer * PI) * 0.2
 	
 	road_mesh.position.x -= delta * 2
 

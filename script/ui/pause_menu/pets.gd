@@ -143,7 +143,7 @@ func leave_bio() -> void:
 									buttons_origin.get_child(selected_option), 
 									"global_position", 
 									Vector2(original_button_pos), 
-									BUTTON_SPEED
+									BUTTON_SPEED / 2.0
 								).set_trans(Tween.TRANS_SINE)
 	
 	await _return_tween.finished
@@ -155,13 +155,13 @@ func leave_bio() -> void:
 												button, 
 												"global_position:x", 
 												162, 
-												BUTTON_SPEED
+												BUTTON_SPEED / 2.0
 											).set_trans(Tween.TRANS_SINE)
 			else:
 				create_tween().tween_property(
 												button,"global_position:x", 
 												30, 
-												BUTTON_SPEED
+												BUTTON_SPEED / 2.0
 											).set_trans(Tween.TRANS_SINE)
 	
 	await get_tree().create_timer(BUTTON_SPEED, true).timeout
