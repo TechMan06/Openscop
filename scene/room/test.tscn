@@ -193,6 +193,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
 
 [node name="Warp" parent="." instance=ExtResource("17_2dt7f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+detect_bucket = null
 scene = "res://scene/room/test.tscn"
 loading_preset = SubResource("Resource_1qxky")
 

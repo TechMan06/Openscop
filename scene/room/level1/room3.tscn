@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://n7ds5jq6om2d"]
+[gd_scene load_steps=29 format=3 uid="uid://n7ds5jq6om2d"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_cuoxg"]
 [ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_01f37"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://cya7cxf4t8pi3" path="res://scene/object/interactive/switcher.tscn" id="21_a6he0"]
 [ext_resource type="PackedScene" uid="uid://d3sov8vsf3ey3" path="res://scene/object/interactive/cage.tscn" id="22_ac13p"]
 [ext_resource type="PackedScene" uid="uid://ddg1r775hmlih" path="res://scene/object/pet/amber.tscn" id="23_tvf8q"]
-[ext_resource type="PackedScene" uid="uid://dvte0cq377kvg" path="res://scene/object/interactive/bucket.tscn" id="24_ovv2t"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_bxgob")
@@ -242,6 +241,3 @@ pos_a = Vector3i(7, 0, -22)
 pos_b = Vector3i(14, 0, -22)
 switch_a = NodePath("../SwitcherObject")
 switch_b = NodePath("../SwitcherObject2")
-
-[node name="Bucket" parent="." instance=ExtResource("24_ovv2t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)

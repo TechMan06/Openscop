@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://script/object/component/management/p2talkcomponent.gd" id="7_pevpq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j5v3i"]
-size = Vector3(1, 1.4, 0.75)
+size = Vector3(1, 1.4, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_llohc"]
 render_priority = 0

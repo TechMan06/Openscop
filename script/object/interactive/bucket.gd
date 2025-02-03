@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 				Console.console_log("[color=yellow]BUCKET MOVING X+[/color]")
 				move("x", delta)
 			elif (
-					player.global_position.x - self.global_position.x <= BUCKET_HITBOX and
+					player.global_position.x - self.global_position.x <= (BUCKET_HITBOX) and
 					self.global_position.x < player.global_position.x and
 					player.velocity.x < 0.0
 				):
@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 				Console.console_log("[color=yellow]BUCKET MOVING Z+[/color]")
 				move("z", delta)
 			elif (
-					player.global_position.z - self.global_position.z <= BUCKET_HITBOX and
+					player.global_position.z - self.global_position.z <= (BUCKET_HITBOX - 0.1) and
 					self.global_position.z < player.global_position.z and
 					player.velocity.z < 0.0
 				):
@@ -59,6 +59,9 @@ func _physics_process(delta: float) -> void:
 			bucket_wall_collision.disabled = false
 		else:
 			bucket_wall_collision.disabled = true
+		
+		if player.global_position.distance_to(self.global_position) > 1.5:
+			SaveManager.get_data().has_bucket = false
 	
 	move_and_slide()
 	
@@ -88,7 +91,7 @@ func move(axis: String, delta: float):
 func is_near_bucket() -> bool:
 	if (
 			self.global_position.x - player.global_position.x <= (BUCKET_HITBOX) and
-			player.global_position.x - self.global_position.x <= (BUCKET_HITBOX )
+			player.global_position.x - self.global_position.x <= (BUCKET_HITBOX)
 		):
 			return true
 	if (

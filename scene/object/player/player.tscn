@@ -10,8 +10,8 @@
 [ext_resource type="Script" path="res://script/object/component/entity/common_entity.gd" id="8_vmbjn"]
 [ext_resource type="Script" path="res://script/object/component/management/p2talkcomponent.gd" id="9_c0wui"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kov5n"]
-size = Vector3(1, 1.4, 0.75)
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjbfb"]
+size = Vector3(1, 1.4, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_llohc"]
 render_priority = 0
@@ -30,14 +30,16 @@ shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/use_depth = false
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
+slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 floor_block_on_wall = false
+floor_max_angle = 0.0
 script = ExtResource("1_ttmsq")
 p2_talk_component = NodePath("P2TalkComponent")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.125)
-shape = SubResource("BoxShape3D_kov5n")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("BoxShape3D_cjbfb")
 
 [node name="PlayerSprite" type="Sprite3D" parent="."]
 material_override = SubResource("ShaderMaterial_llohc")

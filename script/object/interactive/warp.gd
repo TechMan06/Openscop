@@ -6,6 +6,7 @@ class_name WarpClass
 @export var all_directions = false
 @export var diagonal_entrance = false
 @export var directions = Vector2i.ZERO
+@export var detect_bucket: bool = true
 @export_range(0, 3) var warp_direction = 0
 @export var y_offset: float
 @export_subgroup("Warp_to")
@@ -51,8 +52,11 @@ func _process(_delta: float) -> void:
 
 
 func _on_warp_area_body_entered(body: Node3D) -> void:
+	if body is Bucket && detect_bucket:
+		SaveManager.get_data().has_bucket = true
+	
 	if body is Player:
-		if SaveManager.get_data().has_bucket:
+		if SaveManager.get_data().has_bucket && detect_bucket:
 			SaveManager.get_data().bucket_direction = body.direction
 		
 		if body.velocity.x != 0.0 || body.velocity.z != 0.0:
@@ -66,9 +70,6 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 		
 		if y_offset != 0.0:
 			body.entity_y = y_offset
-	
-	if body is Bucket:
-		SaveManager.get_data().has_bucket = true
 
 	if body is PlaybackPlayer:
 		body.queue_free()

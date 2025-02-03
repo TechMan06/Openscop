@@ -34,6 +34,7 @@ render_mode	blend_mix;
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 #endif
 
+
 #if defined(SPRITE) || defined(USE_ALPHA)
 uniform vec3 alpha_color: source_color = vec3(1.0, 0.0, 1.0);
 #endif
@@ -66,6 +67,7 @@ group_uniforms Depth_Properties;
 uniform bool use_depth = false;
 varying float depth;
 varying vec3 has_color;
+varying vec3 old_vertex;
 
 
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
@@ -112,6 +114,8 @@ void vertex()
 		UV += round(vec2(animation_speed) * TIME) / vec2(animation_frames);
 	}
 	
+	old_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	
 	if (y_billboard)
 	{
 		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
@@ -136,14 +140,16 @@ void vertex()
 	}
 #endif
 
-#ifdef SPRITE
+#ifndef SPRITE
 	if (use_depth) {
 		vec4 clip = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(TANGENT, 1.0);
 		depth = clip.z / clip.w;
+		//vec3 world_camera = (INV_VIEW_MATRIX * vec4(vec3(0.0), 1.0)).xyz;
+		//depth = clamp(distance(TANGENT.xyz, world_camera), -0.9, 0.9);
 	}
 #else
 	if (use_depth) {
-		vec4 clip = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(TANGENT, 1.0);
+		vec4 clip = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(old_vertex, 1.0);
 		depth = clip.z / clip.w;
 		//vec3 world_camera = (INV_VIEW_MATRIX * vec4(vec3(0.0), 1.0)).xyz;
 		//depth = clamp(distance(TANGENT.xyz, world_camera), -0.9, 0.9);
@@ -151,6 +157,7 @@ void vertex()
 #endif
 
 }
+
 
 void fragment()
 {
@@ -213,13 +220,9 @@ void fragment()
 	if (use_depth) {
 		DEPTH = depth;
 	} else {
-		vec3 offset_world_pos = vec3(NODE_POSITION_WORLD.x, 1.0, NODE_POSITION_WORLD.z);
-		vec4 ndc_offset = PROJECTION_MATRIX * VIEW_MATRIX * vec4(offset_world_pos,1);
-		//normalize ndc_offset.z and set depth
+		vec4 ndc_offset = PROJECTION_MATRIX * VIEW_MATRIX * vec4(old_vertex, 1);
 		DEPTH = ndc_offset.z / ndc_offset.w;
-		//DEPTH = FRAGCOORD.z - VERTEX.y;
 	}
-	//DEPTH = FRAGCOORD.z;
 #else
 	if (use_depth) {
 		DEPTH = depth;

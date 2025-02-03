@@ -110,6 +110,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_twxb2")
 
 [node name="Warp" parent="GenSpecific2" instance=ExtResource("8_x8bwt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+detect_bucket = null
 warp_direction = 1
 scene = "res://scene/room/level1/room5.tscn"
 loading_preset = ExtResource("9_p3gpn")

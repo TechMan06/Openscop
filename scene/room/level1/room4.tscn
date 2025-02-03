@@ -34,7 +34,7 @@ background_music = 2
 level_slogan = "We hope you are enjoying the game."
 spawn_camera_root = false
 environment_settings = SubResource("Resource_thkrr")
-bucket_spawn_offset = Vector3(0, 0, -0.15)
+bucket_spawn_offset = Vector3(0, 0, -0.16)
 
 [node name="EvenCareMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("5_h0ugi")
@@ -48,6 +48,7 @@ shape = SubResource("ConcavePolygonShape3D_kkn0d")
 
 [node name="Warp" parent="." instance=ExtResource("8_7sr27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+detect_bucket = false
 warp_direction = 2
 scene = "res://scene/room/level1/room3.tscn"
 loading_preset = ExtResource("9_2pbgl")

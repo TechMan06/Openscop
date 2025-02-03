@@ -35,7 +35,6 @@ fog_radius = 17.0
 render_priority = 0
 shader = ExtResource("4_0nbml")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("5_twqjy")
@@ -50,7 +49,6 @@ shader_parameter/use_depth = false
 render_priority = 0
 shader = ExtResource("10_fwmc1")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -66,7 +64,6 @@ data = PackedVector3Array(-14.5, 0, 2.5, -14.5, 1, 2.5, 8.5, 0, 2.5, 8.5, 0, 2.5
 render_priority = 0
 shader = ExtResource("10_fwmc1")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(0.976471, 0.513726, 0.913725, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -79,7 +76,6 @@ shader_parameter/use_depth = false
 render_priority = 0
 shader = ExtResource("10_fwmc1")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -281,6 +277,7 @@ demo_exclusive = true
 
 [node name="Warp" parent="GenSpecific" instance=ExtResource("15_frvro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, -17)
+detect_bucket = null
 warp_direction = 3
 scene = "res://scene/room/level1/room1.tscn"
 loading_preset = ExtResource("19_k4sd1")
@@ -292,6 +289,7 @@ non_demo_exclusive = true
 
 [node name="Warp" parent="GenSpecific2" instance=ExtResource("15_frvro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, -17)
+detect_bucket = null
 warp_direction = 3
 scene = "res://scene/room/level1/room1.tscn"
 loading_preset = ExtResource("16_6mfco")
