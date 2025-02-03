@@ -61,7 +61,6 @@ script = ExtResource("5_1xidx")
 gens = Array[int]([1, 2, 3])
 
 [node name="EvenCareMesh" type="MeshInstance3D" parent="GenSpecific"]
-visible = false
 mesh = ExtResource("6_qs3g5")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("8_2oxwp")
