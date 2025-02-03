@@ -9,6 +9,8 @@ class_name SaveData
 @export var room_path: String = ""
 #ROOM INFO
 @export var piece_log: Dictionary = {}
+@export var has_bucket: bool = false
+@export var bucket_direction: int = 0
 #GAME
 @export var pet: Array[String]
 @export var corrupted: bool

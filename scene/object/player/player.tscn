@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://script/object/component/management/p2talkcomponent.gd" id="9_c0wui"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kov5n"]
-size = Vector3(1, 1.4, 1)
+size = Vector3(1, 1.4, 0.75)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_llohc"]
 render_priority = 0
@@ -30,12 +30,13 @@ shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/use_depth = false
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
+wall_min_slide_angle = 0.0
 floor_block_on_wall = false
 script = ExtResource("1_ttmsq")
 p2_talk_component = NodePath("P2TalkComponent")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.125)
 shape = SubResource("BoxShape3D_kov5n")
 
 [node name="PlayerSprite" type="Sprite3D" parent="."]

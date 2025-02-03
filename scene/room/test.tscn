@@ -75,7 +75,6 @@ environment_settings = ExtResource("2_we153")
 
 [node name="Bucket" parent="." instance=ExtResource("23_bqeen")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-safe_margin = 0.005
 
 [node name="GrassObject" type="Node3D" parent="."]
 script = ExtResource("4_y6pfu")

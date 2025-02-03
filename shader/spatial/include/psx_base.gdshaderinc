@@ -120,6 +120,8 @@ void vertex()
 	else if (billboard)
 	{
 		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
+		//MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
+		//VERTEX.y *= (VIEW_MATRIX[1][2] / 5.0) + 1.0;
 	}
 #endif
 
@@ -211,8 +213,13 @@ void fragment()
 	if (use_depth) {
 		DEPTH = depth;
 	} else {
-		DEPTH = FRAGCOORD.z;
+		vec3 offset_world_pos = vec3(NODE_POSITION_WORLD.x, 1.0, NODE_POSITION_WORLD.z);
+		vec4 ndc_offset = PROJECTION_MATRIX * VIEW_MATRIX * vec4(offset_world_pos,1);
+		//normalize ndc_offset.z and set depth
+		DEPTH = ndc_offset.z / ndc_offset.w;
+		//DEPTH = FRAGCOORD.z - VERTEX.y;
 	}
+	//DEPTH = FRAGCOORD.z;
 #else
 	if (use_depth) {
 		DEPTH = depth;

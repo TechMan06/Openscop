@@ -52,6 +52,9 @@ func _process(_delta: float) -> void:
 
 func _on_warp_area_body_entered(body: Node3D) -> void:
 	if body is Player:
+		if SaveManager.get_data().has_bucket:
+			SaveManager.get_data().bucket_direction = body.direction
+		
 		if body.velocity.x != 0.0 || body.velocity.z != 0.0:
 			if diagonal_entrance:
 				if body.direction == directions.x || body.direction == directions.y:
@@ -63,6 +66,9 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 		
 		if y_offset != 0.0:
 			body.entity_y = y_offset
+	
+	if body is Bucket:
+		SaveManager.get_data().has_bucket = true
 
 	if body is PlaybackPlayer:
 		body.queue_free()

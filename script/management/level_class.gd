@@ -66,6 +66,8 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export var fog_focus_on_player: bool = true
 @export var fog_focus: Node3D
 @export var fog_offset: Vector3 = Vector3.ZERO
+@export_subgroup("Misc_properties")
+@export var bucket_spawn_offset: Vector3 = Vector3.ZERO
 
 
 func _ready() -> void:
@@ -143,7 +145,29 @@ func _ready() -> void:
 			_fog_focus.focus_node = fog_focus
 		
 		_fog_focus.offset = fog_offset
-
+	
+	if SaveManager.get_data().has_bucket:
+		var bucket: CharacterBody3D = load("res://scene/object/interactive/bucket.tscn").instantiate()
+		var spawn_pos: Vector3 = Vector3.ZERO
+		
+		if _player_instance.player_stats.scene_info != []:
+			for spawn in get_tree().get_nodes_in_group("spawn"):
+				if [spawn.scene_path, spawn.warp_id] == _player_instance.player_stats.scene_info:
+					spawn_pos = spawn.global_position
+					
+					match SaveManager.get_data().bucket_direction:
+						0:
+							spawn_pos.z += 1.0
+						1:
+							spawn_pos.x += 1.0
+						2:
+							spawn_pos.x -= 1.0
+						3:
+							spawn_pos.z -= 1.0
+		
+		add_child(bucket)
+		bucket.global_position = spawn_pos + bucket_spawn_offset
+	
 	if spawn_player:
 		if school_preset:
 			_player_instance.control_mode = 1
