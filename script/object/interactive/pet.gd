@@ -18,8 +18,6 @@ const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 @export var sprite_size: float = 0.03:
 	set(value):
 		sprite_size = value
-		if Engine.is_editor_hint():
-			pet_sprite3d.pixel_size = value
 
 @export var frames: Vector2 = Vector2i(1, 1):
 	set(value):

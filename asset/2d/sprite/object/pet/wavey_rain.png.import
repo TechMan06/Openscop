@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yaa82ugjyjui"
-path.s3tc="res://.godot/imported/wavey.png-26057e137717fdd91c6807cc8f1ef0c1.s3tc.ctex"
+uid="uid://d4gy3onttbdlu"
+path="res://.godot/imported/wavey_rain.png-fa333c3a1e5a976240b2f62c36c87e17.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/2d/ui/pause/pets/wavey.png"
-dest_files=["res://.godot/imported/wavey.png-26057e137717fdd91c6807cc8f1ef0c1.s3tc.ctex"]
+source_file="res://asset/2d/sprite/object/pet/wavey_rain.png"
+dest_files=["res://.godot/imported/wavey_rain.png-fa333c3a1e5a976240b2f62c36c87e17.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
