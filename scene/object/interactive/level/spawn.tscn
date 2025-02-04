@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bvl6325rdndwu"]
 
-[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="1_5obe7"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="1_5obe7"]
+
 
 [node name="SpawnObject" type="Marker3D" groups=["spawn"]]
 script = ExtResource("1_5obe7")

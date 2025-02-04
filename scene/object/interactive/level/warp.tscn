@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dn6hdyapwjmyp"]
 
-[ext_resource type="Script" path="res://script/object/interactive/warp.gd" id="1_gnr67"]
+[ext_resource type="Script" path="res://script/object/interactive/level/warp.gd" id="1_gnr67"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_yolch"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_d4cf1"]
 

@@ -13,10 +13,10 @@
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="13_r885y"]
 [ext_resource type="ArrayMesh" uid="uid://cyhgrkw2vxfga" path="res://asset/3d/room/gift/giftplane2.obj" id="14_aw5fm"]
 [ext_resource type="Resource" uid="uid://by8kf70db6lcq" path="res://resource/textbox/default.tres" id="14_y344j"]
-[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="15_frvro"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/common/warp.tscn" id="15_frvro"]
 [ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="16_4v1qo"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="16_6mfco"]
-[ext_resource type="PackedScene" uid="uid://cmc5a5ano61b3" path="res://scene/object/interactive/camera_zone.tscn" id="17_vp0c3"]
+[ext_resource type="PackedScene" uid="uid://cmc5a5ano61b3" path="res://scene/object/interactive/common/camera_zone.tscn" id="17_vp0c3"]
 [ext_resource type="Texture2D" uid="uid://d21du64n13ci3" path="res://asset/2d/ui/misc/evencare.png" id="18_aw0g4"]
 
 [sub_resource type="Resource" id="Resource_tgied"]

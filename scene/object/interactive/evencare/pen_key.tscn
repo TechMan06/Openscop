@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://d365rnf22udpd"]
+
+[ext_resource type="Script" path="res://script/object/interactive/evencare/pen_key.gd" id="1_egane"]
+[ext_resource type="ArrayMesh" uid="uid://8br75kw1hflf" path="res://asset/3d/object/pen_key.obj" id="1_ohpdt"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="2_p8dyn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7pw7f"]
+render_priority = 0
+shader = ExtResource("2_p8dyn")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = Vector3(0, 18.435, 0.66)
+
+[node name="PenKey" type="Marker3D"]
+script = ExtResource("1_egane")
+
+[node name="PenKeyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_ohpdt")
+surface_material_override/0 = SubResource("ShaderMaterial_7pw7f")

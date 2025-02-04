@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://itbo1loprmd5"]
 
-[ext_resource type="Script" path="res://script/object/interactive/slope.gd" id="1_wb1eb"]
+[ext_resource type="Script" path="res://script/object/interactive/level/slope.gd" id="1_wb1eb"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_17yav"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_dbgnb"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rbmav"]
 render_priority = 0

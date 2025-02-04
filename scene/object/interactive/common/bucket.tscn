@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dvte0cq377kvg"]
 
-[ext_resource type="Script" path="res://script/object/interactive/bucket.gd" id="1_n5wfk"]
+[ext_resource type="Script" path="res://script/object/interactive/common/bucket.gd" id="1_e7ywb"]
 [ext_resource type="ArrayMesh" uid="uid://pyekwcve55qw" path="res://asset/3d/object/bucket.obj" id="2_5wl3t"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="3_c74fj"]
 [ext_resource type="AudioStream" uid="uid://cw2npidddcrth" path="res://sfx/object/bucket.wav" id="4_cki80"]
@@ -15,7 +15,9 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0j83s"]
 size = Vector3(2, 2, 2)
@@ -39,7 +41,7 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 floor_stop_on_slope = false
-script = ExtResource("1_n5wfk")
+script = ExtResource("1_e7ywb")
 
 [node name="BucketMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_5wl3t")

@@ -12,11 +12,11 @@
 [ext_resource type="ArrayMesh" uid="uid://c4optyemlx3b7" path="res://asset/3d/room/evencare/evencare7_umbrella.obj" id="10_vqk7t"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="11_7of8w"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="11_vcooa"]
-[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="13_wgv2c"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/common/warp.tscn" id="13_wgv2c"]
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="14_c8tg3"]
 [ext_resource type="ArrayMesh" uid="uid://dm46m75hu5jco" path="res://asset/3d/room/evencare/evencare_drawer.obj" id="14_i6px1"]
 [ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="15_srhmi"]
-[ext_resource type="PackedScene" uid="uid://dvte0cq377kvg" path="res://scene/object/interactive/bucket.tscn" id="17_vfk1n"]
+[ext_resource type="PackedScene" uid="uid://dvte0cq377kvg" path="res://scene/object/interactive/common/bucket.tscn" id="17_vfk1n"]
 [ext_resource type="PackedScene" uid="uid://c6yrf7sf0slu7" path="res://scene/object/pet/wavey.tscn" id="18_nwayf"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvts6yrhq4hnm"]
 
-[ext_resource type="Script" path="res://script/object/interactive/pet.gd" id="1_3hxus"]
+[ext_resource type="Script" path="res://script/object/interactive/common/pet.gd" id="1_3hxus"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="2_bw11b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_floj4"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dtdn1qldur8b6"]
 
-[ext_resource type="Script" path="res://script/object/interactive/playback_player.gd" id="1_0yfa2"]
+[ext_resource type="Script" path="res://script/object/interactive/common/playback_player.gd" id="1_0yfa2"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="3_q6yhf"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="4_onfya"]
 [ext_resource type="Script" path="res://script/object/component/entity/common_entity.gd" id="6_kxg0q"]

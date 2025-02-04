@@ -9,14 +9,14 @@
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="4_y663b"]
 [ext_resource type="ArrayMesh" uid="uid://toccg5whc1of" path="res://asset/3d/room/evencare/evencare1_furniture.obj" id="5_s07sf"]
 [ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="6_me583"]
-[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="7_eccxh"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="7_eccxh"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="10_45o2d"]
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="13_7ny22"]
-[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="13_x1fpd"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="13_x1fpd"]
 [ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="14_xiwdi"]
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="15_3ubyt"]
 [ext_resource type="Resource" uid="uid://by8kf70db6lcq" path="res://resource/textbox/default.tres" id="16_0uggr"]
-[ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="16_asxlo"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="16_1p7qn"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("2_nd3hv")
@@ -43,7 +43,9 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="EvenCareRoom1" type="Node3D"]
 script = ExtResource("1_lwxw7")
@@ -128,12 +130,12 @@ textbox_text = "evencare_1"
 
 [node name="SpawnClass" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-script = ExtResource("16_asxlo")
+script = ExtResource("16_1p7qn")
 scene_path = "res://scene/room/gift_plane/gift_plane.tscn"
 
 [node name="SpawnClass2" type="Marker3D" parent="."]
 transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 16, 0, -5)
-script = ExtResource("16_asxlo")
+script = ExtResource("16_1p7qn")
 scene_path = "res://scene/room/level1/room2.tscn"
 
 [node name="Warp" parent="." instance=ExtResource("7_eccxh")]

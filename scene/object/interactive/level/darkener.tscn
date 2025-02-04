@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bckcmwn6qmafx"]
 
-[ext_resource type="Script" path="res://script/object/interactive/darkener.gd" id="1_2o80p"]
+[ext_resource type="Script" path="res://script/object/interactive/level/darkener.gd" id="1_2o80p"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_i6rqe"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_s7kgq"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tl287"]
 

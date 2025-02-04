@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cklrsj73ts2kt"]
 
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="1_5yto6"]
-[ext_resource type="Script" path="res://script/object/interactive/interaction_symbol.gd" id="1_bbuyp"]
+[ext_resource type="Script" path="res://script/object/interactive/common/interaction_symbol.gd" id="1_bbuyp"]
 [ext_resource type="Texture2D" uid="uid://dxoyv5q4hjklf" path="res://asset/2d/sprite/object/interaction.png" id="2_nyrhg"]
 [ext_resource type="AudioStream" uid="uid://2my305c6q1pn" path="res://sfx/ui/interactpopup.wav" id="3_353nq"]
 

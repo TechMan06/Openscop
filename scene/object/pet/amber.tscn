@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://ddg1r775hmlih"]
 
-[ext_resource type="PackedScene" uid="uid://bvts6yrhq4hnm" path="res://scene/object/interactive/pet_object.tscn" id="1_dncr3"]
+[ext_resource type="PackedScene" uid="uid://bvts6yrhq4hnm" path="res://scene/object/interactive/common/pet_object.tscn" id="1_dncr3"]
 [ext_resource type="Script" path="res://script/object/pet/amber.gd" id="1_xopa3"]
 [ext_resource type="AudioStream" uid="uid://fjq4d38a4kgm" path="res://sfx/pets/amber_cry.wav" id="2_g3u3y"]
 [ext_resource type="Texture2D" uid="uid://ckxk4njwl2xl2" path="res://asset/2d/sprite/object/pet/amber.png" id="3_77lqw"]

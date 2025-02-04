@@ -1,9 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cmc5a5ano61b3"]
 
-[ext_resource type="Script" path="res://script/object/interactive/camera_zone.gd" id="1_7aoeq"]
+[ext_resource type="Script" path="res://script/object/interactive/level/camera_zone.gd" id="1_7aoeq"]
 [ext_resource type="Shader" path="res://shader/spatial/solid_0_transparent.gdshader" id="2_nlt41"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="3_2hj5g"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="4_62bld"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
 

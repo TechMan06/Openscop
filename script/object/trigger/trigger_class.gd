@@ -2,7 +2,7 @@
 extends Marker3D
 class_name TriggerClass
 
-const TRIGGER_SCENE: PackedScene = preload("res://scene/object/interactive/interaction_symbol.tscn")
+const TRIGGER_SCENE: PackedScene = preload("res://scene/object/interactive/common/interaction_symbol.tscn")
 
 @export_category("General Properties")
 @export var destroy_after_interaction: bool = false
