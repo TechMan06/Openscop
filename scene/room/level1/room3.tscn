@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://n7ds5jq6om2d"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_cuoxg"]
-[ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_01f37"]
+[ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_5pmcx"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_bxgob"]
 [ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_68pmb"]
 [ext_resource type="ArrayMesh" uid="uid://dbtotylqobgq2" path="res://asset/3d/room/evencare/evencare3.obj" id="5_qv4f5"]
@@ -77,13 +77,14 @@ shader_parameter/use_depth = false
 [node name="level1-room3" type="Node3D"]
 script = ExtResource("1_cuoxg")
 room_name = "level1-room3"
-loading_preset = ExtResource("2_01f37")
+loading_preset = ExtResource("2_5pmcx")
 background_music = 2
 allow_front_movement = false
 camera_distance = 10.0
 limit_camera_horizontal = true
 horizontal_limit = Vector2(2.5, 14)
 environment_settings = SubResource("Resource_thkrr")
+hardcoded_properties = 1
 
 [node name="EvenCareMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("5_qv4f5")

@@ -57,7 +57,7 @@ func _ready() -> void:
 	
 	update_sheet()
 	
-	if player_stats.character_id > 2:
+	if player_stats.character_id > 2 && Global.global_data.gen > 6 && Global.global_data.gen < 9:
 		_movement_speed = 6.0
 	
 	if control_mode == 1:

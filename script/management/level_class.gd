@@ -68,6 +68,12 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export var fog_offset: Vector3 = Vector3.ZERO
 @export_subgroup("Misc_properties")
 @export var bucket_spawn_offset: Vector3 = Vector3.ZERO
+@export var hardcoded_properties: HardcodedProperties = HardcodedProperties.NONE
+
+enum HardcodedProperties {
+	NONE,
+	EVEN_CARE
+}
 
 
 func _ready() -> void:
@@ -82,8 +88,19 @@ func _ready() -> void:
 	SaveManager.get_data().loading_preset = loading_preset
 	SaveManager.get_data().room_path = get_tree().get_current_scene().scene_file_path
 	
-	if loading_preset == load("res://resource/loading_preset/gift_load.tres") && Global.global_data.gen < 5:
-		loading_preset == load("res://resource/loading_preset/gift_load_demo.tres")
+	if RecordingManager.replay:
+		if RecordingManager.demo:
+			level_slogan = "Demo Recording"
+		else:
+			level_slogan = "Recording Playback"
+	
+	match hardcoded_properties:
+		"Even Care":
+			if Global.global_data.gen < 4:
+				loading_preset = load("res://resource/loading_preset/ec_old.tres")
+			elif RecordingManager.demo:
+				loading_preset = load("res://resource/loading_preset/ec_demo.tres")
+	
 	
 	if Global.global_data.gen < 5 || RecordingManager.demo:
 		if background_music == 2:
@@ -250,7 +267,7 @@ func _ready() -> void:
 			RecordingManager.start_recording()
 	else:
 		RecordingManager.stop_recording()
-		
+
 	await self.tree_entered
 	
 	EventBus.room_started.emit(room_name)
@@ -265,7 +282,7 @@ func _process(_delta: float) -> void:
 			printerr("Starting TextboxPreset is missing!")
 	
 	
-	if Input.is_action_just_pressed("pressed_start"):
+	if Input.is_action_just_pressed("pressed_start") && Global.current_controller == 0:
 		if Global.can_pause && Global.global_data.gen > 2:
 			var _pause_instance: Control = PAUSE_SCENE.instantiate()
 			

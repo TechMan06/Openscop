@@ -83,6 +83,9 @@ func _ready() -> void:
 		
 	else:
 		_sprite.texture = character_sheet
+		
+	if player_stats.character_id > 2 && recording_data.gen > 6 && recording_data.gen < 9:
+		_movement_speed = 6.0
 	
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 	

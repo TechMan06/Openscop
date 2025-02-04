@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bl1uu813327tm"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_smfd6"]
-[ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_sdjm4"]
+[ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_f2d36"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_ja0f7"]
 [ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_0pm0j"]
 [ext_resource type="ArrayMesh" uid="uid://p87ajw2pmcuc" path="res://asset/3d/room/evencare/evencare4.obj" id="5_h0ugi"]
@@ -29,12 +29,13 @@ data = PackedVector3Array(5.5, 0, -29.5, 5.5, 1, -17.5, 5.5, 0, -17.5, 2.5, 1, -
 [node name="level1-room4" type="Node3D"]
 script = ExtResource("1_smfd6")
 room_name = "level1-room4"
-loading_preset = ExtResource("2_sdjm4")
+loading_preset = ExtResource("2_f2d36")
 background_music = 2
 level_slogan = "We hope you are enjoying the game."
 spawn_camera_root = false
 environment_settings = SubResource("Resource_thkrr")
 bucket_spawn_offset = Vector3(0, 0, -0.16)
+hardcoded_properties = 1
 
 [node name="EvenCareMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("5_h0ugi")

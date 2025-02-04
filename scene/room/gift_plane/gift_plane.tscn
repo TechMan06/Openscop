@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cdusfi5aiycta"]
+[gd_scene load_steps=31 format=3 uid="uid://cdusfi5aiycta"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_xt1aa"]
 [ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_nqy6i"]
@@ -16,10 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="15_frvro"]
 [ext_resource type="Script" path="res://script/object/interactive/spawn.gd" id="16_4v1qo"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="16_6mfco"]
-[ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="17_l8mtl"]
 [ext_resource type="PackedScene" uid="uid://cmc5a5ano61b3" path="res://scene/object/interactive/camera_zone.tscn" id="17_vp0c3"]
 [ext_resource type="Texture2D" uid="uid://d21du64n13ci3" path="res://asset/2d/ui/misc/evencare.png" id="18_aw0g4"]
-[ext_resource type="Resource" uid="uid://dfvlriw2fctdw" path="res://resource/loading_preset/gift_load_demo.tres" id="19_k4sd1"]
 
 [sub_resource type="Resource" id="Resource_tgied"]
 script = ExtResource("3_l2j63")
@@ -270,26 +268,8 @@ libraries = {
 "": SubResource("AnimationLibrary_jf2k6")
 }
 
-[node name="GenSpecific" type="Node" parent="."]
-script = ExtResource("17_l8mtl")
-gens = Array[int]([6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-demo_exclusive = true
-
-[node name="Warp" parent="GenSpecific" instance=ExtResource("15_frvro")]
+[node name="Warp" parent="." instance=ExtResource("15_frvro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, -17)
-detect_bucket = null
-warp_direction = 3
-scene = "res://scene/room/level1/room1.tscn"
-loading_preset = ExtResource("19_k4sd1")
-
-[node name="GenSpecific2" type="Node" parent="."]
-script = ExtResource("17_l8mtl")
-gens = Array[int]([6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-non_demo_exclusive = true
-
-[node name="Warp" parent="GenSpecific2" instance=ExtResource("15_frvro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, -17)
-detect_bucket = null
 warp_direction = 3
 scene = "res://scene/room/level1/room1.tscn"
 loading_preset = ExtResource("16_6mfco")

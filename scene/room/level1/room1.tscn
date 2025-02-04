@@ -4,13 +4,13 @@
 [ext_resource type="ArrayMesh" uid="uid://b5knwwiu0fmi" path="res://asset/3d/room/evencare/evencare1.obj" id="2_cx80c"]
 [ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_egdq2"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="2_nd3hv"]
+[ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_t6id3"]
 [ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_vv46u"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="4_y663b"]
 [ext_resource type="ArrayMesh" uid="uid://toccg5whc1of" path="res://asset/3d/room/evencare/evencare1_furniture.obj" id="5_s07sf"]
 [ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="6_me583"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/warp.tscn" id="7_eccxh"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="10_45o2d"]
-[ext_resource type="Resource" uid="uid://dfvlriw2fctdw" path="res://resource/loading_preset/gift_load_demo.tres" id="12_6l8xb"]
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="13_7ny22"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/piece.tscn" id="13_x1fpd"]
 [ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="14_xiwdi"]
@@ -47,7 +47,7 @@ shader_parameter/use_depth = false
 [node name="EvenCareRoom1" type="Node3D"]
 script = ExtResource("1_lwxw7")
 room_name = "level1-room1"
-loading_preset = ExtResource("2_egdq2")
+loading_preset = ExtResource("2_t6id3")
 background_music = 2
 allow_front_movement = false
 camera_height = 4.5
@@ -56,6 +56,7 @@ camera_angle = -20.0
 limit_camera_horizontal = true
 horizontal_limit = Vector2(2.5, 14)
 environment_settings = SubResource("Resource_thkrr")
+hardcoded_properties = 1
 
 [node name="EvenCareMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_cx80c")
@@ -134,22 +135,9 @@ transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926
 script = ExtResource("16_asxlo")
 scene_path = "res://scene/room/level1/room2.tscn"
 
-[node name="GenSpecific3" type="Node" parent="."]
-script = ExtResource("14_xiwdi")
-demo_exclusive = true
-
-[node name="Warp" parent="GenSpecific3" instance=ExtResource("7_eccxh")]
+[node name="Warp" parent="." instance=ExtResource("7_eccxh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-warp_direction = 2
-scene = "res://scene/room/gift_plane/gift_plane.tscn"
-loading_preset = ExtResource("12_6l8xb")
-
-[node name="GenSpecific4" type="Node" parent="."]
-script = ExtResource("14_xiwdi")
-non_demo_exclusive = true
-
-[node name="Warp" parent="GenSpecific4" instance=ExtResource("7_eccxh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+detect_bucket = false
 warp_direction = 2
 scene = "res://scene/room/gift_plane/gift_plane.tscn"
 loading_preset = ExtResource("2_egdq2")

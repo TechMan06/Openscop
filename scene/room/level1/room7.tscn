@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://kygho8mygh4t"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_k0qu1"]
-[ext_resource type="Resource" uid="uid://c4owpgwrf8vhu" path="res://resource/loading_preset/gift_load.tres" id="2_417hp"]
+[ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_lbnb3"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_uwger"]
 [ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_og3x2"]
 [ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="5_1xidx"]
@@ -47,7 +47,7 @@ data = PackedVector3Array(11.5, 1, -6.5, 11.5, 0, -6.5, 6.5, 1, -6.5, 6.5, 1, -6
 [node name="level1-room7" type="Node3D"]
 script = ExtResource("1_k0qu1")
 room_name = "level1-room7"
-loading_preset = ExtResource("2_417hp")
+loading_preset = ExtResource("2_lbnb3")
 background_music = 2
 camera_offset = Vector3(1.5, 0, 0)
 allow_front_movement = false
@@ -55,6 +55,7 @@ camera_height = 4.75
 camera_distance = 11.0
 camera_angle = -20.0
 environment_settings = SubResource("Resource_thkrr")
+hardcoded_properties = 1
 
 [node name="GenSpecific" type="Node" parent="."]
 script = ExtResource("5_1xidx")
