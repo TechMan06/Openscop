@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_2ytmj"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_cjus1"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_x3kpc"]
-[ext_resource type="Texture2D" uid="uid://dddijglym2es2" path="res://asset/2d/background/level1_1.png" id="4_3w36v"]
+[ext_resource type="Texture2D" uid="uid://cumwai6dwnqb" path="res://asset/2d/background/level1_6.png" id="4_ce3f6"]
 [ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="6_g3lt6"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_esnrp"]
 [ext_resource type="Texture2D" uid="uid://odg7mxb4ab8" path="res://vlcsnap-2024-11-30-20h34m41s547.png" id="8_ko338"]
@@ -20,8 +20,9 @@
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_x3kpc")
 sky_color = Color(1, 1, 1, 1)
-texture = ExtResource("4_3w36v")
-scroll_speed = 0.25
+texture = ExtResource("4_ce3f6")
+scroll_speed = 0.2
+offset_y = 0.25
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 enable_fog = false

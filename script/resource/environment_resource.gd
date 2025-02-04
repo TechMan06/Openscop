@@ -4,7 +4,8 @@ class_name EnvironmentResource
 @export_category("Sky Properties")
 @export var sky_color: Color = Color(1.0, 1.0, 1.0,1.0)
 @export var texture: Texture2D
-@export var scroll_speed: float = 0.25
+@export var scroll_speed: float = 0.2
+@export var offset_y: float = 0.25
 @export_category("Ambient Properties")
 @export var ambient_color: Color = Color(1.0, 1.0, 1.0,1.0)
 @export var environment_darkness: float = 1.0

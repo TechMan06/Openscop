@@ -22,7 +22,8 @@
 script = ExtResource("2_nd3hv")
 sky_color = Color(1, 1, 1, 1)
 texture = ExtResource("4_vv46u")
-scroll_speed = 0.25
+scroll_speed = 0.2
+offset_y = 0.25
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 enable_fog = false

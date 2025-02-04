@@ -131,6 +131,7 @@ func _ready() -> void:
 												environment_settings.texture.get_height()
 											)
 										)
+		_get_sky().set_shader_parameter("offset_y", environment_settings.offset_y)
 		_get_sky().set_shader_parameter("scroll_speed", environment_settings.scroll_speed)
 	else:
 		_get_sky().set_shader_parameter("sky_color", environment_settings.sky_color)
