@@ -2,7 +2,6 @@
 extends Area3D
 class_name CameraZone
 
-
 @export_category("General Properties")
 @export var target_pos_start: Vector3 = Vector3.ZERO
 @export var anim_speed_start: Vector3 = Vector3(1.0, 1.0, 1.0)

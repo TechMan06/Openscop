@@ -1,7 +1,7 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://ccfgsol4jhgy3"]
 
 [resource]
-bus/0/volume_db = -1.8481
+bus/0/volume_db = -80.0
 bus/1/name = &"HUD_SFX"
 bus/1/solo = false
 bus/1/mute = false

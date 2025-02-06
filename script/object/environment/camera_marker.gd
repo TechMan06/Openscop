@@ -8,6 +8,8 @@ enum CameraModes {
 	FOLLOW, 
 	POV,
 	LERP,
+	PEN_PIANO,
+	NO_CODE,
 	FREE
 }
 
@@ -29,7 +31,6 @@ var limits: Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 var distance_limit: Vector3 = Vector3.ZERO
 var can_move: Array = [true, true, true]
 var camera_speed: float = 0.0
-
 
 @onready var shake_offset: Marker3D = %ShakeOffset
 
@@ -53,7 +54,6 @@ func _anchor_camera() -> void:
 
 
 func _process(delta: float) -> void:
-	
 	if quake_enabled:
 		shake_progress += 100.0 * delta
 		shake_offset.position.y = (sin(shake_progress * shake_speed) + cos(shake_progress * shake_speed)) * shake_amount * quake_enabled
@@ -198,8 +198,8 @@ func set_speed(value: float) -> void:
 	camera_speed = value
 
 
-func _on_camera_zone_spawned(camera_zone: CameraZone) -> void:
-	camera_zone.camera_marker = self
+func _on_camera_zone_spawned(zone: Node3D) -> void:
+	zone.camera_marker = self
 
 
 func do_earthquake(enable: bool) -> void:
@@ -215,3 +215,7 @@ func set_shake_amount(value: float) -> void:
 
 func set_shake_speed(value: float) -> void:
 	shake_speed = value
+
+
+func get_camera() -> Camera3D:
+	return get_child(0).get_child(0)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d365rnf22udpd"]
+[gd_scene load_steps=6 format=3 uid="uid://d365rnf22udpd"]
 
 [ext_resource type="Script" path="res://script/object/interactive/evencare/pen_key.gd" id="1_egane"]
 [ext_resource type="ArrayMesh" uid="uid://8br75kw1hflf" path="res://asset/3d/object/pen_key.obj" id="1_ohpdt"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="2_p8dyn"]
+[ext_resource type="AudioStream" uid="uid://chf0e4pteu5ce" path="res://sfx/object/pen-piano.wav" id="4_06vtq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7pw7f"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_p8dyn")
 shader_parameter/use_fog = true
@@ -24,3 +26,8 @@ script = ExtResource("1_egane")
 [node name="PenKeyMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_ohpdt")
 surface_material_override/0 = SubResource("ShaderMaterial_7pw7f")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_06vtq")
+unit_size = 20.0
+bus = &"SFX"

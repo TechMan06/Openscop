@@ -1,80 +1,36 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0qe72ysq646f"]
+[gd_scene load_steps=6 format=3 uid="uid://c0qe72ysq646f"]
 
 [ext_resource type="Script" path="res://script/object/interactive/evencare/pen_keys.gd" id="1_bs62s"]
 [ext_resource type="Shader" path="res://shader/spatial/solid_0_transparent.gdshader" id="2_eafrx"]
-[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="3_fjscs"]
-[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="4_pc7jj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
+size = Vector3(1, 1, 3)
 
-[sub_resource type="BoxMesh" id="BoxMesh_vm5i8"]
+[sub_resource type="BoxMesh" id="BoxMesh_r26ec"]
+size = Vector3(1, 1, 3)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vo5tp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_so4lm"]
 render_priority = 0
 shader = ExtResource("2_eafrx")
 shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xhjc"]
-render_priority = 0
-shader = ExtResource("3_fjscs")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(0, 0.25098, 1, 1)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("4_pc7jj")
-shader_parameter/billboard = true
-shader_parameter/y_billboard = false
-shader_parameter/animate = null
-shader_parameter/animation_frames = null
-shader_parameter/animation_speed = null
-shader_parameter/per_quad_depth = false
-shader_parameter/adjustable_depth = false
-shader_parameter/depth_offset = null
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bas2"]
-render_priority = 0
-shader = ExtResource("3_fjscs")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(0.266667, 0.447059, 0.0862745, 1)
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("4_pc7jj")
-shader_parameter/billboard = true
-shader_parameter/y_billboard = false
-shader_parameter/animate = null
-shader_parameter/animation_frames = null
-shader_parameter/animation_speed = null
-shader_parameter/per_quad_depth = false
-shader_parameter/adjustable_depth = false
-shader_parameter/depth_offset = null
-
-[node name="ZoneArea" type="Area3D"]
+[node name="PianoArea" type="Area3D"]
 script = ExtResource("1_bs62s")
+key_amount = null
+camera_speed = null
 
-[node name="ZoneCollision" type="CollisionShape3D" parent="."]
+[node name="PianoCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_j21mq")
 
-[node name="ZoneMesh" type="MeshInstance3D" parent="ZoneCollision"]
-mesh = SubResource("BoxMesh_vm5i8")
+[node name="ZoneMesh" type="MeshInstance3D" parent="PianoCollision"]
+mesh = SubResource("BoxMesh_r26ec")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_vo5tp")
+surface_material_override/0 = SubResource("ShaderMaterial_so4lm")
 
 [node name="CameraFocus" type="Marker3D" parent="."]
 transform = Transform3D(0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="KeyStart" type="Sprite3D" parent="."]
-material_override = SubResource("ShaderMaterial_5xhjc")
-offset = Vector2(0, 32)
-pixel_size = 0.03
-texture = ExtResource("4_pc7jj")
-hframes = 5
-vframes = 5
-
-[node name="KeyEnd" type="Sprite3D" parent="."]
-material_override = SubResource("ShaderMaterial_8bas2")
-offset = Vector2(0, 32)
-pixel_size = 0.03
-texture = ExtResource("4_pc7jj")
-hframes = 5
-vframes = 5
+[node name="Keys" type="Marker3D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

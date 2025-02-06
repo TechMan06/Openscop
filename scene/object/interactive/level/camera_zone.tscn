@@ -5,10 +5,10 @@
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="3_2hj5g"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="4_62bld"]
 
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vm5i8"]
+flip_faces = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vo5tp"]
 render_priority = 0
@@ -20,26 +20,32 @@ render_priority = 0
 shader = ExtResource("3_2hj5g")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(0, 0.25098, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_62bld")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("4_62bld")
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8bas2"]
 render_priority = 0
 shader = ExtResource("3_2hj5g")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(0.266667, 0.447059, 0.0862745, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_62bld")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("4_62bld")
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="ZoneArea" type="Area3D"]
 script = ExtResource("1_7aoeq")
