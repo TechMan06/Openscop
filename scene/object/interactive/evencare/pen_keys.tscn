@@ -16,13 +16,13 @@ shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
 
 [node name="PianoArea" type="Area3D"]
 script = ExtResource("1_bs62s")
-key_amount = null
-camera_speed = null
 
 [node name="PianoCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.25, 0, 0)
 shape = SubResource("BoxShape3D_j21mq")
 
 [node name="ZoneMesh" type="MeshInstance3D" parent="PianoCollision"]
+transform = Transform3D(19.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_r26ec")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_so4lm")

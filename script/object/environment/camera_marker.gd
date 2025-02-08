@@ -10,6 +10,7 @@ enum CameraModes {
 	LERP,
 	PEN_PIANO,
 	NO_CODE,
+	STATIC_CAMERA,
 	FREE
 }
 
@@ -126,7 +127,6 @@ func _process(delta: float) -> void:
 												focus_node.global_position, 
 												camera_speed * delta
 											)
-			
 			CameraModes.FREE:
 				if Input.is_action_pressed("shift"):
 					if Input.is_action_pressed("ui_up"):
@@ -158,6 +158,10 @@ func _process(delta: float) -> void:
 					
 					if Input.is_action_pressed("ui_page_down"):
 						get_child(0).get_child(0).global_position.y -= 0.1
+
+
+func set_top_level(value: bool) -> void:
+	get_child(0).get_child(0).set_as_top_level(value)
 
 
 func set_focus(node: Node3D) -> void:

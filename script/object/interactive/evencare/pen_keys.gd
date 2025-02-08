@@ -29,10 +29,11 @@ var current_tile: int = -1:
 				piano_key.pressed = false
 		
 var inside_zone: bool = false
-var og_camera: Array[Vector3] = [Vector3.ZERO, Vector3.ZERO]
+var og_camera: Array[Vector3] = [Vector3.ZERO, Vector3.ZERO, Vector3.ZERO]
 var og_marker: Vector3
 var target_camera: Array[Vector3] = [Vector3.ZERO, Vector3.ZERO]
 var x_offset: float = 0.0
+var follow_camera: bool = false
 
 @onready var camera_focus: Marker3D = $CameraFocus
 @onready var zone_collision = $PianoCollision
@@ -75,7 +76,12 @@ func _process(_delta: float) -> void:
 	else:
 		if player != null && inside_zone:
 			current_tile = ((global_position.x + 0.5) - player.global_position.x) / KEY_SPACE
-			x_offset = ((global_position.x - player.global_position.x) / 2.0) + global_position.x
+			x_offset = ((player.global_position.x - global_position.x) / 2.0)
+			
+			if follow_camera:
+				#camera_marker.set_top_level(true)
+				camera_marker.get_child(0).global_position.x = x_offset
+
 
 func get_anim_speed(target_pos: Vector3) -> float:
 	var percentage: float = (
@@ -97,20 +103,18 @@ func _on_body_entered(body) -> void:
 		
 		if camera != null:
 			camera_marker.camera_mode = camera_marker.CameraModes.NO_CODE
+			camera_marker.global_position.x = global_position.x
 			og_marker = camera_marker.global_position
 			og_camera[0] = camera_marker.get_camera().position
 			og_camera[1] = camera_marker.get_camera().rotation
+			og_camera[2] = camera_marker.global_position
 			
 			var rotmove_camera_in: Tween = create_tween().set_parallel()
 			
 			rotmove_camera_in.tween_property(
 											camera_marker.get_camera(),
 											"global_position",
-											Vector3(
-														target_camera[0].x + x_offset + camera_marker.global_position.x,
-														target_camera[0].y,
-														target_camera[0].z
-													),
+											target_camera[0],
 											camera_speed *  get_anim_speed(target_camera[0])
 			).set_trans(Tween.TRANS_SINE)
 			
@@ -120,13 +124,22 @@ func _on_body_entered(body) -> void:
 											target_camera[1],
 											camera_speed *  get_anim_speed(target_camera[1])
 			).set_trans(Tween.TRANS_SINE)
+			
+			await rotmove_camera_in.finished
+			
+			follow_camera = true
 
 
 func _on_body_exited(body) -> void:
+	follow_camera = false
+	x_offset = 0.0
 	inside_zone = false
 	current_tile = -1
 	
 	if camera != null:
+		camera_marker.get_child(0).position.x = 0.0
+		camera_marker.global_position.x = player.global_position.x + 1.0
 		camera_marker.camera_mode = camera_marker.CameraModes.FOLLOW
 		camera_marker.get_camera().position = og_camera[0]
 		camera_marker.get_camera().rotation = og_camera[1]
+		#camera_marker.global_position.x = x_offset

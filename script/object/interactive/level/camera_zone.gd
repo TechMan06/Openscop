@@ -139,6 +139,7 @@ func _on_body_exited(body: Node3D) -> void:
 													target_pos_end.x, 
 													anim_speed_end.x * get_anim_speed(target_pos_end)
 												).set_trans(Tween.TRANS_SINE)
+					
 					if !move_parallel_start:
 						await _x_animation.finished
 				
@@ -151,6 +152,7 @@ func _on_body_exited(body: Node3D) -> void:
 													target_pos_end.y, 
 													anim_speed_end.y * get_anim_speed(target_pos_end)
 												).set_trans(Tween.TRANS_SINE)
+					
 					if !move_parallel_start:
 						await _y_animation.finished
 				
