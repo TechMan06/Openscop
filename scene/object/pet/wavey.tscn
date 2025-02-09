@@ -41,14 +41,14 @@ shader_parameter/depth_offset = null
 [node name="WaveySprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
 material_override = SubResource("ShaderMaterial_60efs")
-pixel_size = 0.022
+pixel_size = 0.029
 texture = ExtResource("2_kqqhm")
 hframes = 10
 
 [node name="RainSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 material_override = SubResource("ShaderMaterial_2pjth")
-pixel_size = 0.025
+pixel_size = 0.035
 texture = ExtResource("3_yk64h")
 hframes = 9
 vframes = 4

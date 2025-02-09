@@ -5,9 +5,10 @@ const KEY_SCENE: PackedScene = preload("res://scene/object/interactive/evencare/
 const KEY_SPACE: float = 1.3
 
 @export_category("General Properties")
-@export var key_amount: int = 15
+@export_range(2, 25) var key_amount: int = 15
 @export var camera: Node3D
 @export var camera_speed: float = 0.5
+@export var treadmill: Node3D
 
 var player: Player
 var key_pos: float = 0.0
@@ -103,6 +104,7 @@ func _on_body_entered(body) -> void:
 		player = body
 		inside_zone = true
 		x_offset = ((player.global_position.x - global_position.x) / 2.0) + target_camera[0].x
+		player.player_stats.entity_y = 0.125
 		
 		if camera != null:
 			camera_marker.camera_mode = camera_marker.CameraModes.NO_CODE
@@ -135,13 +137,6 @@ func _on_body_entered(body) -> void:
 											camera_speed *  get_anim_speed(target_camera[0])
 			).set_trans(Tween.TRANS_SINE)
 			
-#			rotmove_camera_in.tween_property(
-#											camera_marker.get_camera(),
-#											"global_position:x",
-#											target_camera[0].x,
-#											camera_speed *  get_anim_speed(target_camera[0])
-#			).set_trans(Tween.TRANS_SINE)
-			
 			rotmove_camera_in.tween_property(
 											camera_marker.get_camera(),
 											"rotation",
@@ -155,6 +150,7 @@ func _on_body_entered(body) -> void:
 
 
 func _on_body_exited(body) -> void:
+	player.player_stats.entity_y = 0.0
 	follow_camera = false
 	x_offset = 0.0
 	inside_zone = false
