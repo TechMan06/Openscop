@@ -74,13 +74,14 @@ func _process(_delta: float) -> void:
 		zone_collision.get_child(0).scale.x = KEY_SPACE * key_amount
 		zone_collision.position.x = ((zone_collision.get_child(0).scale.x / 2.0) - 0.5) * -1.0 
 	else:
-		if player != null && inside_zone:
-			current_tile = ((global_position.x + 0.5) - player.global_position.x) / KEY_SPACE
-			x_offset = ((player.global_position.x - global_position.x) / 2.0)
+		if player != null:
+			x_offset = ((player.global_position.x - global_position.x) / 2.0) + target_camera[0].x
 			
-			if follow_camera:
-				#camera_marker.set_top_level(true)
-				camera_marker.get_child(0).global_position.x = x_offset
+			if inside_zone:
+				current_tile = ((global_position.x + 0.5) - player.global_position.x) / KEY_SPACE
+				
+				if follow_camera:
+					camera_marker.get_child(0).global_position.x = x_offset
 
 
 func get_anim_speed(target_pos: Vector3) -> float:
@@ -88,6 +89,7 @@ func get_anim_speed(target_pos: Vector3) -> float:
 								100.0 - 
 								(100 / camera_focus.global_position.distance_to(target_pos))
 							) * 0.01
+	
 	return percentage
 
 
@@ -100,10 +102,11 @@ func _on_body_entered(body) -> void:
 	if body is Player:
 		player = body
 		inside_zone = true
+		x_offset = ((player.global_position.x - global_position.x) / 2.0) + target_camera[0].x
 		
 		if camera != null:
 			camera_marker.camera_mode = camera_marker.CameraModes.NO_CODE
-			camera_marker.global_position.x = global_position.x
+			print(camera_marker.get_child(0).global_position.x)
 			og_marker = camera_marker.global_position
 			og_camera[0] = camera_marker.get_camera().position
 			og_camera[1] = camera_marker.get_camera().rotation
@@ -113,10 +116,31 @@ func _on_body_entered(body) -> void:
 			
 			rotmove_camera_in.tween_property(
 											camera_marker.get_camera(),
-											"global_position",
-											target_camera[0],
+											"global_position:z",
+											target_camera[0].z,
 											camera_speed *  get_anim_speed(target_camera[0])
 			).set_trans(Tween.TRANS_SINE)
+			
+			rotmove_camera_in.tween_property(
+											camera_marker.get_camera(),
+											"global_position:y",
+											target_camera[0].y,
+											camera_speed *  get_anim_speed(target_camera[0])
+			).set_trans(Tween.TRANS_SINE)
+			
+			rotmove_camera_in.tween_property(
+											camera_marker.get_child(0),
+											"global_position:x",
+											x_offset,
+											camera_speed *  get_anim_speed(target_camera[0])
+			).set_trans(Tween.TRANS_SINE)
+			
+#			rotmove_camera_in.tween_property(
+#											camera_marker.get_camera(),
+#											"global_position:x",
+#											target_camera[0].x,
+#											camera_speed *  get_anim_speed(target_camera[0])
+#			).set_trans(Tween.TRANS_SINE)
 			
 			rotmove_camera_in.tween_property(
 											camera_marker.get_camera(),
@@ -142,4 +166,3 @@ func _on_body_exited(body) -> void:
 		camera_marker.camera_mode = camera_marker.CameraModes.FOLLOW
 		camera_marker.get_camera().position = og_camera[0]
 		camera_marker.get_camera().rotation = og_camera[1]
-		#camera_marker.global_position.x = x_offset
