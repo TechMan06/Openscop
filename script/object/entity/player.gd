@@ -139,6 +139,7 @@ func _handle_input() -> void:
 		_v = 0.0
 	
 	if control_device == 0 && control_mode < 2:
+		
 		_v = (
 				(
 					Input.get_action_strength("pressed_down") 

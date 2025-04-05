@@ -199,7 +199,7 @@ func _finish_replay() -> void:
 		
 		await get_tree().create_timer(HUD.FADE_SPEED).timeout
 		
-		HUD.show_label(false, "", 0)
+		HUD.display_label(false, "", 0)
 	else:
 		demo = false
 		GameManager.reset_game()
@@ -225,7 +225,7 @@ func load_recording(filename: String, gen: int = 8) -> void:
 		await get_tree().create_timer(HUD.FADE_SPEED).timeout
 		
 		if !demo:
-			HUD.show_label(true, filename , gen)
+			HUD.display_label(true, filename , gen)
 		
 		HUD.demo_card.play(&"on")
 		

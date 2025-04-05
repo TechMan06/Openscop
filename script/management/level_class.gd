@@ -112,6 +112,10 @@ func _ready() -> void:
 		
 		environment_settings = EnvironmentResource.new()
 	
+	if environment_settings == null:
+		environment_settings = EnvironmentResource.new()
+		printerr("Environment Settings are missing, created blank environment as placeholder!")
+	
 	environment_obj.environment = Environment.new()
 	
 	_get_environment().set_ambient_light_color(environment_settings.ambient_color)
@@ -120,6 +124,7 @@ func _ready() -> void:
 	_get_environment().sky = Sky.new()
 	_get_environment().sky.sky_material = ShaderMaterial.new()
 	_get_sky().shader = load("res://shader/sky/sky.gdshader")
+	
 	
 	if environment_settings.texture != null:
 		_get_sky().set_shader_parameter("is_color", false)

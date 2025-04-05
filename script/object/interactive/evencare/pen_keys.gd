@@ -12,8 +12,6 @@ const KEY_SPACE: float = 1.3
 
 var player: Player
 var key_pos: float = 0.0
-var _original_pos: Vector3
-var _animation_flags: Array[bool] = [false, false, false]
 var camera_marker: CameraMarker
 var current_tile: int = -1:
 	set(value):
@@ -108,7 +106,7 @@ func _on_body_entered(body) -> void:
 		
 		if camera != null:
 			camera_marker.camera_mode = camera_marker.CameraModes.NO_CODE
-			print(camera_marker.get_child(0).global_position.x)
+			
 			og_marker = camera_marker.global_position
 			og_camera[0] = camera_marker.get_camera().position
 			og_camera[1] = camera_marker.get_camera().rotation
@@ -149,7 +147,7 @@ func _on_body_entered(body) -> void:
 			follow_camera = true
 
 
-func _on_body_exited(body) -> void:
+func _on_body_exited(_body: Node3D) -> void:
 	player.player_stats.entity_y = 0.0
 	follow_camera = false
 	x_offset = 0.0

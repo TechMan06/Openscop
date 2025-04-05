@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3sov8vsf3ey3"]
 
 [ext_resource type="ArrayMesh" uid="uid://bpbox33uawn7g" path="res://asset/3d/object/cage.obj" id="1_f6uii"]
-[ext_resource type="Script" path="res://script/object/interactive/cage.gd" id="1_hifba"]
+[ext_resource type="Script" path="res://script/object/interactive/evencare/cage.gd" id="1_hifba"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="2_m3d8k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kd2en"]

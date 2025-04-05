@@ -529,6 +529,7 @@ bus = &"Music"
 
 [node name="Whistle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_pydtj")
+volume_db = -2.0
 bus = &"HUD_SFX"
 
 [node name="FileSelected" type="AudioStreamPlayer" parent="."]

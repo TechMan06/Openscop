@@ -70,7 +70,7 @@ func reset_game() -> void:
 	
 	await get_tree().create_timer(HUD.FADE_SPEED, true).timeout
 	
-	HUD.show_label(false, "", 0)
+	HUD.display_label(false, "", 0)
 	EventBus.destroy_hud.emit()
 
 

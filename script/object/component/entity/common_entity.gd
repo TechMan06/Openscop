@@ -6,7 +6,7 @@ class_name EntityComponent
 
 
 func _physics_process(delta: float) -> void:
-	if Vector3(entity.velocity.x, 0,entity.velocity.z).length() > entity._ANIMATION_THRESHOLD:
+	if Vector3(entity.target_velocity.x, 0,entity.target_velocity.y).length() > entity._ANIMATION_THRESHOLD:
 		entity.is_walking = true
 	else:
 		entity.is_walking = false
@@ -52,24 +52,42 @@ func _physics_process(delta: float) -> void:
 	if entity.control_mode == 0:
 		var normalized_h_v: Vector2 = Vector2(entity._h, entity._v).normalized()
 		
-		entity.velocity.z = lerp(
-							entity.velocity.z, 
-							normalized_h_v.y * entity._movement_speed, 
-							delta * entity._ACCELERATION
-						)
+		if !entity._treadmill:
+			entity.target_velocity.y = lerp(
+								entity.target_velocity.y, 
+								normalized_h_v.y * entity._movement_speed, 
+								delta * entity._ACCELERATION
+							)
+		
+		
+			entity.velocity.z = entity.target_velocity.y
+		else:
+			if entity._v != 0.0 and entity.target_velocity.y == 0.0:
+				entity.target_velocity.y = entity._v
+				print("RESET VELOCITY")
+			
+			entity.target_velocity.y = lerp(
+								entity.target_velocity.y, 
+								0.0, 
+								delta * entity._ACCELERATION
+							)
+			
+			entity.velocity.z = 0.0
 		
 		if entity.player_stats != null && entity.player_stats.character_id == 2:
-			entity.velocity.x = lerp(
-										entity.velocity.x, 
+			entity.target_velocity.x = lerp(
+										entity.target_velocity.x, 
 										normalized_h_v.x * -1.0 * entity._movement_speed, 
 										delta * entity._ACCELERATION
 									)
 		else:
-			entity.velocity.x = lerp(
-										entity.velocity.x, 
+			entity.target_velocity.x = lerp(
+										entity.target_velocity.x, 
 										normalized_h_v.x * entity._movement_speed, 
 										delta * entity._ACCELERATION
 									)
+			
+			entity.velocity.x = entity.target_velocity.x
 	
 	if entity.control_mode == 1:
 		var entity_speed: float = entity._v * entity._movement_speed * -1.0

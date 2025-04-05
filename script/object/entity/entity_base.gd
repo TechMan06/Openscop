@@ -1,5 +1,5 @@
 @icon("res://icon/entity.png")
-class_name Entity
+class_name Entity ## Base object for all "player", "concurrent player" or "ghost" objects.
 extends CharacterBody3D
 
 const _ACCELERATION: int = 8
@@ -15,12 +15,13 @@ var p2talk_word: String = ""
 
 # MOVEMENT VARIABLES
 var is_walking: bool = false
+var target_velocity: Vector2 = Vector2.ZERO
 var _v: float = 0.0
 var _h: float = 0.0
 var _angle: float = 0.0
 var _movement_speed: float = 5.0
 var _treadmill: bool = false
-var _treadmill_z: float = 0.0
+
 
 #ANIMATION PROPERTIES
 var direction: int = 0

@@ -1,8 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://lgbv24nsmb0f"]
+[gd_scene load_steps=19 format=3 uid="uid://lgbv24nsmb0f"]
 
 [ext_resource type="ArrayMesh" uid="uid://be8txj43mu4tq" path="res://asset/3d/object/treadmill.obj" id="1_bux6o"]
 [ext_resource type="Script" path="res://script/object/interactive/evencare/treadmill.gd" id="1_ykttu"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="2_lo61h"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="4_yp4d8"]
+[ext_resource type="Texture2D" uid="uid://bllx5ago2plgo" path="res://asset/3d/room/evencare/pen_treadmill.png" id="5_xeeqf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g44qn"]
+size = Vector3(0.25, 0.25, 0.525)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e5s5g"]
+size = Vector3(0.25, 0.25, 0.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q8mox"]
 render_priority = 0
@@ -18,21 +26,119 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_g44qn"]
-size = Vector3(0.25, 0.25, 0.5)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cd0it"]
+render_priority = 0
+shader = ExtResource("4_yp4d8")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("5_xeeqf")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
-[node name="PenTreadmill" type="Area3D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_36mhp"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehnse"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqva7"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd33o"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a1p0"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ebv4"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avcdd"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6r22"]
+atlas = ExtResource("5_xeeqf")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c83ht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36mhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehnse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqva7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd33o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a1p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ebv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avcdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6r22")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="PenTreadmill" type="Marker3D"]
 script = ExtResource("1_ykttu")
+
+[node name="TreadmillRear" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75)
+
+[node name="TreadmillCollision" type="CollisionShape3D" parent="TreadmillRear"]
+shape = SubResource("BoxShape3D_g44qn")
+
+[node name="Treadmill" type="Area3D" parent="."]
+
+[node name="TreadmillCollision" type="CollisionShape3D" parent="Treadmill"]
+shape = SubResource("BoxShape3D_e5s5g")
+
+[node name="TreadmillFront" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+
+[node name="TreadmillCollision" type="CollisionShape3D" parent="TreadmillFront"]
+shape = SubResource("BoxShape3D_g44qn")
 
 [node name="TreadmillMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_bux6o")
+skeleton = NodePath("../TreadmillRear")
 surface_material_override/0 = SubResource("ShaderMaterial_q8mox")
 
-[node name="TreadmillCollision" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_g44qn")
+[node name="TreadmillTop" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(2.8, 0, 0, 0, -1.78342e-07, 1, 0, -4.08, -4.37114e-08, 0, 0.130561, 0)
+material_override = SubResource("ShaderMaterial_cd0it")
+sprite_frames = SubResource("SpriteFrames_c83ht")
+frame = 7
+frame_progress = 1.0
 
-[node name="TreadmillOrigin" type="Marker3D" parent="."]
-gizmo_extents = 1.0
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="TreadmillRear" to="." method="_on_treadmill_entered_front"]
+[connection signal="body_entered" from="Treadmill" to="." method="_on_treadmill_entered"]
+[connection signal="body_exited" from="Treadmill" to="." method="_on_treadmill_exited"]
+[connection signal="body_entered" from="TreadmillFront" to="." method="_on_treadmill_entered_rear"]

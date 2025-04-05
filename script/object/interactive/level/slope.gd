@@ -2,7 +2,7 @@
 extends Marker3D
 
 
-const DARKENER_SCENE: PackedScene = preload("res://scene/object/interactive/darkener.tscn")
+const DARKENER_SCENE: PackedScene = preload("res://scene/object/interactive/level/darkener.tscn")
 
 var inside_slope: bool = false
 var entity: Entity

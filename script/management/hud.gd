@@ -46,7 +46,7 @@ func create_textbox(preset: TextboxResource = DEFAULT_TEXTBOX, text: String = "N
 	return
 
 
-func show_label(show_label: bool, recording: String, gen: int) -> void:
+func display_label(show_label: bool, recording: String, gen: int) -> void:
 	$RecordingLabel.visible = show_label
 	
 	if show:

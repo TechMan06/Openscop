@@ -63,7 +63,7 @@ func _parse_command(input : Array) -> void:
 		"!nifty":
 			nifty.emit()
 		"!set_char":
-			if input[1] != "":
+			if check_valid_argument(input) != "":
 				load("res://resource/stat/player.tres").character_id = int(input[1])
 				
 				if int(input[1]) >= 0 && int(input[1]) <= 2:
@@ -80,13 +80,13 @@ func _parse_command(input : Array) -> void:
 				console_log("[color=red]Invalid Character! Choose between [/color][color=yellow]0 = Paul[/color][color=red], [/color][color=yellow]1 = Belle[/color][color=red], [/color][color=yellow]2 = Marvin[/color][color=red]![/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!set_char 0[/color]")
 		"!load_rec":
-			if input[1] != "":
+			if check_valid_argument(input) != "":
 				load_recording.emit(input[1])
 			else:
 				console_log("[color=red]Command \"!load_recording\" is missing argument \"Recording Name\"[/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!load_recording auto-Vt7C8EuZ[/color]")
 		"!set_gen":
-			if input[1] != "":
+			if check_valid_argument(input) != "":
 				if int(input[1]) >= 1 && int(input[1]) <= 15:
 					Global.global_data.gen = int(input[1])
 					console_log("[color=purple]Gen set to:[/color] [color=yellow]" + input[1] + "[/color]")
@@ -96,28 +96,28 @@ func _parse_command(input : Array) -> void:
 				console_log("[color=red]Command \"!set_gen\" is missing argument \"Gen Number\"[/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!set_gen 8[/color]")
 		"!save_slot":
-			if input[1] != "":
+			if check_valid_argument(input) != "":
 				SaveManager.save_slot(int(input[1]))
 				console_log("[color=purple]Saved Game to Slot:[/color] [color=yellow]" + input[1] + "[/color]")
 			else:
 				console_log("[color=red]Command \"!save_slot\" is missing argument \"Save Slot\"[/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!save_slot 0[/color]")
 		"!load_slot":
-			if input[1] != "":
+			if check_valid_argument(input) != "":
 				SaveManager.load_slot(int(input[1]))
 				console_log("[color=purple]Loaded Slot:[/color] [color=yellow]" + input[1] + "[/color][color=purple] Data[/color]")
 			else:
 				console_log("[color=red]Command \"!load_slot\" is missing argument \"Data Slot\"[/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!load_slot 0[/color]")
 		"!load_game":
-			if input[1] != "":
+			if check_valid_argument(input) != "":
 				SaveManager.load_game(int(input[1]))
 				console_log("[color=purple]Loaded Game:[/color] [color=yellow]" + input[1] + "[/color][color=purple] Data[/color]")
 			else:
 				console_log("[color=red]Command \"!load_game\" is missing argument \"Data Slot\"[/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!load_game 0[/color]")
 		"!set_camera":
-			match input[1]:
+			match check_valid_argument(input):
 				"copy":
 					set_camera.emit(0)
 				"follow":
@@ -126,13 +126,24 @@ func _parse_command(input : Array) -> void:
 					set_camera.emit(2)
 				"lerp":
 					set_camera.emit(3)
+				"no_code":
+					set_camera.emit(5)
+				"static":
+					set_camera.emit(6)
 				"free":
-					set_camera.emit(4)
+					set_camera.emit(7)
 				_:
 					console_log("[color=red]This Camera Mode does not exist[/color]")
-					console_log("[color=red]Valid Modes:[/color] [color=yellow]copy[/color], [color=yellow]follow[/color], [color=yellow]pov[/color], [color=yellow]lerp[/color], [color=yellow]free[/color].")
+					console_log("[color=red]Valid Modes:[/color] [color=yellow]copy[/color], [color=yellow]follow[/color], [color=yellow]pov[/color], [color=yellow]lerp[/color], [color=yellow]no_code[/color], [color=yellow]static[/color], [color=yellow]free[/color].")
 		_:
 			console_log("[color=red]Invalid Command![/color]")
+
+
+func check_valid_argument(input: Array) -> String:
+	if input.size() > 1:
+		return input[1]
+	else:
+		return ""
 
 
 func console_log(input: String) -> void:
