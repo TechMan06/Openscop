@@ -52,26 +52,15 @@ func _physics_process(delta: float) -> void:
 	if entity.control_mode == 0:
 		var normalized_h_v: Vector2 = Vector2(entity._h, entity._v).normalized()
 		
-		if !entity._treadmill:
-			entity.target_velocity.y = lerp(
+		entity.target_velocity.y = lerp(
 								entity.target_velocity.y, 
 								normalized_h_v.y * entity._movement_speed, 
 								delta * entity._ACCELERATION
 							)
 		
-		
+		if !entity._treadmill:
 			entity.velocity.z = entity.target_velocity.y
 		else:
-			if entity._v != 0.0 and entity.target_velocity.y == 0.0:
-				entity.target_velocity.y = entity._v
-				print("RESET VELOCITY")
-			
-			entity.target_velocity.y = lerp(
-								entity.target_velocity.y, 
-								0.0, 
-								delta * entity._ACCELERATION
-							)
-			
 			entity.velocity.z = 0.0
 		
 		if entity.player_stats != null && entity.player_stats.character_id == 2:
@@ -97,6 +86,3 @@ func _physics_process(delta: float) -> void:
 		entity.velocity = Vector3(0, 0, entity_speed).rotated(Vector3.UP, entity._angle)
 	
 	entity.move_and_slide()
-	
-	#if entity._treadmill:
-		#entity.global_position.z = clamp(entity.global_position.z, entity.global_position.z, entity._treadmill_z)
