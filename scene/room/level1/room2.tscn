@@ -41,7 +41,9 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="EvenCareRoom2" type="Node3D"]
 script = ExtResource("1_ey0xe")
