@@ -34,6 +34,7 @@ var target_camera: Array[Vector3] = [Vector3.ZERO, Vector3.ZERO]
 var x_offset: float = 0.0
 var follow_camera: bool = false
 
+@onready var camera_timer: Timer = $CameraTimer
 @onready var camera_focus: Marker3D = $CameraFocus
 @onready var zone_collision = $PianoCollision
 @onready var keys = $Keys
@@ -66,7 +67,8 @@ func _ready() -> void:
 		
 		zone_collision.get_shape().size.x = KEY_SPACE * key_amount - 1.0
 		zone_collision.position.x = ((zone_collision.get_shape().size.x / 2.0) - 0.25) * -1.0
-
+		
+		camera_timer.wait_time = camera_speed
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -105,6 +107,7 @@ func _on_body_entered(body) -> void:
 		player.player_stats.entity_y = 0.125
 		
 		if camera != null:
+			camera_timer.start()
 			camera_marker.camera_mode = camera_marker.CameraModes.NO_CODE
 			
 			og_marker = camera_marker.global_position
@@ -148,6 +151,9 @@ func _on_body_entered(body) -> void:
 
 
 func _on_body_exited(_body: Node3D) -> void:
+	if camera_timer.time_left > 0.0:
+		await camera_timer.timeout
+	
 	player.player_stats.entity_y = 0.0
 	follow_camera = false
 	x_offset = 0.0

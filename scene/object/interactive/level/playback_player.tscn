@@ -23,9 +23,9 @@ shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/tile_mode = false
-shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="PlaybackPlayer" type="CharacterBody3D"]
 wall_min_slide_angle = 0.0
@@ -60,11 +60,15 @@ fixed_size = true
 texture_filter = 0
 font = ExtResource("7_hbph4")
 
-[node name="EntityComponent" type="Node" parent="." node_paths=PackedStringArray("entity", "entity_sprite")]
+[node name="EntityComponent" type="Node" parent="." node_paths=PackedStringArray("entity", "entity_sprite", "treadmill_timer")]
 script = ExtResource("6_kxg0q")
 entity = NodePath("..")
 entity_sprite = NodePath("../PlayerSprite")
+treadmill_timer = NodePath("../WalkTimer")
 
 [node name="P2TalkComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("7_pevpq")
 entity = NodePath("..")
+
+[node name="WalkTimer" type="Timer" parent="."]
+one_shot = true

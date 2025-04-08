@@ -81,11 +81,15 @@ font = ExtResource("7_s0ikn")
 stream = ExtResource("7_14yd5")
 bus = &"HUD_SFX"
 
-[node name="EntityComponent" type="Node" parent="." node_paths=PackedStringArray("entity", "entity_sprite")]
+[node name="EntityComponent" type="Node" parent="." node_paths=PackedStringArray("entity", "entity_sprite", "treadmill_timer")]
 script = ExtResource("8_vmbjn")
 entity = NodePath("..")
 entity_sprite = NodePath("../PlayerSprite")
+treadmill_timer = NodePath("../WalkTimer")
 
 [node name="P2TalkComponent" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("9_c0wui")
 entity = NodePath("..")
+
+[node name="WalkTimer" type="Timer" parent="."]
+one_shot = true

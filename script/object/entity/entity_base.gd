@@ -21,6 +21,7 @@ var _h: float = 0.0
 var _angle: float = 0.0
 var _movement_speed: float = 5.0
 var _treadmill: bool = false
+var _odd_care: bool = false
 
 
 #ANIMATION PROPERTIES

@@ -3,6 +3,7 @@ class_name EntityComponent
 
 @export var entity: Entity
 @export var entity_sprite: Sprite3D
+@export var treadmill_timer: Timer
 
 
 func _physics_process(delta: float) -> void:
@@ -52,15 +53,41 @@ func _physics_process(delta: float) -> void:
 	if entity.control_mode == 0:
 		var normalized_h_v: Vector2 = Vector2(entity._h, entity._v).normalized()
 		
-		entity.target_velocity.y = lerp(
+		if !entity._treadmill:
+			entity.target_velocity.y = lerp(
 								entity.target_velocity.y, 
 								normalized_h_v.y * entity._movement_speed, 
 								delta * entity._ACCELERATION
 							)
-		
-		if !entity._treadmill:
+			
 			entity.velocity.z = entity.target_velocity.y
 		else:
+			if entity._odd_care:
+				if treadmill_timer.time_left == 0.0:
+					if Input.is_action_pressed("pressed_action"):
+						entity.target_velocity.y = -entity._movement_speed
+						entity.direction = 3
+						treadmill_timer.start()
+				
+					elif Input.is_action_pressed("pressed_triangle"):
+						entity.target_velocity.y = entity._movement_speed
+						entity.direction = 0
+						treadmill_timer.start()
+					else:
+						if (
+								Input.is_action_pressed("pressed_action") or 
+								Input.is_action_pressed("pressed_triangle")
+							): 
+							treadmill_timer.start()
+						
+						entity.target_velocity.y = 0.0
+			else:
+				entity.target_velocity.y = lerp(
+								entity.target_velocity.y, 
+								normalized_h_v.y * entity._movement_speed, 
+								delta * entity._ACCELERATION
+							)
+			
 			entity.velocity.z = 0.0
 		
 		if entity.player_stats != null && entity.player_stats.character_id == 2:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b82sbuuf2py8n"]
+[gd_scene load_steps=20 format=3 uid="uid://b82sbuuf2py8n"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_76lug"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_7hqx8"]
@@ -15,13 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://c0qe72ysq646f" path="res://scene/object/interactive/evencare/pen_keys.tscn" id="13_yadrb"]
 [ext_resource type="Texture2D" uid="uid://deih85r7byxfr" path="res://input.png" id="14_8a0b5"]
 [ext_resource type="PackedScene" uid="uid://lgbv24nsmb0f" path="res://scene/object/interactive/evencare/treadmill.tscn" id="15_03gp8"]
+[ext_resource type="PackedScene" uid="uid://c0rnfdwmvsyi5" path="res://scene/object/interactive/evencare/treadmill_counter.tscn" id="16_vmtl1"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_kipqm")
 sky_color = Color(1, 1, 1, 1)
 texture = ExtResource("4_eqeuo")
 scroll_speed = 0.2
-offset_y = 50.0
+offset_y = 0.25
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 enable_fog = false
@@ -142,3 +143,7 @@ texture = ExtResource("14_8a0b5")
 
 [node name="PenTreadmill" parent="." instance=ExtResource("15_03gp8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
+
+[node name="TreadmillCounter" parent="." node_paths=PackedStringArray("treadmill") instance=ExtResource("16_vmtl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2)
+treadmill = NodePath("../PenTreadmill")

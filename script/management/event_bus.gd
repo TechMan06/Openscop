@@ -15,6 +15,7 @@ signal p2talk_type(word: String, buttons: String)
 
 signal player_spawned(player_obj: Player)
 signal playback_player_spawned(playback_player_obj: PlaybackPlayer)
+
 signal camera_spawned(camera: CameraMarker)
 signal camera_earthquake(value: bool)
 signal camera_shake_amount(value: float)
@@ -29,3 +30,5 @@ signal nifty_finished(texture: Image, background_texture: Image)
 
 signal destroy_pause
 signal destroy_hud
+
+signal room_started(level: Level)

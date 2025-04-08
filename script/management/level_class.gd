@@ -276,7 +276,7 @@ func _ready() -> void:
 
 	await self.tree_entered
 	
-	EventBus.room_started.emit(room_name)
+	EventBus.room_started.emit(self)
 
 
 func _process(_delta: float) -> void:

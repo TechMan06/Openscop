@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bllx5ago2plgo"
-path="res://.godot/imported/pen_treadmill.png-87720dabea7e9883e5a824801127dbb8.ctex"
+path="res://.godot/imported/pen_treadmill.png-7f0d61c907f28f58a0457d9279aaac98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/3d/room/evencare/pen_treadmill.png"
-dest_files=["res://.godot/imported/pen_treadmill.png-87720dabea7e9883e5a824801127dbb8.ctex"]
+source_file="res://asset/2d/sprite/object/pen_treadmill.png"
+dest_files=["res://.godot/imported/pen_treadmill.png-7f0d61c907f28f58a0457d9279aaac98.ctex"]
 
 [params]
 

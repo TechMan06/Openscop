@@ -86,11 +86,15 @@ func _physics_process(_delta: float) -> void:
 
 	if is_walking:
 		if _sprite.hframes > 1 && _sprite.vframes > 1:
-			if !_footstep_sound.playing:
-				if _footstep_sound.stream_paused:
-					_footstep_sound.stream_paused=false
-				else:
-					_footstep_sound.playing=true
+			if !_treadmill:
+				if !_footstep_sound.playing:
+					if _footstep_sound.stream_paused:
+						_footstep_sound.stream_paused = false
+					else:
+						_footstep_sound.playing = true
+			else:
+				_footstep_sound.stream_paused = true
+			
 			create_tween().tween_property(
 											_footstep_sound, 
 											"volume_db", 

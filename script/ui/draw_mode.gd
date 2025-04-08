@@ -47,9 +47,6 @@ func _process(_delta) -> void:
 		Global.draw_mode = false
 		queue_free()
 	
-	x = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
-	y = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
-
 	pixel_origin.position.x += x
 	pixel_origin.position.y += y
 	
@@ -79,6 +76,10 @@ func _process(_delta) -> void:
 		if Input.is_action_just_pressed("pressed_up") and draw_offset.y < 0:
 			draw_offset.y += 32
 	else:
+		x = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
+		y = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
+
+		
 		if Input.is_action_pressed("pressed_action"):
 			if !draw_sound.playing:
 				draw_sound.play()

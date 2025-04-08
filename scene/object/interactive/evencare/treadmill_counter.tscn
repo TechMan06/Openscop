@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0rnfdwmvsyi5"]
+
+[ext_resource type="ArrayMesh" uid="uid://cggt2cveiuupf" path="res://asset/3d/object/treadmill_counter.obj" id="1_peaj4"]
+[ext_resource type="Script" path="res://script/object/interactive/evencare/treadmill_counter.gd" id="1_xs0y8"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="2_8ft5a"]
+[ext_resource type="Texture2D" uid="uid://cpdb03w1y1f6k" path="res://asset/2d/sprite/object/treadmill_counter.png" id="3_up32o"]
+[ext_resource type="AudioStream" uid="uid://nxswtbq2etbm" path="res://sfx/object/treadmill_beep.wav" id="5_oxvl3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ct42k"]
+render_priority = 0
+shader = ExtResource("2_8ft5a")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5dk2q"]
+render_priority = 0
+shader = ExtResource("2_8ft5a")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_up32o")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[node name="TreadmillCounter" type="Marker3D"]
+script = ExtResource("1_xs0y8")
+
+[node name="CounterMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_peaj4")
+surface_material_override/0 = SubResource("ShaderMaterial_ct42k")
+
+[node name="TreadmillSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.075)
+material_override = SubResource("ShaderMaterial_5dk2q")
+pixel_size = 0.04
+texture = ExtResource("3_up32o")
+hframes = 18
+
+[node name="CounterBeep" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_oxvl3")
+volume_db = 80.0
+panning_strength = 2.0
+bus = &"SFX"
