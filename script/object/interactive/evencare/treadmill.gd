@@ -49,6 +49,10 @@ func _on_treadmill_entered(body):
 	if body is Entity:
 		entity_array.push_back(body)
 		body.player_stats.entity_y = 0.125
+		
+		if body.direction != 0 and body.direction != 3:
+			_place_player_on_treadmill(body)
+			_on_treadmill_entered_front(body)
 
 
 func _on_treadmill_exited(body):
@@ -67,10 +71,10 @@ func _place_player_on_treadmill(body: Entity) -> void:
 func _add_number() -> void:
 	for entity in entity_array:
 		if entity is Player:
-			if entity.target_velocity.y > entity._ANIMATION_THRESHOLD:
+			if entity.target_velocity.y > entity._ANIMATION_THRESHOLD * 2.0:
 				backwards = false
 			
-			elif entity.target_velocity.y < -entity._ANIMATION_THRESHOLD:
+			elif entity.target_velocity.y < -entity._ANIMATION_THRESHOLD * 2.0:
 				backwards = true
 	
 			if snapped(entity.target_velocity.y, 0.1) != 0.0:

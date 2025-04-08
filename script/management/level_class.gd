@@ -170,7 +170,7 @@ func _ready() -> void:
 		_fog_focus.offset = fog_offset
 	
 	if SaveManager.get_data().has_bucket:
-		var bucket: CharacterBody3D = load("res://scene/object/interactive/bucket.tscn").instantiate()
+		var bucket: CharacterBody3D = load("res://scene/object/interactive/common/bucket.tscn").instantiate()
 		var spawn_pos: Vector3 = Vector3.ZERO
 		
 		if _player_instance.player_stats.scene_info != []:

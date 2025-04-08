@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0rnfdwmvsyi5"]
+[gd_scene load_steps=10 format=3 uid="uid://c0rnfdwmvsyi5"]
 
 [ext_resource type="ArrayMesh" uid="uid://cggt2cveiuupf" path="res://asset/3d/object/treadmill_counter.obj" id="1_peaj4"]
 [ext_resource type="Script" path="res://script/object/interactive/evencare/treadmill_counter.gd" id="1_xs0y8"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="2_8ft5a"]
 [ext_resource type="Texture2D" uid="uid://cpdb03w1y1f6k" path="res://asset/2d/sprite/object/treadmill_counter.png" id="3_up32o"]
 [ext_resource type="AudioStream" uid="uid://nxswtbq2etbm" path="res://sfx/object/treadmill_beep.wav" id="5_oxvl3"]
+[ext_resource type="AudioStream" uid="uid://ddek3ts2en3ht" path="res://sfx/object/petal_even.wav" id="6_2cekj"]
+[ext_resource type="AudioStream" uid="uid://bnr8swajiw1ll" path="res://sfx/object/petal_odd.wav" id="7_bggyf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ct42k"]
 render_priority = 0
@@ -45,12 +47,25 @@ surface_material_override/0 = SubResource("ShaderMaterial_ct42k")
 [node name="TreadmillSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.075)
 material_override = SubResource("ShaderMaterial_5dk2q")
-pixel_size = 0.04
+pixel_size = 0.0325
 texture = ExtResource("3_up32o")
 hframes = 18
+vframes = 2
 
 [node name="CounterBeep" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_oxvl3")
+volume_db = 80.0
+panning_strength = 2.0
+bus = &"SFX"
+
+[node name="PetalEven" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_2cekj")
+volume_db = 80.0
+panning_strength = 2.0
+bus = &"SFX"
+
+[node name="PetalOdd" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_bggyf")
 volume_db = 80.0
 panning_strength = 2.0
 bus = &"SFX"
