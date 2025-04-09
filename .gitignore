@@ -23,3 +23,5 @@ mono_crash.*.json
 # If someone is found redistributing these files, they will be given an immediate ban from the discord server.
 asset/3d/room/nmp/grass.png
 asset/3d/room/nmp/grass.png.import
+asset/3d/room/nmp/nmp_general.png
+asset/3d/room/nmp/nmp_general.png.import

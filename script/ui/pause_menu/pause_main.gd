@@ -35,6 +35,7 @@ func _ready() -> void:
 	EventBus.destroy_hud.connect(_on_destruction)
 	EventBus.destroy_pause.connect(_on_destruction)
 	EventBus.return_to_pause.connect(_on_return_to_pause)
+	EventBus.crash_game.connect(crash_pause_menu)
 	
 	Global.can_unpause = false
 	get_tree().paused = true
@@ -178,3 +179,7 @@ func _on_destruction() -> void:
 	Global.can_pause = true
 	Global.can_unpause = false
 	queue_free()
+
+
+func crash_pause_menu() -> void:
+	self.set_process_mode(Node.PROCESS_MODE_DISABLED)

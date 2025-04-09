@@ -1,0 +1,99 @@
+[gd_scene load_steps=19 format=3 uid="uid://mm5ja2s7ibpp"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_j8kwn"]
+[ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_pjxfp"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_kmmen"]
+[ext_resource type="Texture2D" uid="uid://ij2vo1bynsi4" path="res://asset/2d/background/level1_0.png" id="4_wmuic"]
+[ext_resource type="Texture2D" uid="uid://dwwohq6xf6gqd" path="res://odd_care.png" id="5_ss855"]
+[ext_resource type="ArrayMesh" uid="uid://53ncqc45l583" path="res://asset/3d/room/oddcare/oddcare0_grass.obj" id="6_hlvbt"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="7_q2pg3"]
+[ext_resource type="Texture2D" uid="uid://btivirpmmqn8" path="res://asset/3d/room/nmp/grass_placeholder.png" id="8_qs6gj"]
+[ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="9_tvn4y"]
+[ext_resource type="ArrayMesh" uid="uid://byjo48vj2a2bb" path="res://asset/3d/room/oddcare/oddcare0.obj" id="10_o7kjr"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="11_fdobg"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="11_wp1ro"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="13_fionc"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="14_mifo2"]
+[ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="15_8lrml"]
+
+[sub_resource type="Resource" id="Resource_uijn0"]
+script = ExtResource("3_kmmen")
+sky_color = Color(1, 1, 1, 1)
+texture = ExtResource("4_wmuic")
+scroll_speed = 0.2
+offset_y = 0.25
+ambient_color = Color(0.89, 0.89, 0.89, 1)
+environment_darkness = 0.73
+enable_fog = false
+fog_color = Color(1, 1, 1, 1)
+fog_radius = 13.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5qe21"]
+data = PackedVector3Array(-0.6, 0, -1.5, -0.6, 0, 1.5, -0.6, 1, -1.5, -0.6, 1, -1.5, -0.6, 0, 1.5, -0.6, 1, 1.5, 0.6, 0, 1.5, 0.6, 0, -1.5, 0.6, 1, 1.5, 0.6, 1, 1.5, 0.6, 0, -1.5, 0.6, 1, -1.5, 2.5, 0, 1.5, 0.6, 0, 1.5, 2.5, 1, 1.5, 2.5, 1, 1.5, 0.6, 0, 1.5, 0.6, 1, 1.5, -0.6, 1, 9.5, -0.6, 1, 7, -0.6, 0, 9.5, -0.6, 0, 9.5, -0.6, 1, 7, -0.6, 0, 7, 0.6, 0, 9.5, 0.6, 0, 7, 0.6, 1, 9.5, 0.6, 1, 9.5, 0.6, 0, 7, 0.6, 1, 7, -1.5, 1, 7, -1.5, 1, 1.5, -1.5, 0, 7, -1.5, 0, 7, -1.5, 1, 1.5, -1.5, 0, 1.5, -1.5, 1, 1.5, -0.6, 1, 1.5, -1.5, 0, 1.5, -1.5, 0, 1.5, -0.6, 1, 1.5, -0.6, 0, 1.5, -1.5, 0, 7, -0.6, 0, 7, -1.5, 1, 7, -1.5, 1, 7, -0.6, 0, 7, -0.6, 1, 7, 2.5, 0, 7, 2.5, 0, 1.5, 2.5, 1, 7, 2.5, 1, 7, 2.5, 0, 1.5, 2.5, 1, 1.5, 2.5, 1, 7, 0.6, 1, 7, 2.5, 0, 7, 2.5, 0, 7, 0.6, 1, 7, 0.6, 0, 7)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blja6"]
+render_priority = 0
+shader = ExtResource("7_q2pg3")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("8_qs6gj")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[node name="OddCareRoom0" type="Node3D"]
+script = ExtResource("1_j8kwn")
+room_name = "level1-room0"
+loading_preset = ExtResource("2_pjxfp")
+allow_recording = false
+spawn_camera_root = false
+environment_settings = SubResource("Resource_uijn0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.927184, 0.374607, 0, -0.374607, 0.927184, 0.5, 3.6, 12.125)
+fov = 45.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8892)
+visible = false
+modulate = Color(1, 1, 1, 0.478431)
+texture = ExtResource("5_ss855")
+
+[node name="LevelBody" type="StaticBody3D" parent="."]
+
+[node name="LevelCollision" type="CollisionShape3D" parent="LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_5qe21")
+
+[node name="Grass" type="MeshInstance3D" parent="."]
+mesh = ExtResource("6_hlvbt")
+surface_material_override/0 = SubResource("ShaderMaterial_blja6")
+
+[node name="TextureLoader" type="Node" parent="Grass"]
+script = ExtResource("9_tvn4y")
+protected_texture_path = "res://asset/3d/room/nmp/grass.png"
+
+[node name="NiftyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("10_o7kjr")
+surface_material_override/0 = ExtResource("11_fdobg")
+script = ExtResource("11_wp1ro")
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+script = ExtResource("13_fionc")
+
+[node name="SpawnClass2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+script = ExtResource("13_fionc")
+scene_path = "res://scene/room/odd_care/room1.tscn"
+
+[node name="Warp" parent="." instance=ExtResource("14_mifo2")]
+warp_direction = 3
+
+[node name="Warp2" parent="." instance=ExtResource("14_mifo2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+scene = "res://scene/room/odd_care/room1.tscn"
+loading_preset = ExtResource("15_8lrml")

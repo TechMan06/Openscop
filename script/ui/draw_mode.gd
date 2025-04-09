@@ -34,7 +34,8 @@ func _ready() -> void:
 		bg_texture.texture = ImageTexture.create_from_image(background_image)
 	else:
 		bg_texture.texture = ImageTexture.create_from_image(background_image)
-
+	
+	EventBus.crash_game.connect(crash_draw_mode)
 
 func _process(_delta) -> void:
 	if Input.is_action_pressed("pressed_start"):
@@ -45,6 +46,8 @@ func _process(_delta) -> void:
 		HUD.play_nifty()
 		BGMusic.increase_volume()
 		Global.draw_mode = false
+	
+	if !Global.draw_mode:
 		queue_free()
 	
 	pixel_origin.position.x += x
@@ -105,3 +108,8 @@ func _process(_delta) -> void:
 				bg_texture.texture = ImageTexture.create_from_image(background_image)
 		else:
 			draw_sound.stop()
+
+
+func crash_draw_mode() -> void:
+	draw_sound.set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	self.set_process_mode(Node.PROCESS_MODE_DISABLED)

@@ -2,6 +2,7 @@
 //https://github.com/MenacingMecha/godot-psx-style-demo
 render_mode shadows_disabled, specular_disabled, depth_draw_opaque;
 
+global uniform float float_time;
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
 global uniform bool fog_enabled;
 global uniform vec3 fog_pos;
@@ -106,13 +107,13 @@ void vertex()
 	    UV = (UV + tileUvTranslate) * tileUvScale;
 	} else {
 		UV = UV * uv_scale + uv_offset;
-		UV += uv_pan_velocity * TIME;
+		UV += uv_pan_velocity * float_time;
 	}
 #endif
 
 #ifdef SPRITE
 	if (animate) {
-		UV += round(vec2(animation_speed) * TIME) / vec2(animation_frames);
+		UV += round(vec2(animation_speed) * float_time) / vec2(animation_frames);
 	}
 	
 	old_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;

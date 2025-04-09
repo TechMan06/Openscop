@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://byjo48vj2a2bb"
+path="res://.godot/imported/oddcare0.obj-fa51095db4e8ea77703e5ecb2bbd87b7.mesh"
+
+[deps]
+
+files=["res://.godot/imported/oddcare0.obj-fa51095db4e8ea77703e5ecb2bbd87b7.mesh"]
+
+source_file="res://asset/3d/room/oddcare/oddcare0.obj"
+dest_files=["res://.godot/imported/oddcare0.obj-fa51095db4e8ea77703e5ecb2bbd87b7.mesh", "res://.godot/imported/oddcare0.obj-fa51095db4e8ea77703e5ecb2bbd87b7.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

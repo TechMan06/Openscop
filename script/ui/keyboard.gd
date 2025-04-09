@@ -87,6 +87,7 @@ var _inverted_theme_color: Color = (Color.WHITE if background == 3 else Color.BL
 func _ready() -> void:
 	EventBus.destroy_hud.connect(queue_free)
 	EventBus.change_keyboard_bg.connect(_change_background)
+	EventBus.crash_game.connect(crash_keyboard)
 	
 	var _keyboard_row: int = 0
 	
@@ -387,3 +388,7 @@ func _change_background(color_id: int) -> void:
 			letter.add_theme_color_override("font_color", _inverted_theme_color)
 		else:
 			letter.add_theme_color_override("font_color", _theme_color)
+
+
+func crash_keyboard() -> void:
+	self.set_process_mode(Node.PROCESS_MODE_DISABLED)

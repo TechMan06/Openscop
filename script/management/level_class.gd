@@ -72,7 +72,7 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 
 enum HardcodedProperties {
 	NONE,
-	EVEN_CARE
+	ODD_CARE_PIANO_ROOM
 }
 
 
@@ -82,6 +82,9 @@ func _ready() -> void:
 	EventBus.piece_collected.connect(_on_piece_collected)
 	EventBus.nifty_upload.connect(_on_texture_upload)
 	EventBus.nifty_finished.connect(_store_background)
+	EventBus.cage_spawned.connect(_setup_cage)
+	EventBus.cage_state_changed.connect(_on_cage_state_change)
+	EventBus.petal_number_update.connect(_update_petal_number)
 	Console.nifty.connect(_nifty)
 	
 	SaveManager.get_data().room_name = room_name
@@ -195,6 +198,9 @@ func _ready() -> void:
 		if school_preset:
 			_player_instance.control_mode = 1
 		
+		if hardcoded_properties == HardcodedProperties.ODD_CARE_PIANO_ROOM and RecordingManager.demo:
+			_player_instance.odd_care = true
+		
 		add_child(_player_instance)
 		
 		_player_instance.set_footstep_sound(footstep_sound)
@@ -263,7 +269,6 @@ func _ready() -> void:
 		
 		add_child(_camera)
 	
-
 	if allow_recording && GameManager.debug_settings.auto_record:
 		if (
 				!RecordingManager.recording
@@ -273,13 +278,16 @@ func _ready() -> void:
 			RecordingManager.start_recording()
 	else:
 		RecordingManager.stop_recording()
-
+	
 	await self.tree_entered
 	
 	EventBus.room_started.emit(self)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	Global.clock_float += delta
+	RenderingServer.global_shader_parameter_set("float_time", Global.clock_float)
+	
 	if textbox != "":
 		if textbox_preset != null:
 			await HUD.transition_end
@@ -396,3 +404,23 @@ func _nifty() -> void:
 	Global.is_game_paused = true
 	Global.draw_mode = true
 	add_child(_draw_instance)
+
+
+func _setup_cage(cage: Cage) -> void:
+	if SaveManager.get_data().cage.has(room_name):
+		if SaveManager.get_data().cage[room_name].has(str(cage.cage_id)):
+			cage.open = SaveManager.get_data().cage[room_name][str(cage.cage_id)]
+			cage.set_state(cage.open)
+
+
+func _on_cage_state_change(cage_id: int, value: bool) -> void:
+	if !SaveManager.get_data().cage.has(room_name):
+		SaveManager.get_data().cage[room_name] = {
+													str(cage_id) : value
+												}
+	else:
+		SaveManager.get_data().cage[room_name][str(cage_id)] = value
+
+
+func _update_petal_number(value: int) -> void:
+	SaveManager.get_data().petals = value

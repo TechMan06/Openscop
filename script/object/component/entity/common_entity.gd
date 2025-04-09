@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 			
 			entity.velocity.z = entity.target_velocity.y
 		else:
-			if entity._odd_care:
+			if entity.odd_care:
 				if treadmill_timer.time_left == 0.0:
 					if Input.is_action_pressed("pressed_action"):
 						entity.target_velocity.y = -entity._movement_speed

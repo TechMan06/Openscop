@@ -45,6 +45,19 @@ func save_slot(slot: int = 0) -> void:
 	ResourceSaver.save(_data, "user://savedata/save" + str(slot) + ".tres")
 
 
+func save_odd_care(slot: int = 0) -> void:
+	if ResourceLoader.exists("user://savedata/save" + str(slot) + ".tres"):
+		var loaded_old_data: SaveData = load("user://savedata/save" + str(slot) + ".tres")
+		var old_data: SaveData = loaded_old_data.duplicate(true)
+		
+		old_data.corrupted = true
+		old_data.unlocked_odd_care = _data.unlocked_odd_care
+		old_data.petals = _data.petals
+		old_data.cage = _data.cage
+		
+		ResourceSaver.save(old_data, "user://savedata/save" + str(slot) + ".tres")
+
+
 func manage_player_data() -> void:
 	_data.player_data = _data.player_data.duplicate(true)
 	_data.player_data.scene_info = []

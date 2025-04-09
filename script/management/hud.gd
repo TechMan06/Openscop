@@ -20,6 +20,7 @@ const FADE_SPEED: float = 0.5
 func _ready() -> void:
 	EventBus.emit_transition.connect(_on_scene_transition)
 	EventBus.destroy_hud.connect(_on_hud_destruction)
+	EventBus.crash_game.connect(crash_hud)
 	loading_image.visible = false
 	
 	return
@@ -144,3 +145,7 @@ func play_nifty() -> void:
 
 func _on_hud_destruction() -> void:
 	demo_card.play(&"default")
+
+
+func crash_hud() -> void:
+	self.set_process_mode(Node.PROCESS_MODE_DISABLED)

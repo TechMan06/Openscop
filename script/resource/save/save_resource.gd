@@ -14,3 +14,6 @@ class_name SaveData
 #GAME
 @export var pet: Array[String]
 @export var corrupted: bool
+@export var unlocked_odd_care: bool = false
+@export var petals: int = 0
+@export var cage: Dictionary = {}

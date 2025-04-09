@@ -172,8 +172,12 @@ Gift Plane Level Mesh
 Gift Plane Tiles
 Green Pieces
 Loading Screens
-Pen Keyboard Key
-Pen Keyboard Sound
+Odd Care Level Mesh
+Pen Piano Key
+Pen Piano Sound
+Pen Treadmill Counter Model
+Pen Treadmill Counter Sprites
+Pen Treadmill Sprites
 Pause Menu Numbers
 Pink Piece
 Purple Piece
@@ -183,6 +187,7 @@ sort-test Level Mesh
 Sprite Room Tiles
 Title Screen 3D
 Tool Model
+Torus Piece
 
 [color=#00FFFF]CMUDict:[/color]
 P2 to TALK Dictionary:
@@ -238,7 +243,7 @@ Even Care Sign
 Gift Plane Decorations
 Gift Plane Sign
 Switch Model
-Pen Treadmill
+Pen Treadmill Base
 
 [color=#00FFFF]Sam Hayzen:[/color]
 P2 to TALK Phonetic to PSX Button Table
@@ -266,6 +271,7 @@ Wavey Colors
 
 [color=#80aab3]Noogai223:[/color]
 Pause Menu
+Pen Treadmill Counter Sprites
 
 [color=#80aab3]Lad:[/color]
 Pause Menu Pets
@@ -285,12 +291,15 @@ Pause Menu
 File Select
 Keyboard
 Pause Menu
+Pen Treadmill Counter Sprites
 
 [color=#80aab3]Ugng:[/color]
 Pause Menu
+Pen Treadmill Counter Sprites
 
 [color=#80aab3]Wirelex:[/color]
 Pause Menu
+Pen Treadmill Counter Sprites
 School HUD
 
 

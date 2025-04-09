@@ -3,6 +3,7 @@ extends Node
 signal boot_game
 
 var global_data: GlobalData = load("res://resource/management/global_data.tres")
+var clock_float: float = 0.0
 var custom_sheet: ImageTexture
 var is_game_paused: bool = false
 var p2talk_dict: Dictionary = JSON.parse_string(
@@ -20,6 +21,7 @@ var can_unpause: bool = false
 var current_slot: int = 0
 var current_controller: int = 0
 var draw_mode: bool = false
+
 
 
 func _ready() -> void:
@@ -283,3 +285,19 @@ func vector3_average(vector_array: Array[Vector3]) -> Vector3:
 	z = z / vector_array.size() + 1
 	
 	return Vector3(x, y, z)
+
+
+func crash_game(stop_music: bool = true, stop_sfx: bool = true) -> void:
+	SaveManager.save_odd_care(current_slot)
+	RecordingManager.stop_recording()
+	EventBus.crash_game.emit()
+	get_tree().paused = true
+	
+	if stop_music:
+		await get_tree().create_timer(1.0, true).timeout
+		
+		BGMusic.stop()
+	
+	if stop_sfx:
+		AudioServer.set_bus_mute(1, true)
+		AudioServer.set_bus_mute(2, true)

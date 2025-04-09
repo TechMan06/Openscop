@@ -6,7 +6,8 @@
 script = ExtResource("1_38mhe")
 sky_color = Color(0, 0, 0, 1)
 scroll_speed = 0.25
-ambient_color = Color(0.89, 0.89, 0.89, 1)
+offset_y = 0.25
+ambient_color = Color(0.890196, 0.890196, 0.890196, 1)
 environment_darkness = 0.73
 enable_fog = true
 fog_color = Color(0, 0, 0, 1)

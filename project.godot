@@ -258,3 +258,7 @@ fog_enabled={
 "type": "bool",
 "value": false
 }
+float_time={
+"type": "float",
+"value": 0.0
+}
