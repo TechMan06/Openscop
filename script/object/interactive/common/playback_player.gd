@@ -152,23 +152,23 @@ func _physics_process(_delta: float) -> void:
 		else:
 			if recording_reader_p1 <= recording_data.p1_data.size() - 1:
 				if recording_timer == recording_data.p1_data[recording_reader_p1][0]:
-					if recording_data.p1_data[recording_reader_p1][5] != 0:
-						_v = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][5])
-					
 					if recording_data.p1_data[recording_reader_p1][6] != 0:
-						_v = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][6])
+						_v = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][6])
 					
 					if recording_data.p1_data[recording_reader_p1][7] != 0:
-						if flip_x:
-							_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][7])
-						else:
-							_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][7])
+						_v = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][7])
 					
-					if recording_data.p1_data[recording_reader_p1][8] != 0:	
+					if recording_data.p1_data[recording_reader_p1][8] != 0:
 						if flip_x:
-							_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
-						else:
 							_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
+						else:
+							_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
+					
+					if recording_data.p1_data[recording_reader_p1][9] != 0:	
+						if flip_x:
+							_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][9])
+						else:
+							_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][9])
 					
 					if recording_data.p1_data[recording_reader_p1][9] != 0:	
 						await get_tree().physics_frame

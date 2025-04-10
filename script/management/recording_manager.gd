@@ -15,6 +15,7 @@ var recording_reader_p1: int = 0
 var recording_reader_p2: int = 0
 var recording_reader_draw: int = 0
 var recording_data: RecordingData
+var cancel_movement: Array[int]
 
 var input_sim: Array[InputEventAction]
 var input_array: Array[String] = [
@@ -49,11 +50,11 @@ func _physics_process(_delta: float) -> void:
 				check_input() 
 				and Global.current_controller == 0
 				and SaveManager.get_data().player_data.input_enabled
-				and !Global.draw_mode
 				or Input.is_action_just_pressed("pressed_select") 
 				or Input.is_action_just_released("pressed_select")
 			):
-				var _frame_array: Array[int] = [recording_timer]
+				var can_move: bool = !Global.is_game_paused and !Global.draw_mode
+				var _frame_array: Array[int] = [recording_timer, can_move]
 				
 				for input in input_array:
 					_frame_array.append(_check_input_type(input))
@@ -61,7 +62,7 @@ func _physics_process(_delta: float) -> void:
 				recording_data.p1_data.push_back(
 													_frame_array
 												)
-	
+		
 	if replay:
 		if !replay_setup:
 			recording_finished = false
@@ -89,8 +90,8 @@ func _physics_process(_delta: float) -> void:
 				if recording_timer == recording_data.p1_data[recording_reader_p1][0]:
 
 					for input in input_array:
-						if input_array.find(input) < 14:
-							_parse_input(input_array.find(input) + 1)
+						if input_array.find(input) < 15:
+							_parse_input(input_array.find(input) + 2)
 					
 					if Console.recording_parse:
 						Console.console_log("[color=green]PLAYER 1[/color][color=yellow]Frame: " + str(recording_timer) + " Data:" + str(recording_data.p1_data[recording_reader_p1]) + " Index: " + str(recording_reader_p1) + "[/color]")
@@ -117,7 +118,7 @@ func _physics_process(_delta: float) -> void:
 				
 				if recording_reader_draw <= recording_data["draw_mode"].size() - 1:
 					if recording_timer == recording_data.draw_mode[recording_reader_draw][0]:
-						EventBus.nifty_ghost.emit(recording_data.draw_mode[recording_reader_draw][1])
+						#EventBus.nifty_ghost.emit(recording_data.draw_mode[recording_reader_draw][1])
 						recording_reader_draw += 1
 
 
