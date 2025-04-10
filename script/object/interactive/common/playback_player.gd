@@ -29,6 +29,7 @@ var replay_setup: bool = false
 var recording_finished: bool = false
 var recording_reader_p1: int = 0
 var recording_reader_p2: int = 0
+var recording_reader_draw: int = 0
 var input_sim_select: bool = false
 var input_sim_action: bool = false
 
@@ -42,7 +43,7 @@ func _ready() -> void:
 	p2_talk_component = $P2TalkComponent
 
 	if recording == "":
-		if main_recording_folder:
+		if !main_recording_folder:
 			var _recording_list: Array = []
 			
 			for file in DirAccess.get_files_at("user://recordings/"):
@@ -59,7 +60,7 @@ func _ready() -> void:
 			if _recording_list != []:
 				recording_data = load("user://player_recordings/" + _recording_list.pick_random())
 	else:
-		if main_recording_folder:
+		if !main_recording_folder:
 			recording_data = load("user://player_recordings/" + recording)
 		else:
 			recording_data = load("user://recordings/" + recording)
@@ -83,9 +84,14 @@ func _ready() -> void:
 		
 	else:
 		_sprite.texture = character_sheet
-		
-	if player_stats.character_id > 2 && recording_data.gen > 6 && recording_data.gen < 9:
-		_movement_speed = 6.0
+	
+	if player_stats != null:
+		if (
+				player_stats.character_id > 2 and 
+				recording_data.gen > 6 and 
+				recording_data.gen < 9
+			):
+			_movement_speed = 6.0
 	
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 	
@@ -198,7 +204,11 @@ func _physics_process(_delta: float) -> void:
 				else:
 					if Console.recording_parse:
 						Console.console_log("[color=green]PLAYER NPC CONTROL 2[/color][color=yellow]Frame: " + str(recording_timer) + " Data: [/color][color=red]NONE[/color]")
-
+			
+			if recording_reader_draw <= recording_data["draw_mode"].size() - 1:
+				if recording_timer == recording_data.draw_mode[recording_reader_draw][0]:
+					EventBus.nifty_ghost.emit(recording_data.draw_mode[recording_reader_draw][1])
+					recording_reader_draw += 1
 
 func number_parser(number: int) -> float:
 	if number==1:
