@@ -42,9 +42,9 @@ func _ready() -> void:
 	
 	EventBus.crash_game.connect(crash_draw_mode)
 
+
 func _process(_delta) -> void:
 	if Input.is_action_pressed("pressed_start"):
-		#var final_picture: ImageTexture = ImageTexture.create_from_image()
 		get_tree().paused = false
 		Global.can_pause = true
 		Global.is_game_paused = false

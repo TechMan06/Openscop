@@ -43,7 +43,7 @@ func _ready() -> void:
 	p2_talk_component = $P2TalkComponent
 
 	if recording == "":
-		if !main_recording_folder:
+		if main_recording_folder:
 			var _recording_list: Array = []
 			
 			for file in DirAccess.get_files_at("user://recordings/"):
@@ -69,6 +69,13 @@ func _ready() -> void:
 		if player_stats == null:
 			player_stats = PlayerStats.new()
 			player_stats = recording_data.save_data.player_data
+			
+		if (
+				player_stats.character_id > 2 and 
+				recording_data.gen > 6 and 
+				recording_data.gen < 9
+			):
+			_movement_speed = 6.0
 		
 		if use_recording_position:
 			global_position = Vector3(
@@ -84,14 +91,6 @@ func _ready() -> void:
 		
 	else:
 		_sprite.texture = character_sheet
-	
-	if player_stats != null:
-		if (
-				player_stats.character_id > 2 and 
-				recording_data.gen > 6 and 
-				recording_data.gen < 9
-			):
-			_movement_speed = 6.0
 	
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 	
@@ -209,6 +208,7 @@ func _physics_process(_delta: float) -> void:
 				if recording_timer == recording_data.draw_mode[recording_reader_draw][0]:
 					EventBus.nifty_ghost.emit(recording_data.draw_mode[recording_reader_draw][1])
 					recording_reader_draw += 1
+
 
 func number_parser(number: int) -> float:
 	if number==1:

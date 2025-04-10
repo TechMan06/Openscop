@@ -82,7 +82,13 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 				body.entity_y = y_offset
 
 	if body is PlaybackPlayer:
-		body.queue_free()
+		if body.velocity.x != 0.0 || body.velocity.z != 0.0:
+			if diagonal_entrance:
+				if body.direction == directions.x || body.direction == directions.y:
+					body.queue_free()
+			else:
+				if body.direction == warp_direction || all_directions || body.control_mode == 1:
+					body.queue_free()
 
 
 func _on_nmp_unlock() -> void:
