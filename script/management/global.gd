@@ -44,7 +44,7 @@ func _ready() -> void:
 		global_data = load("user://savedata/global.tres")
 	else:
 		save_global()
-
+	
 	boot_game.emit()
 
 

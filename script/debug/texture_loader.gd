@@ -14,18 +14,7 @@ func _ready() -> void:
 																"albedoTex", 
 																load(protected_texture_path)
 															)
-				else:
-					printerr("Texture file \"" + protected_texture_path + "\" not found!")
 			else:
-				printerr("Parent is not NiftyMesh or MeshInstance3D!")
+				printerr("Parent is not NiftyMesh or MeshInstance3D!")		
 		else:
-			if get_parent() is MeshInstance3D:
-				if get_parent().get_surface_override_material(0).get_shader_parameter("albedoTex") != null:
-					get_parent().get_surface_override_material(0).set_shader_parameter(
-																"albedoTex", 
-																load(protected_texture_path)
-															)
-				else:
-					printerr("Texture file \"" + protected_texture_path + "\" not found!")
-			else:
-				printerr("Parent is not NiftyMesh or MeshInstance3D!")
+			printerr("Texture file \"" + protected_texture_path + "\" not found!")

@@ -17,6 +17,13 @@ func _process(_delta: float) -> void:
 						0,
 						round(_camera_object.position.z / TILE_SIZE) * TILE_SIZE
 					)
+		
+		if self.position == Vector3.ZERO:
+			if get_child(0).visible:
+				get_child(0).visible = false
+		else:
+			if !get_child(0).visible:
+				get_child(0).visible = true
 
 
 func _on_camera_spawn(camera: CameraMarker) -> void:

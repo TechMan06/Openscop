@@ -38,7 +38,7 @@ func _ready() -> void:
 		piece_sprite.frame_coords.y = randi_range(0, 4)
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if !performed_check:
 		if get_tree().get_nodes_in_group("piece").find(self) != null:
 			EventBus.piece_spawned.emit(get_tree().get_nodes_in_group("piece").find(self))

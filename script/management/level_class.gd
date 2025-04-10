@@ -72,7 +72,9 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 
 enum HardcodedProperties {
 	NONE,
-	ODD_CARE_PIANO_ROOM
+	EVEN_CARE,
+	ODD_CARE_PIANO_ROOM,
+	RONETH_ROOM
 }
 
 
@@ -85,6 +87,9 @@ func _ready() -> void:
 	EventBus.cage_spawned.connect(_setup_cage)
 	EventBus.cage_state_changed.connect(_on_cage_state_change)
 	EventBus.petal_number_update.connect(_update_petal_number)
+	EventBus.gen_specific_object_spawned.connect(_on_gen_specific_object_spawned)
+	EventBus.warp_spawned.connect(_on_warp_spawned)
+	EventBus.unlock_nmp.connect(unlock_nmp)
 	Console.nifty.connect(_nifty)
 	
 	SaveManager.get_data().room_name = room_name
@@ -98,7 +103,7 @@ func _ready() -> void:
 			level_slogan = "Recording Playback"
 	
 	match hardcoded_properties:
-		"Even Care":
+		HardcodedProperties.EVEN_CARE:
 			if Global.global_data.gen < 4:
 				loading_preset = load("res://resource/loading_preset/ec_old.tres")
 			elif RecordingManager.demo:
@@ -156,7 +161,8 @@ func _ready() -> void:
 		RenderingServer.global_shader_parameter_set("fog_enabled", false)
 	
 	if Global.global_data.gen > 2:
-		BGMusic.play_track(background_music)
+		if !SaveManager.get_data().unlocked_nmp:
+			BGMusic.play_track(background_music)
 	else:
 		BGMusic.stream_paused = true
 	
@@ -300,6 +306,9 @@ func _process(delta: float) -> void:
 		if Global.can_pause && Global.global_data.gen > 2:
 			var _pause_instance: Control = PAUSE_SCENE.instantiate()
 			
+			if hardcoded_properties == HardcodedProperties.RONETH_ROOM:
+				_pause_instance.secret_code = true
+			
 			_pause_instance.level_slogan = level_slogan
 			
 			add_child(_pause_instance)
@@ -324,7 +333,7 @@ func _process(delta: float) -> void:
 			or Input.is_action_just_pressed("pressed_circle")
 		):
 		if Input.is_action_just_pressed(nifty_code[input_counter]):
-			if input_counter < 9:
+			if input_counter < nifty_code.size() - 1:
 				input_counter += 1
 			else:
 				_nifty()
@@ -424,3 +433,30 @@ func _on_cage_state_change(cage_id: int, value: bool) -> void:
 
 func _update_petal_number(value: int) -> void:
 	SaveManager.get_data().petals = value
+
+
+func _on_gen_specific_object_spawned(object: GenSpecific) -> void:
+	if !SaveManager.get_data().unlocked_odd_care:
+		if object.odd_care_exclusive:
+			object.queue_free()
+	else:
+		if object.non_odd_care_exclusive:
+			object.queue_free()
+
+
+func _on_warp_spawned(warp: WarpClass) -> void:
+	if (
+			hardcoded_properties == HardcodedProperties.EVEN_CARE or
+			hardcoded_properties == HardcodedProperties.RONETH_ROOM
+		):
+			if SaveManager.get_data().unlocked_nmp:
+				if warp.loading_preset == load("res://resource/loading_preset/ec_noload.tres"):
+					warp.loading_preset = load("res://resource/loading_preset/nmp_delay.tres")
+				elif warp.loading_preset == load("res://resource/loading_preset/gift_load.tres"):
+					warp.loading_preset = load("res://resource/loading_preset/nmp_load.tres")
+				
+				if warp.scene == "res://scene/room/gift_plane/gift_plane.tscn":
+					warp.scene = "res://scene/room/nmp/nmp.tscn"
+
+func unlock_nmp() -> void:
+	SaveManager.get_data().unlocked_nmp = true

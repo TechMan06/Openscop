@@ -36,7 +36,7 @@ level_slogan = "We hope you are enjoying the game."
 spawn_camera_root = false
 environment_settings = SubResource("Resource_thkrr")
 bucket_spawn_offset = Vector3(0, 0, -0.16)
-hardcoded_properties = 1
+hardcoded_properties = 3
 
 [node name="EvenCareMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("5_h0ugi")

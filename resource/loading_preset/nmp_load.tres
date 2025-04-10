@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LoadingPreset" load_steps=3 format=3 uid="uid://byotx5pl4dp1j"]
+
+[ext_resource type="Texture2D" uid="uid://cb7e1mwfel8mm" path="res://asset/2d/loading_screen/nmp_load.png" id="1_adek2"]
+[ext_resource type="Script" path="res://script/resource/loading_resource.gd" id="2_anebs"]
+
+[resource]
+script = ExtResource("2_anebs")
+loading_image = ExtResource("1_adek2")
+use_timer = true
+randomize_time = true
+loading_timer = 5.0
+fade_color = Color(0, 0, 0, 1)

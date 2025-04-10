@@ -92,6 +92,9 @@ scene_path = "res://scene/room/odd_care/room1.tscn"
 
 [node name="Warp" parent="." instance=ExtResource("14_mifo2")]
 warp_direction = 3
+scene = "res://scene/room/nmp/nmp.tscn"
+loading_preset = ExtResource("2_pjxfp")
+warp_id = 1
 
 [node name="Warp2" parent="." instance=ExtResource("14_mifo2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)

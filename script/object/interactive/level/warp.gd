@@ -2,6 +2,9 @@
 @tool
 extends Node3D
 class_name WarpClass
+
+var performed_check: bool = false
+
 @export_subgroup("Warp_properties")
 @export var all_directions = false
 @export var diagonal_entrance = false
@@ -21,10 +24,16 @@ class_name WarpClass
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
+		EventBus.unlock_nmp.connect(_on_nmp_unlock)
 		sprite.visible = GameManager.debug_settings.debug
 
 
 func _process(_delta: float) -> void:
+	if !Engine.is_editor_hint():
+		if !performed_check:
+			EventBus.warp_spawned.emit(self)
+			performed_check = true
+	
 	if !all_directions:
 		sprite.frame_coords.x = clamp(warp_direction, 0, 3)
 	
@@ -74,3 +83,13 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 
 	if body is PlaybackPlayer:
 		body.queue_free()
+
+
+func _on_nmp_unlock() -> void:
+	if loading_preset == load("res://resource/loading_preset/ec_noload.tres"):
+		loading_preset = load("res://resource/loading_preset/nmp_delay.tres")
+	elif loading_preset == load("res://resource/loading_preset/gift_load.tres"):
+		loading_preset = load("res://resource/loading_preset/nmp_load.tres")
+	
+	if scene == "res://scene/room/gift_plane/gift_plane.tscn":
+		scene = "res://scene/room/nmp/nmp.tscn"

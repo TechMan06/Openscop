@@ -30,6 +30,7 @@ signal unlock_nmp
 signal cage_state_changed(id: int, value: bool)
 signal cage_spawned(gate: Cage)
 signal petal_number_update(value: int)
+signal warp_spawned(warp: WarpClass)
 
 signal nifty_upload(texture: Image)
 signal nifty_finished(texture: Image, background_texture: Image)
@@ -38,3 +39,4 @@ signal destroy_pause
 signal destroy_hud
 
 signal room_started(level: Level)
+signal gen_specific_object_spawned(settings: GenSpecific)

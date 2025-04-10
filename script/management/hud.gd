@@ -99,16 +99,20 @@ func _on_scene_transition(preset: LoadingPreset) -> void:
 		loading_image.texture = preset.loading_image
 		loading_image.visible = true
 		BGMusic.stop()
-		
-		await get_tree().create_timer(
-										preset.loading_timer 
-										+ randf_range(
-														0., 
-														preset.loading_timer 
-														/ 4
-													), 
-										true 
-									).timeout
+	
+	if preset.use_timer:
+		if preset.randomize_time:
+			await get_tree().create_timer(
+											preset.loading_timer 
+											+ randf_range(
+															0., 
+															preset.loading_timer 
+															/ 4
+														), 
+											true 
+										).timeout
+		else:
+			await get_tree().create_timer(preset.loading_timer, true).timeout
 	
 	EventBus.start_scene.emit()
 	

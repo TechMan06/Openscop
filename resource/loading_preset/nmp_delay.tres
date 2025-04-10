@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LoadingPreset" load_steps=2 format=3 uid="uid://xydmle6ae5f8"]
+
+[ext_resource type="Script" path="res://script/resource/loading_resource.gd" id="1_fr6t4"]
+
+[resource]
+script = ExtResource("1_fr6t4")
+use_timer = true
+randomize_time = false
+loading_timer = 1.0
+fade_color = Color(0, 0, 0, 1)

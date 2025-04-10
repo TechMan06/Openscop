@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_jvk55")
+use_timer = false
+randomize_time = true
 loading_timer = 5.0
 fade_color = Color(0, 0, 0, 1)

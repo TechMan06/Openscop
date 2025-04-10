@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://np18ry1q0d5d"]
+[gd_scene load_steps=52 format=3 uid="uid://np18ry1q0d5d"]
 
 [ext_resource type="Script" path="res://script/ui/pause_menu/pause_main.gd" id="1_ak7a2"]
 [ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="2_nj20g"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://cd33hjua20ryu" path="res://sfx/pause/pause1.wav" id="13_c67kn"]
 [ext_resource type="AudioStream" uid="uid://dki2uq8a0y47" path="res://sfx/pause/pause2.wav" id="14_fdwfv"]
 [ext_resource type="AudioStream" uid="uid://ceiirlk68u38n" path="res://sfx/pause/pause3.wav" id="15_i6nqj"]
+[ext_resource type="AudioStream" uid="uid://b552yysjig0ee" path="res://sfx/ui/nmpunlock.wav" id="16_2m2e1"]
 [ext_resource type="AudioStream" uid="uid://b18ajvqy3kl3u" path="res://sfx/pause/selected.wav" id="16_r685t"]
 [ext_resource type="AudioStream" uid="uid://mmkhc5kb3o70" path="res://sfx/pause/select1.wav" id="17_1m5mx"]
 [ext_resource type="AudioStream" uid="uid://b3ptbmyyksd43" path="res://sfx/pause/select2.wav" id="18_4wvin"]
@@ -450,6 +451,10 @@ offset_bottom = 40.0
 [node name="PauseSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_afu8u")
 autoplay = true
+bus = &"HUD_SFX"
+
+[node name="NMPUnlock" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_2m2e1")
 bus = &"HUD_SFX"
 
 [node name="SelectSound" type="AudioStreamPlayer" parent="."]

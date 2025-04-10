@@ -1,0 +1,17 @@
+These are the textures from the textures.com website you will be needing to build the Newmaker Plane textures, the links here were provided by the Giftscop team's Texture Spreadsheet, which can be found here: https://docs.google.com/spreadsheets/d/11qOmtNMs3_AbysUd7oa_6AB6ujTT56oBacGgX1EJ7JI/edit#gid=0
+
+
+
+
+Newmaker Plane:
+
+Grass: https://www.textures.com/download/grass0005/3411
+Download the "Seamless" Version
+
+Bricks: https://www.textures.com/download/bricksmallbrown0475/120031
+Download the "Seamless" Version
+
+Bricks Top: https://www.textures.com/download/plaster-coloured-0100/16517
+Download the "Seamless" Version
+
+NMP Door: https://www.textures.com/download/doors-wood-0145/87409

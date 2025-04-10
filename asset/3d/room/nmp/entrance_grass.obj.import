@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c4e6i4h5g3oah"
+path="res://.godot/imported/entrance_grass.obj-951105a52b873ced3f287af92cb438ec.mesh"
+
+[deps]
+
+files=["res://.godot/imported/entrance_grass.obj-951105a52b873ced3f287af92cb438ec.mesh"]
+
+source_file="res://asset/3d/room/nmp/entrance_grass.obj"
+dest_files=["res://.godot/imported/entrance_grass.obj-951105a52b873ced3f287af92cb438ec.mesh", "res://.godot/imported/entrance_grass.obj-951105a52b873ced3f287af92cb438ec.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

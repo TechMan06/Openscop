@@ -6,5 +6,7 @@
 [resource]
 script = ExtResource("2_7ir22")
 loading_image = ExtResource("1_dbofu")
+use_timer = true
+randomize_time = true
 loading_timer = 5.0
 fade_color = Color(1, 1, 1, 1)

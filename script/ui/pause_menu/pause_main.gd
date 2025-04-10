@@ -14,6 +14,18 @@ var _selected_option: int = 0:
 		button_sound.play()
 		_selected_option = value
 var allow_input: bool = true
+var secret_code: bool = true
+var current_key: int = 0
+var code_array: Array[String] = [
+									"pressed_down", 
+									"pressed_down", 
+									"pressed_down",
+									"pressed_down",
+									"pressed_down",
+									"pressed_right",
+									"pressed_start"
+								]
+var unlocked_nmp: bool = false
 
 @onready var main_menu: Control = %Main
 @onready var buttons_origin: Marker2D = %ButtonsOrigin
@@ -74,6 +86,30 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if !_in_menu && Global.can_unpause:
+		
+		if (
+			Input.is_action_just_pressed("pressed_l2") 
+			or Input.is_action_just_pressed("pressed_l1") 
+			or Input.is_action_just_pressed("pressed_r2") 
+			or Input.is_action_just_pressed("pressed_r1")
+			or Input.is_action_just_pressed("pressed_up")
+			or Input.is_action_just_pressed("pressed_down")
+			or Input.is_action_just_pressed("pressed_left")
+			or Input.is_action_just_pressed("pressed_right")
+			or Input.is_action_just_pressed("pressed_start")
+			or Input.is_action_just_pressed("pressed_select")
+			or Input.is_action_just_pressed("pressed_action")
+			or Input.is_action_just_pressed("pressed_triangle")
+			or Input.is_action_just_pressed("pressed_square")
+			or Input.is_action_just_pressed("pressed_circle")
+		):
+			if Input.is_action_just_pressed(code_array[current_key]):
+				if current_key < code_array.size() - 1:
+					current_key += 1
+				else:
+					unlocked_nmp = true
+			else:
+				current_key = 0
 		if Input.is_action_just_pressed("pressed_start") && Global.can_unpause:
 			unpause_game()
 		
@@ -143,6 +179,10 @@ func unpause_game() -> void:
 	Global.can_unpause = false
 	screenshot.z_index = 2
 	
+	if unlocked_nmp:
+		BGMusic.stream_paused = true
+		$NMPUnlock.play()
+	
 	var grow: Tween = create_tween()
 
 	grow.tween_property(
@@ -161,6 +201,9 @@ func unpause_game() -> void:
 	Global.can_pause = true
 	Global.can_unpause = true
 	get_tree().paused = false
+	if unlocked_nmp:
+		EventBus.unlock_nmp.emit()
+	
 	queue_free()
 
 
