@@ -9,3 +9,4 @@ class_name RecordingData
 @export var save_data: SaveData = SaveManager.get_data().duplicate(true)
 @export var p1_data: Array[Array]
 @export var p2_data: Array[Array]
+@export var draw_mode: Array[Array]

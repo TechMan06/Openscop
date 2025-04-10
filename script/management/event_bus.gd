@@ -33,7 +33,7 @@ signal petal_number_update(value: int)
 signal warp_spawned(warp: WarpClass)
 
 signal nifty_upload(texture: Image)
-signal nifty_finished(texture: Image, background_texture: Image)
+signal nifty_finished(texture: Image, draw_layer_texture: Image)
 
 signal destroy_pause
 signal destroy_hud

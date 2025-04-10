@@ -11,7 +11,7 @@ const PLAYER_SCENE: PackedScene = preload("res://scene/object/player/player.tscn
 
 var environment_obj: WorldEnvironment = WorldEnvironment.new()
 var room_texture: Image
-var background_texture: Image
+var draw_texture: Image
 
 #CODES
 var nifty_code: Array[String] = ["pressed_l2","pressed_square","pressed_r1","pressed_triangle","pressed_r2","pressed_up","pressed_r2","pressed_circle","pressed_r2","pressed_circle"]
@@ -399,15 +399,18 @@ func _get_sky() -> ShaderMaterial:
 	return _get_environment().sky.get_material()
 
 
-func _store_background(_room_tex: Image, background_image: Image) -> void:
-	background_texture = background_image
+func _store_background(_room_tex: Image, draw_image: Image) -> void:
+	draw_texture = draw_image
+	
+	if RecordingManager.recording:
+		RecordingManager.recording_data.draw_mode.push_back([RecordingManager.recording_timer, Marshalls.raw_to_base64(draw_image.get_data())])
 
 
 func _nifty() -> void:
 	var _draw_instance: Control = DRAW_MODE.instantiate()
 				
 	_draw_instance.texture = room_texture
-	_draw_instance.background_image = background_texture
+	_draw_instance.draw_layer_image = draw_texture
 	
 	Global.can_pause = false
 	Global.is_game_paused = true

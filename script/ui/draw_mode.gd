@@ -5,12 +5,13 @@ var x: float = 0.0
 var y: float = 0.0
 
 @export var texture: Image
-@export var background_image: Image
+@export var draw_layer_image: Image
 
 @onready var pixel_origin: Marker2D = $PixelOrigin
 @onready var texture_origin = %TextureOrigin
-@onready var room_texture: TextureRect = $TextureOrigin/RoomTexture
-@onready var bg_texture: TextureRect = $TextureOrigin/BGTexture
+@onready var room_texture: TextureRect = %RoomTexture
+@onready var draw_canvas: SubViewport = %DrawSubViewport
+@onready var draw_texture: TextureRect = %DrawLayer
 @onready var draw_sound: AudioStreamPlayer = $DrawSound
 
 
@@ -22,27 +23,32 @@ func _ready() -> void:
 	
 	BGMusic.decrease_volume()
 
-	if background_image == null:
+	if draw_layer_image == null:
 		# TO-DO: REPLACE ARGUMENT 4 WITH PROPER ENUM
-		background_image = Image.create(
+		draw_layer_image = Image.create(
 											int(str(texture.get_width() / 257.0)[0])  + 512, 
 											int(str(texture.get_height() / 257.0)[0]) + 512, 
 											false, 
 											4
 										)
-		background_image.fill(Color.html("#FF00FF"))
-		bg_texture.texture = ImageTexture.create_from_image(background_image)
+		
+		draw_layer_image.fill(Color.html("#FF00FF"))
+		draw_layer_image.detect_alpha()
+		draw_texture.texture = ImageTexture.create_from_image(draw_layer_image)
 	else:
-		bg_texture.texture = ImageTexture.create_from_image(background_image)
+		draw_texture.texture = ImageTexture.create_from_image(draw_layer_image)
+	
+	draw_canvas.size = Vector2(texture.get_width(), texture.get_height())
 	
 	EventBus.crash_game.connect(crash_draw_mode)
 
 func _process(_delta) -> void:
 	if Input.is_action_pressed("pressed_start"):
+		#var final_picture: ImageTexture = ImageTexture.create_from_image()
 		get_tree().paused = false
 		Global.can_pause = true
 		Global.is_game_paused = false
-		EventBus.nifty_finished.emit(texture, background_image)
+		EventBus.nifty_finished.emit(draw_canvas.get_texture().get_image(), draw_layer_image)
 		HUD.play_nifty()
 		BGMusic.increase_volume()
 		Global.draw_mode = false
@@ -61,6 +67,10 @@ func _process(_delta) -> void:
 	texture_origin.position = Vector2(draw_offset.x + 32, draw_offset.y)
 	
 	if Input.is_action_pressed("pressed_triangle"):
+		x = 0.0
+		y = 0.0
+		draw_sound.stop()
+		
 		if (
 				Input.is_action_just_pressed("pressed_right") and 
 				abs(draw_offset.x - 32) < room_texture.texture.get_width()
@@ -87,25 +97,13 @@ func _process(_delta) -> void:
 			if !draw_sound.playing:
 				draw_sound.play()
 			
-			if (
-					(pixel_origin.position.x < room_texture.texture.get_width() + 32 + draw_offset.x) 
-					and (pixel_origin.position.y < room_texture.texture.get_height() + draw_offset.y)
-				):
-				texture.set_pixel(
-										pixel_origin.position.x - 32 - draw_offset.x, 
-										pixel_origin.position.y - draw_offset.y, 
-										Color.html("#FFCEE5")
-									)
-				
-				room_texture.set_texture(ImageTexture.create_from_image(texture))
-			else:
-				background_image.set_pixel(
-												pixel_origin.position.x  - 32 - draw_offset.x, 
-												pixel_origin.position.y - draw_offset.y, 
-												Color.html("#FFCEE5")
-											)
-				
-				bg_texture.texture = ImageTexture.create_from_image(background_image)
+			draw_layer_image.set_pixel(
+											pixel_origin.position.x - 32 - draw_offset.x, 
+											pixel_origin.position.y - draw_offset.y, 
+											Color.html("#FFCEE5FF")
+										)
+			
+			draw_texture.texture = ImageTexture.create_from_image(draw_layer_image)
 		else:
 			draw_sound.stop()
 

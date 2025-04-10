@@ -11,9 +11,7 @@ void fragment() {
 	vec2 texture_uv = UV;
 	vec4 texture_color = texture(albedoTex, texture_uv);
 	
-	COLOR.rgb = texture_color.rgb * modulate_color.rgb;
-	
-	if (length(texture_color.rgb - alpha_color.rgb) < 0.1) {
+	if (length(COLOR.rgb - alpha_color.rgb) < 0.1) {
 		COLOR.a = 0.0;
 	}
 }

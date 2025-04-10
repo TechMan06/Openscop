@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://da2k87dmfitt8"]
+[gd_scene load_steps=8 format=3 uid="uid://da2k87dmfitt8"]
 
 [ext_resource type="Script" path="res://script/ui/draw_mode.gd" id="1_ilpmw"]
 [ext_resource type="Texture2D" uid="uid://civgscnwowptw" path="res://asset/2d/ui/misc/nifty_pencil.png" id="2_3om5o"]
+[ext_resource type="Shader" path="res://shader/canvas/transparency.gdshader" id="2_sujbm"]
 [ext_resource type="AudioStream" uid="uid://b5pb8i60x740e" path="res://sfx/ui/draw.wav" id="3_xl7gr"]
 
 [sub_resource type="Gradient" id="Gradient_1eat8"]
@@ -10,6 +11,11 @@ colors = PackedColorArray(0.772549, 0.137255, 1, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vtla4"]
 gradient = SubResource("Gradient_1eat8")
 width = 32
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qa6p"]
+shader = ExtResource("2_sujbm")
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
 
 [node name="DrawMode" type="Control"]
 process_mode = 3
@@ -51,17 +57,31 @@ flip_h = true
 
 [node name="TextureOrigin" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(32, 0)
 
-[node name="RoomTexture" type="TextureRect" parent="TextureOrigin"]
+[node name="DrawViewport" type="SubViewportContainer" parent="TextureOrigin"]
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="DrawSubViewport" type="SubViewport" parent="TextureOrigin/DrawViewport"]
+unique_name_in_owner = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="DrawLayer" type="TextureRect" parent="TextureOrigin/DrawViewport/DrawSubViewport"]
+unique_name_in_owner = true
 z_index = 1
+z_as_relative = false
+material = SubResource("ShaderMaterial_3qa6p")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RoomTexture" type="TextureRect" parent="TextureOrigin/DrawViewport/DrawSubViewport"]
+unique_name_in_owner = true
 z_as_relative = false
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="BGTexture" type="TextureRect" parent="TextureOrigin"]
-offset_right = 40.0
-offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PixelOrigin" type="Marker2D" parent="."]
 position = Vector2(32, 240)
@@ -76,3 +96,14 @@ texture = ExtResource("2_3om5o")
 [node name="DrawSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xl7gr")
 bus = &"HUD_SFX"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 1)
