@@ -152,35 +152,36 @@ func _physics_process(_delta: float) -> void:
 		else:
 			if recording_reader_p1 <= recording_data.p1_data.size() - 1:
 				if recording_timer == recording_data.p1_data[recording_reader_p1][0]:
-					if recording_data.p1_data[recording_reader_p1][6] != 0:
-						_v = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][6])
-					
-					if recording_data.p1_data[recording_reader_p1][7] != 0:
-						_v = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][7])
-					
-					if recording_data.p1_data[recording_reader_p1][8] != 0:
-						if flip_x:
-							_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
-						else:
-							_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
-					
-					if recording_data.p1_data[recording_reader_p1][9] != 0:	
-						if flip_x:
-							_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][9])
-						else:
-							_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][9])
-					
-					if recording_data.p1_data[recording_reader_p1][9] != 0:	
-						await get_tree().physics_frame
-						input_sim_action = true
-						await get_tree().physics_frame
-						input_sim_action = false
-					
-					if recording_data.p1_data[recording_reader_p1][13] !=0:	
-						await get_tree().physics_frame
-						input_sim_select = true
-						await get_tree().physics_frame
-						input_sim_select = false
+					if  recording_data.p1_data[recording_reader_p1][1]:
+						if recording_data.p1_data[recording_reader_p1][6] != 0:
+							_v = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][6])
+						
+						if recording_data.p1_data[recording_reader_p1][7] != 0:
+							_v = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][7])
+						
+						if recording_data.p1_data[recording_reader_p1][8] != 0:
+							if flip_x:
+								_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
+							else:
+								_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][8])
+						
+						if recording_data.p1_data[recording_reader_p1][9] != 0:	
+							if flip_x:
+								_h = -1.0 * number_parser(recording_data.p1_data[recording_reader_p1][9])
+							else:
+								_h = 1.0 * number_parser(recording_data.p1_data[recording_reader_p1][9])
+						
+						if recording_data.p1_data[recording_reader_p1][10] != 0:	
+							await get_tree().physics_frame
+							input_sim_action = true
+							await get_tree().physics_frame
+							input_sim_action = false
+						
+						if recording_data.p1_data[recording_reader_p1][11] !=0:	
+							await get_tree().physics_frame
+							input_sim_select = true
+							await get_tree().physics_frame
+							input_sim_select = false
 					
 					recording_reader_p1 += 1
 					
@@ -206,7 +207,7 @@ func _physics_process(_delta: float) -> void:
 			
 			if recording_reader_draw <= recording_data["draw_mode"].size() - 1:
 				if recording_timer == recording_data.draw_mode[recording_reader_draw][0]:
-					EventBus.nifty_ghost.emit(recording_data.draw_mode[recording_reader_draw][1])
+					EventBus.nifty_set_pixels.emit(recording_data.draw_mode[recording_reader_draw][1])
 					recording_reader_draw += 1
 
 
