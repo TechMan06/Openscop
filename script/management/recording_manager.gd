@@ -13,7 +13,6 @@ var recording_finished: bool = false
 var recording_timer: int = 0
 var recording_reader_p1: int = 0
 var recording_reader_p2: int = 0
-var recording_reader_draw: int = 0
 var recording_data: RecordingData
 var cancel_movement: Array[int]
 
@@ -114,12 +113,7 @@ func _physics_process(_delta: float) -> void:
 						recording_reader_p2 += 1
 				else:
 					if Console.recording_parse:
-						Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: " + str(recording_timer) + " Data: [/color][color=red]NONE[/color]")		
-				
-				if recording_reader_draw <= recording_data["draw_mode"].size() - 1:
-					if recording_timer == recording_data.draw_mode[recording_reader_draw][0]:
-						#EventBus.nifty_ghost.emit(recording_data.draw_mode[recording_reader_draw][1])
-						recording_reader_draw += 1
+						Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: " + str(recording_timer) + " Data: [/color][color=red]NONE[/color]")
 
 
 func _parse_input(index: int) -> void:

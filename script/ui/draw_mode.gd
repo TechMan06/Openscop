@@ -3,6 +3,7 @@ extends Control
 var draw_offset: Vector2i = Vector2i.ZERO
 var x: float = 0.0
 var y: float = 0.0
+var pixel_array: Array[Vector2i]
 
 @export var texture: Image
 @export var draw_layer_image: Image
@@ -16,6 +17,7 @@ var y: float = 0.0
 
 
 func _ready() -> void:
+	EventBus.nifty_set_pixels.connect(nifty_set_pixels)
 	HUD.play_nifty()
 	room_texture.texture = ImageTexture.create_from_image(texture)
 	
@@ -48,7 +50,7 @@ func _process(_delta) -> void:
 		get_tree().paused = false
 		Global.can_pause = true
 		Global.is_game_paused = false
-		EventBus.nifty_finished.emit(draw_canvas.get_texture().get_image(), draw_layer_image)
+		EventBus.nifty_finished.emit(draw_canvas.get_texture().get_image(), draw_layer_image, pixel_array)
 		HUD.play_nifty()
 		BGMusic.increase_volume()
 		Global.draw_mode = false
@@ -97,11 +99,19 @@ func _process(_delta) -> void:
 			if !draw_sound.playing:
 				draw_sound.play()
 			
+			var pixel_position: Vector2i = Vector2i(
+														pixel_origin.position.x - 32 - draw_offset.x,
+														pixel_origin.position.y - draw_offset.y
+													)
+			
 			draw_layer_image.set_pixel(
-											pixel_origin.position.x - 32 - draw_offset.x, 
-											pixel_origin.position.y - draw_offset.y, 
-											Color.html("#FFCEE5FF")
-										)
+										pixel_position.x, 
+										pixel_position.y, 
+										Color.html("#FFCEE5FF")
+									)
+			
+			if pixel_array.find(Vector2i(pixel_position.x, pixel_position.y)) == -1:
+				pixel_array.push_back(pixel_position)
 			
 			draw_texture.texture = ImageTexture.create_from_image(draw_layer_image)
 		else:
@@ -111,3 +121,22 @@ func _process(_delta) -> void:
 func crash_draw_mode() -> void:
 	draw_sound.set_process_mode(Node.PROCESS_MODE_ALWAYS)
 	self.set_process_mode(Node.PROCESS_MODE_DISABLED)
+
+
+func nifty_set_pixels(pixel_array: Array[Vector2i]) -> void:
+	for pixel in pixel_array:
+		draw_layer_image.set_pixel(
+									clamp(
+											pixel.x,
+											0,
+											draw_layer_image.get_width()
+										), 
+									clamp(
+											pixel.y,
+											0,
+											draw_layer_image.get_height()
+										), 
+									Color.html("#FFCEE5FF")
+								)
+	
+	draw_texture.texture = ImageTexture.create_from_image(draw_layer_image)

@@ -11,7 +11,7 @@ func _ready() -> void:
 		print("REBUILDING")
 
 	EventBus.nifty_finished.connect(_update_textures)
-
+	
 	await get_tree().process_frame
 	
 	var texture: CompressedTexture2D = get_surface_override_material(0).get_shader_parameter("albedoTex")
@@ -20,7 +20,7 @@ func _ready() -> void:
 	EventBus.nifty_upload.emit(_texture_image)
 
 
-func _update_textures(room_texture: Image, _background_texture: Image) -> void:
+func _update_textures(room_texture: Image, _background_texture: Image, pixel_array: Array[Vector2i]) -> void:
 	get_surface_override_material(0).set_shader_parameter(
 															"albedoTex", 
 															ImageTexture.create_from_image(room_texture)

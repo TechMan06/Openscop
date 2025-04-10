@@ -90,6 +90,7 @@ func _ready() -> void:
 	EventBus.gen_specific_object_spawned.connect(_on_gen_specific_object_spawned)
 	EventBus.warp_spawned.connect(_on_warp_spawned)
 	EventBus.unlock_nmp.connect(unlock_nmp)
+	EventBus.nifty_set_pixels.connect(nifty_set_pixels)
 	Console.nifty.connect(_nifty)
 	
 	SaveManager.get_data().room_name = room_name
@@ -399,11 +400,11 @@ func _get_sky() -> ShaderMaterial:
 	return _get_environment().sky.get_material()
 
 
-func _store_background(_room_tex: Image, draw_image: Image) -> void:
+func _store_background(_room_tex: Image, draw_image: Image, pixel_array: Array[Vector2i]) -> void:
 	draw_texture = draw_image
 	
 	if RecordingManager.recording:
-		RecordingManager.recording_data.draw_mode.push_back([RecordingManager.recording_timer, Marshalls.raw_to_base64(draw_image.get_data())])
+		RecordingManager.recording_data.draw_mode.push_back([RecordingManager.recording_timer, pixel_array])
 
 
 func _nifty() -> void:
@@ -460,6 +461,49 @@ func _on_warp_spawned(warp: WarpClass) -> void:
 				
 				if warp.scene == "res://scene/room/gift_plane/gift_plane.tscn":
 					warp.scene = "res://scene/room/nmp/nmp.tscn"
+
+
+func nifty_set_pixels(pixel_array: Array[Vector2i]) -> void:
+	if draw_texture == null:
+		draw_texture = Image.create(
+										int(str(room_texture.get_width() / 257.0)[0])  + 512, 
+										int(str(room_texture.get_height() / 257.0)[0]) + 512, 
+										false, 
+										4
+									)
+		draw_texture.fill(Color.html("#FF00FF"))
+		
+	for pixel in pixel_array:
+		draw_texture.set_pixel(
+								clamp(
+										pixel.x,
+										0,
+										draw_texture.get_width()
+									), 
+								clamp(
+										pixel.y,
+										0,
+										draw_texture.get_height()
+									), 
+								Color.html("#FFCEE5FF")
+							)
+		room_texture.set_pixel(
+								clamp(
+										pixel.x,
+										0,
+										room_texture.get_width()
+									), 
+								clamp(
+										pixel.y,
+										0,
+										room_texture.get_height()
+									), 
+								Color.html("#FFCEE5FF")
+							)
+
+	
+	EventBus.nifty_finished.emit(room_texture, draw_texture, pixel_array)
+
 
 func unlock_nmp() -> void:
 	SaveManager.get_data().unlocked_nmp = true
