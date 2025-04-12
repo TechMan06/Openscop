@@ -75,7 +75,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_blja6")
 
 [node name="TextureLoader" type="Node" parent="Grass"]
 script = ExtResource("9_tvn4y")
-protected_texture_path = "res://asset/3d/room/nmp/grass.png"
+protected_texture_path = "res://asset/3d/room/nmp/nmp_general.png"
 
 [node name="NiftyMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("10_o7kjr")
