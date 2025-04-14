@@ -116,5 +116,4 @@ func _physics_process(delta: float) -> void:
 	if Global.global_data.gen > 2:
 		entity_sprite.frame_coords = Vector2(entity.direction, floor(entity._current_frame))
 	
-	
 	entity.move_and_slide()
