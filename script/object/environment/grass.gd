@@ -19,13 +19,14 @@ func _process(_delta: float) -> void:
 						0,
 						round(_camera_object.position.z / TILE_SIZE) * TILE_SIZE
 					)
-		
-		if forbidden_positions.find(self.position):
-			if get_child(0).visible:
-				get_child(0).visible = false
+	
+	for grass_chunk in self.get_children():
+		if forbidden_positions.find(grass_chunk.global_position):
+			if !grass_chunk.visible:
+				grass_chunk.visible = true
 		else:
-			if !get_child(0).visible:
-				get_child(0).visible = true
+			if grass_chunk.visible:
+				grass_chunk.visible = false
 
 
 func _on_camera_spawn(camera: CameraMarker) -> void:

@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://csvd32t6xnda2"]
+
+[ext_resource type="ArrayMesh" uid="uid://dche6yocq7w0r" path="res://asset/3d/object/trapdoor.obj" id="1_bj5i6"]
+[ext_resource type="Script" path="res://script/object/interactive/common/trapdoor.gd" id="1_c28yp"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="2_fqiim"]
+[ext_resource type="ArrayMesh" uid="uid://esqcxvo7bgpd" path="res://asset/3d/object/trapdoor_door.obj" id="3_8o683"]
+[ext_resource type="Texture2D" uid="uid://cug5niin5ydjt" path="res://asset/3d/room/nmp/nmp_general_placeholder.png" id="4_g5fov"]
+[ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="5_os0cw"]
+[ext_resource type="PackedScene" uid="uid://bckcmwn6qmafx" path="res://scene/object/interactive/level/darkener.tscn" id="7_0vyjy"]
+[ext_resource type="PackedScene" uid="uid://itbo1loprmd5" path="res://scene/object/interactive/level/slope.tscn" id="8_d1edf"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="9_pw6vp"]
+[ext_resource type="PackedScene" uid="uid://cklrsj73ts2kt" path="res://scene/object/interactive/common/interaction_symbol.tscn" id="10_61wdo"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="11_qewoq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3xtqy"]
+render_priority = 0
+shader = ExtResource("2_fqiim")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afmgf"]
+render_priority = 0
+shader = ExtResource("2_fqiim")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_g5fov")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gjh18"]
+data = PackedVector3Array(0.9173, 1, -1.2674, -0.9173, 1, -1.2674, 0.9173, 0, -1.2674, 0.9173, 0, -1.2674, -0.9173, 1, -1.2674, -0.9173, 0, -1.2674, -0.9173, 0, 1.2674, -0.9173, 0, -1.2674, -0.9173, 1, 1.2674, -0.9173, 1, 1.2674, -0.9173, 0, -1.2674, -0.9173, 1, -1.2674, 0.9173, 0, -1.2674, 0.9173, 0, 1.2674, 0.9173, 1, -1.2674, 0.9173, 1, -1.2674, 0.9173, 0, 1.2674, 0.9173, 1, 1.2674, 0.9173, 1, 1.2674, 0.9173, 0, 1.2674, 0.8, 1, 1.2674, 0.8, 1, 1.2674, 0.9173, 0, 1.2674, 0.8, 0, 1.2674, -0.9173, 0, 1.2674, -0.9173, 1, 1.2674, -0.8173, 0, 1.2674, -0.8173, 0, 1.2674, -0.9173, 1, 1.2674, -0.8173, 1, 1.2674, -0.8173, 0, 1.2674, -0.8173, 1, 1.2674, -0.8173, 0, 0.25, -0.8173, 0, 0.25, -0.8173, 1, 1.2674, -0.8173, 1, 0.25, 0.8, 1, 1.2674, 0.8, 0, 1.2674, 0.8, 1, 0.25, 0.8, 1, 0.25, 0.8, 0, 1.2674, 0.8, 0, 0.25)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fhm28"]
+data = PackedVector3Array(-0.9173, 0, 1.2674, -0.9173, 1, 1.2674, 0.9173, 0, 1.2674, 0.9173, 0, 1.2674, -0.9173, 1, 1.2674, 0.9173, 1, 1.2674)
+
+[node name="Trapdoor" type="Node3D"]
+script = ExtResource("1_c28yp")
+
+[node name="TrapdoorMesh" type="Marker3D" parent="."]
+unique_name_in_owner = true
+
+[node name="BaseMesh" type="MeshInstance3D" parent="TrapdoorMesh"]
+mesh = ExtResource("1_bj5i6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_3xtqy")
+
+[node name="DoorMesh" type="MeshInstance3D" parent="TrapdoorMesh"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.862514, -0.506034, 0, 0.506034, 0.862514, -0.75, 0.88, 0)
+mesh = ExtResource("3_8o683")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_afmgf")
+
+[node name="TextureLoader" type="Node" parent="TrapdoorMesh/DoorMesh"]
+script = ExtResource("5_os0cw")
+protected_texture_path = "res://asset/3d/room/nmp/nmp_general.png"
+
+[node name="TrapdoorBody" type="StaticBody3D" parent="TrapdoorMesh"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="TrapdoorMesh/TrapdoorBody"]
+shape = SubResource("ConcavePolygonShape3D_gjh18")
+
+[node name="TrapdoorFront" type="StaticBody3D" parent="TrapdoorMesh"]
+
+[node name="FrontShape" type="CollisionShape3D" parent="TrapdoorMesh/TrapdoorFront"]
+unique_name_in_owner = true
+shape = SubResource("ConcavePolygonShape3D_fhm28")
+
+[node name="Darkener" parent="TrapdoorMesh" instance=ExtResource("7_0vyjy")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+darkener_direction = 3
+
+[node name="Slope" parent="TrapdoorMesh" instance=ExtResource("8_d1edf")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+slope_length = 2.0
+slope_direction = 3
+slope_up = false
+
+[node name="Warp" parent="TrapdoorMesh" instance=ExtResource("9_pw6vp")]
+unique_name_in_owner = true
+transform = Transform3D(-0.25, 0, -7.54979e-08, 0, 1, 0, 3.7749e-08, 0, -0.5, 0, 0, 0)
+all_directions = true
+
+[node name="Trigger" parent="TrapdoorMesh" instance=ExtResource("10_61wdo")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+enabled = true
+height_offset = 1.0
+min_distance = 0.5
+
+[node name="SpawnClass" type="Marker3D" parent="TrapdoorMesh"]
+unique_name_in_owner = true
+script = ExtResource("11_qewoq")

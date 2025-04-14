@@ -10,9 +10,9 @@ const ROTATION_LIMIT: float = 0.25
 const ROTATION_ANIM_SPEED: float = 1.5
 const GROW_ANIMATION_SPEED: float = 0.25
 
-var enabled: bool = false
-var height_offset: float = 1.5
-var min_distance: float = 2.5
+@export var enabled: bool = false
+@export var height_offset: float = 1.5
+@export var min_distance: float = 2.5
 var original_position: float = 0.0
 var player_inside_zone: bool = false
 

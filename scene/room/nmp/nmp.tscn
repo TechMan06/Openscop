@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://4me8yyhhjy42"]
+[gd_scene load_steps=23 format=3 uid="uid://4me8yyhhjy42"]
 
 [ext_resource type="ArrayMesh" uid="uid://bvoytwwvqkwh" path="res://asset/3d/room/nmp/grass.obj" id="1_otb4p"]
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_xubgh"]
@@ -15,8 +15,24 @@
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="14_kk8a2"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="15_hqprg"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="16_f3ile"]
+[ext_resource type="ArrayMesh" uid="uid://c4e6i4h5g3oah" path="res://asset/3d/room/nmp/entrance_grass.obj" id="17_6vldx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p61yp"]
+render_priority = 0
+shader = ExtResource("5_gmsef")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("10_71mw1")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = Vector3(0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mi3ry"]
 render_priority = 0
 shader = ExtResource("5_gmsef")
 shader_parameter/use_fog = true
@@ -174,6 +190,15 @@ script = ExtResource("11_5rsy2")
 script = ExtResource("7_cmf6k")
 protected_texture_path = "res://asset/3d/room/nmp/nmp_general.png"
 
+[node name="NiftyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("17_6vldx")
+surface_material_override/0 = SubResource("ShaderMaterial_mi3ry")
+script = ExtResource("11_5rsy2")
+
+[node name="TextureLoader" type="Node" parent="NiftyMesh"]
+script = ExtResource("7_cmf6k")
+protected_texture_path = "res://asset/3d/room/nmp/nmp_general.png"
+
 [node name="GenSpecific" type="Node" parent="."]
 script = ExtResource("8_ejbax")
 non_odd_care_exclusive = true
@@ -195,6 +220,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -2.25)
 shape = SubResource("BoxShape3D_746c8")
 
 [node name="SpawnClass" type="Marker3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 script = ExtResource("16_f3ile")
 scene_path = "res://scene/room/odd_care/room0.tscn"
