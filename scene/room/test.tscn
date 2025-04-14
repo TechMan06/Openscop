@@ -35,7 +35,9 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [sub_resource type="QuadMesh" id="QuadMesh_mnjs5"]
 size = Vector2(2, 2)
@@ -52,12 +54,14 @@ shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = Vector2i(0, 0)
 shader_parameter/animation_speed = null
-shader_parameter/tile_mode = false
-shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = true
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [sub_resource type="Resource" id="Resource_1qxky"]
 script = ExtResource("18_je81u")
+use_timer = false
+randomize_time = true
 loading_timer = 5.0
 fade_color = Color(1, 1, 1, 1)
 
@@ -70,6 +74,7 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 script = ExtResource("1_y30j2")
 loading_preset = ExtResource("2_e4std")
 level_slogan = "If you wanna be my lover, you gotta gotta be my friend"
+school_preset = true
 footstep_sound = 1
 environment_settings = ExtResource("2_we153")
 

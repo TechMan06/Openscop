@@ -21,22 +21,6 @@ func _physics_process(delta: float) -> void:
 		entity.direction = 2
 	elif entity._h > 0:
 		entity.direction = 1
-
-	if Global.global_data.gen > 2:
-		entity_sprite.frame_coords = Vector2(entity.direction, floor(entity._current_frame))
-	
-	if entity.is_walking:
-		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
-		
-		if entity_sprite.frame_coords.x != entity_sprite.hframes - 1 && entity_sprite.hframes % 2 > 0:
-			entity._current_frame += entity._ANIMATION_SPEED * delta
-		else:
-			entity._current_frame == 0.0
-		
-		if entity._current_frame > entity_sprite.vframes:
-			entity._current_frame = 1
-	else:
-		entity._current_frame = 0
 	
 	if entity.player_stats != null:
 		entity_sprite.get_material_override().set_shader_parameter(
@@ -111,5 +95,26 @@ func _physics_process(delta: float) -> void:
 		entity.rotation.y += entity._h * -1/ 25
 		entity._angle = entity.rotation.y
 		entity.velocity = Vector3(0, 0, entity_speed).rotated(Vector3.UP, entity._angle)
+		
+		if entity.velocity.length() > entity._ANIMATION_THRESHOLD:
+			entity.is_walking = true
+		else:
+			entity.is_walking = false
+	
+	if entity.is_walking:
+		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
+		if entity_sprite.frame_coords.x != entity_sprite.hframes - 1 && entity_sprite.hframes % 2 > 0:
+			entity._current_frame += entity._ANIMATION_SPEED * delta
+		else:
+			entity._current_frame == 0.0
+		
+		if entity._current_frame > entity_sprite.vframes:
+			entity._current_frame = 1
+	else:
+		entity._current_frame = 0
+	
+	if Global.global_data.gen > 2:
+		entity_sprite.frame_coords = Vector2(entity.direction, floor(entity._current_frame))
+	
 	
 	entity.move_and_slide()

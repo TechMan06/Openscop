@@ -8,6 +8,9 @@ var player: Entity
 func _ready() -> void:
 	GameManager.update_sheet.connect(update_sheet)
 	update_sheet()
+	
+	if FileAccess.file_exists("res://asset/2d/ui/misc/school_hud.png"):
+		$SchoolFrame.texture = load("res://asset/2d/ui/misc/school_hud.png")
 
 
 func _process(_delta: float) -> void:
@@ -17,7 +20,7 @@ func _process(_delta: float) -> void:
 				!= player_sprite.frame_coords.x
 				and player._sprite.frame_coords.x != 1
 				and player._sprite.frame_coords.x != 2
-				):
+			):
 			player_sprite.frame_coords.x =  player._sprite.frame_coords.x
 		
 		if player._sprite.frame_coords.y != player_sprite.frame_coords.y:

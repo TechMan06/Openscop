@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm1qwyqkdrufs"]
+[gd_scene load_steps=7 format=3 uid="uid://dm1qwyqkdrufs"]
 
 [ext_resource type="Script" path="res://script/ui/school_ui.gd" id="1_e42ru"]
-[ext_resource type="Texture2D" uid="uid://1rw50yu8vi3b" path="res://asset/2d/ui/misc/school.png" id="1_rssgy"]
+[ext_resource type="Texture2D" uid="uid://1rw50yu8vi3b" path="res://asset/2d/ui/misc/school_placeholder.png" id="2_8s7iq"]
 [ext_resource type="Shader" path="res://shader/canvas/transparency.gdshader" id="2_ecfd3"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_kcj32"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_52eow"]
+shader = ExtResource("2_ecfd3")
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xovvm"]
 shader = ExtResource("2_ecfd3")
@@ -20,6 +25,7 @@ script = ExtResource("1_e42ru")
 [node name="SchoolFrame" type="TextureRect" parent="."]
 z_index = -1
 z_as_relative = false
+material = SubResource("ShaderMaterial_52eow")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,7 +33,7 @@ offset_right = 320.0
 offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_rssgy")
+texture = ExtResource("2_8s7iq")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 z_index = -1

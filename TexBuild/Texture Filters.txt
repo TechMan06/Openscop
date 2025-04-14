@@ -1,0 +1,34 @@
+This file contains the values and filters that are applied to the textures.com textures in order to turn them into the Petscop textures, some textures are not included in this file because they do not need filters:
+
+These values should be used in G.I.M.P
+
+
+
+
+Newmaker Plane:
+
+Grass:
+Texture Size: 128x128
+- Color Balance: 
+Shadows:(R: 0.25, G: 0.0, B:0.0) Midtones: (R: -5.0, G: 5.0, B: 20.0)
+
+- Bricks:
+Texture Size: 96x96
+Crop to 14 bricks vertically and 9 bricks horizontally
+
+- Bricks Top:
+Texture Size: 32x32
+Exposure: -0.1
+
+- NMP Door:
+- Color Balance:
+Midtones: (R: 0.0, G: 10.0, B: 15.0)
+
+
+
+
+School:
+- Bricks:
+Texture Size: 128x64
+Crop to 15 bricks, skip first row of bricks
+Reduce contrast in half

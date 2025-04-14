@@ -13,5 +13,6 @@ void fragment() {
 	
 	if (length(COLOR.rgb - alpha_color.rgb) < 0.1) {
 		COLOR.a = 0.0;
+		COLOR.rgb = COLOR.rgb * modulate_color.rgb;
 	}
 }
