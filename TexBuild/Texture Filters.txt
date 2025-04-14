@@ -5,6 +5,13 @@ These values should be used in G.I.M.P
 
 
 
+Common:
+
+Tool Room Wall / Party Room Wall / School Wall:
+Texture Size: 64x64
+Set saturation to 0
+
+
 Newmaker Plane:
 
 Grass:

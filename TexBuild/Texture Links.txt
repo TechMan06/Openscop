@@ -3,6 +3,13 @@ These are the textures from the textures.com website you will be needing to buil
 
 
 
+Common:
+Tool Room Wall / Party Room Wall / School Wall: https://www.textures.com/download/concrete-plates-0205/123858
+Download the "Seamless" Version
+
+
+
+
 Newmaker Plane:
 
 Grass: https://www.textures.com/download/grass0005/3411
