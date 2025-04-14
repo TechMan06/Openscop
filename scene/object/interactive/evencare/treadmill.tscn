@@ -108,6 +108,7 @@ animations = [{
 }]
 
 [node name="PenTreadmill" type="Marker3D"]
+process_mode = 1
 script = ExtResource("1_ykttu")
 
 [node name="TreadmillRear" type="Area3D" parent="."]

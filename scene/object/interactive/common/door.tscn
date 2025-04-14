@@ -161,6 +161,7 @@ _data = {
 }
 
 [node name="Door" type="Marker3D"]
+process_mode = 1
 script = ExtResource("1_4phu8")
 
 [node name="DoorMesh" type="MeshInstance3D" parent="."]

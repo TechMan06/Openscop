@@ -15,6 +15,7 @@ shader = ExtResource("2_eafrx")
 shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
 
 [node name="PianoArea" type="Area3D"]
+process_mode = 1
 script = ExtResource("1_bs62s")
 
 [node name="PianoCollision" type="CollisionShape3D" parent="."]

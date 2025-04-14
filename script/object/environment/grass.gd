@@ -3,7 +3,9 @@ extends Node3D
 const TILE_SIZE: int = 29
 
 var _camera_object: CameraMarker
-
+var forbidden_positions: Array[Vector3] = [
+	Vector3(0.0, 0.0, 0.0)
+]
 
 func _ready() -> void:
 	EventBus.camera_spawned.connect(_on_camera_spawn)
@@ -18,7 +20,7 @@ func _process(_delta: float) -> void:
 						round(_camera_object.position.z / TILE_SIZE) * TILE_SIZE
 					)
 		
-		if self.position == Vector3.ZERO:
+		if forbidden_positions.find(self.position):
 			if get_child(0).visible:
 				get_child(0).visible = false
 		else:

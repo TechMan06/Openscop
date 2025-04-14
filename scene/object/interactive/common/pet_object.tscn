@@ -8,7 +8,6 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_bw11b")
 shader_parameter/use_fog = true
-shader_parameter/alpha_vertex_color = false
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/billboard = true
@@ -16,13 +15,14 @@ shader_parameter/y_billboard = false
 shader_parameter/animate = false
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/tile_mode = false
-shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qawgv"]
 
 [node name="PetObject" type="Marker3D"]
+process_mode = 1
 script = ExtResource("1_3hxus")
 
 [node name="PetSprite" type="Sprite3D" parent="."]

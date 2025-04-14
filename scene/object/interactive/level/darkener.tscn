@@ -4,7 +4,6 @@
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_i6rqe"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_s7kgq"]
 
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_tl287"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j67b8"]
@@ -12,13 +11,16 @@ render_priority = 0
 shader = ExtResource("2_i6rqe")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(0.756863, 0, 0.780392, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_s7kgq")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_s7kgq")
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="Darkener" type="Marker3D"]
 script = ExtResource("1_2o80p")

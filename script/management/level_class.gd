@@ -97,6 +97,8 @@ func _ready() -> void:
 	SaveManager.get_data().loading_preset = loading_preset
 	SaveManager.get_data().room_path = get_tree().get_current_scene().scene_file_path
 	
+	self.set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	
 	if RecordingManager.replay:
 		if RecordingManager.demo:
 			level_slogan = "Demo Recording"
@@ -293,7 +295,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	Global.clock_float += delta
-	RenderingServer.global_shader_parameter_set("float_time", Global.clock_float)
+	
+	if !Global.is_game_paused:
+		RenderingServer.global_shader_parameter_set("float_time", Global.clock_float)
 	
 	if textbox != "":
 		if textbox_preset != null:
@@ -337,7 +341,8 @@ func _process(delta: float) -> void:
 			if input_counter < nifty_code.size() - 1:
 				input_counter += 1
 			else:
-				_nifty()
+				if !Global.is_game_paused:
+					_nifty()
 		else:
 			input_counter = 0
 

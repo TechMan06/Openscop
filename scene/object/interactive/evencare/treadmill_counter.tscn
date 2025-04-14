@@ -38,6 +38,7 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [node name="TreadmillCounter" type="Marker3D"]
+process_mode = 1
 script = ExtResource("1_xs0y8")
 
 [node name="CounterMesh" type="MeshInstance3D" parent="."]

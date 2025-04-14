@@ -30,6 +30,7 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("p2_talk_component")]
+process_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 floor_block_on_wall = false

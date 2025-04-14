@@ -29,6 +29,7 @@ resource_local_to_scene = true
 size = Vector3(2, 2, 0)
 
 [node name="Warp" type="Node3D"]
+process_mode = 1
 script = ExtResource("1_gnr67")
 
 [node name="WarpArea" type="Area3D" parent="."]

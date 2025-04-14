@@ -48,6 +48,7 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [node name="ZoneArea" type="Area3D"]
+process_mode = 1
 script = ExtResource("1_7aoeq")
 
 [node name="ZoneCollision" type="CollisionShape3D" parent="."]
