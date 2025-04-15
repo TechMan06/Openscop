@@ -1,11 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://dpwq17fdria6v"]
+[gd_scene load_steps=29 format=3 uid="uid://dpwq17fdria6v"]
 
 [ext_resource type="Script" path="res://script/ui/secret/recording_button.gd" id="1_vmvf2"]
 [ext_resource type="Texture2D" uid="uid://v7nbf7fy87sm" path="res://asset/2d/ui/secret/recording_button.png" id="2_nm0xe"]
 [ext_resource type="Texture2D" uid="uid://dkqlh3tui8oig" path="res://asset/2d/ui/pause/pets/pen.png" id="3_sgqrs"]
 [ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="4_hge2o"]
-[ext_resource type="Texture2D" uid="uid://chmlf8i31bkjs" path="res://asset/2d/ui/secret/gen.png" id="5_titpo"]
-[ext_resource type="FontFile" uid="uid://bb3aywj2kfsp7" path="res://asset/2d/font/fnt/number_small.fnt" id="6_0j8bw"]
+[ext_resource type="FontFile" uid="uid://dtabqugvs5qj6" path="res://asset/2d/font/ttf/PetscopTall.ttf" id="5_8xrda"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvs4j"]
 atlas = ExtResource("2_nm0xe")
@@ -143,7 +142,7 @@ animations = [{
 font = ExtResource("4_hge2o")
 
 [sub_resource type="LabelSettings" id="LabelSettings_56heo"]
-font = ExtResource("6_0j8bw")
+font = ExtResource("5_8xrda")
 
 [sub_resource type="Animation" id="Animation_qdwr6"]
 length = 0.001
@@ -257,16 +256,12 @@ offset_bottom = 42.0
 text = "PLACEHOLDER"
 label_settings = SubResource("LabelSettings_lyrwu")
 
-[node name="RecordingGen" type="Sprite2D" parent="ButtonFace/TextOrigin"]
-position = Vector2(211, 25)
-texture = ExtResource("5_titpo")
-
 [node name="GenNumber" type="Label" parent="ButtonFace/TextOrigin"]
-offset_left = 229.0
+offset_left = 199.0
 offset_top = 19.0
 offset_right = 245.0
 offset_bottom = 42.0
-text = "00"
+text = "Gen. 00"
 label_settings = SubResource("LabelSettings_56heo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

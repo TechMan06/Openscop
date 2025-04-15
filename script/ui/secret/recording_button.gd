@@ -16,4 +16,4 @@ func _ready() -> void:
 	if recording_resource != null:
 		$ButtonFace/RecordingIcon.frame = int(recording_resource.memcard)
 		$ButtonFace/TextOrigin/RecordingName.text = recording_resource.name
-		$ButtonFace/TextOrigin/GenNumber.text = str(recording_resource.gen).pad_zeros(2)
+		$ButtonFace/TextOrigin/GenNumber.text = "GEN. " + str(recording_resource.gen).pad_zeros(2)

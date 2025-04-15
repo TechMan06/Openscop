@@ -3,9 +3,9 @@ extends Node3D
 const TILE_SIZE: int = 29
 
 var _camera_object: CameraMarker
-var forbidden_positions: Array[Vector3] = [
-	Vector3(0.0, 0.0, 0.0)
-]
+var forbidden_positions: Array[Vector3] = []
+	#Vector3(0.0, 0.0, 0.0)
+#]
 
 func _ready() -> void:
 	EventBus.camera_spawned.connect(_on_camera_spawn)

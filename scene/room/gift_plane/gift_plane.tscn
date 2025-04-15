@@ -198,9 +198,9 @@ _data = {
 "move_logo": SubResource("Animation_iv0pa")
 }
 
-[node name="gift_plane" type="Node3D"]
+[node name="gift-plane" type="Node3D"]
 script = ExtResource("1_xt1aa")
-room_name = "gift_plane"
+room_name = "gift-plane"
 loading_preset = ExtResource("2_nqy6i")
 background_music = 1
 allow_front_movement = false

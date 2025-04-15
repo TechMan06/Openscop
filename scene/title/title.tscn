@@ -13,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="10_g8lf8"]
 [ext_resource type="Texture2D" uid="uid://spnyrwx3rosx" path="res://asset/2d/ui/title/panic.png" id="10_lli8y"]
 [ext_resource type="Texture2D" uid="uid://ryssvf1pireo" path="res://asset/2d/ui/title/title_piece.png" id="11_b3kyf"]
-[ext_resource type="FontFile" uid="uid://bb3aywj2kfsp7" path="res://asset/2d/font/fnt/number_small.fnt" id="12_ji7jh"]
 [ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="13_61pkf"]
 [ext_resource type="Texture2D" uid="uid://cjiabc2qo06nf" path="res://asset/2d/ui/title/file_options.png" id="14_e1yo8"]
+[ext_resource type="FontFile" uid="uid://dtabqugvs5qj6" path="res://asset/2d/font/ttf/PetscopTall.ttf" id="15_1qjog"]
 [ext_resource type="Texture2D" uid="uid://byp8lkd0er7r7" path="res://asset/2d/ui/title/continue_cursor.png" id="15_hc7kx"]
 [ext_resource type="AudioStream" uid="uid://bf0e6hfsjvudv" path="res://sfx/title_screen/press_start.wav" id="17_q7emt"]
 [ext_resource type="AudioStream" uid="uid://cxqsh40sckwcr" path="res://music/petscop.ogg" id="18_ua51s"]
@@ -97,7 +97,7 @@ animations = [{
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k8dyq"]
-font = ExtResource("12_ji7jh")
+font = ExtResource("15_1qjog")
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibh5m"]
