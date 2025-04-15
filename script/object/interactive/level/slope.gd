@@ -70,28 +70,28 @@ func _process(_delta: float) -> void:
 				0:
 					entity.player_stats.entity_y = (
 														 abs(
-															abs(entity.global_position.z) 
+															entity.global_position.z
 															- slope_start.global_position.z
 														) * (1.0 if slope_up else -1.0)
 													) + y_offset
 				1:
 					entity.player_stats.entity_y = (
 														abs(
-															abs(entity.global_position.x) 
+															entity.global_position.x
 															- slope_start.global_position.x
 														) * (1.0 if slope_up else -1.0)
 													) + y_offset
 				2:
 					entity.player_stats.entity_y = (
 														abs(
-															abs(slope_start.global_position.x) 
+															slope_start.global_position.x
 															- entity.global_position.x
 														) * (1.0 if slope_up else -1.0)
 													) + y_offset
 				3:
 					entity.player_stats.entity_y = (
 														abs(
-															abs(slope_start.global_position.z) 
+															slope_start.global_position.z
 															- entity.global_position.z
 														) * (1.0 if slope_up else -1.0)
 													) + y_offset

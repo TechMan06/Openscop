@@ -18,3 +18,4 @@ class_name SaveData
 @export var unlocked_odd_care: bool = false
 @export var petals: int = 0
 @export var cage: Dictionary = {}
+@export var trapdoor: Dictionary = {}

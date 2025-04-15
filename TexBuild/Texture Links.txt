@@ -4,7 +4,14 @@ These are the textures from the textures.com website you will be needing to buil
 
 
 Common:
+
 Tool Room Wall / Party Room Wall / School Wall: https://www.textures.com/download/concrete-plates-0205/123858
+Download the "Seamless" Version
+
+Cellar Floor / School Basement: https://www.textures.com/download/concrete-floors-0017/15596
+Download the "Seamless" Version
+
+Cellar Wall / School Basement Edge: https://www.textures.com/download/concrete-bare-0129/9383
 Download the "Seamless" Version
 
 
@@ -12,17 +19,26 @@ Download the "Seamless" Version
 
 Newmaker Plane:
 
-Grass: https://www.textures.com/download/grass0005/3411
-Download the "Seamless" Version
-
 Bricks: https://www.textures.com/download/bricksmallbrown0475/120031
 Download the "Seamless" Version
 
 Bricks Top: https://www.textures.com/download/plaster-coloured-0100/16517
 Download the "Seamless" Version
 
+Grass: https://www.textures.com/download/grass0005/3411
+Download the "Seamless" Version
+
 NMP Door: https://www.textures.com/download/doors-wood-0145/87409
 
+NMP Door Hatch: https://www.textures.com/download/doorswoodsingleold0204/88137
+
+NMP Dirt: https://www.textures.com/download/gravel-0209/2930
+Download the "Seamless" Version
+
+
+Cellar:
+Cellar Gauge 1: https://www.textures.com/download/gauges-0011/7878
+Cellar Gauge 2: https://www.textures.com/download/gauges-0118/60936
 
 
 

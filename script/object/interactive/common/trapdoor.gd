@@ -1,19 +1,24 @@
 
 @tool
 extends Node3D
+class_name Trapdoor
 
 const ROTATION_ANGLE: float = 135.0
 const ANIM_SPEED: float = 1.0
 
 var rotation_array: Array[float] = [180.0, -90.0, 90.0, 0.0]
 var opposite_rotation: Array[int] = [3, 2, 1, 0]
+var performed_check: bool = false
 
 @export_category("Trapdoor Properties")
 @export var has_door: bool = true
 @export var open: bool = false
+@export var door_id: int = 0
 @export_range(0, 3) var direction = 3
 @export var use_trigger: bool = false
 @export var destroy_after_trigger: bool = true
+@export var use_timer: float = 0.0
+@export var play_jingle: bool = false
 @export_category("Warp Properties")
 @export var warp_offset: float = 0.0
 @export_file("*.tscn") var warp_to
@@ -59,28 +64,26 @@ func _ready() -> void:
 		spawn.player_direction = opposite_rotation[direction]
 		trigger.global_rotation.y = 0.0
 		
-		if has_door:
-			if open:
-				door_mesh.rotation.z = ROTATION_ANGLE
-				front_shape.disabled = true
-		else:
-			door_mesh.visible = false
-			front_shape.disabled = true
+		if open:
+			set_opened()
 		
 		if !use_trigger:
 			trigger.queue_free()
 	
-		trigger.triggered.connect(_check_state)
+		trigger.triggered.connect(_used_trigger)
+		
+		if use_timer > 0.0:
+			await get_tree().create_timer(use_timer).timeout
+			
+			check_state()
 
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		global_rotation.y = deg_to_rad(rotation_array[direction])
-	#else:
-		#$TrapdoorMesh/SpawnClass.scene_path = warp_to
-		#$TrapdoorMesh/SpawnClass.warp_id = warp_id
-		#$TrapdoorMesh/Darkener.darkener_direction = direction
-		#$TrapdoorMesh/Darkener.g
+	else:
+		if !performed_check:
+			EventBus.trapdoor_spawned.emit(self)
 
 
 func open_door() -> void:
@@ -100,6 +103,8 @@ func open_door() -> void:
 	await open_tween.finished
 	
 	open = true
+	
+	EventBus.trapdoor_enabled.emit(door_id, open)
 
 
 func close_door() -> void:
@@ -119,14 +124,28 @@ func close_door() -> void:
 	await close_tween.finished
 	
 	open = false
+	
+	EventBus.trapdoor_enabled.emit(door_id, open)
 
 
-func _check_state() -> void:
+func _used_trigger() -> void:
 	if destroy_after_trigger:
 		trigger.deactivate()
 	
+	check_state()
+
+
+func check_state() -> void:
 	if open:
 		close_door()
 	else:
 		open_door()
-	
+
+
+func set_opened() -> void:
+	if has_door:
+		door_mesh.rotation.z = deg_to_rad(ROTATION_ANGLE)
+		front_shape.disabled = true
+	else:
+		door_mesh.visible = false
+		front_shape.disabled = true

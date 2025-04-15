@@ -35,6 +35,7 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 			"Cement3", 
 			"School", 
 			"Sand") var footstep_sound: int = 0
+@export var disable_shadow_monster_man: bool = false
 @export_category("Starting Textbox Settings")
 @export_multiline var textbox: String = ""
 @export var textbox_preset: TextboxResource
@@ -91,6 +92,8 @@ func _ready() -> void:
 	EventBus.warp_spawned.connect(_on_warp_spawned)
 	EventBus.unlock_nmp.connect(unlock_nmp)
 	EventBus.nifty_set_pixels.connect(nifty_set_pixels)
+	EventBus.trapdoor_spawned.connect(_setup_trapdoor)
+	EventBus.trapdoor_enabled.connect(_trapdoor_state_changed)
 	Console.nifty.connect(_nifty)
 	
 	SaveManager.get_data().room_name = room_name
@@ -209,6 +212,9 @@ func _ready() -> void:
 		
 		if hardcoded_properties == HardcodedProperties.ODD_CARE_PIANO_ROOM and RecordingManager.demo:
 			_player_instance.odd_care = true
+			
+		if disable_shadow_monster_man:
+			_player_instance.player_stats.brightness = 1.0
 		
 		add_child(_player_instance)
 		
@@ -512,3 +518,19 @@ func nifty_set_pixels(pixel_array: Array[Vector2i]) -> void:
 
 func unlock_nmp() -> void:
 	SaveManager.get_data().unlocked_nmp = true
+
+
+func _setup_trapdoor(trapdoor: Trapdoor) -> void:
+	if SaveManager.get_data().trapdoor.has(room_name):
+		if SaveManager.get_data().trapdoor[room_name].has(str(trapdoor.door_id)):
+			if SaveManager.get_data().trapdoor[room_name][str(trapdoor.door_id)]:
+				trapdoor.set_opened()
+
+
+func _trapdoor_state_changed(trapdoor_id, value: bool) -> void:
+	if !SaveManager.get_data().trapdoor.has(room_name):
+		SaveManager.get_data().trapdoor[room_name] = {
+														str(trapdoor_id) : value
+													}
+	else:
+		SaveManager.get_data().trapdoor[room_name][str(trapdoor_id)] = value

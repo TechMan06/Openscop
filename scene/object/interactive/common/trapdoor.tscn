@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://csvd32t6xnda2"]
+[gd_scene load_steps=18 format=3 uid="uid://csvd32t6xnda2"]
 
 [ext_resource type="ArrayMesh" uid="uid://dche6yocq7w0r" path="res://asset/3d/object/trapdoor.obj" id="1_bj5i6"]
 [ext_resource type="Script" path="res://script/object/interactive/common/trapdoor.gd" id="1_c28yp"]
@@ -11,8 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="9_pw6vp"]
 [ext_resource type="PackedScene" uid="uid://cklrsj73ts2kt" path="res://scene/object/interactive/common/interaction_symbol.tscn" id="10_61wdo"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="11_qewoq"]
+[ext_resource type="PackedScene" uid="uid://c67nqiopby4yt" path="res://scene/object/interactive/level/height-bed.tscn" id="12_8pck4"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3xtqy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdndm"]
 render_priority = 0
 shader = ExtResource("2_fqiim")
 shader_parameter/use_fog = true
@@ -47,6 +48,9 @@ data = PackedVector3Array(0.9173, 1, -1.2674, -0.9173, 1, -1.2674, 0.9173, 0, -1
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fhm28"]
 data = PackedVector3Array(-0.9173, 0, 1.2674, -0.9173, 1, 1.2674, 0.9173, 0, 1.2674, 0.9173, 0, 1.2674, -0.9173, 1, 1.2674, 0.9173, 1, 1.2674)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_onscp"]
+size = Vector3(1.75, 0, 2.5)
+
 [node name="Trapdoor" type="Node3D"]
 script = ExtResource("1_c28yp")
 
@@ -56,7 +60,7 @@ unique_name_in_owner = true
 [node name="BaseMesh" type="MeshInstance3D" parent="TrapdoorMesh"]
 mesh = ExtResource("1_bj5i6")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_3xtqy")
+surface_material_override/0 = SubResource("ShaderMaterial_pdndm")
 
 [node name="DoorMesh" type="MeshInstance3D" parent="TrapdoorMesh"]
 unique_name_in_owner = true
@@ -107,3 +111,13 @@ min_distance = 0.5
 [node name="SpawnClass" type="Marker3D" parent="TrapdoorMesh"]
 unique_name_in_owner = true
 script = ExtResource("11_qewoq")
+
+[node name="Cement3" type="Area3D" parent="TrapdoorMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrapdoorMesh/Cement3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0626658, 0)
+shape = SubResource("BoxShape3D_onscp")
+
+[node name="HeightBed" parent="TrapdoorMesh" instance=ExtResource("12_8pck4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0.75)
+height = 0.25

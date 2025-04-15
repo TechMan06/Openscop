@@ -37,7 +37,6 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5c50u"]
-size = Vector3(1, 1, 2)
 
 [node name="Slope" type="Marker3D"]
 script = ExtResource("1_wb1eb")
@@ -54,6 +53,7 @@ vframes = 5
 frame = 10
 
 [node name="SlopeEnd" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="Sprite" type="Sprite3D" parent="SlopeEnd"]
 material_override = SubResource("ShaderMaterial_j7req")
@@ -65,6 +65,7 @@ vframes = 5
 frame = 10
 
 [node name="SlopeArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 
 [node name="SlopeCollision" type="CollisionShape3D" parent="SlopeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

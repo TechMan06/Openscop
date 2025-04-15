@@ -41,3 +41,7 @@ signal destroy_hud
 
 signal room_started(level: Level)
 signal gen_specific_object_spawned(settings: GenSpecific)
+
+
+signal trapdoor_spawned(door: Trapdoor)
+signal trapdoor_enabled(door_id: int, state: bool)

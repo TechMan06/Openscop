@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dt7svctxhl47d"
+path="res://.godot/imported/cellar_furnace.obj-cffc2d38f25325a473cbb0c94e4ee47d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cellar_furnace.obj-cffc2d38f25325a473cbb0c94e4ee47d.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/cellar_furnace.obj"
+dest_files=["res://.godot/imported/cellar_furnace.obj-cffc2d38f25325a473cbb0c94e4ee47d.mesh", "res://.godot/imported/cellar_furnace.obj-cffc2d38f25325a473cbb0c94e4ee47d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

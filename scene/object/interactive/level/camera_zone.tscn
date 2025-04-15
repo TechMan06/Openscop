@@ -10,7 +10,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_vm5i8"]
 flip_faces = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vo5tp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtb5a"]
 render_priority = 0
 shader = ExtResource("2_nlt41")
 shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
@@ -57,7 +57,7 @@ shape = SubResource("BoxShape3D_j21mq")
 [node name="ZoneMesh" type="MeshInstance3D" parent="ZoneCollision"]
 mesh = SubResource("BoxMesh_vm5i8")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_vo5tp")
+surface_material_override/0 = SubResource("ShaderMaterial_vtb5a")
 
 [node name="CameraFocus" type="Marker3D" parent="."]
 transform = Transform3D(0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0, 1, 0, 0, 0)

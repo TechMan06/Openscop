@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://4me8yyhhjy42"]
+[gd_scene load_steps=24 format=3 uid="uid://4me8yyhhjy42"]
 
 [ext_resource type="ArrayMesh" uid="uid://bvoytwwvqkwh" path="res://asset/3d/room/nmp/grass.obj" id="1_otb4p"]
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_xubgh"]
@@ -15,7 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="14_kk8a2"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="15_hqprg"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="16_f3ile"]
+[ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="17_2iqh4"]
 [ext_resource type="PackedScene" uid="uid://csvd32t6xnda2" path="res://scene/object/interactive/common/trapdoor.tscn" id="17_imlju"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_cgkbh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p61yp"]
 render_priority = 0
@@ -74,16 +77,21 @@ script = ExtResource("1_xubgh")
 footstep_sound = 1
 environment_settings = ExtResource("2_yoyrk")
 
+[node name="Grass" type="Area3D" parent="."]
+
+[node name="GrassFloor" type="CollisionShape3D" parent="Grass"]
+shape = SubResource("WorldBoundaryShape3D_cgkbh")
+
 [node name="GrassObject" type="Node3D" parent="."]
 script = ExtResource("4_pg4oa")
 
-[node name="Grass" type="MeshInstance3D" parent="GrassObject"]
+[node name="Grass1" type="MeshInstance3D" parent="GrassObject"]
 visibility_range_end = 50.0
 mesh = ExtResource("1_otb4p")
 surface_material_override/0 = SubResource("ShaderMaterial_p61yp")
 script = ExtResource("11_5rsy2")
 
-[node name="TextureLoader" type="Node" parent="GrassObject/Grass"]
+[node name="TextureLoader" type="Node" parent="GrassObject/Grass1"]
 script = ExtResource("7_cmf6k")
 protected_texture_path = "res://asset/3d/room/nmp/nmp_general.png"
 
@@ -228,4 +236,8 @@ scene = "res://scene/room/odd_care/room0.tscn"
 loading_preset = ExtResource("15_hqprg")
 
 [node name="Trapdoor" parent="." instance=ExtResource("17_imlju")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 0, 101.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 0, 100)
+use_timer = 30.0
+warp_to = "res://scene/room/unmp/cellar.tscn"
+spawn_scene_path = "res://scene/room/unmp/cellar.tscn"
+loading_preset = ExtResource("17_2iqh4")
