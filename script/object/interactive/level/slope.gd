@@ -65,7 +65,7 @@ func _process(_delta: float) -> void:
 	
 	if !Engine.is_editor_hint():
 		
-		if inside_slope:
+		if entity.inside_slope:
 			match slope_direction:
 				0:
 					entity.player_stats.entity_y = (
@@ -95,25 +95,14 @@ func _process(_delta: float) -> void:
 															- entity.global_position.z
 														) * (1.0 if slope_up else -1.0)
 													) + y_offset
-		else:
-			if entity!= null:
-				
-				if entity.player_stats.entity_y <= 0.:
-					entity.player_stats.entity_y = 0.
-				
-				if entity.player_stats.entity_y >= 0.:
-					if entity.player_stats.entity_y >= 0.5:
-						entity.player_stats.entity_y -= 0.5
-					else:
-						entity.player_stats.entity_y = 0.
-	
+
 
 func _on_slope_area_body_entered(body: Node3D) -> void:
 	if body is Entity && !Engine.is_editor_hint():
-		inside_slope = true
+		body.inside_slope = true
 		entity = body
 
 
 func _on_slope_area_body_exited(body: Node3D) -> void:
 	if body is Entity && !Engine.is_editor_hint():
-		inside_slope = false
+		body.inside_slope = false

@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2600wj0iyryf"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_tv43w"]
+[ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_03is2"]
+[ext_resource type="Resource" uid="uid://cpnxltpebnvr6" path="res://resource/environment/under_nmp.tres" id="3_xmc3i"]
+[ext_resource type="ArrayMesh" uid="uid://bviou8v6v2t1v" path="res://asset/3d/room/under_nmp/cellar.obj" id="4_ifd0t"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="5_s3ixu"]
+[ext_resource type="Texture2D" uid="uid://baifxxiaueyif" path="res://asset/3d/room/under_nmp/cellar_placeholder.png" id="6_xic46"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_uavqy"]
+[ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="8_rux0m"]
+[ext_resource type="PackedScene" uid="uid://itbo1loprmd5" path="res://scene/object/interactive/level/slope.tscn" id="10_t2yvs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bt114"]
+render_priority = 0
+shader = ExtResource("5_s3ixu")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("6_xic46")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_61u1e"]
+data = PackedVector3Array(-0.5, 0, -6.5, -3.5, 0, -6.5, -0.5, 1, -6.5, -0.5, 1, -6.5, -3.5, 0, -6.5, -3.5, 1, -6.5, -0.5, 0, -6.5, -0.5, 1, -6.5, -0.5, 0, -2.5, -0.5, 0, -2.5, -0.5, 1, -6.5, -0.5, 1, -2.5, -3.5, 1, -6.5, -3.5, 0, -6.5, -3.5, 1, 2.5, -3.5, 1, 2.5, -3.5, 0, -6.5, -3.5, 0, 2.5, -3.5, 0, 4.1, -3.5, 1, 4.1, -6.5, 0, 4.1, -6.5, 0, 4.1, -3.5, 1, 4.1, -6.5, 1, 4.1, -3.5, 1, 4.1, -3.5, 0, 4.1, -3.5, 1, 5, -3.5, 1, 5, -3.5, 0, 4.1, -3.5, 0, 5, -6.5, 1, 2.5, -3.5, 1, 2.5, -6.5, 0, 2.5, -6.5, 0, 2.5, -3.5, 1, 2.5, -3.5, 0, 2.5, -3.5, 1, 5, -3.5, 0, 5, 6.5, 1, 5, 6.5, 1, 5, -3.5, 0, 5, 6.5, 0, 5, 6.5, 1, 5, 6.5, 0, 5, 6.5, 1, 0.5, 6.5, 1, 0.5, 6.5, 0, 5, 6.5, 0, 0.5, 6.5, 1, 0.5, 6.5, 0, 0.5, 4.5, 1, 0.5, 4.5, 1, 0.5, 6.5, 0, 0.5, 4.5, 0, 0.5, 4.5, 1, 0.5, 4.5, 0, 0.5, 4.5, 1, -6.5, 4.5, 1, -6.5, 4.5, 0, 0.5, 4.5, 0, -6.5, 4.5, 1, -6.5, 4.5, 0, -6.5, 1.5, 1, -6.5, 1.5, 1, -6.5, 4.5, 0, -6.5, 1.5, 0, -6.5, 1.5, 1, -6.5, 1.5, 0, -6.5, 1.5, 1, -2.5, 1.5, 1, -2.5, 1.5, 0, -6.5, 1.5, 0, -2.5, 3.25, 1, -4.5, 3.25, 0, -4.5, 2.75, 1, -4.5, 2.75, 1, -4.5, 3.25, 0, -4.5, 2.75, 0, -4.5, 3.25, 0, -4.5, 3.25, 1, -4.5, 3.25, 0, -5, 3.25, 0, -5, 3.25, 1, -4.5, 3.25, 1, -5, 3.25, 0, -5, 3.25, 1, -5, 2.75, 0, -5, 2.75, 0, -5, 3.25, 1, -5, 2.75, 1, -5, 2.75, 1, -4.5, 2.75, 0, -4.5, 2.75, 1, -5, 2.75, 1, -5, 2.75, 0, -4.5, 2.75, 0, -5)
+
+[node name="hallway1" type="Node3D"]
+script = ExtResource("1_tv43w")
+room_name = "hallway1"
+loading_preset = ExtResource("2_03is2")
+footstep_sound = 4
+disable_shadow_monster_man = true
+place_camera_at = Vector3(0, 0, -1)
+allow_front_movement = false
+environment_settings = ExtResource("3_xmc3i")
+
+[node name="NiftyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_ifd0t")
+surface_material_override/0 = SubResource("ShaderMaterial_bt114")
+script = ExtResource("7_uavqy")
+
+[node name="TextureLoader" type="Node" parent="NiftyMesh"]
+script = ExtResource("8_rux0m")
+protected_texture_path = "res://asset/3d/room/under_nmp/nmp_cellar.png"
+
+[node name="Slope" parent="." instance=ExtResource("10_t2yvs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.5)
+slope_length = 4.0
+slope_direction = 3
+
+[node name="CellarCollision" type="StaticBody3D" parent="."]
+
+[node name="CellarShape" type="CollisionShape3D" parent="CellarCollision"]
+shape = SubResource("ConcavePolygonShape3D_61u1e")

@@ -20,6 +20,7 @@ var _v: float = 0.0
 var _h: float = 0.0
 var _angle: float = 0.0
 var _movement_speed: float = 5.0
+var inside_slope: bool = false
 var _treadmill: bool = false
 var odd_care: bool = false
 

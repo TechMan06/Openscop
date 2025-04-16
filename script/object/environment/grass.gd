@@ -21,12 +21,13 @@ func _process(_delta: float) -> void:
 					)
 	
 	for grass_chunk in self.get_children():
-		if forbidden_positions.find(grass_chunk.global_position):
-			if !grass_chunk.visible:
-				grass_chunk.visible = true
-		else:
-			if grass_chunk.visible:
-				grass_chunk.visible = false
+		if grass_chunk is NiftyMesh:
+			if forbidden_positions.find(grass_chunk.global_position):
+				if !grass_chunk.visible:
+					grass_chunk.visible = true
+			else:
+				if grass_chunk.visible:
+					grass_chunk.visible = false
 
 
 func _on_camera_spawn(camera: CameraMarker) -> void:

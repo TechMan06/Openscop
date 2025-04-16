@@ -22,9 +22,11 @@ func _process(_delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Entity:
-		body.player_stats.entity_y = height
+		body.inside_slope = true
+		body.player_stats.entity_y = height + body.entity_min
 
 
-func _on_body_exited(body):
+func _on_body_exited(body: Node3D) -> void:
 	if body is Entity:
-		body.player_stats.entity_y = 0.0
+		body.inside_slope = false
+		body.player_stats.entity_y = 0.0 + body.entity_min
