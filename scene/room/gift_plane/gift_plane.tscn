@@ -235,7 +235,7 @@ textbox_preset = ExtResource("14_y344j")
 textbox_text = "giftplane"
 
 [node name="LogoMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.981574, 0, 0.191083, 0, 1, 0, -0.191083, 0, 0.981574, 12.8929, 2.74956, -0.1382)
+transform = Transform3D(0.981574, 0, 0.191083, 0, 1, 0, -0.191083, 0, 0.981574, 12.8685, 2.74956, -0.23677)
 mesh = ExtResource("14_aw5fm")
 surface_material_override/0 = SubResource("ShaderMaterial_dqfyf")
 script = SubResource("GDScript_6yjul")
