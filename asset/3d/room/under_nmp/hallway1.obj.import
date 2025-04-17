@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dwpoapjk2rapy"
+path="res://.godot/imported/hallway1.obj-441971020211266a6ba1f3826310a46a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hallway1.obj-441971020211266a6ba1f3826310a46a.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/hallway1.obj"
+dest_files=["res://.godot/imported/hallway1.obj-441971020211266a6ba1f3826310a46a.mesh", "res://.godot/imported/hallway1.obj-441971020211266a6ba1f3826310a46a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

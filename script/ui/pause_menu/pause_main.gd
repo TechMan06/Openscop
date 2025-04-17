@@ -204,6 +204,7 @@ func unpause_game() -> void:
 	
 	if unlocked_nmp:
 		SaveManager.get_data().unlocked_nmp = true
+		EventBus.unlock_nmp.emit()
 	
 	queue_free()
 

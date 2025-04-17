@@ -1,32 +1,30 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2600wj0iyryf"]
+[gd_scene load_steps=14 format=3 uid="uid://d2600wj0iyryf"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_tv43w"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_03is2"]
-[ext_resource type="Resource" uid="uid://cpnxltpebnvr6" path="res://resource/environment/under_nmp.tres" id="3_xmc3i"]
-[ext_resource type="ArrayMesh" uid="uid://bviou8v6v2t1v" path="res://asset/3d/room/under_nmp/cellar.obj" id="4_ifd0t"]
-[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="5_s3ixu"]
-[ext_resource type="Texture2D" uid="uid://baifxxiaueyif" path="res://asset/3d/room/under_nmp/cellar_placeholder.png" id="6_xic46"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_dmwv2"]
+[ext_resource type="ArrayMesh" uid="uid://dwpoapjk2rapy" path="res://asset/3d/room/under_nmp/hallway1.obj" id="4_1l6s4"]
+[ext_resource type="Material" uid="uid://bvy5cv0fajqeu" path="res://asset/3d/material/unmp.tres" id="5_x7pvp"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_uavqy"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="8_airjm"]
 [ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="8_rux0m"]
-[ext_resource type="PackedScene" uid="uid://itbo1loprmd5" path="res://scene/object/interactive/level/slope.tscn" id="10_t2yvs"]
+[ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="9_y6vdt"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="10_ywxug"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="11_7tdeu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bt114"]
-render_priority = 0
-shader = ExtResource("5_s3ixu")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/albedoTex = ExtResource("6_xic46")
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/tile_mode = false
-shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/per_quad_depth = false
-shader_parameter/adjustable_depth = false
-shader_parameter/depth_offset = null
+[sub_resource type="Resource" id="Resource_5rhae"]
+script = ExtResource("3_dmwv2")
+sky_color = Color(0, 0, 0, 1)
+scroll_speed = 0.2
+offset_y = 0.25
+ambient_color = Color(0.7, 0.7, 0.7, 1)
+environment_darkness = 0.7
+enable_fog = true
+fog_color = Color(0, 0, 0, 1)
+fog_radius = 5.0
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_61u1e"]
-data = PackedVector3Array(-0.5, 0, -6.5, -3.5, 0, -6.5, -0.5, 1, -6.5, -0.5, 1, -6.5, -3.5, 0, -6.5, -3.5, 1, -6.5, -0.5, 0, -6.5, -0.5, 1, -6.5, -0.5, 0, -2.5, -0.5, 0, -2.5, -0.5, 1, -6.5, -0.5, 1, -2.5, -3.5, 1, -6.5, -3.5, 0, -6.5, -3.5, 1, 2.5, -3.5, 1, 2.5, -3.5, 0, -6.5, -3.5, 0, 2.5, -3.5, 0, 4.1, -3.5, 1, 4.1, -6.5, 0, 4.1, -6.5, 0, 4.1, -3.5, 1, 4.1, -6.5, 1, 4.1, -3.5, 1, 4.1, -3.5, 0, 4.1, -3.5, 1, 5, -3.5, 1, 5, -3.5, 0, 4.1, -3.5, 0, 5, -6.5, 1, 2.5, -3.5, 1, 2.5, -6.5, 0, 2.5, -6.5, 0, 2.5, -3.5, 1, 2.5, -3.5, 0, 2.5, -3.5, 1, 5, -3.5, 0, 5, 6.5, 1, 5, 6.5, 1, 5, -3.5, 0, 5, 6.5, 0, 5, 6.5, 1, 5, 6.5, 0, 5, 6.5, 1, 0.5, 6.5, 1, 0.5, 6.5, 0, 5, 6.5, 0, 0.5, 6.5, 1, 0.5, 6.5, 0, 0.5, 4.5, 1, 0.5, 4.5, 1, 0.5, 6.5, 0, 0.5, 4.5, 0, 0.5, 4.5, 1, 0.5, 4.5, 0, 0.5, 4.5, 1, -6.5, 4.5, 1, -6.5, 4.5, 0, 0.5, 4.5, 0, -6.5, 4.5, 1, -6.5, 4.5, 0, -6.5, 1.5, 1, -6.5, 1.5, 1, -6.5, 4.5, 0, -6.5, 1.5, 0, -6.5, 1.5, 1, -6.5, 1.5, 0, -6.5, 1.5, 1, -2.5, 1.5, 1, -2.5, 1.5, 0, -6.5, 1.5, 0, -2.5, 3.25, 1, -4.5, 3.25, 0, -4.5, 2.75, 1, -4.5, 2.75, 1, -4.5, 3.25, 0, -4.5, 2.75, 0, -4.5, 3.25, 0, -4.5, 3.25, 1, -4.5, 3.25, 0, -5, 3.25, 0, -5, 3.25, 1, -4.5, 3.25, 1, -5, 3.25, 0, -5, 3.25, 1, -5, 2.75, 0, -5, 2.75, 0, -5, 3.25, 1, -5, 2.75, 1, -5, 2.75, 1, -4.5, 2.75, 0, -4.5, 2.75, 1, -5, 2.75, 1, -5, 2.75, 0, -4.5, 2.75, 0, -5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bss10"]
+data = PackedVector3Array(-22.5, 1, -3.5, -22.5, 0, -3.5, -23.5, 1, -3.5, -23.5, 1, -3.5, -22.5, 0, -3.5, -23.5, 0, -3.5, 2, 0, -0.5, -0.5, 0, -0.5, 2, 1, -0.5, 2, 1, -0.5, -0.5, 0, -0.5, -0.5, 1, -0.5, -22.5, 1, -4.5, -22.5, 0, -4.5, -22.5, 1, -3.5, -22.5, 1, -3.5, -22.5, 0, -4.5, -22.5, 0, -3.5, -0.5, 0, 1, 2, 0, 1, -0.5, 1, 1, -0.5, 1, 1, 2, 0, 1, 2, 1, 1, -0.5, 1, -4.5, -0.5, 0, -4.5, -22.5, 1, -4.5, -22.5, 1, -4.5, -0.5, 0, -4.5, -22.5, 0, -4.5, -0.5, 1, -0.5, -0.5, 0, -0.5, -0.5, 1, -4.5, -0.5, 1, -4.5, -0.5, 0, -0.5, -0.5, 0, -4.5, -23.5, 1, -3.5, -23.5, 0, -3.5, -23.5, 1, -2.5, -23.5, 1, -2.5, -23.5, 0, -3.5, -23.5, 0, -2.5, -23.5, 1, -2.5, -23.5, 0, -2.5, -24.5, 1, -2.5, -24.5, 1, -2.5, -23.5, 0, -2.5, -24.5, 0, -2.5, -24.5, 1, -2.5, -24.5, 0, -2.5, -24.5, 1, -1.5, -24.5, 1, -1.5, -24.5, 0, -2.5, -24.5, 0, -1.5, -24.5, 1, -1.5, -24.5, 0, -1.5, -25.5, 1, -1.5, -25.5, 1, -1.5, -24.5, 0, -1.5, -25.5, 0, -1.5, -25.5, 1, -1.5, -25.5, 0, -1.5, -25.5, 1, -0.5, -25.5, 1, -0.5, -25.5, 0, -1.5, -25.5, 0, -0.5, -25.5, 1, -0.5, -25.5, 0, -0.5, -26.5, 1, -0.5, -26.5, 1, -0.5, -25.5, 0, -0.5, -26.5, 0, -0.5, -26.5, 1, -0.5, -26.5, 0, -0.5, -26.5, 1, 0.5, -26.5, 1, 0.5, -26.5, 0, -0.5, -26.5, 0, 0.5, -26.5, 1, 0.5, -26.5, 0, 0.5, -29.5, 1, 0.5, -29.5, 1, 0.5, -26.5, 0, 0.5, -29.5, 0, 0.5, -26.5, 1, 3, -26.5, 0, 3, -0.5, 1, 3, -0.5, 1, 3, -26.5, 0, 3, -0.5, 0, 3, -0.5, 0, 1, -0.5, 1, 1, -0.5, 0, 3, -0.5, 0, 3, -0.5, 1, 1, -0.5, 1, 3, -29.5, 1, 2, -29.5, 0, 2, -26.5, 1, 2, -26.5, 1, 2, -29.5, 0, 2, -26.5, 0, 2, -26.5, 1, 2, -26.5, 0, 2, -26.5, 1, 3, -26.5, 1, 3, -26.5, 0, 2, -26.5, 0, 3)
 
 [node name="hallway1" type="Node3D"]
 script = ExtResource("1_tv43w")
@@ -34,25 +32,111 @@ room_name = "hallway1"
 loading_preset = ExtResource("2_03is2")
 footstep_sound = 4
 disable_shadow_monster_man = true
-place_camera_at = Vector3(0, 0, -1)
 allow_front_movement = false
-environment_settings = ExtResource("3_xmc3i")
+limit_camera_horizontal = true
+horizontal_limit = Vector2(-26, -1)
+environment_settings = SubResource("Resource_5rhae")
 
 [node name="NiftyMesh" type="MeshInstance3D" parent="."]
-mesh = ExtResource("4_ifd0t")
-surface_material_override/0 = SubResource("ShaderMaterial_bt114")
+mesh = ExtResource("4_1l6s4")
+surface_material_override/0 = ExtResource("5_x7pvp")
 script = ExtResource("7_uavqy")
 
 [node name="TextureLoader" type="Node" parent="NiftyMesh"]
 script = ExtResource("8_rux0m")
-protected_texture_path = "res://asset/3d/room/under_nmp/nmp_cellar.png"
-
-[node name="Slope" parent="." instance=ExtResource("10_t2yvs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.5)
-slope_length = 4.0
-slope_direction = 3
+protected_texture_path = "res://asset/3d/room/under_nmp/unmp_hallway.png"
 
 [node name="CellarCollision" type="StaticBody3D" parent="."]
 
-[node name="CellarShape" type="CollisionShape3D" parent="CellarCollision"]
-shape = SubResource("ConcavePolygonShape3D_61u1e")
+[node name="CollisionShape" type="CollisionShape3D" parent="CellarCollision"]
+shape = SubResource("ConcavePolygonShape3D_bss10")
+
+[node name="Warp" parent="." instance=ExtResource("8_airjm")]
+warp_direction = 1
+scene = "res://scene/room/unmp/cellar.tscn"
+loading_preset = ExtResource("9_y6vdt")
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+script = ExtResource("10_ywxug")
+scene_path = "res://scene/room/unmp/cellar.tscn"
+
+[node name="PieceArea" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0.5)
+
+[node name="PieceArea2" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0.5)
+
+[node name="PieceArea3" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.5)
+
+[node name="PieceArea4" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -0.5)
+
+[node name="PieceArea5" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0.5)
+
+[node name="PieceArea6" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0.5)
+
+[node name="PieceArea7" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0.5)
+
+[node name="PieceArea8" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0.5)
+
+[node name="PieceArea9" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -0.5)
+
+[node name="PieceArea10" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -0.5)
+
+[node name="PieceArea11" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -0.5)
+
+[node name="PieceArea12" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -0.5)
+
+[node name="PieceArea13" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0.5)
+
+[node name="PieceArea14" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 0.5)
+
+[node name="PieceArea15" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -0.5)
+
+[node name="PieceArea16" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -0.5)
+
+[node name="PieceArea17" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 0.5)
+
+[node name="PieceArea18" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0.5)
+
+[node name="PieceArea19" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 0.5)
+
+[node name="PieceArea20" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -0.5)
+
+[node name="PieceArea21" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -0.5)
+
+[node name="PieceArea22" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -0.5)
+
+[node name="PieceArea23" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0.5)
+
+[node name="PieceArea24" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, -0.5)
+
+[node name="PieceArea25" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 0.5)
+
+[node name="PieceArea26" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 0.5)
+
+[node name="PieceArea27" parent="." instance=ExtResource("11_7tdeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -1.5)

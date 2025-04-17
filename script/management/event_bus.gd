@@ -23,6 +23,7 @@ signal camera_shake_amount(value: float)
 signal camera_zone_spawned(camera_zone: CameraZone)
 signal camera_shake_speed(value: float)
 
+signal unlock_nmp
 signal warp_spawned(warp: WarpClass)
 
 signal nifty_upload(texture: Image)
