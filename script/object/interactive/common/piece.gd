@@ -22,6 +22,7 @@ var type_array: Array[int] = [
 								3,1,0,4,2,
 								1,0,4,2,3
 							]
+var room_name: String
 
 @onready var piece_sprite = $PieceSprite
 @onready var piece_collision = $PieceCollision
@@ -29,6 +30,7 @@ var type_array: Array[int] = [
 
 
 func _ready() -> void:
+	
 	if Global.global_data.gen < 3:
 		queue_free()
 	
@@ -36,17 +38,14 @@ func _ready() -> void:
 		piece_sprite.frame_coords.y = type_array[get_tree().get_nodes_in_group("piece").find(self)]
 	else:
 		piece_sprite.frame_coords.y = randi_range(0, 4)
-
-
-func _process(_delta: float) -> void:
-	if !performed_check:
-		if get_tree().get_nodes_in_group("piece").find(self) != null:
-			EventBus.piece_spawned.emit(get_tree().get_nodes_in_group("piece").find(self))
-			performed_check = true
+	
+	if SaveManager.get_data().piece_log.has(get_tree().get_current_scene().room_name):
+		if SaveManager.get_data().piece_log[get_tree().get_current_scene().room_name].find(get_tree().get_nodes_in_group("piece").find(self)) != -1:
+			self.queue_free()
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is Player && performed_check:
+	if body is Player:
 		piece_sound.play()
 		
 		EventBus.piece_collected.emit(get_tree().get_nodes_in_group("piece").find(self))

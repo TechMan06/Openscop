@@ -23,7 +23,6 @@ signal camera_shake_amount(value: float)
 signal camera_zone_spawned(camera_zone: CameraZone)
 signal camera_shake_speed(value: float)
 
-signal piece_spawned(id: int)
 signal piece_collected(id: int)
 
 signal unlock_nmp
