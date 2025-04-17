@@ -61,7 +61,7 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[node name="Cellar" type="Node3D"]
+[node name="cellar" type="Node3D"]
 script = ExtResource("1_h4vwc")
 room_name = "cellar"
 loading_preset = ExtResource("2_4dfsw")

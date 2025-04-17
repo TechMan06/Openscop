@@ -12,12 +12,14 @@ var performed_check: bool = false
 @export var cage_id: int = 0
 @export_range(0, 100) var move_to: float = 3.0
 
+@onready var room_name: String = get_tree().get_current_scene().room_name
 
-func _physics_process(_delta: float) -> void:
-	if !performed_check:
-		EventBus.cage_spawned.emit(self)
-		performed_check = true
-		cage_initiated.emit()
+
+func _ready() -> void:
+	if SaveManager.get_data().cage.has(room_name):
+		if SaveManager.get_data().cage[room_name].has(str(cage_id)):
+			open = SaveManager.get_data().cage[room_name][str(cage_id)]
+			set_state(open)
 
 
 func set_state(value: bool) -> void:
@@ -45,6 +47,12 @@ func _on_trigger() -> void:
 	open = !open
 	
 	if saveable:
-		EventBus.cage_state_changed.emit(cage_id, open)
+		if !SaveManager.get_data().cage.has(room_name):
+			SaveManager.get_data().cage[room_name] = {
+														str(cage_id) : open
+													}
+		else:
+			SaveManager.get_data().cage[room_name][str(cage_id)] = open
+
 	
 	allow_toggle.emit()

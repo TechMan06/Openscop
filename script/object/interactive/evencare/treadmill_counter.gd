@@ -64,5 +64,5 @@ func _add_number(backward: bool) -> void:
 		Global.crash_game()
 	
 	if save_petals:
-		EventBus.petal_number_update.emit(current_value)
+		SaveManager.get_data().petals = current_value
 	

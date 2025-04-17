@@ -83,15 +83,8 @@ func _ready() -> void:
 	EventBus.playback_player_spawned.connect(_on_playback_player_spawn)
 	EventBus.nifty_upload.connect(_on_texture_upload)
 	EventBus.nifty_finished.connect(_store_background)
-	EventBus.cage_spawned.connect(_setup_cage)
-	EventBus.cage_state_changed.connect(_on_cage_state_change)
-	EventBus.petal_number_update.connect(_update_petal_number)
-	EventBus.gen_specific_object_spawned.connect(_on_gen_specific_object_spawned)
 	EventBus.warp_spawned.connect(_on_warp_spawned)
-	EventBus.unlock_nmp.connect(unlock_nmp)
 	EventBus.nifty_set_pixels.connect(nifty_set_pixels)
-	EventBus.trapdoor_spawned.connect(_setup_trapdoor)
-	EventBus.trapdoor_enabled.connect(_trapdoor_state_changed)
 	Console.nifty.connect(_nifty)
 	
 	SaveManager.get_data().room_name = room_name
@@ -415,35 +408,6 @@ func _nifty() -> void:
 	add_child(_draw_instance)
 
 
-func _setup_cage(cage: Cage) -> void:
-	if SaveManager.get_data().cage.has(room_name):
-		if SaveManager.get_data().cage[room_name].has(str(cage.cage_id)):
-			cage.open = SaveManager.get_data().cage[room_name][str(cage.cage_id)]
-			cage.set_state(cage.open)
-
-
-func _on_cage_state_change(cage_id: int, value: bool) -> void:
-	if !SaveManager.get_data().cage.has(room_name):
-		SaveManager.get_data().cage[room_name] = {
-													str(cage_id) : value
-												}
-	else:
-		SaveManager.get_data().cage[room_name][str(cage_id)] = value
-
-
-func _update_petal_number(value: int) -> void:
-	SaveManager.get_data().petals = value
-
-
-func _on_gen_specific_object_spawned(object: GenSpecific) -> void:
-	if !SaveManager.get_data().unlocked_odd_care:
-		if object.odd_care_exclusive:
-			object.queue_free()
-	else:
-		if object.non_odd_care_exclusive:
-			object.queue_free()
-
-
 func _on_warp_spawned(warp: WarpClass) -> void:
 	if (
 			hardcoded_properties == HardcodedProperties.EVEN_CARE or
@@ -496,26 +460,5 @@ func nifty_set_pixels(pixel_array: Array[Vector2i]) -> void:
 									), 
 								Color.html("#FFCEE5FF")
 							)
-
 	
 	EventBus.nifty_finished.emit(room_texture, draw_texture, pixel_array)
-
-
-func unlock_nmp() -> void:
-	SaveManager.get_data().unlocked_nmp = true
-
-
-func _setup_trapdoor(trapdoor: Trapdoor) -> void:
-	if SaveManager.get_data().trapdoor.has(room_name):
-		if SaveManager.get_data().trapdoor[room_name].has(str(trapdoor.door_id)):
-			if SaveManager.get_data().trapdoor[room_name][str(trapdoor.door_id)]:
-				trapdoor.set_opened()
-
-
-func _trapdoor_state_changed(trapdoor_id, value: bool) -> void:
-	if !SaveManager.get_data().trapdoor.has(room_name):
-		SaveManager.get_data().trapdoor[room_name] = {
-														str(trapdoor_id) : value
-													}
-	else:
-		SaveManager.get_data().trapdoor[room_name][str(trapdoor_id)] = value

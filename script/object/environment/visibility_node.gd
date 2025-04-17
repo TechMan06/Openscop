@@ -12,6 +12,13 @@ var performed_check: bool = false
 
 
 func _ready() -> void:
+	if !SaveManager.get_data().unlocked_odd_care:
+		if self.odd_care_exclusive:
+			self.queue_free()
+	else:
+		if self.non_odd_care_exclusive:
+			self.queue_free()
+	
 	if gens.find(Global.global_data.gen) == -1:
 		queue_free()
 		

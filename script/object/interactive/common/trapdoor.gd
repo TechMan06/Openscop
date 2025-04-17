@@ -36,6 +36,7 @@ var performed_check: bool = false
 @onready var warp: WarpClass = %Warp
 @onready var trigger: Marker3D = %Trigger
 @onready var spawn: SpawnClass = %SpawnClass
+@onready var room_name: String = get_tree().get_current_scene().room_name
 
 
 
@@ -76,6 +77,11 @@ func _ready() -> void:
 			await get_tree().create_timer(use_timer).timeout
 			
 			check_state()
+		
+		if SaveManager.get_data().trapdoor.has(room_name):
+			if SaveManager.get_data().trapdoor[room_name].has(str(door_id)):
+				if SaveManager.get_data().trapdoor[room_name][str(door_id)]:
+					set_opened()
 
 
 func _process(delta: float) -> void:
@@ -104,7 +110,12 @@ func open_door() -> void:
 	
 	open = true
 	
-	EventBus.trapdoor_enabled.emit(door_id, open)
+	if !SaveManager.get_data().trapdoor.has(room_name):
+		SaveManager.get_data().trapdoor[room_name] = {
+														str(door_id) : open
+													}
+	else:
+		SaveManager.get_data().trapdoor[room_name][str(door_id)] = open
 
 
 func close_door() -> void:
@@ -124,8 +135,6 @@ func close_door() -> void:
 	await close_tween.finished
 	
 	open = false
-	
-	EventBus.trapdoor_enabled.emit(door_id, open)
 
 
 func _used_trigger() -> void:

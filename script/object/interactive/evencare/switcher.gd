@@ -18,13 +18,16 @@ var can_trigger: bool = true
 @onready var lever_b = $LeverOrigins/LeverB
 @onready var interaction_symbol = $LeverOrigins/InteractionSymbol
 
+@onready var room_name: String = get_tree().get_current_scene().room_name
+
 
 func _ready() -> void:
 	if connect_to != null:
 		connect_to.allow_toggle.connect(allow_toggle)
 		
 		if connect_to is Cage:
-			await connect_to.cage_initiated
+			await get_tree().process_frame
+			
 			turned_on = !connect_to.open
 	
 	lever_origins.position.y = height_offset

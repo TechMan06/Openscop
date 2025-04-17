@@ -201,8 +201,9 @@ func unpause_game() -> void:
 	Global.can_pause = true
 	Global.can_unpause = true
 	get_tree().paused = false
+	
 	if unlocked_nmp:
-		EventBus.unlock_nmp.emit()
+		SaveManager.get_data().unlocked_nmp = true
 	
 	queue_free()
 
