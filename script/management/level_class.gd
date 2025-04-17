@@ -81,7 +81,6 @@ enum HardcodedProperties {
 
 func _ready() -> void:
 	EventBus.playback_player_spawned.connect(_on_playback_player_spawn)
-	EventBus.piece_collected.connect(_on_piece_collected)
 	EventBus.nifty_upload.connect(_on_texture_upload)
 	EventBus.nifty_finished.connect(_store_background)
 	EventBus.cage_spawned.connect(_setup_cage)
@@ -354,13 +353,6 @@ func _process(delta: float) -> void:
 
 func _on_playback_player_spawn(playback_player_obj: PlaybackPlayer) -> void:
 	playback_player_obj.add_collision_exception_with(_player_instance)
-
-
-func _on_piece_collected(piece_id: int) -> void:
-	if SaveManager.get_data().piece_log.has(room_name):
-		SaveManager.get_data().piece_log[room_name].push_back(piece_id)
-	elif room_name != "" || room_name.rstrip(" ") != "":
-		SaveManager.get_data().piece_log[room_name] = [piece_id]
 
 
 func _on_texture_upload(texture: Image) -> void:

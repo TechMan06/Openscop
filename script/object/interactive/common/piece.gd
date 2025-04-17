@@ -22,25 +22,25 @@ var type_array: Array[int] = [
 								3,1,0,4,2,
 								1,0,4,2,3
 							]
-var room_name: String
 
+@onready var room_name: String = get_tree().get_current_scene().room_name
+@onready var piece_id: int = get_tree().get_nodes_in_group("piece").find(self)
 @onready var piece_sprite = $PieceSprite
 @onready var piece_collision = $PieceCollision
 @onready var piece_sound = $PieceSound
 
 
 func _ready() -> void:
-	
 	if Global.global_data.gen < 3:
 		queue_free()
 	
 	if type_array[get_tree().get_nodes_in_group("piece").find(self)] != null:
-		piece_sprite.frame_coords.y = type_array[get_tree().get_nodes_in_group("piece").find(self)]
+		piece_sprite.frame_coords.y = type_array[piece_id]
 	else:
 		piece_sprite.frame_coords.y = randi_range(0, 4)
 	
-	if SaveManager.get_data().piece_log.has(get_tree().get_current_scene().room_name):
-		if SaveManager.get_data().piece_log[get_tree().get_current_scene().room_name].find(get_tree().get_nodes_in_group("piece").find(self)) != -1:
+	if SaveManager.get_data().piece_log.has(room_name):
+		if SaveManager.get_data().piece_log[room_name].find(piece_id) != -1:
 			self.queue_free()
 
 
@@ -48,7 +48,10 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is Player:
 		piece_sound.play()
 		
-		EventBus.piece_collected.emit(get_tree().get_nodes_in_group("piece").find(self))
+		if SaveManager.get_data().piece_log.has(room_name):
+			SaveManager.get_data().piece_log[room_name].push_back(piece_id)
+		elif room_name != "" || room_name.rstrip(" ") != "":
+			SaveManager.get_data().piece_log[room_name] = [piece_id]
 		
 		body.player_stats.piece_amount += 1
 		
