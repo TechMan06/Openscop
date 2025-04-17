@@ -8,7 +8,6 @@ const ANIM_SPEED: float = 1.0
 
 var rotation_array: Array[float] = [180.0, -90.0, 90.0, 0.0]
 var opposite_rotation: Array[int] = [3, 2, 1, 0]
-var performed_check: bool = false
 
 @export_category("Trapdoor Properties")
 @export var has_door: bool = true
@@ -87,9 +86,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		global_rotation.y = deg_to_rad(rotation_array[direction])
-	else:
-		if !performed_check:
-			EventBus.trapdoor_spawned.emit(self)
 
 
 func open_door() -> void:

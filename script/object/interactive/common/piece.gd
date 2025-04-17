@@ -9,7 +9,6 @@ const VER_SPEED: int = 5
 var global_data: GlobalData = load("res://resource/management/global_data.tres")
 var current_frame: int = 0
 var collected: bool = false
-var performed_check: bool = false
 var type_array: Array[int] = [
 								0,1,2,3,4,
 								4,0,2,1,3,

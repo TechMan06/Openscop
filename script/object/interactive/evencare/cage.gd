@@ -4,8 +4,6 @@ class_name Cage
 signal allow_toggle
 signal cage_initiated
 
-var performed_check: bool = false
-
 @export var open: bool = false
 @export var flip: bool = false
 @export var saveable: bool = false
