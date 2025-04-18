@@ -220,6 +220,8 @@ void fragment()
 	if (use_blend) {
 		ALPHA = texture_color.a;
 	} else {
+		ALPHA_SCISSOR_THRESHOLD = 0.25;
+		
 		if (length(texture_color.rgb - alpha_color.rgb) < 0.25) {
 			ALPHA = 0.0;
 		}

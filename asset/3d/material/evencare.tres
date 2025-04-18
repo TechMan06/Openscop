@@ -9,6 +9,7 @@ shader = ExtResource("1_783sy")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/use_blend = false
 shader_parameter/albedoTex = ExtResource("2_3nqib")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
