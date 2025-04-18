@@ -423,7 +423,7 @@ func _on_warp_spawned(warp: WarpClass) -> void:
 						warp.scene == "res://scene/room/level1/room1.tscn" or 
 						warp.scene == "res://scene/room/level1/room2.tscn"
 					):
-					warp.loading_preset = load("res://resource/loading_preset/nmp_noload_delay.tscn")
+					warp.loading_preset = load("res://resource/loading_preset/nmp_noload_delay.tres")
 				
 				if warp.scene == "res://scene/room/gift_plane/gift_plane.tscn":
 					warp.scene = "res://scene/room/nmp/nmp.tscn"
