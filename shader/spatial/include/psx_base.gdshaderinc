@@ -27,9 +27,6 @@ render_mode	cull_back;
 render_mode	cull_disabled;
 #endif
 
-#ifdef BLEND
-render_mode	blend_mix;
-#endif
 
 #ifndef NO_TEXTURE
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
@@ -38,6 +35,7 @@ uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 
 #if defined(SPRITE) || defined(USE_ALPHA)
 uniform vec3 alpha_color: source_color = vec3(1.0, 0.0, 1.0);
+uniform bool use_blend = false;
 #endif
 
 
@@ -199,8 +197,6 @@ void fragment()
 #else
 	vec4 texture_color = texture(albedoTex, texture_uv);
 	
-	texture_color.rgba = mix(vec4(1.0, 1.0, 1.0, texture_color.a), texture_color.rgba, COLOR.a);
-	
 	#ifdef LIT
 		if (fog_enabled) {
 			ALBEDO = (color_base * texture_color).rgb * (1.0 - fog_amount) + fog_color * fog_amount;
@@ -217,15 +213,16 @@ void fragment()
 
 #ifdef LIGHT_VOLUME
 	ALPHA = 1.0 - UV.y;
-#elif defined(ALPHA_BLEND)
-	ALPHA = texture_color.a * color_base.a;
 #endif
-	
+
+
 #if defined(SPRITE) || defined(USE_ALPHA)
-	ALPHA_SCISSOR_THRESHOLD = 0.25;
-	
-	if (length(texture_color.rgb - alpha_color.rgb) < ALPHA_SCISSOR_THRESHOLD) {
-		ALPHA = 0.0;
+	if (use_blend) {
+		ALPHA = texture_color.a;
+	} else {
+		if (length(texture_color.rgb - alpha_color.rgb) < 0.25) {
+			ALPHA = 0.0;
+		}
 	}
 #endif
 
