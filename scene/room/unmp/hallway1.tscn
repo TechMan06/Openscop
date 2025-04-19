@@ -31,7 +31,6 @@ script = ExtResource("1_tv43w")
 room_name = "hallway1"
 loading_preset = ExtResource("2_03is2")
 footstep_sound = 4
-disable_shadow_monster_man = true
 allow_front_movement = false
 limit_camera_horizontal = true
 horizontal_limit = Vector2(-26, -1)

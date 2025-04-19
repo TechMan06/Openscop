@@ -35,7 +35,6 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 			"Cement3", 
 			"School", 
 			"Sand") var footstep_sound: int = 0
-@export var disable_shadow_monster_man: bool = false
 @export_category("Starting Textbox Settings")
 @export_multiline var textbox: String = ""
 @export var textbox_preset: TextboxResource
@@ -203,9 +202,6 @@ func _ready() -> void:
 		
 		if hardcoded_properties == HardcodedProperties.ODD_CARE_PIANO_ROOM and RecordingManager.demo:
 			_player_instance.odd_care = true
-			
-		if disable_shadow_monster_man:
-			_player_instance.player_stats.brightness = 1.0
 		
 		add_child(_player_instance)
 		

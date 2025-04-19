@@ -44,17 +44,23 @@ func _ready() -> void:
 		match direction:
 			0:
 				warp.global_position.z += warp_offset
+				warp.disable_shadow_monster_man = false
+				darkener.queue_free()
 			1:
 				warp.global_position.x += warp_offset
 			2:
 				warp.global_position.x -= warp_offset
 			3:
 				warp.global_position.z -= warp_offset
+				
 		
 		slope.slope_direction = direction
 		slope.global_rotation.y = 0.0
-		darkener.darkener_direction = direction
-		darkener.global_rotation.y = 0.0
+		
+		if direction != 0:
+			darkener.darkener_direction = direction
+			darkener.global_rotation.y = 0.0
+		
 		warp.scene = warp_to
 		warp.detect_bucket = detect_bucket
 		warp.loading_preset = loading_preset

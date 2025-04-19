@@ -67,7 +67,6 @@ script = ExtResource("1_h4vwc")
 room_name = "cellar"
 loading_preset = ExtResource("2_4dfsw")
 footstep_sound = 4
-disable_shadow_monster_man = true
 place_camera_at = Vector3(0, 0, -1)
 allow_front_movement = false
 limit_camera_horizontal = true
@@ -101,6 +100,7 @@ shape = SubResource("ConcavePolygonShape3D_nxaqf")
 [node name="Warp" parent="." instance=ExtResource("11_2cxv2")]
 transform = Transform3D(0.9, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -5.5)
 warp_direction = 3
+disable_shadow_monster_man = null
 scene = "res://scene/room/nmp/nmp.tscn"
 loading_preset = ExtResource("2_4dfsw")
 
@@ -145,6 +145,7 @@ protected_texture_path = "res://asset/3d/room/under_nmp/nmp_cellar.png"
 [node name="Warp2" parent="." instance=ExtResource("11_2cxv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 2)
 warp_direction = 2
+disable_shadow_monster_man = null
 scene = "res://scene/room/unmp/hallway1.tscn"
 loading_preset = ExtResource("14_leaew")
 

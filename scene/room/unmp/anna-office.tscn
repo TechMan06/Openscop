@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtk6he8atg17p"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_rvpco"]
+[ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_m0nw2"]
+
+[node name="anna-office" type="Node3D"]
+script = ExtResource("1_rvpco")
+room_name = "anna-office"
+loading_preset = ExtResource("2_m0nw2")
+footstep_sound = 4

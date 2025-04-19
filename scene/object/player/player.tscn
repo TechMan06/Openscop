@@ -19,7 +19,6 @@ shader = ExtResource("2_mramm")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/use_blend = false
 shader_parameter/albedoTex = ExtResource("1_6mpon")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false

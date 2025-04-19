@@ -52,7 +52,7 @@ func save_global() -> void:
 	ResourceSaver.save(global_data, "user://savedata/global.tres")
 
 
-func warp_to(scene_path: String, preset) -> void:
+func warp_to(scene_path: String, preset, disable_shadow_monster: bool = false) -> void:
 	var _loading_preset: LoadingPreset = null
 	
 	if preset is String:
@@ -63,6 +63,9 @@ func warp_to(scene_path: String, preset) -> void:
 	EventBus.emit_transition.emit(_loading_preset)
 	
 	await EventBus.start_scene
+	
+	if disable_shadow_monster:
+		SaveManager.get_data().player_data.brightness = 1.0
 	
 	get_tree().change_scene_to_file(scene_path)
 

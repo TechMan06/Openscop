@@ -12,6 +12,7 @@ var performed_check: bool = false
 @export var detect_bucket: bool = true
 @export_range(0, 3) var warp_direction = 0
 @export var y_offset: float
+@export var disable_shadow_monster_man: bool = false
 @export_subgroup("Warp_to")
 @export_file("*.tscn") var scene
 @export var loading_preset: LoadingPreset
@@ -72,11 +73,11 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 			if body.velocity.x != 0.0 || body.velocity.z != 0.0:
 				if diagonal_entrance:
 					if body.direction == directions.x || body.direction == directions.y:
-						Global.warp_to(scene, loading_preset)
+						Global.warp_to(scene, loading_preset, disable_shadow_monster_man)
 				else:
 					if body.direction == warp_direction || all_directions || body.control_mode == 1:
 						body.player_stats.scene_info = [get_tree().get_current_scene().scene_file_path, warp_id]
-						Global.warp_to(scene, loading_preset)
+						Global.warp_to(scene, loading_preset, disable_shadow_monster_man)
 			
 			if y_offset != 0.0:
 				body.entity_y = y_offset

@@ -100,6 +100,7 @@ slope_up = false
 unique_name_in_owner = true
 transform = Transform3D(-0.25, 0, -7.54979e-08, 0, 1, 0, 3.7749e-08, 0, -0.5, 0, 0, 0)
 all_directions = true
+disable_shadow_monster_man = true
 
 [node name="Trigger" parent="TrapdoorMesh" instance=ExtResource("10_61wdo")]
 unique_name_in_owner = true
