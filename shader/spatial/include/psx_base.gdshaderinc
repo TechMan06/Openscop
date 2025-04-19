@@ -35,7 +35,6 @@ uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 
 #if defined(SPRITE) || defined(USE_ALPHA)
 uniform vec3 alpha_color: source_color = vec3(1.0, 0.0, 1.0);
-uniform bool use_blend = false;
 #endif
 
 
@@ -217,15 +216,15 @@ void fragment()
 
 
 #if defined(SPRITE) || defined(USE_ALPHA)
-	if (use_blend) {
+	#if defined(BLEND_ALPHA)
 		ALPHA = texture_color.a;
-	} else {
+	#else
 		ALPHA_SCISSOR_THRESHOLD = 0.25;
-		
+
 		if (length(texture_color.rgb - alpha_color.rgb) < 0.25) {
 			ALPHA = 0.0;
 		}
-	}
+	#endif
 #endif
 
 #if defined(SPRITE)
