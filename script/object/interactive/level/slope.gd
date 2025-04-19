@@ -65,7 +65,7 @@ func _process(_delta: float) -> void:
 	
 	if !Engine.is_editor_hint():
 		
-		if entity.inside_slope:
+		if entity != null and entity.inside_slope:
 			match slope_direction:
 				0:
 					entity.player_stats.entity_y = (
