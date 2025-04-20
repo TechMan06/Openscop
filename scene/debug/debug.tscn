@@ -158,7 +158,10 @@ SFX
 PSX Buttons
 
 [color=#00FFFF]Cheddar:[/color]
+Anna Office Telephone
+Anna Office Note Background
 Care B
+CMUDict to P2 to TALK Dictionary Conversion Tools
 Dialogue Previewer Tool
 Draw Mode Assets
 Even Care Furniture
@@ -172,6 +175,8 @@ Gift Plane Level Mesh
 Gift Plane Tiles
 Green Pieces
 Loading Screens
+Newmaker Plane Models
+Newmaker Plane Texture
 Odd Care Level Mesh
 Pen Piano Key
 Pen Piano Sound
@@ -181,13 +186,14 @@ Pen Treadmill Sprites
 Pause Menu Numbers
 Pink Piece
 Purple Piece
-CMUDict to P2 to TALK Dictionary Conversion Tools
 Recording Menu Buttons
 sort-test Level Mesh
 Sprite Room Tiles
 Title Screen 3D
 Tool Model
 Torus Piece
+Under the Newmaker Plane Models
+Under the Newmaker Plane Textures
 
 [color=#00FFFF]CMUDict:[/color]
 P2 to TALK Dictionary:
@@ -200,11 +206,13 @@ Most Common English Words Filter:
 [color=#00FFFF]DaWizardBoi:[/color]
 CAUGHT Sprite
 Pause Menu Background
+Pause Menu Frame
 Pause Menu Piece Counter
 Pen Treadmill Counter Sprites
+Secret Menu Background
 
 [color=#00FFFF]Geometricentric:[/color]
-Amber
+Amber Bouncing
 Care A standing
 CAUGHT Sprite
 Cone Piece
@@ -262,7 +270,7 @@ Logo Animation
 
 [color=#FF0000]I[/color] [color=#FF1800]g[/color][color=#FF2F00]i[/color][color=#FF4700]v[/color][color=#FF5E00]e[/color] [color=#FF7600]t[/color][color=#FF8D00]h[/color][color=#FFA500]e[/color] [color=#FFBC00]G[/color][color=#FFD400]i[/color][color=#FFEB00]f[/color][color=#FBFF00]t[/color][color=#E4FF00]s[/color][color=#CCFF00]c[/color][color=#B4FF00]o[/color][color=#9DFF00]p[/color] [color=#85FF00]t[/color][color=#6EFF00]e[/color][color=#56FF00]a[/color][color=#3FFF00]m[/color] [color=#27FF00]a[/color] [color=#10FF00]h[/color][color=#00FF08]u[/color][color=#00FF1F]g[/color][color=#00FF37]e[/color] [color=#00FF4E]t[/color][color=#00FF66]h[/color][color=#00FF7E]a[/color][color=#00FF95]n[/color][color=#00FFAD]k[/color][color=#00FFC4]s[/color] [color=#00FFDC]f[/color][color=#00FFF3]o[/color][color=#00F3FF]r[/color] [color=#00DCFF]a[/color][color=#00C4FF]l[/color][color=#00ADFF]l[/color][color=#0095FF]o[/color][color=#007EFF]w[/color][color=#0066FF]i[/color][color=#004EFF]n[/color][color=#0037FF]g[/color] [color=#001FFF]t[/color][color=#0008FF]h[/color][color=#1000FF]e[/color][color=#2700FF]s[/color][color=#3F00FF]e[/color] [color=#5600FF]t[/color][color=#6E00FF]o[/color] [color=#8500FF]b[/color][color=#9D00FF]e[/color] [color=#B400FF]u[/color][color=#CC00FF]s[/color][color=#E400FF]e[/color][color=#FB00FF]d[/color] [color=#FF00EB]o[/color][color=#FF00D4]n[/color] [color=#FF00BC]O[/color][color=#FF00A5]p[/color][color=#FF008D]e[/color][color=#FF0076]n[/color][color=#FF005E]s[/color][color=#FF0047]c[/color][color=#FF002F]o[/color][color=#FF0018]p[/color]
 
-Amber
+Amber Idle
 Amber Colors
 Guardian Colors
 Marvin Head
@@ -276,18 +284,10 @@ Wavey Colors
 
 [color=purple]Petscop Megasheet Credits:[/color]
 
-[color=#80aab3]Noogai223:[/color]
-Pause Menu
-
-[color=#80aab3]Lad:[/color]
-Pause Menu Pets
-
 [color=#80aab3]Osyu:[/color]
 File Select
 Keyboard
-Pet Menu
 Pet Menu Boxes
-Pets
 PSX Buttons
 
 [color=#80aab3]Releskowitz:[/color]
@@ -296,14 +296,8 @@ Pause Menu
 [color=#80aab3]The New Orchestra:[/color]
 File Select
 Keyboard
-Pause Menu
-
-[color=#80aab3]Ugng:[/color]
-Pause Menu
 
 [color=#80aab3]Wirelex:[/color]
-Pause Menu
-Pen Treadmill Counter Sprites
 School HUD
 
 

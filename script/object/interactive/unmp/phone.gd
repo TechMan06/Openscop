@@ -13,9 +13,6 @@ var shake_tween: Tween
 @export_multiline var textbox_text: String
 @export_category("General Properties")
 @export var destroy_after_interaction: bool = false
-@export_category("Symbol Properties")
-@export var height_offset: float = 0.0
-@export var min_distance: float = 1.5
 
 @onready var phone_sprite = $PhoneSprite
 @onready var phone_ring = $PhoneRing
@@ -33,8 +30,6 @@ func _ready() -> void:
 	dialogue_trigger.textbox_preset = textbox_preset
 	dialogue_trigger.textbox_text = textbox_text
 	dialogue_trigger.destroy_after_interaction = destroy_after_interaction
-	dialogue_trigger.height_offset = height_offset
-	dialogue_trigger.min_distance = min_distance
 	
 	var shake_tween: Tween = create_tween().set_loops()
 		

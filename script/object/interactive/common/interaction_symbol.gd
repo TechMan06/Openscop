@@ -80,7 +80,11 @@ func animate() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pressed_action") && player_inside_zone:
+	if (
+			Input.is_action_just_pressed("pressed_action") and
+			SaveManager.get_data().player_data.input_enabled and
+			player_inside_zone
+		):
 		triggered.emit()
 
 

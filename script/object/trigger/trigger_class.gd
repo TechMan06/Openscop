@@ -15,11 +15,13 @@ const TRIGGER_SCENE: PackedScene = preload("res://scene/object/interactive/commo
 
 func _ready() -> void:
 	var _trigger: Marker3D = TRIGGER_SCENE.instantiate()
+	
 	_trigger.height_offset = height_offset
 	_trigger.min_distance = min_distance
 	_trigger.triggered.connect(_on_trigger)
 	_trigger.triggered.connect(_destruction_check)
 	_trigger.triggered.connect(emit_trigger)
+	
 	add_child(_trigger)
 
 

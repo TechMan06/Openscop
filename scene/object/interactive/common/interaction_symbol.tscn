@@ -25,6 +25,7 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ex3k8"]
+resource_local_to_scene = true
 radius = 2.5
 
 [node name="InteractionSymbol" type="Marker3D"]
