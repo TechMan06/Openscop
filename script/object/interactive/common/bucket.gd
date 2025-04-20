@@ -3,14 +3,18 @@ class_name Bucket
 
 const ACCELERATION: int = 8
 const BUCKET_HITBOX: float = 1.1
+const JUMP_SIZE: float = 0.1
+const JUMP_SPEED: float = 0.125
 
 var player: Player
 var direction_vector: Vector3
 var collider_iterator
 
+@export var has_pet: String = ""
+
+@onready var meshes = %Meshes
 @onready var bucket_sound = %BucketSound
 @onready var bucket_wall_collision = %BucketWallCollision
-
 
 
 func _ready() -> void:
@@ -19,57 +23,58 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if player != null:
-		if is_near_bucket():
-			if (
-					self.global_position.x - player.global_position.x <= BUCKET_HITBOX and
-					self.global_position.x > player.global_position.x and
-					player.velocity.x > 0.0
-				):
-				Console.console_log("[color=yellow]BUCKET MOVING X+[/color]")
-				move("x", delta)
-			elif (
-					player.global_position.x - self.global_position.x <= (BUCKET_HITBOX) and
-					self.global_position.x < player.global_position.x and
-					player.velocity.x < 0.0
-				):
-				Console.console_log("[color=yellow]BUCKET MOVING X-[/color]")
-				move("x", delta)
-			elif (
-					self.global_position.z - player.global_position.z <= BUCKET_HITBOX and
-					self.global_position.z > player.global_position.z and
-					player.velocity.z > 0.0
-				):
-				Console.console_log("[color=yellow]BUCKET MOVING Z+[/color]")
-				move("z", delta)
-			elif (
-					player.global_position.z - self.global_position.z <= (BUCKET_HITBOX - 0.1) and
-					self.global_position.z < player.global_position.z and
-					player.velocity.z < 0.0
-				):
-				Console.console_log("[color=yellow]BUCKET MOVING Z-[/color]")
-				move("z", delta)
+	if has_pet == "":
+		if player != null:
+			if is_near_bucket():
+				if (
+						self.global_position.x - player.global_position.x <= BUCKET_HITBOX and
+						self.global_position.x > player.global_position.x and
+						player.velocity.x > 0.0
+					):
+					Console.console_log("[color=yellow]BUCKET MOVING X+[/color]")
+					move("x", delta)
+				elif (
+						player.global_position.x - self.global_position.x <= (BUCKET_HITBOX) and
+						self.global_position.x < player.global_position.x and
+						player.velocity.x < 0.0
+					):
+					Console.console_log("[color=yellow]BUCKET MOVING X-[/color]")
+					move("x", delta)
+				elif (
+						self.global_position.z - player.global_position.z <= BUCKET_HITBOX and
+						self.global_position.z > player.global_position.z and
+						player.velocity.z > 0.0
+					):
+					Console.console_log("[color=yellow]BUCKET MOVING Z+[/color]")
+					move("z", delta)
+				elif (
+						player.global_position.z - self.global_position.z <= (BUCKET_HITBOX - 0.1) and
+						self.global_position.z < player.global_position.z and
+						player.velocity.z < 0.0
+					):
+					Console.console_log("[color=yellow]BUCKET MOVING Z-[/color]")
+					move("z", delta)
+				else:
+					stop_bucket(delta)
+			
 			else:
 				stop_bucket(delta)
+			
+			if player.global_position.z < self.global_position.z:
+				bucket_wall_collision.disabled = false
+			else:
+				bucket_wall_collision.disabled = true
+			
+			if player.global_position.distance_to(self.global_position) > 1.5:
+				SaveManager.get_data().has_bucket = false
 		
+		move_and_slide()
+		
+		if velocity.length() > 1.5:
+			if !bucket_sound.playing:
+				bucket_sound.play()
 		else:
-			stop_bucket(delta)
-		
-		if player.global_position.z < self.global_position.z:
-			bucket_wall_collision.disabled = false
-		else:
-			bucket_wall_collision.disabled = true
-		
-		if player.global_position.distance_to(self.global_position) > 1.5:
-			SaveManager.get_data().has_bucket = false
-	
-	move_and_slide()
-	
-	if velocity.length() > 1.5:
-		if !bucket_sound.playing:
-			bucket_sound.play()
-	else:
-		bucket_sound.stop()
+			bucket_sound.stop()
 
 
 func stop_bucket(delta: float) -> void:
@@ -126,3 +131,32 @@ func _on_side_area_entered(body):
 func _on_side_area_exited(body):
 	if body is Player:
 		direction_vector.x = 0.0
+
+
+func jump() -> void:
+	var jump_tween: Tween = create_tween()
+	
+	jump_tween.tween_property(
+								meshes, 
+								"position:y", 
+								JUMP_SIZE, 
+								JUMP_SPEED
+							)
+	jump_tween.tween_property(
+								meshes, 
+								"position:y", 
+								0.0, 
+								JUMP_SPEED
+							)
+	jump_tween.tween_property(
+								meshes, 
+								"position:y", 
+								JUMP_SIZE, 
+								JUMP_SPEED
+							)
+	jump_tween.tween_property(
+								meshes, 
+								"position:y", 
+								0.0, 
+								JUMP_SPEED
+							)

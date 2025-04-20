@@ -287,11 +287,10 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	Global.clock_float += delta
-	
 	if !Global.is_game_paused:
+		Global.clock_float += delta
 		RenderingServer.global_shader_parameter_set("float_time", Global.clock_float)
-	
+		
 	if textbox != "":
 		if textbox_preset != null:
 			await HUD.transition_end

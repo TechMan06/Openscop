@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://mnkfr0xnrjqh"]
+
+[ext_resource type="Script" path="res://script/object/pet/roneth.gd" id="1_8cs3j"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="1_tww10"]
+[ext_resource type="Texture2D" uid="uid://bubsn7d3qcp6a" path="res://asset/2d/sprite/object/pet/roneth.png" id="2_pnehv"]
+
+[sub_resource type="Curve3D" id="Curve3D_0rtjn"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0)
+}
+point_count = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36vv3"]
+render_priority = 0
+shader = ExtResource("1_tww10")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("2_pnehv")
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsmpb"]
+atlas = ExtResource("2_pnehv")
+region = Rect2(0, 0, 72, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyxc1"]
+atlas = ExtResource("2_pnehv")
+region = Rect2(72, 0, 72, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gf2ih"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsmpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyxc1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1yt3e"]
+resource_local_to_scene = true
+size = Vector3(10, 10, 10)
+
+[node name="Roneth" type="Marker3D"]
+script = ExtResource("1_8cs3j")
+
+[node name="RonethPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_0rtjn")
+
+[node name="RonethFollow" type="PathFollow3D" parent="RonethPath"]
+
+[node name="RonethObject" type="Marker3D" parent="RonethPath/RonethFollow"]
+unique_name_in_owner = true
+
+[node name="RonethSprite" type="AnimatedSprite3D" parent="RonethPath/RonethFollow/RonethObject"]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_36vv3")
+offset = Vector2(0, 40)
+pixel_size = 0.06
+sprite_frames = SubResource("SpriteFrames_gf2ih")
+autoplay = "default"
+frame_progress = 0.81377
+
+[node name="RonethLoadArea" type="Area3D" parent="RonethPath/RonethFollow/RonethObject/RonethSprite"]
+
+[node name="RonethShape" type="CollisionShape3D" parent="RonethPath/RonethFollow/RonethObject/RonethSprite/RonethLoadArea"]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_1yt3e")
+
+[connection signal="body_entered" from="RonethPath/RonethFollow/RonethObject/RonethSprite/RonethLoadArea" to="." method="_on_near_roneth"]
