@@ -116,6 +116,7 @@ WestCraft15
 
 [color=#00FFFF]Other Friendly Fellas:[/color]
 Algo
+James9270
 TL/24
 Tom
 Wowzaboi
@@ -128,8 +129,8 @@ ZLD1
 [color=#00FFFF]And I would also like to give a huge thanks to Nitroyuash once again, for programming the Blender 2.79 .obj vertex color exporter add-on, that was used for testing of some special vertex colored geometry. Thank you very much Nitroyuash![/color]
 
 [color=#00FFFF]Nenad2d's contribution to the project lasted between:[/color]
-[color=blue]January 25th 2024[/color]
-[color=blue]January 28th 2024[/color]
+[color=blue]January 25th 2025[/color]
+[color=blue]January 28th 2025[/color]
 
 
 Shoutouts to you all! Y'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!
@@ -189,10 +190,14 @@ Purple Piece
 Recording Menu Buttons
 sort-test Level Mesh
 Sprite Room Tiles
+School Background
+School HUD Background
+School Tiles
 Title Screen 3D
 Tool Model
 Torus Piece
-Under the Newmaker Plane Models
+Under the Newmaker Plane Level Meshes
+Under the Newmaker Plane Furniture
 Under the Newmaker Plane Textures
 
 [color=#00FFFF]CMUDict:[/color]
@@ -269,7 +274,6 @@ Logo Animation
 [color=#FF00FF]Assets donated by Giftscop:[/color]
 
 [color=#FF0000]I[/color] [color=#FF1800]g[/color][color=#FF2F00]i[/color][color=#FF4700]v[/color][color=#FF5E00]e[/color] [color=#FF7600]t[/color][color=#FF8D00]h[/color][color=#FFA500]e[/color] [color=#FFBC00]G[/color][color=#FFD400]i[/color][color=#FFEB00]f[/color][color=#FBFF00]t[/color][color=#E4FF00]s[/color][color=#CCFF00]c[/color][color=#B4FF00]o[/color][color=#9DFF00]p[/color] [color=#85FF00]t[/color][color=#6EFF00]e[/color][color=#56FF00]a[/color][color=#3FFF00]m[/color] [color=#27FF00]a[/color] [color=#10FF00]h[/color][color=#00FF08]u[/color][color=#00FF1F]g[/color][color=#00FF37]e[/color] [color=#00FF4E]t[/color][color=#00FF66]h[/color][color=#00FF7E]a[/color][color=#00FF95]n[/color][color=#00FFAD]k[/color][color=#00FFC4]s[/color] [color=#00FFDC]f[/color][color=#00FFF3]o[/color][color=#00F3FF]r[/color] [color=#00DCFF]a[/color][color=#00C4FF]l[/color][color=#00ADFF]l[/color][color=#0095FF]o[/color][color=#007EFF]w[/color][color=#0066FF]i[/color][color=#004EFF]n[/color][color=#0037FF]g[/color] [color=#001FFF]t[/color][color=#0008FF]h[/color][color=#1000FF]e[/color][color=#2700FF]s[/color][color=#3F00FF]e[/color] [color=#5600FF]t[/color][color=#6E00FF]o[/color] [color=#8500FF]b[/color][color=#9D00FF]e[/color] [color=#B400FF]u[/color][color=#CC00FF]s[/color][color=#E400FF]e[/color][color=#FB00FF]d[/color] [color=#FF00EB]o[/color][color=#FF00D4]n[/color] [color=#FF00BC]O[/color][color=#FF00A5]p[/color][color=#FF008D]e[/color][color=#FF0076]n[/color][color=#FF005E]s[/color][color=#FF0047]c[/color][color=#FF002F]o[/color][color=#FF0018]p[/color]
-
 Amber Idle
 Amber Colors
 Guardian Colors
@@ -290,15 +294,13 @@ Keyboard
 Pet Menu Boxes
 PSX Buttons
 
-[color=#80aab3]Releskowitz:[/color]
-Pause Menu
-
 [color=#80aab3]The New Orchestra:[/color]
 File Select
 Keyboard
 
-[color=#80aab3]Wirelex:[/color]
-School HUD
+
+[color=#80aab3Wirelex:[/color]
+School HUD Border
 
 
 Without these people, this project wouldn't have been possible.
