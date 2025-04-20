@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dtk6he8atg17p"]
+[gd_scene load_steps=27 format=3 uid="uid://dtk6he8atg17p"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_rvpco"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_m0nw2"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="19_u5aud"]
 [ext_resource type="Script" path="res://script/object/trigger/picture_trigger.gd" id="20_y4b3c"]
 [ext_resource type="Texture2D" uid="uid://d17da0ip6t3mh" path="res://asset/2d/picture/office_note.png" id="21_fww51"]
+[ext_resource type="Texture2D" uid="uid://dgty0ncj8metw" path="res://asset/2d/picture/office_note_drawing.png" id="22_njw0e"]
 
 [sub_resource type="Resource" id="Resource_pwnox"]
 script = ExtResource("3_68wj5")
@@ -145,4 +146,5 @@ scene_path = "res://scene/room/unmp/hallway1.tscn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3.5)
 script = ExtResource("20_y4b3c")
 image_0 = ExtResource("21_fww51")
+image_1 = ExtResource("22_njw0e")
 min_distance = 0.025
