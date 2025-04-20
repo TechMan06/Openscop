@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cnv66cn4me1ri"
+path="res://.godot/imported/anna_office_chair.obj-78befc755e59c729196f10a91ace4292.mesh"
+
+[deps]
+
+files=["res://.godot/imported/anna_office_chair.obj-78befc755e59c729196f10a91ace4292.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/anna_office_chair.obj"
+dest_files=["res://.godot/imported/anna_office_chair.obj-78befc755e59c729196f10a91ace4292.mesh", "res://.godot/imported/anna_office_chair.obj-78befc755e59c729196f10a91ace4292.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

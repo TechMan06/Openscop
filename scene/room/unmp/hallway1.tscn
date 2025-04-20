@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2600wj0iyryf"]
+[gd_scene load_steps=15 format=3 uid="uid://d2600wj0iyryf"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_tv43w"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_03is2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="9_y6vdt"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="10_ywxug"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="11_7tdeu"]
+[ext_resource type="PackedScene" uid="uid://bcd2iwmi2japo" path="res://scene/object/interactive/unmp/phone_sound.tscn" id="12_7m1s2"]
 
 [sub_resource type="Resource" id="Resource_5rhae"]
 script = ExtResource("3_dmwv2")
@@ -51,11 +52,13 @@ protected_texture_path = "res://asset/3d/room/under_nmp/unmp_hallway.png"
 shape = SubResource("ConcavePolygonShape3D_bss10")
 
 [node name="Warp" parent="." instance=ExtResource("8_airjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 warp_direction = 1
 scene = "res://scene/room/unmp/cellar.tscn"
 loading_preset = ExtResource("9_y6vdt")
 
 [node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 script = ExtResource("10_ywxug")
 scene_path = "res://scene/room/unmp/cellar.tscn"
 
@@ -139,3 +142,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 0.5)
 
 [node name="PieceArea27" parent="." instance=ExtResource("11_7tdeu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -1.5)
+
+[node name="Warp2" parent="." instance=ExtResource("8_airjm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 1)
+warp_direction = 2
+scene = "res://scene/room/unmp/anna-office.tscn"
+loading_preset = ExtResource("9_y6vdt")
+
+[node name="SpawnClass2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 1)
+script = ExtResource("10_ywxug")
+scene_path = "res://scene/room/unmp/anna-office.tscn"
+
+[node name="phone_sound" parent="." instance=ExtResource("12_7m1s2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 0, -4.5)
+max_distance = 30.0

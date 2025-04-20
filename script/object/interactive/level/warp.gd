@@ -4,6 +4,7 @@ extends Node3D
 class_name WarpClass
 
 var performed_check: bool = false
+var is_ready: bool = false
 
 @export_subgroup("Warp_properties")
 @export var all_directions = false
@@ -27,6 +28,9 @@ func _ready() -> void:
 	if !Engine.is_editor_hint():
 		EventBus.unlock_nmp.connect(_on_nmp_unlock)
 		sprite.visible = GameManager.debug_settings.debug
+		
+		await get_tree().create_timer(0.05).timeout
+		is_ready = true
 
 
 func _process(_delta: float) -> void:
@@ -62,7 +66,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_warp_area_body_entered(body: Node3D) -> void:
-	if scene != null:
+	if scene != null and is_ready:
 		if body is Bucket && detect_bucket:
 			SaveManager.get_data().has_bucket = true
 		

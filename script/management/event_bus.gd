@@ -1,12 +1,12 @@
 extends Node
 
-
 signal emit_transition(loading_preset: LoadingPreset)
 signal start_scene
 signal crash_game
 
 signal return_to_pause
 signal text_finished
+signal text_started
 
 signal finished_typing(content: String, attached_node: Node)
 signal change_keyboard_bg(color: int)

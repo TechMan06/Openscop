@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvfva2a450y1b"]
+[gd_scene load_steps=10 format=3 uid="uid://cvfva2a450y1b"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_e0fun"]
 [ext_resource type="ArrayMesh" uid="uid://cvcmf4tcq2gf6" path="res://asset/3d/room/level2/level2.obj" id="2_oqjas"]
@@ -7,12 +7,12 @@
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="3_qr06m"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="5_r4n11"]
 [ext_resource type="Texture2D" uid="uid://bwx2lwbcmpcrt" path="res://asset/3d/room/level2/texture.png" id="6_yyyq4"]
-[ext_resource type="Texture2D" uid="uid://odg7mxb4ab8" path="res://vlcsnap-2024-11-30-20h34m41s547.png" id="8_nk1eh"]
 
 [sub_resource type="Resource" id="Resource_ehjxm"]
 script = ExtResource("2_xleam")
 sky_color = Color(1, 1, 1, 1)
 scroll_speed = 0.25
+offset_y = 0.25
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 enable_fog = false
@@ -28,6 +28,11 @@ shader_parameter/albedoTex = ExtResource("6_yyyq4")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="level2-room1" type="Node3D"]
 script = ExtResource("1_e0fun")
@@ -45,8 +50,3 @@ script = ExtResource("5_r4n11")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.957717, 0.287712, 0, -0.287712, 0.957717, -0.183, 3.75, 10.75)
 fov = 35.0
-
-[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.3676)
-modulate = Color(1, 1, 1, 0)
-texture = ExtResource("8_nk1eh")

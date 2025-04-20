@@ -1,10 +1,140 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtk6he8atg17p"]
+[gd_scene load_steps=24 format=3 uid="uid://dtk6he8atg17p"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_rvpco"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_m0nw2"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_68wj5"]
+[ext_resource type="ArrayMesh" uid="uid://cl3honuhs7ip0" path="res://asset/3d/room/under_nmp/anna_office.obj" id="3_jxg7d"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="4_bok0f"]
+[ext_resource type="Texture2D" uid="uid://do71k7dm1xbsi" path="res://asset/3d/room/under_nmp/office_placeholder.png" id="5_pi22m"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="6_6r723"]
+[ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="7_3bxjq"]
+[ext_resource type="ArrayMesh" uid="uid://3w527jh0y1mp" path="res://asset/3d/room/under_nmp/anna_office_cabinet.obj" id="8_8a2gs"]
+[ext_resource type="Texture2D" uid="uid://bpfrcyv8yx7e4" path="res://vlcsnap-2025-04-19-16h41m53s767.png" id="9_gln40"]
+[ext_resource type="ArrayMesh" uid="uid://dwl3j6dab3shl" path="res://asset/3d/room/under_nmp/office_table.obj" id="10_qfqj5"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="11_0xl1g"]
+[ext_resource type="ArrayMesh" uid="uid://cnv66cn4me1ri" path="res://asset/3d/room/under_nmp/anna_office_chair.obj" id="13_6uags"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="14_vrlrp"]
+[ext_resource type="PackedScene" uid="uid://vth0ydbdcwng" path="res://scene/object/interactive/unmp/phone.tscn" id="15_3bmv8"]
+[ext_resource type="Resource" uid="uid://c2ybn3215t54p" path="res://resource/textbox/dark.tres" id="16_rj7ul"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="17_ysbwa"]
+[ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="18_pwi4q"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="19_u5aud"]
+
+[sub_resource type="Resource" id="Resource_pwnox"]
+script = ExtResource("3_68wj5")
+sky_color = Color(0, 0, 0, 1)
+scroll_speed = 0.2
+offset_y = 0.25
+ambient_color = Color(0.7, 0.7, 0.7, 1)
+environment_darkness = 0.7
+enable_fog = true
+fog_color = Color(0, 0, 0, 1)
+fog_radius = 6.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sf7hl"]
+render_priority = 0
+shader = ExtResource("4_bok0f")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("5_pi22m")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mcch8"]
+data = PackedVector3Array(-0.5, 1, -0.5, -0.5, 0, -0.5, -0.5, 1, -3.5, -0.5, 1, -3.5, -0.5, 0, -0.5, -0.5, 0, -3.5, -7.5, 0, -0.5, -10.5, 0, -0.5, -7.5, 1, -0.5, -7.5, 1, -0.5, -10.5, 0, -0.5, -10.5, 1, -0.5, -0.5, 0, 1, -0.5, 1, 1, -0.5, 0, 2, -0.5, 0, 2, -0.5, 1, 1, -0.5, 1, 2, -0.5, 0, 1, 2.5, 0, 1, -0.5, 1, 1, -0.5, 1, 1, 2.5, 0, 1, 2.5, 1, 1, -10.5, 0, 1, -7.5, 0, 1, -10.5, 1, 1, -10.5, 1, 1, -7.5, 0, 1, -7.5, 1, 1, 2.5, 0, -0.5, -0.5, 0, -0.5, 2.5, 1, -0.5, 2.5, 1, -0.5, -0.5, 0, -0.5, -0.5, 1, -0.5, -7.5, 0, 2, -0.5, 0, 2, -7.5, 1, 2, -7.5, 1, 2, -0.5, 0, 2, -0.5, 1, 2, -7.5, 0, -0.5, -7.5, 1, -0.5, -7.5, 0, -2.5, -7.5, 0, -2.5, -7.5, 1, -0.5, -7.5, 1, -2.5, -0.5, 0, -3.5, -2.5, 0, -3.5, -0.5, 1, -3.5, -0.5, 1, -3.5, -2.5, 0, -3.5, -2.5, 1, -3.5, -7.5, 1, 1, -7.5, 0, 1, -7.5, 1, 2, -7.5, 1, 2, -7.5, 0, 1, -7.5, 0, 2, -6.5, 0, -2.5, -7.5, 0, -2.5, -6.5, 1, -2.5, -6.5, 1, -2.5, -7.5, 0, -2.5, -7.5, 1, -2.5, -6.5, 0, -3.5, -6.5, 0, -2.5, -6.5, 1, -3.5, -6.5, 1, -3.5, -6.5, 0, -2.5, -6.5, 1, -2.5, -3.5, 0, -3.5, -6.5, 0, -3.5, -3.5, 1, -3.5, -3.5, 1, -3.5, -6.5, 0, -3.5, -6.5, 1, -3.5, -2.5, 1, -3.5, -2.5, 0, -3.5, -2.5, 1, -2.5, -2.5, 1, -2.5, -2.5, 0, -3.5, -2.5, 0, -2.5, -2.5, 0, -2.5, -3.5, 0, -2.5, -2.5, 1, -2.5, -2.5, 1, -2.5, -3.5, 0, -2.5, -3.5, 1, -2.5, -3.5, 0, -3.5, -3.5, 1, -3.5, -3.5, 0, -2.5, -3.5, 0, -2.5, -3.5, 1, -3.5, -3.5, 1, -2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_soxuo"]
+render_priority = 0
+shader = ExtResource("11_0xl1g")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="anna-office" type="Node3D"]
 script = ExtResource("1_rvpco")
 room_name = "anna-office"
 loading_preset = ExtResource("2_m0nw2")
 footstep_sound = 4
+spawn_camera_root = false
+environment_settings = SubResource("Resource_pwnox")
+
+[node name="RoomMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_jxg7d")
+surface_material_override/0 = SubResource("ShaderMaterial_sf7hl")
+script = ExtResource("6_6r723")
+
+[node name="TextureLoader" type="Node" parent="RoomMesh"]
+script = ExtResource("7_3bxjq")
+protected_texture_path = "res://asset/3d/room/under_nmp/anna_office.png"
+
+[node name="CabinetMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("8_8a2gs")
+surface_material_override/0 = SubResource("ShaderMaterial_sf7hl")
+script = ExtResource("6_6r723")
+
+[node name="TextureLoader" type="Node" parent="CabinetMesh"]
+script = ExtResource("7_3bxjq")
+protected_texture_path = "res://asset/3d/room/under_nmp/anna_office.png"
+
+[node name="LevelCollision" type="StaticBody3D" parent="."]
+
+[node name="CollisionMesh" type="CollisionShape3D" parent="LevelCollision"]
+shape = SubResource("ConcavePolygonShape3D_mcch8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, -3.96488, 3.43401, 11.1469)
+fov = 35.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0387099, -11.3809)
+visible = false
+modulate = Color(1, 1, 1, 0.87451)
+no_depth_test = true
+texture = ExtResource("9_gln40")
+
+[node name="TableMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("10_qfqj5")
+surface_material_override/0 = SubResource("ShaderMaterial_soxuo")
+
+[node name="ChairMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("13_6uags")
+surface_material_override/0 = SubResource("ShaderMaterial_soxuo")
+
+[node name="PieceArea" parent="." instance=ExtResource("14_vrlrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="PieceArea2" parent="." instance=ExtResource("14_vrlrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="PieceArea3" parent="." instance=ExtResource("14_vrlrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Phone" parent="." instance=ExtResource("15_3bmv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -5)
+textbox_preset = ExtResource("16_rj7ul")
+textbox_text = "annaoffice"
+
+[node name="Warp" parent="." instance=ExtResource("17_ysbwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+warp_direction = 1
+scene = "res://scene/room/unmp/hallway1.tscn"
+loading_preset = ExtResource("18_pwi4q")
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+script = ExtResource("19_u5aud")
+scene_path = "res://scene/room/unmp/hallway1.tscn"

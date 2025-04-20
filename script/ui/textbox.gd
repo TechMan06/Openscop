@@ -28,6 +28,7 @@ var _disabled: bool = false
 
 func _ready() -> void:
 	EventBus.destroy_hud.connect(queue_free)
+	EventBus.text_started.emit()
 	
 	theme = preset.background
 	position = preset.position
@@ -96,13 +97,13 @@ func _process(_delta: float) -> void:
 					_textbox_label.text = text[_textbox]
 				else:
 					_disabled = true
+					EventBus.text_finished.emit()
 					
 					if  Global.global_data.gen > 2 && !preset.mute:
 						visible = false
 						_closing_sound.play()
 						await _closing_sound.finished
 					
-					EventBus.text_finished.emit()
 					queue_free()
 
 	if preset.destructible && Input.is_action_just_pressed("pressed_triangle"):
@@ -137,7 +138,7 @@ func _check_character() -> void:
 	_type_speed.stop()
 	
 	#CHECKS IF CHARACATER IS NORMAL OR SPECIAL CHARACTER, WHICH IS TYPED SLOWER ON PETSCOP
-	if _slowchars.find(clean_text[_textbox][_textbox_label.visible_characters]) == -1:
+	if _slowchars.find(clean_text[_textbox][_textbox_label.visible_characters -1]) == -1:
 		_type_speed.wait_time = _DEFAULT_WAIT
 		
 		if !_typing_sound.playing && Global.global_data.gen > 2 && !preset.mute:

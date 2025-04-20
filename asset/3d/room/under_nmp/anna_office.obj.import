@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cl3honuhs7ip0"
+path="res://.godot/imported/anna_office.obj-d46fde43ce87e5e03b6ab579ac996e7b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/anna_office.obj-d46fde43ce87e5e03b6ab579ac996e7b.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/anna_office.obj"
+dest_files=["res://.godot/imported/anna_office.obj-d46fde43ce87e5e03b6ab579ac996e7b.mesh", "res://.godot/imported/anna_office.obj-d46fde43ce87e5e03b6ab579ac996e7b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -47,6 +47,13 @@ func create_textbox(preset: TextboxResource = DEFAULT_TEXTBOX, text: String = "N
 	return
 
 
+func is_reading_dialogue() -> bool:
+	if dialogue_boxes.get_child_count() != 0:
+		return true
+	
+	return false
+
+
 func display_label(show_label: bool, recording: String, gen: int) -> void:
 	$RecordingLabel.visible = show_label
 	

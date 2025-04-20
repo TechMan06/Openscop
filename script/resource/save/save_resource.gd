@@ -19,5 +19,5 @@ class_name SaveData
 @export var petals: int = 0
 @export var cage: Dictionary = {}
 @export var trapdoor: Dictionary = {}
-@export var anna_phone: Dictionary = {}
+@export var anna_phone: Array[int]
 

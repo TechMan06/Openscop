@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcd2iwmi2japo"]
+
+[ext_resource type="AudioStream" uid="uid://csbcawviw83x7" path="res://sfx/object/anna_phone.wav" id="1_giqn2"]
+[ext_resource type="Script" path="res://script/object/interactive/unmp/phone_sound.gd" id="2_cm01d"]
+
+[node name="phone_sound" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_giqn2")
+panning_strength = 3.0
+bus = &"SFX"
+script = ExtResource("2_cm01d")
