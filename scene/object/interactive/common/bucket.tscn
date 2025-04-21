@@ -44,8 +44,12 @@ axis_lock_angular_z = true
 floor_stop_on_slope = false
 script = ExtResource("1_e7ywb")
 
-[node name="BucketMesh" type="MeshInstance3D" parent="."]
+[node name="Meshes" type="Marker3D" parent="."]
+unique_name_in_owner = true
+
+[node name="BucketMesh" type="MeshInstance3D" parent="Meshes"]
 mesh = ExtResource("2_5wl3t")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_u135j")
 
 [node name="BucketArea" type="Area3D" parent="."]

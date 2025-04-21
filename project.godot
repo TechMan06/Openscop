@@ -33,6 +33,8 @@ GameManager="*res://scene/management/game_manager.tscn"
 
 window/size/viewport_width=320
 window/size/viewport_height=240
+window/size/window_width_override=640
+window/size/window_height_override=480
 window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
