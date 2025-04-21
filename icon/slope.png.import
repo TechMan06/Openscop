@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfkyptjb4hwmo"
-path="res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"
+uid="uid://dd650bovc8oq3"
+path="res://.godot/imported/slope.png-403b23849a6244dd467864e5fb18a7ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon/warp.png"
-dest_files=["res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"]
+source_file="res://icon/slope.png"
+dest_files=["res://.godot/imported/slope.png-403b23849a6244dd467864e5fb18a7ba.ctex"]
 
 [params]
 

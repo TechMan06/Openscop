@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfkyptjb4hwmo"
-path="res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"
+uid="uid://bvj3ys4105gqw"
+path="res://.godot/imported/darken.png-6dcba6d9c7ff2f2fce00b6a02a6d3f18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon/warp.png"
-dest_files=["res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"]
+source_file="res://icon/darken.png"
+dest_files=["res://.godot/imported/darken.png-6dcba6d9c7ff2f2fce00b6a02a6d3f18.ctex"]
 
 [params]
 

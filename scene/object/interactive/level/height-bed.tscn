@@ -3,7 +3,7 @@
 [ext_resource type="Shader" path="res://shader/spatial/solid_0_transparent.gdshader" id="1_a1dmh"]
 [ext_resource type="Script" path="res://script/object/interactive/level/height-bed.gd" id="1_c4bip"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_aqm6v"]
-[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_g1v1g"]
+[ext_resource type="Texture2D" uid="uid://bcn80gtmucawv" path="res://asset/2d/ui/editor/height_bed.png" id="4_qbjdw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
 
@@ -19,9 +19,9 @@ shader_parameter/MAIN_COLOR = Color(0, 0, 1, 1)
 render_priority = 0
 shader = ExtResource("2_aqm6v")
 shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 0, 1, 1)
+shader_parameter/modulate_color = Color(1, 0.647059, 0.701961, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_g1v1g")
+shader_parameter/albedoTex = ExtResource("4_qbjdw")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
@@ -47,9 +47,7 @@ unique_name_in_owner = true
 material_override = SubResource("ShaderMaterial_cr0ds")
 offset = Vector2(0, 32)
 pixel_size = 0.03
-texture = ExtResource("3_g1v1g")
-hframes = 5
-vframes = 5
+texture = ExtResource("4_qbjdw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

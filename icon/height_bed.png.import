@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfkyptjb4hwmo"
-path="res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"
+uid="uid://xk55pvuc8lod"
+path="res://.godot/imported/height_bed.png-9184cbfde7e2bbf3362abe287e27b568.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon/warp.png"
-dest_files=["res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"]
+source_file="res://icon/height_bed.png"
+dest_files=["res://.godot/imported/height_bed.png-9184cbfde7e2bbf3362abe287e27b568.ctex"]
 
 [params]
 

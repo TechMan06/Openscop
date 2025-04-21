@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfkyptjb4hwmo"
-path="res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"
+uid="uid://cpk71vjtl76ti"
+path="res://.godot/imported/warp_directions.png-371f05367d046126bf5c0ef2cc04d3be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon/warp.png"
-dest_files=["res://.godot/imported/warp.png-854c7932a069542ad359ce823ff0fbe8.ctex"]
+source_file="res://asset/2d/ui/editor/warp_directions.png"
+dest_files=["res://.godot/imported/warp_directions.png-371f05367d046126bf5c0ef2cc04d3be.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

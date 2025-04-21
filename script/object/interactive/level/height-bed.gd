@@ -1,4 +1,5 @@
 @tool
+@icon("res://icon/height_bed.png")
 extends Area3D
 class_name HeightBed
 

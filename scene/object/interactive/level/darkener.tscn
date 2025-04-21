@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/object/interactive/level/darkener.gd" id="1_2o80p"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_i6rqe"]
-[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_s7kgq"]
+[ext_resource type="Texture2D" uid="uid://pof57hs8y3ce" path="res://asset/2d/ui/editor/dark.png" id="3_ei3wf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tl287"]
 
@@ -10,9 +10,9 @@
 render_priority = 0
 shader = ExtResource("2_i6rqe")
 shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(0.756863, 0, 0.780392, 1)
+shader_parameter/modulate_color = Color(0.988235, 0.462745, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_s7kgq")
+shader_parameter/albedoTex = ExtResource("3_ei3wf")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
@@ -35,9 +35,7 @@ shape = SubResource("BoxShape3D_tl287")
 material_override = SubResource("ShaderMaterial_j67b8")
 offset = Vector2(0, 32)
 pixel_size = 0.03
-texture = ExtResource("3_s7kgq")
-hframes = 5
-vframes = 5
+texture = ExtResource("3_ei3wf")
 
 [connection signal="body_entered" from="DarkenerArea" to="." method="_on_darkener_area_body_entered"]
 [connection signal="body_exited" from="DarkenerArea" to="." method="_on_darkener_area_body_exited"]

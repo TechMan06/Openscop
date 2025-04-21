@@ -1,5 +1,7 @@
 @tool
+@icon("res://icon/darken.png")
 extends Marker3D
+class_name Darkener
 
 
 @export_subgroup("Darkener Settings:")

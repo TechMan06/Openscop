@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/object/interactive/level/warp.gd" id="1_gnr67"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_yolch"]
-[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_d4cf1"]
+[ext_resource type="Texture2D" uid="uid://cpk71vjtl76ti" path="res://asset/2d/ui/editor/warp_directions.png" id="3_4daxd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qy0te"]
 resource_local_to_scene = true
@@ -12,9 +12,9 @@ size = Vector3(2, 2, 0)
 render_priority = 0
 shader = ExtResource("2_yolch")
 shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(0, 1, 0, 1)
+shader_parameter/modulate_color = Color(0.537255, 1, 0.505882, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_d4cf1")
+shader_parameter/albedoTex = ExtResource("3_4daxd")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
@@ -42,7 +42,7 @@ shape = SubResource("BoxShape3D_qy0te")
 material_override = SubResource("ShaderMaterial_v268w")
 offset = Vector2(0, 32)
 pixel_size = 0.03
-texture = ExtResource("3_d4cf1")
+texture = ExtResource("3_4daxd")
 hframes = 5
 vframes = 5
 
