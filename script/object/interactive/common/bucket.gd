@@ -1,20 +1,27 @@
 extends CharacterBody3D
 class_name Bucket
 
+signal caught
+
 const ACCELERATION: int = 8
 const BUCKET_HITBOX: float = 1.1
 const JUMP_SIZE: float = 0.1
 const JUMP_SPEED: float = 0.125
+const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
+
 
 var player: Player
 var direction_vector: Vector3
-var collider_iterator
 
 @export var has_pet: String = ""
+@export var disable_collection: bool = false
 
-@onready var meshes = %Meshes
-@onready var bucket_sound = %BucketSound
-@onready var bucket_wall_collision = %BucketWallCollision
+@onready var meshes: Marker3D = %Meshes
+@onready var bucket_sound: AudioStreamPlayer3D = %BucketSound
+@onready var bucket_wall_collision: CollisionShape3D = %BucketWallCollision
+@onready var bucket_collision: CollisionShape3D = %BucketCollision
+@onready var bucket_collection_area: Area3D = %BucketCollectionArea
+@onready var cry_sound: AudioStreamPlayer3D = %CrySound
 
 
 func _ready() -> void:
@@ -75,6 +82,9 @@ func _physics_process(delta: float) -> void:
 				bucket_sound.play()
 		else:
 			bucket_sound.stop()
+	else:
+		bucket_collision.disabled = true
+		bucket_wall_collision.disabled = true
 
 
 func stop_bucket(delta: float) -> void:
@@ -160,3 +170,25 @@ func jump() -> void:
 								0.0, 
 								JUMP_SPEED
 							)
+
+
+func _on_bucket_collected(body: Node3D) -> void:
+	if has_pet != "":
+		if body is Entity && !disable_collection:
+			caught.emit()
+			
+			if cry_sound.stream != null:
+				cry_sound.play()
+			
+			if body is Player:
+				$CaughtTimer.start()
+				SaveManager._data.pet.append(has_pet)
+			
+			create_tween().tween_property(meshes, "scale", Vector3.ZERO, 0.625)
+			
+			disable_collection = true
+
+
+func _on_caught_timer_timeout():
+	var _caught_instance: Marker2D = CAUGHT_SCENE.instantiate()
+	add_child(_caught_instance)

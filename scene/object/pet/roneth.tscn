@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://mnkfr0xnrjqh"]
+[gd_scene load_steps=11 format=3 uid="uid://mnkfr0xnrjqh"]
 
 [ext_resource type="Script" path="res://script/object/pet/roneth.gd" id="1_8cs3j"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="1_tww10"]
 [ext_resource type="Texture2D" uid="uid://bubsn7d3qcp6a" path="res://asset/2d/sprite/object/pet/roneth.png" id="2_pnehv"]
+[ext_resource type="AudioStream" uid="uid://by3katwebaevt" path="res://sfx/pets/roneth_cry.wav" id="2_wbhnr"]
 
 [sub_resource type="Curve3D" id="Curve3D_0rtjn"]
 _data = {
@@ -55,6 +56,7 @@ size = Vector3(10, 10, 10)
 
 [node name="Roneth" type="Marker3D"]
 script = ExtResource("1_8cs3j")
+cry_sound = ExtResource("2_wbhnr")
 
 [node name="RonethPath" type="Path3D" parent="."]
 curve = SubResource("Curve3D_0rtjn")

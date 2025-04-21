@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvte0cq377kvg"]
+[gd_scene load_steps=12 format=3 uid="uid://dvte0cq377kvg"]
 
 [ext_resource type="Script" path="res://script/object/interactive/common/bucket.gd" id="1_e7ywb"]
 [ext_resource type="ArrayMesh" uid="uid://pyekwcve55qw" path="res://asset/3d/object/bucket.obj" id="2_5wl3t"]
@@ -19,6 +19,13 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3x7dp"]
+margin = 0.0
+size = Vector3(0.74, 1, 0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l8gjm"]
+points = PackedVector3Array(-0.361514, -0.3913, -0.149776, -0.361514, -0.3913, 0.1, -0.361514, 0.3913, -0.149776, -0.149758, -0.3913, -0.361514, 0.361443, -0.3913, 0.1, -0.361514, 0.3913, 0.1, -0.149758, 0.3913, -0.361514, 0.149687, -0.3913, -0.361514, 0.361443, -0.3913, -0.149776, 0.361443, 0.3913, 0.1, 0.149687, 0.3913, -0.361514, 0.361443, 0.3913, -0.149776)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0j83s"]
 size = Vector3(2, 2, 2)
 
@@ -28,12 +35,8 @@ size = Vector3(0.5, 1, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_4p4uv"]
 size = Vector3(2, 1, 0.45)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3x7dp"]
-margin = 0.0
-size = Vector3(0.74, 1, 0.5)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l8gjm"]
-points = PackedVector3Array(-0.361514, -0.3913, -0.149776, -0.361514, -0.3913, 0.1, -0.361514, 0.3913, -0.149776, -0.149758, -0.3913, -0.361514, 0.361443, -0.3913, 0.1, -0.361514, 0.3913, 0.1, -0.149758, 0.3913, -0.361514, 0.149687, -0.3913, -0.361514, 0.361443, -0.3913, -0.149776, 0.361443, 0.3913, 0.1, 0.149687, 0.3913, -0.361514, 0.361443, 0.3913, -0.149776)
+[sub_resource type="BoxShape3D" id="BoxShape3D_brrok"]
+size = Vector3(0.75, 0.75, 0.75)
 
 [node name="Bucket" type="CharacterBody3D"]
 process_mode = 1
@@ -51,6 +54,16 @@ unique_name_in_owner = true
 mesh = ExtResource("2_5wl3t")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_u135j")
+
+[node name="BucketWallCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75)
+shape = SubResource("BoxShape3D_3x7dp")
+disabled = true
+
+[node name="BucketCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("ConvexPolygonShape3D_l8gjm")
 
 [node name="BucketArea" type="Area3D" parent="."]
 
@@ -74,17 +87,25 @@ stream = ExtResource("4_cki80")
 unit_size = 20.0
 bus = &"SFX"
 
-[node name="BucketWallCollision" type="CollisionShape3D" parent="."]
+[node name="CrySound" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75)
-shape = SubResource("BoxShape3D_3x7dp")
-disabled = true
+stream = ExtResource("4_cki80")
+unit_size = 20.0
+bus = &"SFX"
 
-[node name="BucketCollision" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_l8gjm")
+[node name="BucketCollectionArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+
+[node name="BucketShape" type="CollisionShape3D" parent="BucketCollectionArea"]
+shape = SubResource("BoxShape3D_brrok")
+
+[node name="CaughtTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="body_entered" from="BucketArea" to="." method="_on_bucket_area_body_entered"]
 [connection signal="body_entered" from="FrontArea" to="." method="_on_front_area_entered"]
 [connection signal="body_exited" from="FrontArea" to="." method="_on_front_area_exited"]
 [connection signal="body_entered" from="SideArea" to="." method="_on_side_area_entered"]
 [connection signal="body_exited" from="SideArea" to="." method="_on_side_area_exited"]
+[connection signal="body_entered" from="BucketCollectionArea" to="." method="_on_bucket_collected"]
+[connection signal="timeout" from="CaughtTimer" to="." method="_on_caught_timer_timeout"]

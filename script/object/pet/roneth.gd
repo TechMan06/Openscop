@@ -15,6 +15,7 @@ var roneth_scale: float
 @export var vertical_distance: float = 5.0
 @export var hitbox_size: float = 2.0
 @export var weight: float = 0.25
+@export var cry_sound: AudioStream
 
 
 @onready var roneth_sprite = %RonethSprite
@@ -72,6 +73,7 @@ func _process(_delta: float) -> void:
 				
 				if roneth.global_position.y == roneth_min_y:
 					bucket.has_pet = pet_name
+					bucket.cry_sound.stream = cry_sound
 					bucket.jump()
 					enabled = false
 	else:
