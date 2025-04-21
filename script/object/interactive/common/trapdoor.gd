@@ -30,7 +30,6 @@ var opposite_rotation: Array[int] = [3, 2, 1, 0]
 @onready var trapdoor_mesh: Marker3D = %TrapdoorMesh
 @onready var door_mesh = %DoorMesh
 @onready var front_shape = %FrontShape
-@onready var darkener: Marker3D = %Darkener
 @onready var slope: Marker3D = %Slope
 @onready var warp: WarpClass = %Warp
 @onready var trigger: Marker3D = %Trigger
@@ -45,7 +44,7 @@ func _ready() -> void:
 			0:
 				warp.global_position.z += warp_offset
 				warp.disable_shadow_monster_man = false
-				darkener.queue_free()
+				slope.change_brightness = false
 			1:
 				warp.global_position.x += warp_offset
 			2:
@@ -56,11 +55,6 @@ func _ready() -> void:
 		
 		slope.slope_direction = direction
 		slope.global_rotation.y = 0.0
-		
-		if direction != 0:
-			darkener.darkener_direction = direction
-			darkener.global_rotation.y = 0.0
-		
 		warp.scene = warp_to
 		warp.detect_bucket = detect_bucket
 		warp.loading_preset = loading_preset

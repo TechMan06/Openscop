@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c2kbimvwm18bt"]
+[gd_scene load_steps=31 format=3 uid="uid://c2kbimvwm18bt"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_y30j2"]
 [ext_resource type="Resource" uid="uid://fqixpor1kacn" path="res://resource/loading_preset/default.tres" id="2_e4std"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cya7cxf4t8pi3" path="res://scene/object/interactive/evencare/switcher.tscn" id="22_8hvac"]
 [ext_resource type="Texture2D" uid="uid://yxr6iwtlt5tm" path="res://asset/2d/sprite/object/pet/care_b.png" id="22_arvv6"]
 [ext_resource type="PackedScene" uid="uid://dvte0cq377kvg" path="res://scene/object/interactive/common/bucket.tscn" id="23_bqeen"]
+[ext_resource type="PackedScene" uid="uid://c67nqiopby4yt" path="res://scene/object/interactive/level/height-bed.tscn" id="24_51r6h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p61yp"]
 render_priority = 0
@@ -74,7 +75,6 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 script = ExtResource("1_y30j2")
 loading_preset = ExtResource("2_e4std")
 level_slogan = "If you wanna be my lover, you gotta gotta be my friend"
-school_preset = true
 footstep_sound = 1
 environment_settings = ExtResource("2_we153")
 
@@ -187,8 +187,7 @@ script = ExtResource("12_v5duc")
 
 [node name="Slope" parent="." instance=ExtResource("13_w8ply")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
-slope_length = 3.0
-change_brightness = true
+slope_length = 2.0
 
 [node name="Darkener" parent="." instance=ExtResource("14_jo3ns")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
@@ -218,3 +217,7 @@ pet_sprite = ExtResource("22_arvv6")
 
 [node name="SwitcherObject" parent="." instance=ExtResource("22_8hvac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+
+[node name="HeightBed" parent="." instance=ExtResource("24_51r6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+height = 1.0

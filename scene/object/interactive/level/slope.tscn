@@ -1,33 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://itbo1loprmd5"]
+[gd_scene load_steps=9 format=3 uid="uid://itbo1loprmd5"]
 
 [ext_resource type="Script" path="res://script/object/interactive/level/slope.gd" id="1_wb1eb"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="2_17yav"]
 [ext_resource type="Texture2D" uid="uid://klmephfg8wrp" path="res://asset/2d/ui/editor/slope_up.png" id="2_r0teh"]
-[ext_resource type="Texture2D" uid="uid://nqriskrx3hl" path="res://asset/2d/ui/editor/slope_down.png" id="3_o4nj7"]
 [ext_resource type="Texture2D" uid="uid://cme1lnm7poo52" path="res://asset/2d/sprite/object/slope_direction.png" id="5_wa3nr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5v7od"]
 render_priority = 0
 shader = ExtResource("2_17yav")
 shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(0.471, 0.639, 1, 1)
-shader_parameter/alpha_color = Color(0.94902, 0, 0.211765, 1)
-shader_parameter/albedoTex = ExtResource("3_o4nj7")
-shader_parameter/billboard = true
-shader_parameter/y_billboard = false
-shader_parameter/animate = null
-shader_parameter/animation_frames = null
-shader_parameter/animation_speed = null
-shader_parameter/per_quad_depth = false
-shader_parameter/adjustable_depth = false
-shader_parameter/depth_offset = null
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3i0y2"]
-render_priority = 0
-shader = ExtResource("2_17yav")
-shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 0.444, 0.445, 1)
-shader_parameter/alpha_color = Color(1, 0, 0, 1)
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("2_r0teh")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
@@ -39,16 +22,17 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5c50u"]
+size = Vector3(1, 1, 0)
 
 [sub_resource type="Curve3D" id="Curve3D_ifp0e"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, -2),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 2, 2.5),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2xfo"]
-transparency = 1
+shading_mode = 0
 albedo_color = Color(1, 1, 1, 0.47451)
 albedo_texture = ExtResource("5_wa3nr")
 uv1_scale = Vector3(2, 8, -0.59)
@@ -63,19 +47,12 @@ script = ExtResource("1_wb1eb")
 [node name="SpriteTOP" type="Sprite3D" parent="SlopeStart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 material_override = SubResource("ShaderMaterial_5v7od")
-offset = Vector2(12.575, 32)
+offset = Vector2(0, 32)
 pixel_size = 0.03
 texture = ExtResource("2_r0teh")
 
 [node name="SlopeEnd" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-
-[node name="SpriteBOTTOM" type="Sprite3D" parent="SlopeEnd"]
-visible = false
-material_override = SubResource("ShaderMaterial_3i0y2")
-offset = Vector2(0, 2)
-pixel_size = 0.03
-texture = ExtResource("3_o4nj7")
 
 [node name="SlopeArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
@@ -84,9 +61,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
 shape = SubResource("BoxShape3D_5c50u")
 
 [node name="Path3D" type="Path3D" parent="."]
+visible = false
 curve = SubResource("Curve3D_ifp0e")
 
 [node name="PathMesh" type="CSGPolygon3D" parent="."]
+visible = false
 material_override = SubResource("StandardMaterial3D_l2xfo")
 polygon = PackedVector2Array(-0.13, -0.005, 0.13, -0.005, 0.13, 0.005, -0.13, 0.005)
 mode = 2

@@ -22,14 +22,13 @@ func _physics_process(delta: float) -> void:
 	elif entity._h > 0:
 		entity.direction = 1
 	
-	if !entity.inside_slope:
-		if entity.player_stats.entity_y >= 0.5:
-			entity.player_stats.entity_y -= 0.5
-		else:
-			entity.player_stats.entity_y = entity.entity_min
-		
-		if entity.player_stats.entity_y <= entity.entity_min:
-			entity.player_stats.entity_y = entity.entity_min
+	if entity.player_stats.entity_y >= 0.5:
+		entity.player_stats.entity_y -= 0.5
+	else:
+		entity.player_stats.entity_y = entity.entity_min
+	
+	if entity.player_stats.entity_y <= entity.entity_min:
+		entity.player_stats.entity_y = entity.entity_min
 	
 	if entity.player_stats != null:
 		entity_sprite.get_material_override().set_shader_parameter(

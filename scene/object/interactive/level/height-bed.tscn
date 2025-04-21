@@ -6,9 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://bcn80gtmucawv" path="res://asset/2d/ui/editor/height_bed.png" id="4_qbjdw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
+resource_local_to_scene = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_vm5i8"]
+resource_local_to_scene = true
 flip_faces = true
+size = Vector3(1, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4gf5o"]
 render_priority = 0
@@ -19,7 +22,7 @@ shader_parameter/MAIN_COLOR = Color(0, 0, 1, 1)
 render_priority = 0
 shader = ExtResource("2_aqm6v")
 shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 0.647059, 0.701961, 1)
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("4_qbjdw")
 shader_parameter/billboard = true
@@ -35,9 +38,11 @@ shader_parameter/depth_offset = null
 script = ExtResource("1_c4bip")
 
 [node name="ZoneCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
 shape = SubResource("BoxShape3D_j21mq")
 
 [node name="ZoneMesh" type="MeshInstance3D" parent="ZoneCollision"]
+unique_name_in_owner = true
 mesh = SubResource("BoxMesh_vm5i8")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_4gf5o")
