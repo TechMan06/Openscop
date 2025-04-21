@@ -25,7 +25,7 @@ var entity: Entity
 @onready var slope_area: Area3D = $SlopeArea
 @onready var slope_collision: CollisionShape3D = $SlopeArea/SlopeCollision
 @onready var display_path: Path3D = $Path3D
-
+@onready var display_mesh = $PathMesh
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
@@ -41,7 +41,6 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
-		
 		if is_instance_valid(slope_down_texture) and is_instance_valid(slope_top_sprite):
 			if slope_up:
 				if slope_top_sprite.material_override != null and slope_bottom_sprite.material_override != null:

@@ -10,9 +10,9 @@
 render_priority = 0
 shader = ExtResource("2_17yav")
 shader_parameter/use_fog = true
-shader_parameter/modulate_color = Color(1, 0.444, 0.445, 1)
+shader_parameter/modulate_color = Color(0.471, 0.639, 1, 1)
 shader_parameter/alpha_color = Color(0.94902, 0, 0.211765, 1)
-shader_parameter/albedoTex = ExtResource("2_r0teh")
+shader_parameter/albedoTex = ExtResource("3_o4nj7")
 shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/animate = null
@@ -39,11 +39,10 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5c50u"]
-size = Vector3(1.99, 1, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_ifp0e"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.99, 2.99, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, -2),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -87,7 +86,7 @@ shape = SubResource("BoxShape3D_5c50u")
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_ifp0e")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+[node name="PathMesh" type="CSGPolygon3D" parent="."]
 material_override = SubResource("StandardMaterial3D_l2xfo")
 polygon = PackedVector2Array(-0.13, -0.005, 0.13, -0.005, 0.13, 0.005, -0.13, 0.005)
 mode = 2
