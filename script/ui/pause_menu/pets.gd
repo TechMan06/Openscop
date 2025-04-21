@@ -14,6 +14,7 @@ var can_select: bool = true
 var can_leave: bool = true
 var can_return: bool = false
 
+@onready var room: Level = get_tree().get_current_scene()
 @onready var cursor_sound: AudioStreamPlayer = $CursorSound
 @onready var buttons_origin: Marker2D = %ButtonsOrigin
 @onready var info_buttons_origin: Marker2D = %InfoButtonsOrigin
@@ -22,6 +23,12 @@ var can_return: bool = false
 
 func _ready() -> void:
 	EventBus.text_finished.connect(leave_bio)
+	
+	if (
+			room.hardcoded_properties == room.HardcodedProperties.EVEN_CARE or
+			room.hardcoded_properties == room.HardcodedProperties.RONETH_ROOM
+		):
+		pets_array = [pets_array[0], pets_array[1], pets_array[2], pets_array[3], pets_array[4], pets_array[5]]
 	
 	var _row: float = 0
 	
@@ -41,6 +48,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	
 	if selected_option > 5:
 		buttons_origin.position.y = -267.5
 	else:

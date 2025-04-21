@@ -78,7 +78,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_ymuvl")
 [node name="Warp2" parent="." instance=ExtResource("7_eccxh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -5)
 warp_direction = 1
-disable_shadow_monster_man = null
 scene = "res://scene/room/level1/room2.tscn"
 loading_preset = ExtResource("13_7ny22")
 
@@ -143,6 +142,5 @@ scene_path = "res://scene/room/level1/room2.tscn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 detect_bucket = false
 warp_direction = 2
-disable_shadow_monster_man = null
 scene = "res://scene/room/gift_plane/gift_plane.tscn"
 loading_preset = ExtResource("2_egdq2")

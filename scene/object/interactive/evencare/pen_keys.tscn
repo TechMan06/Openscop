@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shader/spatial/solid_0_transparent.gdshader" id="2_eafrx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
-size = Vector3(1, 1, 2)
+size = Vector3(1, 1, 2.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r26ec"]
 size = Vector3(1, 1, 3)
@@ -35,6 +35,8 @@ transform = Transform3D(0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0, 1, 
 
 [node name="CameraTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Clones" type="Marker3D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

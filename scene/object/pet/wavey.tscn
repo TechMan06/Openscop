@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6yrf7sf0slu7"]
+[gd_scene load_steps=10 format=3 uid="uid://c6yrf7sf0slu7"]
 
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="1_nlc7y"]
+[ext_resource type="Script" path="res://script/object/pet/wavey.gd" id="1_op5m5"]
 [ext_resource type="Texture2D" uid="uid://wlhbjprtcoxb" path="res://asset/2d/sprite/object/pet/wavey.png" id="2_kqqhm"]
 [ext_resource type="Texture2D" uid="uid://d4gy3onttbdlu" path="res://asset/2d/sprite/object/pet/wavey_rain.png" id="3_yk64h"]
 
@@ -20,6 +21,28 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra2tb"]
+atlas = ExtResource("2_kqqhm")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s1o1"]
+atlas = ExtResource("2_kqqhm")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5rlyp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ra2tb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s1o1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2pjth"]
 render_priority = 0
 shader = ExtResource("1_nlc7y")
@@ -37,13 +60,15 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [node name="WaveyPet" type="Marker3D"]
+script = ExtResource("1_op5m5")
 
-[node name="WaveySprite" type="Sprite3D" parent="."]
+[node name="WaveySprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
 material_override = SubResource("ShaderMaterial_60efs")
 pixel_size = 0.029
-texture = ExtResource("2_kqqhm")
-hframes = 10
+sprite_frames = SubResource("SpriteFrames_5rlyp")
+autoplay = "default"
+frame_progress = 0.126415
 
 [node name="RainSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)

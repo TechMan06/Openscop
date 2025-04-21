@@ -21,51 +21,62 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	for entity in entity_array:
 		if entity is Player:
-			if !treadmill_top.is_playing():
-				if entity.target_velocity.y > entity._ANIMATION_THRESHOLD:
-					treadmill_top.play(&"default")
+			if (
+					entity.global_position.x > self.global_position.x - 0.5 and
+					entity.global_position.x < self.global_position.x + 0.5
+				):
 				
-				elif entity.target_velocity.y < -entity._ANIMATION_THRESHOLD:
-					treadmill_top.play_backwards(&"default")
+				if entity.direction == 0:
+					if entity.global_position.z >= self.global_position.z:
+						if !entity._treadmill:
+							_place_player_on_treadmill(entity)
+					else:
+						if entity._treadmill:
+							entity._treadmill = false
+				elif entity.direction == 3:
+					if entity.global_position.z <= self.global_position.z:
+						if !entity._treadmill:
+							_place_player_on_treadmill(entity)
+					else:
+						if entity._treadmill:
+							entity._treadmill = false
+				
+				entity.player_stats.entity_y = 0.7
+					
+				if !treadmill_top.is_playing():
+					if entity.target_velocity.y > entity._ANIMATION_THRESHOLD:
+						treadmill_top.play(&"default")
+					
+					elif entity.target_velocity.y < -entity._ANIMATION_THRESHOLD:
+						treadmill_top.play_backwards(&"default")
 
-			if abs(entity.target_velocity.y) > entity._ANIMATION_THRESHOLD:
-				if !treadmill_sound.playing:
-					treadmill_sound.play()
-			else:
-				treadmill_sound.stop()
-
-
-func _on_treadmill_entered_front(body) -> void:
-	if body is Entity and body.direction == 0:
-		_place_player_on_treadmill(body)
-
-
-func _on_treadmill_entered_rear(body):
-	if body is Entity and body.direction == 3:
-		_place_player_on_treadmill(body)
+				if abs(entity.target_velocity.y) > entity._ANIMATION_THRESHOLD:
+					if !treadmill_sound.playing:
+						treadmill_sound.play()
+				else:
+					treadmill_sound.stop()
 
 
 func _on_treadmill_entered(body):
 	if body is Entity:
 		entity_array.push_back(body)
-		body.player_stats.entity_y = 0.125
 		
 		if body.direction != 0 and body.direction != 3:
 			_place_player_on_treadmill(body)
-			_on_treadmill_entered_front(body)
 
 
 func _on_treadmill_exited(body):
 	if body is Entity:
 		treadmill_sound.stop()
-		body.player_stats.entity_y = 0.0
 		body._treadmill = false
 		entity_array.erase(body)
 
 
 func _place_player_on_treadmill(body: Entity) -> void:
-	body._treadmill = true
-	body.global_position.z = global_position.z
+	if !body._treadmill:
+		body._treadmill = true
+		body.global_position.z = self.global_position.z
+	
 
 
 func _add_number() -> void:

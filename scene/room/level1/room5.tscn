@@ -127,9 +127,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 2)
 [node name="PieceArea12" parent="." instance=ExtResource("12_2qs5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 2)
 
-[node name="PianoArea" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("13_yadrb")]
+[node name="PianoArea" parent="." node_paths=PackedStringArray("camera", "treadmill_counter") instance=ExtResource("13_yadrb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.435, 0, 5)
 camera = NodePath("Camera3D")
+treadmill_counter = NodePath("../TreadmillCounter")
 
 [node name="Camera3D" type="Marker3D" parent="PianoArea"]
 transform = Transform3D(0.707107, -0.165071, 0.687569, 0, 0.97237, 0.233445, -0.707107, -0.165071, 0.687569, 11.4, 6.68, 16.75)

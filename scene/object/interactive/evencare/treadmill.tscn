@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://lgbv24nsmb0f"]
+[gd_scene load_steps=19 format=3 uid="uid://lgbv24nsmb0f"]
 
 [ext_resource type="ArrayMesh" uid="uid://be8txj43mu4tq" path="res://asset/3d/object/treadmill.obj" id="1_bux6o"]
 [ext_resource type="Script" path="res://script/object/interactive/evencare/treadmill.gd" id="1_ykttu"]
@@ -7,11 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bllx5ago2plgo" path="res://asset/2d/sprite/object/pen_treadmill.png" id="5_u8n6b"]
 [ext_resource type="AudioStream" uid="uid://bggbttsf5gkr6" path="res://sfx/object/treadmill.wav" id="6_svyec"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_g44qn"]
-size = Vector3(0.25, 0.25, 0.525)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_e5s5g"]
-size = Vector3(0.25, 0.25, 0.5)
+size = Vector3(0.25, 1, 0.25)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q8mox"]
 render_priority = 0
@@ -111,26 +108,14 @@ animations = [{
 process_mode = 1
 script = ExtResource("1_ykttu")
 
-[node name="TreadmillRear" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.75)
-
-[node name="TreadmillCollision" type="CollisionShape3D" parent="TreadmillRear"]
-shape = SubResource("BoxShape3D_g44qn")
-
 [node name="Treadmill" type="Area3D" parent="."]
 
 [node name="TreadmillCollision" type="CollisionShape3D" parent="Treadmill"]
 shape = SubResource("BoxShape3D_e5s5g")
 
-[node name="TreadmillFront" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
-
-[node name="TreadmillCollision" type="CollisionShape3D" parent="TreadmillFront"]
-shape = SubResource("BoxShape3D_g44qn")
-
 [node name="TreadmillMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_bux6o")
-skeleton = NodePath("../TreadmillRear")
+skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_q8mox")
 
 [node name="TreadmillTop" type="AnimatedSprite3D" parent="."]
@@ -145,7 +130,5 @@ stream = ExtResource("6_svyec")
 panning_strength = 2.0
 bus = &"SFX"
 
-[connection signal="body_entered" from="TreadmillRear" to="." method="_on_treadmill_entered_front"]
 [connection signal="body_entered" from="Treadmill" to="." method="_on_treadmill_entered"]
 [connection signal="body_exited" from="Treadmill" to="." method="_on_treadmill_exited"]
-[connection signal="body_entered" from="TreadmillFront" to="." method="_on_treadmill_entered_rear"]

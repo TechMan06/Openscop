@@ -1,6 +1,7 @@
 @tool
 extends Area3D
 
+const CLONE_SCENE: PackedScene = preload("res://scene/object/interactive/evencare/player_clone.tscn")
 const KEY_SCENE: PackedScene = preload("res://scene/object/interactive/evencare/pen_key.tscn")
 const KEY_SPACE: float = 1.3
 
@@ -8,7 +9,9 @@ const KEY_SPACE: float = 1.3
 @export_range(2, 25) var key_amount: int = 15
 @export var camera: Node3D
 @export var camera_speed: float = 0.5
-@export var treadmill: Node3D
+@export var treadmill_counter: TreadmillCounter
+@export var pen_distance: int = 5
+@export var create_clones: bool = true
 
 var player: Player
 var key_pos: float = 0.0
@@ -18,11 +21,23 @@ var current_tile: int = -1:
 		current_tile = value
 		
 		if value != -1:
-			for piano_key in keys.get_children():
-				if piano_key.get_index() != value:
-					piano_key.pressed = false
-				else:
-					piano_key.pressed = true
+			if treadmill_counter == null:
+				for piano_key in keys.get_children():
+					if piano_key.get_index() == value:
+						piano_key.pressed = true
+					else:
+						piano_key.pressed = false
+				
+			else:
+				for piano_key in keys.get_children():
+					if (
+							piano_key.get_index() == value or 
+							piano_key.get_index() == keys.get_child_count() - pen_distance - 1 + value or
+							piano_key.get_index() == value - pen_distance - 1
+						):
+						piano_key.pressed = true
+					else:
+						piano_key.pressed = false
 		else:
 			for piano_key in keys.get_children():
 				piano_key.pressed = false
@@ -38,6 +53,7 @@ var follow_camera: bool = false
 @onready var camera_focus: Marker3D = $CameraFocus
 @onready var zone_collision = $PianoCollision
 @onready var keys = $Keys
+@onready var clones = $Clones
 
 
 func _ready() -> void:
@@ -69,6 +85,7 @@ func _ready() -> void:
 		zone_collision.position.x = ((zone_collision.get_shape().size.x / 2.0) - 0.25) * -1.0
 		
 		camera_timer.wait_time = camera_speed
+
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -106,6 +123,19 @@ func _on_body_entered(body) -> void:
 		x_offset = ((player.global_position.x - global_position.x) / 2.0) + target_camera[0].x
 		player.player_stats.entity_y = 0.125
 		
+		if treadmill_counter != null and create_clones:
+			var key_iterator_forward: float = 1.0
+			
+			while (current_tile + 3 + treadmill_counter.current_value) * key_iterator_forward < key_amount:
+				create_clone(body, (current_tile + 3 + treadmill_counter.current_value) * key_iterator_forward)
+				key_iterator_forward += 1
+			
+			var key_iterator_backward: float = 0.0
+
+			while (treadmill_counter.current_value + 1 - current_tile) * key_iterator_backward > -key_amount:
+				create_clone(body, (treadmill_counter.current_value + 1 - current_tile) * key_iterator_backward)
+				key_iterator_backward -= 1
+			
 		if camera != null:
 			camera_timer.start()
 			camera_marker.camera_mode = camera_marker.CameraModes.NO_CODE
@@ -160,9 +190,32 @@ func _on_body_exited(_body: Node3D) -> void:
 	inside_zone = false
 	current_tile = -1
 	
+	if treadmill_counter != null:
+		for clone in clones.get_children():
+			clone.deactivate()
+	
 	if camera != null:
 		camera_marker.get_child(0).position.x = 0.0
 		camera_marker.global_position.x = player.global_position.x + 1.0
 		camera_marker.camera_mode = camera_marker.CameraModes.FOLLOW
 		camera_marker.get_camera().position = og_camera[0]
 		camera_marker.get_camera().rotation = og_camera[1]
+
+
+func create_clone(player: Player, offset: int) -> void:
+	if offset != 0:
+		var clone_instance: PianoClone = CLONE_SCENE.instantiate()
+		
+		clone_instance.player = player
+		
+		if offset > -1:
+			clone_instance.offset = keys.get_child(offset).position
+		else:
+			if offset > -key_amount:
+				clone_instance.offset = keys.get_child(abs(offset)).position * -1.0
+		
+		clone_instance.max_keys = key_amount
+		clone_instance.key_space = KEY_SPACE
+		clone_instance.piano_pos = global_position
+		
+		clones.add_child(clone_instance)
