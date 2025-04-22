@@ -19,7 +19,7 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qawgv"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3foqx"]
 
 [node name="PetObject" type="Marker3D"]
 process_mode = 1
@@ -34,7 +34,7 @@ pixel_size = 0.03
 collision_layer = 3
 
 [node name="PetCollision" type="CollisionShape3D" parent="PetArea"]
-shape = SubResource("BoxShape3D_qawgv")
+shape = SubResource("BoxShape3D_3foqx")
 
 [node name="Cry" type="AudioStreamPlayer3D" parent="."]
 unit_size = 30.0

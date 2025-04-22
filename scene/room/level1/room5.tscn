@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b82sbuuf2py8n"]
+[gd_scene load_steps=22 format=3 uid="uid://b82sbuuf2py8n"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_76lug"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_7hqx8"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://deih85r7byxfr" path="res://input.png" id="14_8a0b5"]
 [ext_resource type="PackedScene" uid="uid://lgbv24nsmb0f" path="res://scene/object/interactive/evencare/treadmill.tscn" id="15_03gp8"]
 [ext_resource type="PackedScene" uid="uid://c0rnfdwmvsyi5" path="res://scene/object/interactive/evencare/treadmill_counter.tscn" id="16_vmtl1"]
+[ext_resource type="PackedScene" uid="uid://jnyw8iep4fwu" path="res://scene/object/pet/pen.tscn" id="17_cffe0"]
+[ext_resource type="AudioStream" uid="uid://pdj0aptyj6m6" path="res://sfx/pets/pen_cry.wav" id="18_qlkkv"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_kipqm")
@@ -127,10 +129,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 2)
 [node name="PieceArea12" parent="." instance=ExtResource("12_2qs5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 2)
 
-[node name="PianoArea" parent="." node_paths=PackedStringArray("camera", "treadmill_counter") instance=ExtResource("13_yadrb")]
+[node name="PianoArea" parent="." node_paths=PackedStringArray("camera", "treadmill_counter", "pen") instance=ExtResource("13_yadrb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.435, 0, 5)
 camera = NodePath("Camera3D")
 treadmill_counter = NodePath("../TreadmillCounter")
+pen = NodePath("../Pen")
 
 [node name="Camera3D" type="Marker3D" parent="PianoArea"]
 transform = Transform3D(0.707107, -0.165071, 0.687569, 0, 0.97237, 0.233445, -0.707107, -0.165071, 0.687569, 11.4, 6.68, 16.75)
@@ -148,3 +151,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
 [node name="TreadmillCounter" parent="." node_paths=PackedStringArray("treadmill") instance=ExtResource("16_vmtl1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2)
 treadmill = NodePath("../PenTreadmill")
+
+[node name="Pen" parent="." node_paths=PackedStringArray("piano") instance=ExtResource("17_cffe0")]
+cry_sound = ExtResource("18_qlkkv")
+piano = NodePath("../PianoArea")

@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://by3katwebaevt" path="res://sfx/pets/roneth_cry.wav" id="2_wbhnr"]
 
 [sub_resource type="Curve3D" id="Curve3D_0rtjn"]
+resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
 "tilts": PackedFloat32Array(0)

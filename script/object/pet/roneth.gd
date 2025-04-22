@@ -15,7 +15,7 @@ var roneth_scale: float
 @export var vertical_distance: float = 5.0
 @export var hitbox_size: float = 2.0
 @export var weight: float = 0.25
-@export var cry_sound: AudioStream
+@export var cry_sound: AudioStream = load("res://sfx/pets/roneth_cry.wav")
 
 
 @onready var roneth_sprite = %RonethSprite
@@ -42,6 +42,9 @@ func _ready() -> void:
 						)
 	roneth_min_y = self.global_position.y + roneth_path.get_curve().get_point_position(1).y
 	roneth_og_size = roneth_sprite.pixel_size
+	
+	if SaveManager.get_data().pet.find(pet_name) != -1:
+		enabled = false
 
 
 func _process(_delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cjs7ne1csnso"]
+[gd_scene load_steps=20 format=3 uid="uid://cjs7ne1csnso"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_2ytmj"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_cjus1"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cumwai6dwnqb" path="res://asset/2d/background/level1_6.png" id="4_ce3f6"]
 [ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="6_g3lt6"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_esnrp"]
-[ext_resource type="Texture2D" uid="uid://odg7mxb4ab8" path="res://vlcsnap-2024-11-30-20h34m41s547.png" id="8_ko338"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="8_x8bwt"]
 [ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="9_o7hlx"]
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="9_p3gpn"]
@@ -133,9 +132,3 @@ shape = SubResource("ConcavePolygonShape3D_al3v3")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.939884, 0.341495, 0, -0.341495, 0.939884, 0.5, 4.3, 13.5)
 fov = 35.0
-
-[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.5)
-visible = false
-modulate = Color(1, 1, 1, 0.32549)
-texture = ExtResource("8_ko338")

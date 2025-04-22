@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkqlh3tui8oig"
-path="res://.godot/imported/pen.png-f826a86934d6d25025b5784f7736a017.ctex"
+uid="uid://vata7hk74f2b"
+path="res://.godot/imported/pen.png-326a5c3b58458c56810e4c1e01babca7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/2d/ui/pause/pets/pen.png"
-dest_files=["res://.godot/imported/pen.png-f826a86934d6d25025b5784f7736a017.ctex"]
+source_file="res://asset/2d/sprite/object/pet/pen.png"
+dest_files=["res://.godot/imported/pen.png-326a5c3b58458c56810e4c1e01babca7.ctex"]
 
 [params]
 

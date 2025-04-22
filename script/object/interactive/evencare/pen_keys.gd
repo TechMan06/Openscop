@@ -1,5 +1,8 @@
 @tool
 extends Area3D
+class_name PenPiano
+
+signal piano_ready
 
 const CLONE_SCENE: PackedScene = preload("res://scene/object/interactive/evencare/player_clone.tscn")
 const KEY_SCENE: PackedScene = preload("res://scene/object/interactive/evencare/pen_key.tscn")
@@ -10,37 +13,20 @@ const KEY_SPACE: float = 1.3
 @export var camera: Node3D
 @export var camera_speed: float = 0.5
 @export var treadmill_counter: TreadmillCounter
-@export var pen_distance: int = 5
 @export var create_clones: bool = true
+@export_category("Pen Properties")
+@export var pen: Pen
+@export var pen_distance: int = 5
 
 var player: Player
 var key_pos: float = 0.0
 var camera_marker: CameraMarker
 var current_tile: int = -1:
 	set(value):
-		current_tile = value
-		
-		if value != -1:
-			if treadmill_counter == null:
-				for piano_key in keys.get_children():
-					if piano_key.get_index() == value:
-						piano_key.pressed = true
-					else:
-						piano_key.pressed = false
-				
-			else:
-				for piano_key in keys.get_children():
-					if (
-							piano_key.get_index() == value or 
-							piano_key.get_index() == keys.get_child_count() - pen_distance - 1 + value or
-							piano_key.get_index() == value - pen_distance - 1
-						):
-						piano_key.pressed = true
-					else:
-						piano_key.pressed = false
-		else:
-			for piano_key in keys.get_children():
-				piano_key.pressed = false
+		if current_tile != value:
+			current_tile = value
+			
+			update_piano_keys(value)
 		
 var inside_zone: bool = false
 var og_camera: Array[Vector3] = [Vector3.ZERO, Vector3.ZERO, Vector3.ZERO]
@@ -69,6 +55,7 @@ func _ready() -> void:
 		
 		while key_iterate < key_amount:
 			var pen_key: Marker3D = KEY_SCENE.instantiate()
+			
 			keys.add_child(pen_key)
 			pen_key.global_position.x = global_position.x + key_pos
 			key_pos -= KEY_SPACE
@@ -85,6 +72,8 @@ func _ready() -> void:
 		zone_collision.position.x = ((zone_collision.get_shape().size.x / 2.0) - 0.25) * -1.0
 		
 		camera_timer.wait_time = camera_speed
+		
+		piano_ready.emit()
 
 
 func _process(_delta: float) -> void:
@@ -219,3 +208,30 @@ func create_clone(player: Player, offset: int) -> void:
 		clone_instance.piano_pos = global_position
 		
 		clones.add_child(clone_instance)
+
+
+func update_piano_keys(value: int) -> void:
+	if value != -1:
+		if pen == null:
+			for piano_key in keys.get_children():
+				if piano_key.get_index() == value:
+					piano_key.pressed = true
+				else:
+					piano_key.pressed = false
+			
+		else:
+			for piano_key in keys.get_children():
+				if (
+						piano_key.get_index() == value or 
+						piano_key.get_index() == keys.get_child_count() - pen_distance - 1 + value or
+						piano_key.get_index() == value - pen_distance - 1
+					):
+					if piano_key.get_index() != value:
+						pen.update_position(piano_key.global_position)
+					
+					piano_key.pressed = true
+				else:
+					piano_key.pressed = false
+	else:
+		for piano_key in keys.get_children():
+			piano_key.pressed = false

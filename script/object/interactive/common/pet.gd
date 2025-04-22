@@ -102,8 +102,6 @@ func _on_pet_area_body_entered(body: Node3D) -> void:
 											).set_trans(Tween.TRANS_LINEAR)
 			
 			_shrink_animator.tween_property(pet_sprite3d, "rotation:y", deg_to_rad(360), 2.5)
-			
-			await _shrink_animator.finished
 
 
 func _on_caught_timer_timeout() -> void:
