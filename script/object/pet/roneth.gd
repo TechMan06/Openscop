@@ -16,6 +16,7 @@ var roneth_scale: float
 @export var hitbox_size: float = 2.0
 @export var weight: float = 0.25
 @export var cry_sound: AudioStream = load("res://sfx/pets/roneth_cry.wav")
+@export var splash_sound: AudioStream = load("res://sfx/object/bucket_splash_roneth.wav")
 
 
 @onready var roneth_sprite = %RonethSprite
@@ -23,6 +24,7 @@ var roneth_scale: float
 @onready var roneth: Marker3D = %RonethObject
 @onready var roneth_path: Path3D = $RonethPath
 @onready var roneth_follow: PathFollow3D = $RonethPath/RonethFollow
+@onready var roneth_bucket = $RonethBucket
 
 
 func _ready() -> void:
@@ -42,6 +44,7 @@ func _ready() -> void:
 						)
 	roneth_min_y = self.global_position.y + roneth_path.get_curve().get_point_position(1).y
 	roneth_og_size = roneth_sprite.pixel_size
+	roneth_bucket.set_stream(splash_sound)
 	
 	if SaveManager.get_data().pet.find(pet_name) != -1:
 		enabled = false
@@ -78,6 +81,7 @@ func _process(_delta: float) -> void:
 					bucket.has_pet = pet_name
 					bucket.cry_sound.stream = cry_sound
 					bucket.jump()
+					roneth_bucket.play()
 					enabled = false
 	else:
 		visible = false
