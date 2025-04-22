@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	%ZoneCollision.get_shape().size = Vector3(area_size.y, 1.0, area_size.y)
+	%ZoneCollision.get_shape().size = Vector3(area_size.x, 1.0, area_size.y)
 	%ZoneMesh.get_mesh().size = Vector3(area_size.x, height, area_size.y)
 	%ZoneMesh.global_position.y = height / 2.0
 	
