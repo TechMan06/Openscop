@@ -60,9 +60,9 @@ shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/tile_mode = false
-shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [sub_resource type="Shader" id="Shader_yj6u1"]
 code = "shader_type spatial;
@@ -89,9 +89,9 @@ shader_parameter/y_billboard = false
 shader_parameter/animate = null
 shader_parameter/animation_frames = null
 shader_parameter/animation_speed = null
-shader_parameter/tile_mode = false
-shader_parameter/tile = Vector2i(0, 0)
-shader_parameter/use_depth = false
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="AmberPet" type="Marker3D"]
 script = ExtResource("1_xopa3")
@@ -110,6 +110,7 @@ cry_sound_file = ExtResource("2_g3u3y")
 pet_sprite = ExtResource("3_77lqw")
 sprite_size = 0.04
 frames = Vector2(3, 1)
+sprite_offset = Vector2(0, 32)
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="AmberOrigin/JumpOffset/PetObject"]
 unique_name_in_owner = true

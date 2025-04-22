@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://kygho8mygh4t"]
+[gd_scene load_steps=22 format=3 uid="uid://kygho8mygh4t"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_k0qu1"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_lbnb3"]
@@ -17,6 +17,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dm46m75hu5jco" path="res://asset/3d/room/evencare/evencare_drawer.obj" id="14_i6px1"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="15_srhmi"]
 [ext_resource type="PackedScene" uid="uid://dvte0cq377kvg" path="res://scene/object/interactive/common/bucket.tscn" id="17_vfk1n"]
+[ext_resource type="PackedScene" uid="uid://bhdahvhtas0uu" path="res://scene/object/pet/randice.tscn" id="18_1jtmi"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_uwger")
@@ -147,3 +148,7 @@ gens = Array[int]([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
 
 [node name="Bucket" parent="GenSpecific3" instance=ExtResource("17_vfk1n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3)
+
+[node name="Randice" parent="GenSpecific3" instance=ExtResource("18_1jtmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
+positions = Array[Vector3]([Vector3(1, 0, -1), Vector3(8, 0, -5)])

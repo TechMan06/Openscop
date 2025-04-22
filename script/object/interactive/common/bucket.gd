@@ -172,6 +172,10 @@ func jump() -> void:
 							)
 
 
+func bump() -> void:
+	$BucketAnim.play(&"bucket_hit")
+
+
 func _on_bucket_collected(body: Node3D) -> void:
 	if has_pet != "":
 		if body is Entity && !disable_collection:

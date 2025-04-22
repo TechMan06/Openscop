@@ -39,6 +39,20 @@ window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
+[importer_defaults]
+
+texture={
+"detect_3d/compress_to": 0
+}
+3d_texture={
+"compress/mode": 0,
+"mipmaps/generate": false
+}
+2d_array_texture={
+"compress/mode": 0,
+"mipmaps/generate": false
+}
+
 [input]
 
 ui_accept={

@@ -1,3 +1,105 @@
-[gd_scene format=3 uid="uid://bhdahvhtas0uu"]
+[gd_scene load_steps=10 format=3 uid="uid://bhdahvhtas0uu"]
+
+[ext_resource type="PackedScene" uid="uid://bvts6yrhq4hnm" path="res://scene/object/interactive/common/pet_object.tscn" id="1_muy52"]
+[ext_resource type="Script" path="res://script/object/pet/randice.gd" id="1_nx1j5"]
+[ext_resource type="Texture2D" uid="uid://cxb5gece8w8dg" path="res://asset/2d/sprite/object/pet/randice.png" id="2_2megm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oisul"]
+resource_local_to_scene = true
+
+[sub_resource type="Animation" id="Animation_4xag0"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PetObject:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_00pl0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PetObject:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lv55n"]
+resource_name = "move"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PetObject:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 0), Vector2(3, 0), Vector2(4, 0), Vector2(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r13nj"]
+resource_name = "dead"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PetObject:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 0), Vector2(7, 0), Vector2(8, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etj5b"]
+_data = {
+"RESET": SubResource("Animation_00pl0"),
+"dead": SubResource("Animation_r13nj"),
+"idle": SubResource("Animation_4xag0"),
+"move": SubResource("Animation_lv55n")
+}
 
 [node name="Randice" type="Marker3D"]
+script = ExtResource("1_nx1j5")
+
+[node name="PetObject" parent="." instance=ExtResource("1_muy52")]
+pet_sprite = ExtResource("2_2megm")
+disable_collection = true
+sprite_size = 0.035
+frames = Vector2(9, 1)
+sprite_offset = Vector2(0, 25)
+
+[node name="RandiceArea" type="Area3D" parent="."]
+
+[node name="RandiceShape" type="CollisionShape3D" parent="RandiceArea"]
+shape = SubResource("BoxShape3D_oisul")
+
+[node name="SpriteAnimation" type="AnimationPlayer" parent="."]
+speed_scale = 3.0
+libraries = {
+"": SubResource("AnimationLibrary_etj5b")
+}
+
+[connection signal="body_entered" from="RandiceArea" to="." method="_on_near_randice"]

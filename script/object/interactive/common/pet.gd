@@ -18,10 +18,19 @@ const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 @export var sprite_size: float = 0.03:
 	set(value):
 		sprite_size = value
+		
+		$PetSprite.pixel_size = value
 
 @export var frames: Vector2 = Vector2i(1, 1):
 	set(value):
 		frames = value
+		
+		if Engine.is_editor_hint():
+			_update_frames()
+
+@export var sprite_offset: Vector2 = Vector2i.ZERO:
+	set(value):
+		sprite_offset = value
 		
 		if Engine.is_editor_hint():
 			_update_frames()
@@ -69,8 +78,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
-		pet_sprite3d.set_texture(pet_sprite)
-		pet_sprite3d.get_material_override().set_shader_parameter("albedoTex", pet_sprite3d.texture)
+		$PetSprite.set_texture(pet_sprite)
+		$PetSprite.get_material_override().set_shader_parameter("albedoTex", pet_sprite3d.texture)
 		_update_frames()
 
 
@@ -111,11 +120,13 @@ func _on_caught_timer_timeout() -> void:
 
 func _update_frames() -> void:
 	if frames.x > 1:
-		pet_sprite3d.hframes = float(frames.x)
+		$PetSprite.hframes = float(frames.x)
 	if frames.y > 1:
-		pet_sprite3d.vframes = float(frames.y)
+		$PetSprite.vframes = float(frames.y)
 	
-	pet_sprite3d.get_material_override().set_shader_parameter(
+	$PetSprite.offset = sprite_offset
+	
+	$PetSprite.get_material_override().set_shader_parameter(
 																"animation_frames", 
 																Vector2(
 																			pet_sprite3d.hframes, 
@@ -125,8 +136,8 @@ func _update_frames() -> void:
 
 
 func _update_animation() -> void:
-	pet_sprite3d.get_material_override().set_shader_parameter("animate", animate)
+	$PetSprite.get_material_override().set_shader_parameter("animate", animate)
 
 
 func _update_anim_speed() -> void:
-	pet_sprite3d.get_material_override().set_shader_parameter("animation_speed", animation_speed)
+	$PetSprite.get_material_override().set_shader_parameter("animation_speed", animation_speed)
