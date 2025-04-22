@@ -155,9 +155,9 @@ func get_direction(value: int) -> Vector3:
 		0:
 			return Vector3(0., 0., 0.5)
 		1:
-			return Vector3(0., 0.5, 0.)
+			return Vector3(0.5, 0., 0.)
 		2:
-			return Vector3(0., -0.5, 0.)
+			return Vector3(-0.5, 0., 0.)
 		3:
 			return Vector3(0., 0., -0.5)
 	
