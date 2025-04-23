@@ -39,6 +39,7 @@ script = ExtResource("1_e0fun")
 room_name = "level2-room1"
 loading_preset = ExtResource("2_r7isy")
 background_music = 3
+footstep_sound = 1
 spawn_camera_root = false
 environment_settings = SubResource("Resource_ehjxm")
 

@@ -28,7 +28,9 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export_multiline var level_slogan: String = ""
 @export var school_preset: bool = false
 @export var spawn_player: bool = true
-@export_enum("EvenCare", 
+@export_enum(
+			"None",
+			"EvenCare", 
 			"Grass", 
 			"Cement", 
 			"Cement2", 
@@ -106,9 +108,8 @@ func _ready() -> void:
 				loading_preset = load("res://resource/loading_preset/ec_demo.tres")
 	
 	
-	if Global.global_data.gen < 5 || RecordingManager.demo:
-		if background_music == 2:
-			background_music = 3
+	if Global.global_data.gen < 5 and background_music == 2:
+		background_music = 3
 	
 	if Global.global_data.gen < 4:
 		if environment_settings != null:

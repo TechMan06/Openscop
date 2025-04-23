@@ -5,6 +5,7 @@ class_name Player
 
 const SCHOOL_OVERLAY: PackedScene = preload("res://scene/ui/school_ui.tscn")
 const TERRAIN_TYPES: Array[String] = [
+			"None",
 			"EvenCare", 
 			"Grass", 
 			"Cement", 
@@ -19,12 +20,16 @@ const FOOTSTEP_FADEOUT_TIMES: Array[float] = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05
 
 var current_footstep: int = 0:
 	set(value):
-		var _sound_path: String = "res://sfx/footstep/" + str(
-										TERRAIN_TYPES[value]
-									).to_lower() + ".wav"
-		
-		if _footstep_sound.stream.get_path() != _sound_path:
-			_footstep_sound.stream = load(_sound_path)
+		current_footstep = value
+		if value != 0:
+			var _sound_path: String = "res://sfx/footstep/" + str(
+											TERRAIN_TYPES[value]
+										).to_lower() + ".wav"
+			
+			if _footstep_sound.stream.get_path() != _sound_path:
+				_footstep_sound.stream = load(_sound_path)
+		else:
+			_footstep_sound.volume_db = -80.0
 
 var control_device: int = 0
 var rotation_direction: Vector3 = Vector3.ZERO
@@ -95,12 +100,13 @@ func _physics_process(_delta: float) -> void:
 			else:
 				_footstep_sound.stream_paused = true
 			
-			create_tween().tween_property(
-											_footstep_sound, 
-											"volume_db", 
-											80.0, 
-											FOOTSTEP_FADEIN_TIMES[current_footstep]
-										)
+			if current_footstep != 0:
+				create_tween().tween_property(
+												_footstep_sound, 
+												"volume_db", 
+												80.0, 
+												FOOTSTEP_FADEIN_TIMES[current_footstep]
+											)
 		
 		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
 		if position.y == 0.0:
@@ -115,12 +121,14 @@ func _physics_process(_delta: float) -> void:
 				current_footstep = TERRAIN_TYPES.find(_terrain_detector.get_collider().name)
 	else:
 		_current_frame = 0
-		create_tween().tween_property(
-					_footstep_sound, 
-					"volume_db", 
-					-80.0, 
-					FOOTSTEP_FADEOUT_TIMES[current_footstep]
-				)
+		
+		if current_footstep != 0:
+			create_tween().tween_property(
+											_footstep_sound, 
+											"volume_db", 
+											-80.0, 
+											FOOTSTEP_FADEOUT_TIMES[current_footstep]
+										)
 	
 	player_stats.player_pos.x = global_position.x
 	player_stats.player_pos.y = global_position.y

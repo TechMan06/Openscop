@@ -2,6 +2,7 @@ extends Resource
 class_name SaveData
 
 #BASIC DATA
+@export var save_seed: int = 0
 @export var player_data: PlayerStats = PlayerStats.new()
 @export var save_name: String = ""
 @export var room_name: String = ""

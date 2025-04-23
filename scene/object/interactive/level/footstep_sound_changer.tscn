@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctsc0ptocedms"]
+
+[ext_resource type="Script" path="res://script/object/interactive/level/footstep_sound_changer.gd" id="1_hvjfs"]
+[ext_resource type="Shader" path="res://shader/spatial/solid_0_transparent.gdshader" id="2_waqsj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_242pn"]
+resource_local_to_scene = true
+size = Vector3(1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f2hw1"]
+resource_local_to_scene = true
+flip_faces = true
+size = Vector3(1, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sl8hq"]
+render_priority = 0
+shader = ExtResource("2_waqsj")
+shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
+
+[node name="SoundChanger" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_hvjfs")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_242pn")
+
+[node name="ZoneMesh" type="MeshInstance3D" parent="Shape"]
+unique_name_in_owner = true
+mesh = SubResource("BoxMesh_f2hw1")
+surface_material_override/0 = SubResource("ShaderMaterial_sl8hq")

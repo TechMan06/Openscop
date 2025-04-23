@@ -51,6 +51,7 @@ script = ExtResource("1_j8kwn")
 room_name = "level1-room0"
 loading_preset = ExtResource("2_pjxfp")
 allow_recording = false
+footstep_sound = 1
 spawn_camera_root = false
 environment_settings = SubResource("Resource_uijn0")
 

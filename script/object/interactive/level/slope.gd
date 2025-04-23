@@ -16,8 +16,6 @@ var entities: Array[Entity]
 @export var slope_up: bool = true
 @export var change_brightness: bool = false
 
-@onready var slope_up_texture = load("res://asset/2d/ui/editor/slope_up.png")
-@onready var slope_down_texture = load("res://asset/2d/ui/editor/slope_down.png")
 @onready var slope_top_sprite: Sprite3D = $SlopeStart/SpriteTOP
 @onready var slope_end: Marker3D = $SlopeEnd
 @onready var slope_start: Marker3D = $SlopeStart
@@ -44,28 +42,28 @@ func _ready() -> void:
 				slope_end.position.x = 0.0
 				slope_area.position.x = 0.0
 				slope_area.position.z = slope_length / 2
-				slope_collision.get_shape().size = Vector3(slope_width, 1.0, slope_length - 1)
+				slope_collision.get_shape().size = Vector3(slope_width - 0.5, 1.0, slope_length - 1)
 
 			3:
 				slope_end.position.z = slope_length * -1
 				slope_end.position.x = 0.0
 				slope_area.position.x = 0.0
 				slope_area.position.z = slope_length / 2 * -1
-				slope_collision.get_shape().size = Vector3(slope_width, 1.0, slope_length - 1)
+				slope_collision.get_shape().size = Vector3(slope_width - 0.5, 1.0, slope_length - 1)
 
 			1:
 				slope_end.position.x = slope_length
 				slope_end.position.z = 0.0
 				slope_area.position.z = 0.0
 				slope_area.position.x = slope_length / 2
-				slope_collision.get_shape().size = Vector3(slope_length - 1, 1.0, slope_width)
+				slope_collision.get_shape().size = Vector3(slope_length - 1, 1.0, slope_width - 0.5)
 
 			2:
 				slope_end.position.x = slope_length * -1
 				slope_end.position.z = 0.0
 				slope_area.position.z = 0.0
 				slope_area.position.x = slope_length / 2 * -1
-				slope_collision.get_shape().size = Vector3(slope_length - 1, 1.0, slope_width)
+				slope_collision.get_shape().size = Vector3(slope_length - 1, 1.0, slope_width - 0.5)
 
 
 func _process(_delta: float) -> void:
@@ -216,3 +214,6 @@ func _on_slope_area_body_entered(body: Node3D) -> void:
 func _on_slope_area_body_exited(body):
 	if entities.find(body) != -1:
 		entities.erase(body)
+		
+		if !slope_up:
+			body.player_stats.entity_y = body.entity_min

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cklrsj73ts2kt" path="res://scene/object/interactive/common/interaction_symbol.tscn" id="10_61wdo"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="11_qewoq"]
 [ext_resource type="PackedScene" uid="uid://c67nqiopby4yt" path="res://scene/object/interactive/level/height-bed.tscn" id="12_8pck4"]
+[ext_resource type="PackedScene" uid="uid://ctsc0ptocedms" path="res://scene/object/interactive/level/footstep_sound_changer.tscn" id="12_l6l8l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pdndm"]
 render_priority = 0
@@ -46,9 +47,6 @@ data = PackedVector3Array(0.9173, 1, -1.2674, -0.9173, 1, -1.2674, 0.9173, 0, -1
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fhm28"]
 data = PackedVector3Array(-0.9173, 0, 1.2674, -0.9173, 1, 1.2674, 0.9173, 0, 1.2674, 0.9173, 0, 1.2674, -0.9173, 1, 1.2674, 0.9173, 1, 1.2674)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_onscp"]
-size = Vector3(1.75, 0, 2.5)
 
 [node name="Trapdoor" type="Node3D"]
 script = ExtResource("1_c28yp")
@@ -88,7 +86,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 slope_length = 2.0
 slope_direction = 3
-slope_up = false
 change_brightness = true
 
 [node name="Warp" parent="TrapdoorMesh" instance=ExtResource("9_pw6vp")]
@@ -108,11 +105,11 @@ min_distance = 0.5
 unique_name_in_owner = true
 script = ExtResource("11_qewoq")
 
-[node name="Cement3" type="Area3D" parent="TrapdoorMesh"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TrapdoorMesh/Cement3"]
-shape = SubResource("BoxShape3D_onscp")
-
 [node name="HeightBed" parent="TrapdoorMesh" instance=ExtResource("12_8pck4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0.88)
-height = 0.25
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.88)
+area_size = Vector2(1, 0.75)
+
+[node name="SoundChanger" parent="TrapdoorMesh" instance=ExtResource("12_l6l8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+sound = "Cement3"
+area_size = Vector2(2, 2.5)

@@ -338,6 +338,7 @@ func _on_file_created(file_name: String, attach_node: Node) -> void:
 	if file_name != "":
 		save_data.save_name = file_name
 		var _default_data: SaveData = SaveData.new()
+		_default_data.save_seed = randi()
 		_default_data.save_name = file_name
 		_default_data.room_path = "res://scene/room/gift_plane/gift_plane.tscn"
 		_default_data.loading_preset = load("res://resource/loading_preset/gift_load.tres")

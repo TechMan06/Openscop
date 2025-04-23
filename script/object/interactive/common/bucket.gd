@@ -173,6 +173,7 @@ func jump() -> void:
 
 
 func bump() -> void:
+	$BumpSound.play()
 	$BucketAnim.play(&"bucket_hit")
 
 

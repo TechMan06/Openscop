@@ -52,6 +52,7 @@ script = ExtResource("1_lwxw7")
 room_name = "level1-room1"
 loading_preset = ExtResource("2_t6id3")
 background_music = 2
+footstep_sound = 1
 allow_front_movement = false
 camera_height = 4.5
 camera_distance = 10.0

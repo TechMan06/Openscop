@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="7_cmf6k"]
 [ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="8_ejbax"]
 [ext_resource type="ArrayMesh" uid="uid://maqyhbv0cnx2" path="res://asset/3d/room/nmp/entrance.obj" id="8_w73q4"]
+[ext_resource type="PackedScene" uid="uid://ctsc0ptocedms" path="res://scene/object/interactive/level/footstep_sound_changer.tscn" id="9_6vpvv"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="9_jmul8"]
 [ext_resource type="Texture2D" uid="uid://cug5niin5ydjt" path="res://asset/3d/room/nmp/nmp_general_placeholder.png" id="10_71mw1"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="11_5rsy2"]
@@ -32,8 +33,6 @@ shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = true
 shader_parameter/depth_offset = Vector3(0, -4, 0)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_cgkbh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3fy6b"]
 render_priority = 0
@@ -178,11 +177,9 @@ script = ExtResource("11_5rsy2")
 script = ExtResource("7_cmf6k")
 protected_texture_path = "res://asset/3d/room/nmp/nmp_general.png"
 
-[node name="Grass" type="Area3D" parent="GrassObject"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-
-[node name="GrassFloor" type="CollisionShape3D" parent="GrassObject/Grass"]
-shape = SubResource("WorldBoundaryShape3D_cgkbh")
+[node name="SoundChanger" parent="GrassObject" instance=ExtResource("9_6vpvv")]
+sound = "Grass"
+area_size = Vector2(87, 87)
 
 [node name="GenSpecific" type="Node" parent="."]
 script = ExtResource("8_ejbax")

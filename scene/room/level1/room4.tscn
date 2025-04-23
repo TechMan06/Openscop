@@ -34,6 +34,7 @@ room_name = "level1-room4"
 loading_preset = ExtResource("2_f2d36")
 background_music = 2
 level_slogan = "We hope you are enjoying the game."
+footstep_sound = 1
 spawn_camera_root = false
 environment_settings = SubResource("Resource_thkrr")
 bucket_spawn_offset = Vector3(0, 0, -0.16)

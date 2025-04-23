@@ -32,6 +32,10 @@ var type_array: Array[int] = [
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
+		var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+		
+		rng.set_seed(SaveManager.get_data().save_seed)
+		
 		room_name = get_tree().get_current_scene().room_name
 		
 		if Global.global_data.gen < 3:
@@ -40,7 +44,7 @@ func _ready() -> void:
 		if type_array[piece_id] != null:
 			piece_sprite.frame_coords.y = type_array[piece_id]
 		else:
-			piece_sprite.frame_coords.y = randi_range(0, 4)
+			piece_sprite.frame_coords.y = rng.randi_range(0, 4)
 		
 		if SaveManager.get_data().piece_log.has(room_name):
 			if SaveManager.get_data().piece_log[room_name].find(piece_id) != -1:

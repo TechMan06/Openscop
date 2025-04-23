@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://lgbv24nsmb0f"]
+[gd_scene load_steps=20 format=3 uid="uid://lgbv24nsmb0f"]
 
 [ext_resource type="ArrayMesh" uid="uid://be8txj43mu4tq" path="res://asset/3d/object/treadmill.obj" id="1_bux6o"]
 [ext_resource type="Script" path="res://script/object/interactive/evencare/treadmill.gd" id="1_ykttu"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="4_yp4d8"]
 [ext_resource type="Texture2D" uid="uid://bllx5ago2plgo" path="res://asset/2d/sprite/object/pen_treadmill.png" id="5_u8n6b"]
 [ext_resource type="AudioStream" uid="uid://bggbttsf5gkr6" path="res://sfx/object/treadmill.wav" id="6_svyec"]
+[ext_resource type="PackedScene" uid="uid://ctsc0ptocedms" path="res://scene/object/interactive/level/footstep_sound_changer.tscn" id="7_yxh7q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e5s5g"]
 size = Vector3(0.25, 1, 0.25)
@@ -129,6 +130,9 @@ frame_progress = 1.0
 stream = ExtResource("6_svyec")
 panning_strength = 2.0
 bus = &"SFX"
+
+[node name="SoundChanger" parent="." instance=ExtResource("7_yxh7q")]
+area_size = Vector2(1, 1.25)
 
 [connection signal="body_entered" from="Treadmill" to="." method="_on_treadmill_entered"]
 [connection signal="body_exited" from="Treadmill" to="." method="_on_treadmill_exited"]

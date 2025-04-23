@@ -19,6 +19,8 @@ var opposite_rotation: Array[int] = [3, 2, 1, 0]
 @export var use_timer: float = 0.0
 @export var play_jingle: bool = false
 @export_category("Warp Properties")
+@export var has_warp: bool = true
+@export var has_spawn: bool = true
 @export var warp_offset: float = 0.0
 @export_file("*.tscn") var warp_to
 @export var spawn_scene_path: String
@@ -34,12 +36,14 @@ var opposite_rotation: Array[int] = [3, 2, 1, 0]
 @onready var warp: WarpClass = %Warp
 @onready var trigger: Marker3D = %Trigger
 @onready var spawn: SpawnClass = %SpawnClass
-@onready var room_name: String = get_tree().get_current_scene().room_name
+@onready var room_name: String
 
 
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
+		room_name = get_tree().get_current_scene().room_name
+		
 		match direction:
 			0:
 				warp.global_position.z += warp_offset
@@ -55,13 +59,22 @@ func _ready() -> void:
 		
 		slope.slope_direction = direction
 		slope.global_rotation.y = 0.0
-		warp.scene = warp_to
-		warp.detect_bucket = detect_bucket
-		warp.loading_preset = loading_preset
-		warp.warp_id = warp_id
-		spawn.scene_path = warp_to
-		spawn.warp_id = warp_id
-		spawn.player_direction = opposite_rotation[direction]
+		
+		if has_warp:
+			warp.scene = warp_to
+			warp.detect_bucket = detect_bucket
+			warp.loading_preset = loading_preset
+			warp.warp_id = warp_id
+		else:
+			warp.queue_free()
+		
+		if has_spawn:
+			spawn.scene_path = warp_to
+			spawn.warp_id = warp_id
+			spawn.player_direction = opposite_rotation[direction]
+		else:
+			spawn.queue_free()
+		
 		trigger.global_rotation.y = 0.0
 		
 		if open:

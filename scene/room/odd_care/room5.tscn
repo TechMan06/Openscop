@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0o8hqtj1obfe"]
+[gd_scene load_steps=19 format=3 uid="uid://c0o8hqtj1obfe"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_jkkb8"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_ylio3"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="10_2ikgk"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="11_p7cqm"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="12_ohp84"]
+[ext_resource type="PackedScene" uid="uid://ctsc0ptocedms" path="res://scene/object/interactive/level/footstep_sound_changer.tscn" id="14_b83u7"]
 [ext_resource type="PackedScene" uid="uid://lgbv24nsmb0f" path="res://scene/object/interactive/evencare/treadmill.tscn" id="15_6fflt"]
 [ext_resource type="PackedScene" uid="uid://c0rnfdwmvsyi5" path="res://scene/object/interactive/evencare/treadmill_counter.tscn" id="16_lsrmk"]
 
@@ -52,6 +53,7 @@ script = ExtResource("1_jkkb8")
 room_name = "odd-room5"
 loading_preset = ExtResource("2_ylio3")
 background_music = 3
+footstep_sound = 1
 allow_front_movement = false
 camera_distance = 16.75
 limit_camera_horizontal = true
@@ -134,5 +136,10 @@ treadmill_counter = NodePath("../TreadmillCounter")
 [node name="TriggerCollision" type="CollisionShape3D" parent="CrashTrigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
 shape = SubResource("BoxShape3D_8fpm6")
+
+[node name="SoundChanger" parent="." instance=ExtResource("14_b83u7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
+sound = "EvenCare"
+area_size = Vector2(2, 2)
 
 [connection signal="body_entered" from="CrashTrigger" to="CrashTrigger" method="_on_body_entered"]

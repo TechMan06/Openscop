@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvte0cq377kvg"]
+[gd_scene load_steps=16 format=3 uid="uid://dvte0cq377kvg"]
 
 [ext_resource type="Script" path="res://script/object/interactive/common/bucket.gd" id="1_e7ywb"]
 [ext_resource type="ArrayMesh" uid="uid://pyekwcve55qw" path="res://asset/3d/object/bucket.obj" id="2_5wl3t"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="3_c74fj"]
 [ext_resource type="AudioStream" uid="uid://cw2npidddcrth" path="res://sfx/object/bucket.wav" id="4_cki80"]
+[ext_resource type="AudioStream" uid="uid://ct5t0lrfb0c8u" path="res://sfx/object/bucket_bump.wav" id="5_lpilv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u135j"]
 render_priority = 0
@@ -38,6 +39,21 @@ size = Vector3(2, 1, 0.45)
 [sub_resource type="BoxShape3D" id="BoxShape3D_brrok"]
 size = Vector3(0.75, 0.75, 0.75)
 
+[sub_resource type="Animation" id="Animation_4g4y5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_qrxld"]
 resource_name = "bucket_hit"
 length = 1.1
@@ -52,21 +68,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0.1, 0), Vector3(0, 0, 0), Vector3(-0.1, 0, 0), Vector3(-0.1, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0), Vector3(-0.1, 0, 0), Vector3(-0.1, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4g4y5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Meshes:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7uv2y"]
@@ -121,6 +122,12 @@ shape = SubResource("BoxShape3D_4p4uv")
 [node name="BucketSound" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_cki80")
+unit_size = 20.0
+bus = &"SFX"
+
+[node name="BumpSound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_lpilv")
 unit_size = 20.0
 bus = &"SFX"
 

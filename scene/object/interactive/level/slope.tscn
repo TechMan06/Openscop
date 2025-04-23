@@ -22,11 +22,13 @@ shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5c50u"]
+resource_local_to_scene = true
 size = Vector3(1, 1, 0)
 
 [sub_resource type="Curve3D" id="Curve3D_ifp0e"]
+resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 2, 2.5),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -41,6 +43,7 @@ texture_filter = 0
 
 [node name="Slope" type="Marker3D"]
 script = ExtResource("1_wb1eb")
+slope_up = false
 
 [node name="SlopeStart" type="Marker3D" parent="."]
 

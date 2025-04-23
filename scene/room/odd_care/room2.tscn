@@ -87,6 +87,7 @@ script = ExtResource("1_tckm0")
 room_name = "odd-room2"
 loading_preset = ExtResource("2_l08dr")
 background_music = 3
+footstep_sound = 1
 allow_front_movement = false
 camera_height = 4.5
 camera_distance = 13.0

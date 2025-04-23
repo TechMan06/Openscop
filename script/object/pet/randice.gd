@@ -9,7 +9,7 @@ var bucket: Bucket
 @export var pet_name: String = "randice"
 @export var positions: Array[Vector3]
 @export var hitbox_size: float = 3.0
-#@export var cry_sound: AudioStream = load("randice_cry")
+@export var cry_sound: AudioStream = load("res://sfx/pets/randice_cry.wav")
 
 @onready var sprite_anim: AnimationPlayer = $SpriteAnimation
 @onready var randice_shape = $RandiceArea/RandiceShape
@@ -33,6 +33,8 @@ func _ready() -> void:
 	
 	if SaveManager.get_data().pet.find(pet_name) != -1:
 		queue_free()
+	
+	$PetObject.cry_sound_file = cry_sound
 
 
 func _on_near_randice(body: Node3D):
@@ -41,6 +43,7 @@ func _on_near_randice(body: Node3D):
 			while sprite_anim.current_animation == "move":
 				await get_tree().physics_frame
 			
+			$RandiceDisappear.play()
 			sprite_anim.play_backwards(&"move")
 			
 			await sprite_anim.animation_finished
@@ -50,8 +53,9 @@ func _on_near_randice(body: Node3D):
 			await get_tree().create_timer(WAIT_TIME).timeout
 			
 			visible = true
-			update_positions()
 			
+			update_positions()
+			$RandiceAppear.play()
 			sprite_anim.play(&"move")
 			
 			await sprite_anim.animation_finished
@@ -63,6 +67,8 @@ func _on_near_randice(body: Node3D):
 
 
 func update_positions() -> void:
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.set_seed(SaveManager.get_data().save_seed)
 	
 	possible_positions = positions.duplicate(true)
 	
@@ -71,7 +77,7 @@ func update_positions() -> void:
 	while possible_positions.size() != og_size - 1:
 		possible_positions.erase(global_position)
 	
-	global_position = possible_positions.pick_random()
+	global_position = possible_positions[rng.randi_range(0, possible_positions.size() - 1)]
 	
 	if bucket != null:
 		if (

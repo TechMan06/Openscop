@@ -85,6 +85,7 @@ script = ExtResource("1_nh54y")
 room_name = "odd-room3"
 loading_preset = ExtResource("2_iduyq")
 background_music = 3
+footstep_sound = 1
 allow_front_movement = false
 camera_distance = 10.0
 limit_camera_horizontal = true
