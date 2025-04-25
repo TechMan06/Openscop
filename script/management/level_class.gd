@@ -256,8 +256,6 @@ func _ready() -> void:
 	if !focus_on_player && spawn_camera_root && !spawn_player:
 		var _camera: CameraMarker = create_camera()
 		
-		_camera.global_position = place_camera_at
-		_camera.global_position = _camera.global_position + camera_offset
 		_camera.focus_node = camera_focus
 		
 		match camera_mode:
@@ -271,6 +269,9 @@ func _ready() -> void:
 				_camera.set_mode(_camera.CameraModes.LERP)
 		
 		add_child(_camera)
+		
+		_camera.global_position = place_camera_at
+		_camera.global_position = _camera.global_position + camera_offset
 	
 	if allow_recording && GameManager.debug_settings.auto_record:
 		if (
