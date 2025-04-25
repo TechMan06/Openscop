@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo31m38sj34dw"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_dlnrd"]
+[ext_resource type="Script" path="res://script/management/tile_editor.gd" id="2_y51tc"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fycmy"]
+
+[node name="TileTest" type="Node3D"]
+script = ExtResource("1_dlnrd")
+spawn_player = false
+
+[node name="DrawCursor" type="Node3D" parent="."]
+script = ExtResource("2_y51tc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DrawCursor"]
+mesh = SubResource("ArrayMesh_fycmy")
