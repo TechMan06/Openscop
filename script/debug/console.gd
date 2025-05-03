@@ -17,10 +17,16 @@ var recording_parse: bool = false
 
 
 func _ready() -> void:
-	visible = false
+	if !OS.has_feature("movie"):
+		visible = false
+	
 	console_log("\n\n[color=red]Welcome to the [color=purple]Openscop[/color] Console/Developer Menu.\nThis special menu contains a lot of tools that can help you with debugging Openscop's source code, toggle variables without having to edit the code, trigger events, and debug the game. It can also be used as an aid during the process of making your fangame or fan video.\nI'd like to thank Izzint for first implementing this into Openscop![/color]")
 	#console_log("\n[color=yellow]For information and commands list, check the Docs![/color]")
 	parse_button.pressed.connect(_submit_command)
+	
+	if OS.has_feature("movie"):
+		console_log("\n[color=yellow]MOVIE WRITER IS ENABLED, RECORDING MOVIE...[/color]\n\n")
+		
 
 
 func _process(_delta: float) -> void:

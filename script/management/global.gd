@@ -34,6 +34,10 @@ func _ready() -> void:
 	
 	await get_tree().process_frame
 	
+	if OS.has_feature("movie"):
+		get_window().set_size(Vector2i(320, 240))
+		get_window().set_flag(Window.FLAG_RESIZE_DISABLED, true)
+	
 	if GameManager.debug_settings.custom_sheet != "":
 		GameManager.file_dialog._on_sheet_selected(GameManager.debug_settings.custom_sheet)
 	

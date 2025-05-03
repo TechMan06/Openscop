@@ -18,6 +18,12 @@ mono_crash.*.json
 # MacOS Files
 .DS_Store
 
+# Movie Ignores
+movie/*.wav
+movie/*.png
+movie/*.avi
+movie/*.mp4
+
 # TexBuild Ignores
 # Please, do not mess around with these, you can break your game.
 # If someone is found redistributing these files, they will be given an immediate ban from the discord server.
@@ -37,3 +43,4 @@ asset/3d/room/under_nmp/unmp_hallway.png
 asset/3d/room/under_nmp/unmp_hallway.png.import
 asset/3d/room/under_nmp/anna_office.png
 asset/3d/room/under_nmp/anna_office.png.import
+
