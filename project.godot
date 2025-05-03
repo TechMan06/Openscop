@@ -258,6 +258,15 @@ shift={
 common/physics_ticks_per_second=30
 common/max_physics_steps_per_frame=16
 
+[rendering]
+
+camera/depth_of_field/depth_of_field_bokeh_shape=0
+camera/depth_of_field/depth_of_field_bokeh_quality=0
+environment/ssao/quality=0
+environment/ssil/quality=0
+environment/glow/upscale_mode=0
+environment/volumetric_fog/use_filter=0
+
 [shader_globals]
 
 precision_multiplier={
