@@ -64,6 +64,8 @@ func _ready() -> void:
 	
 	if player_stats.character_id > 2 && Global.global_data.gen > 6 && Global.global_data.gen < 9:
 		_movement_speed = 6.0
+	else:
+		_movement_speed = 5.0
 	
 	if control_mode == 1:
 		var _school_hud: Marker2D = SCHOOL_OVERLAY.instantiate()

@@ -47,17 +47,17 @@ func _parse_command(input : Array) -> void:
 		"!toggle_parse":
 			recording_parse=!recording_parse
 			console_log("[color=purple]Toggled Print Recording to:[/color] [color=yellow]" + str(recording_parse).to_upper() + "[/color]")
-		"!start_rec":
+		"!start_recording":
 			if !RecordingManager.replay:
 				RecordingManager.start_recording()
 			else:
 				console_log("[color=red]Cannot Record during Replay.[/color]")
-		"!stop_rec":
+		"!stop_recording":
 			if !RecordingManager.replay:
 				RecordingManager.stop_recording()
 			else:
 				console_log("[color=red]Cannot stop Recording during Replay.[/color]")
-		"!cancel_rec":
+		"!cancel_recording":
 			if !RecordingManager.replay:
 				RecordingManager.cancel_recording()
 			else:
@@ -85,7 +85,7 @@ func _parse_command(input : Array) -> void:
 			else:
 				console_log("[color=red]Invalid Character! Choose between [/color][color=yellow]0 = Paul[/color][color=red], [/color][color=yellow]1 = Belle[/color][color=red], [/color][color=yellow]2 = Marvin[/color][color=red]![/color]")
 				console_log("[color=red]Formatting Example:[/color] [color=yellow]!set_char 0[/color]")
-		"!load_rec":
+		"!load_recording":
 			if check_valid_argument(input) != "":
 				load_recording.emit(input[1])
 			else:
@@ -143,6 +143,8 @@ func _parse_command(input : Array) -> void:
 					console_log("[color=red]Valid Modes:[/color] [color=yellow]copy[/color], [color=yellow]follow[/color], [color=yellow]pov[/color], [color=yellow]lerp[/color], [color=yellow]no_code[/color], [color=yellow]static[/color], [color=yellow]free[/color].")
 		"!crash_game":
 			Global.crash_game()
+		"!refresh_scene":
+			Global.warp_to(get_tree().get_current_scene().scene_file_path, get_tree().get_current_scene().loading_preset)
 		_:
 			console_log("[color=red]Invalid Command![/color]")
 
@@ -154,7 +156,9 @@ func check_valid_argument(input: Array) -> String:
 		return ""
 
 
-func console_log(input: String) -> void:
+func console_log(input: String, clear_console: bool = true) -> void:
 	console_output.append_text(input)
 	console_output.newline()
-	console_input.clear()
+	
+	if clear_console:
+		console_input.clear()

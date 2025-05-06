@@ -84,7 +84,7 @@ vec4 get_snapped_pos(vec4 base_pos)
 
 void vertex()
 {
-	COLOR.rgba = COLOR.rgba * COLOR.rgba * COLOR.rgba;
+	COLOR.rgba = COLOR.rgba * COLOR.rgba;
 	
 #ifdef LIT
 	if (fog_enabled && use_fog) {

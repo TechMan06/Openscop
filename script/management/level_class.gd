@@ -100,6 +100,13 @@ func _ready() -> void:
 		else:
 			level_slogan = "Recording Playback"
 	
+	if RecordingManager.recording and !RecordingManager.demo and !RecordingManager.replay:
+		RecordingManager.recording_data.warp_out.append([
+														RecordingManager.recording_timer, 
+														SaveManager.get_data().player_data.scene_info[2], 
+														SaveManager.get_data().player_data.scene_info[1]
+													])
+	
 	match hardcoded_properties:
 		HardcodedProperties.EVEN_CARE:
 			if Global.global_data.gen < 4:
@@ -210,7 +217,10 @@ func _ready() -> void:
 
 		if _player_instance.player_stats.scene_info != []:
 			for spawn in get_tree().get_nodes_in_group("spawn"):
-				if [spawn.scene_path, spawn.warp_id] == _player_instance.player_stats.scene_info:
+				if (
+						spawn.scene_path == _player_instance.player_stats.scene_info[0] and
+						spawn.warp_id == _player_instance.player_stats.scene_info[1]
+					):
 					_player_instance.global_position = spawn.global_position
 					_player_instance.direction = spawn.player_direction
 		else:
@@ -286,6 +296,21 @@ func _ready() -> void:
 	await self.tree_entered
 	
 	EventBus.room_started.emit(self)
+
+
+func _physics_process(_delta: float) -> void:
+	for ghost in Global.ghost_tracker:
+		var live_ghosts: Array[String] = []
+		
+		Global.ghost_tracker[ghost]["timer"] += 1
+
+#		if Global.ghost_tracker[ghost]["timer"] == Global.ghost_tracker[ghost]["data"].warp_out[Global.ghost_tracker[ghost]["warp_timer"]][0]:
+#			if get_tree().get_current_scene().scene_file_path == Global.ghost_tracker[ghost]["data"].warp_out[Global.ghost_tracker[ghost]["warp_timer"]][1]:
+#				for live_ghost in get_tree().get_nodes_in_group("playback_player"):
+#					live_ghosts.append(live_ghost.file)
+
+				#if live_ghosts.find(Global.ghost_tracker[ghost]["file"]) == -1:
+
 
 
 func _process(delta: float) -> void:

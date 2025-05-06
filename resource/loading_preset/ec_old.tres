@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="LoadingPreset" load_steps=3 format=3 uid="uid://bumkaxrj0h6cj"]
 
-[ext_resource type="Texture2D" uid="uid://com3trj4wu70c" path="res://asset/2d/loading_screen/evencare_load2.png" id="1_dbofu"]
+[ext_resource type="Texture2D" uid="uid://b3aru2c5b14ou" path="res://asset/2d/loading_screen/evencare_load_demo.png" id="1_apnh4"]
 [ext_resource type="Script" path="res://script/resource/loading_resource.gd" id="2_7ir22"]
 
 [resource]
 script = ExtResource("2_7ir22")
-loading_image = ExtResource("1_dbofu")
+loading_image = ExtResource("1_apnh4")
 use_timer = true
 randomize_time = true
 loading_timer = 5.0

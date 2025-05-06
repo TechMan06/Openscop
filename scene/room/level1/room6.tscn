@@ -28,7 +28,7 @@ enable_fog = false
 fog_color = Color(1, 1, 1, 1)
 fog_radius = 13.5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipm55"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twxb2"]
 render_priority = 0
 shader = ExtResource("11_lkage")
 shader_parameter/use_fog = true
@@ -42,7 +42,7 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_twxb2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipm55"]
 render_priority = 0
 shader = ExtResource("11_lkage")
 shader_parameter/use_fog = true
@@ -84,6 +84,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 scene = "res://scene/room/level1/room7.tscn"
 loading_preset = ExtResource("9_p3gpn")
 
+[node name="FurnitureMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.76837e-07, -9.53674e-07)
+mesh = ExtResource("16_ykgd0")
+skeleton = NodePath("../GenSpecific2")
+surface_material_override/0 = SubResource("ShaderMaterial_twxb2")
+
 [node name="GenSpecific" type="Node" parent="."]
 script = ExtResource("9_o7hlx")
 gens = Array[int]([1, 2])
@@ -108,11 +114,6 @@ mesh = ExtResource("13_xunsi")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("6_g3lt6")
 script = ExtResource("7_esnrp")
-
-[node name="FurnitureMesh" type="MeshInstance3D" parent="GenSpecific2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.76837e-07, -9.53674e-07)
-mesh = ExtResource("16_ykgd0")
-surface_material_override/0 = SubResource("ShaderMaterial_twxb2")
 
 [node name="Warp" parent="GenSpecific2" instance=ExtResource("8_x8bwt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)

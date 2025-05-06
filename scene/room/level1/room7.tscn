@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://kygho8mygh4t"]
+[gd_scene load_steps=23 format=3 uid="uid://kygho8mygh4t"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_k0qu1"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_lbnb3"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="15_srhmi"]
 [ext_resource type="PackedScene" uid="uid://dvte0cq377kvg" path="res://scene/object/interactive/common/bucket.tscn" id="17_vfk1n"]
 [ext_resource type="PackedScene" uid="uid://bhdahvhtas0uu" path="res://scene/object/pet/randice.tscn" id="18_1jtmi"]
+[ext_resource type="PackedScene" uid="uid://dtdn1qldur8b6" path="res://scene/object/interactive/level/playback_player.tscn" id="19_rn851"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_uwger")
@@ -153,3 +154,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3)
 [node name="Randice" parent="GenSpecific3" instance=ExtResource("18_1jtmi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
 positions = Array[Vector3]([Vector3(1, 0, -1), Vector3(8, 0, -5)])
+
+[node name="PlaybackPlayer" parent="." instance=ExtResource("19_rn851")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1.5)
+on_recording_end = 1

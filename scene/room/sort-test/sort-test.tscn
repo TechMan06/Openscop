@@ -13,6 +13,7 @@
 script = ExtResource("3_mx2sf")
 sky_color = Color(1, 1, 1, 1)
 scroll_speed = 0.25
+offset_y = 0.25
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 enable_fog = false

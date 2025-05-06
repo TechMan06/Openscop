@@ -121,6 +121,7 @@ func _on_caught_timer_timeout() -> void:
 func _update_frames() -> void:
 	if frames.x > 1:
 		$PetSprite.hframes = float(frames.x)
+	
 	if frames.y > 1:
 		$PetSprite.vframes = float(frames.y)
 	

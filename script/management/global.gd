@@ -21,7 +21,7 @@ var can_unpause: bool = false
 var current_slot: int = 0
 var current_controller: int = 0
 var draw_mode: bool = false
-
+var ghost_tracker: Dictionary
 
 
 func _ready() -> void:

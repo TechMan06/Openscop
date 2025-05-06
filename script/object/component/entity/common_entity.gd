@@ -22,9 +22,6 @@ func _physics_process(delta: float) -> void:
 	elif entity._h > 0:
 		entity.direction = 1
 	
-	if entity.player_stats.entity_y >= 0.5:
-		entity.player_stats.entity_y -= 0.5
-	
 	if entity.player_stats != null:
 		entity_sprite.get_material_override().set_shader_parameter(
 												"modulate_color", 
@@ -34,7 +31,10 @@ func _physics_process(delta: float) -> void:
 														entity.player_stats.brightness
 													)
 												)
-	
+		
+		if entity.player_stats.entity_y >= 0.5:
+			entity.player_stats.entity_y -= 0.5
+		
 		entity_sprite.position.y = entity.entity_min + entity.player_stats.entity_y
 	
 	if entity.control_mode == 0:

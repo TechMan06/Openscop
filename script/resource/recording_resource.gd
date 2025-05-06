@@ -10,3 +10,4 @@ class_name RecordingData
 @export var p1_data: Array[Array]
 @export var p2_data: Array[Array]
 @export var draw_mode: Array[Array]
+@export var warp_out: Array[Array]

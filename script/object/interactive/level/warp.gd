@@ -77,10 +77,11 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 			if body.velocity.x != 0.0 || body.velocity.z != 0.0:
 				if diagonal_entrance:
 					if body.direction == directions.x || body.direction == directions.y:
+						body.player_stats.scene_info = [get_tree().get_current_scene().scene_file_path, warp_id, scene]
 						Global.warp_to(scene, loading_preset, disable_shadow_monster_man)
 				else:
 					if body.direction == warp_direction || all_directions || body.control_mode == 1:
-						body.player_stats.scene_info = [get_tree().get_current_scene().scene_file_path, warp_id]
+						body.player_stats.scene_info = [get_tree().get_current_scene().scene_file_path, warp_id, scene]
 						Global.warp_to(scene, loading_preset, disable_shadow_monster_man)
 			
 			if y_offset != 0.0:
@@ -90,10 +91,20 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 		if body.velocity.x != 0.0 || body.velocity.z != 0.0:
 			if diagonal_entrance:
 				if body.direction == directions.x || body.direction == directions.y:
-					body.queue_free()
+					match body.on_warp:
+						0:
+							body.warp()
+							
+						1:
+							body.queue_free()
 			else:
 				if body.direction == warp_direction || all_directions || body.control_mode == 1:
-					body.queue_free()
+					match body.on_warp:
+						0:
+							body.warp()
+						
+						1:
+							body.queue_free()
 
 
 func _on_nmp_unlock() -> void:

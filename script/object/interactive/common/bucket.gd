@@ -26,6 +26,7 @@ var direction_vector: Vector3
 
 func _ready() -> void:
 	await self.tree_entered
+	
 	SaveManager.get_data().has_bucket = false
 
 
@@ -38,28 +39,24 @@ func _physics_process(delta: float) -> void:
 						self.global_position.x > player.global_position.x and
 						player.velocity.x > 0.0
 					):
-					Console.console_log("[color=yellow]BUCKET MOVING X+[/color]")
 					move("x", delta)
 				elif (
 						player.global_position.x - self.global_position.x <= (BUCKET_HITBOX) and
 						self.global_position.x < player.global_position.x and
 						player.velocity.x < 0.0
 					):
-					Console.console_log("[color=yellow]BUCKET MOVING X-[/color]")
 					move("x", delta)
 				elif (
 						self.global_position.z - player.global_position.z <= BUCKET_HITBOX and
 						self.global_position.z > player.global_position.z and
 						player.velocity.z > 0.0
 					):
-					Console.console_log("[color=yellow]BUCKET MOVING Z+[/color]")
 					move("z", delta)
 				elif (
 						player.global_position.z - self.global_position.z <= (BUCKET_HITBOX - 0.1) and
 						self.global_position.z < player.global_position.z and
 						player.velocity.z < 0.0
 					):
-					Console.console_log("[color=yellow]BUCKET MOVING Z-[/color]")
 					move("z", delta)
 				else:
 					stop_bucket(delta)
@@ -97,6 +94,7 @@ func move(axis: String, delta: float):
 	match axis:
 		"x":
 			self.velocity.z = lerp(self.velocity.z, 0.0, ACCELERATION * delta)
+
 			self.velocity.x = player.velocity.x * direction_vector.x
 		"z":
 			self.velocity.x = lerp(self.velocity.x, 0.0, ACCELERATION * delta)
@@ -108,13 +106,17 @@ func is_near_bucket() -> bool:
 			self.global_position.x - player.global_position.x <= (BUCKET_HITBOX) and
 			player.global_position.x - self.global_position.x <= (BUCKET_HITBOX)
 		):
+			player.pushing_bucket = true
 			return true
+			
 	if (
 			self.global_position.z - player.global_position.z <= (BUCKET_HITBOX) and
 			player.global_position.z - self.global_position.z <= (BUCKET_HITBOX)
 	):
+			player.pushing_bucket = true
 			return true
-
+	
+	player.pushing_bucket = false
 	return false
 
 

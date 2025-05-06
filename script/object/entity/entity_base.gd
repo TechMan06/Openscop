@@ -19,10 +19,27 @@ var target_velocity: Vector2 = Vector2.ZERO
 var _v: float = 0.0
 var _h: float = 0.0
 var _angle: float = 0.0
-var _movement_speed: float = 5.0
+var _movement_speed: float = 0.0
 var _treadmill: bool = false
 var odd_care: bool = false
+var pushing_bucket: bool = false:
+	set(value):
+		pushing_bucket = value
 
+		if SaveManager.get_data().player_data.character_id > 2 && Global.global_data.gen > 6 && Global.global_data.gen < 9:
+			if !value:
+				if _movement_speed != 6.0:
+					_movement_speed = 6.0
+			else:
+				if _movement_speed != 5.0:
+					_movement_speed = 5.0
+		else:
+			if !value:
+				if _movement_speed != 5.0:
+					_movement_speed = 5.0
+			else:
+				if _movement_speed != 4.0:
+					_movement_speed = 4.0
 
 #ANIMATION PROPERTIES
 var direction: int = 0

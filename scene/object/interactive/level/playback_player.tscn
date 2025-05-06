@@ -27,7 +27,7 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[node name="PlaybackPlayer" type="CharacterBody3D"]
+[node name="PlaybackPlayer" type="CharacterBody3D" groups=["playback_player"]]
 process_mode = 3
 wall_min_slide_angle = 0.0
 floor_block_on_wall = false
