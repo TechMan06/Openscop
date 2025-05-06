@@ -25,7 +25,7 @@ shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = true
-shader_parameter/depth_offset = Vector3(0, -4, 0)
+shader_parameter/depth_offset = Vector3(0, -4, 0.3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_afmgf"]
 render_priority = 0
@@ -40,7 +40,7 @@ shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = true
-shader_parameter/depth_offset = Vector3(0, -4, 0)
+shader_parameter/depth_offset = Vector3(0, -4, 0.3)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gjh18"]
 data = PackedVector3Array(0.9173, 1, -1.2674, -0.9173, 1, -1.2674, 0.9173, 0, -1.2674, 0.9173, 0, -1.2674, -0.9173, 1, -1.2674, -0.9173, 0, -1.2674, -0.9173, 0, 1.2674, -0.9173, 0, -1.2674, -0.9173, 1, 1.2674, -0.9173, 1, 1.2674, -0.9173, 0, -1.2674, -0.9173, 1, -1.2674, 0.9173, 0, -1.2674, 0.9173, 0, 1.2674, 0.9173, 1, -1.2674, 0.9173, 1, -1.2674, 0.9173, 0, 1.2674, 0.9173, 1, 1.2674, 0.9173, 1, 1.2674, 0.9173, 0, 1.2674, 0.8, 1, 1.2674, 0.8, 1, 1.2674, 0.9173, 0, 1.2674, 0.8, 0, 1.2674, -0.9173, 0, 1.2674, -0.9173, 1, 1.2674, -0.8173, 0, 1.2674, -0.8173, 0, 1.2674, -0.9173, 1, 1.2674, -0.8173, 1, 1.2674, -0.8173, 0, 1.2674, -0.8173, 1, 1.2674, -0.8173, 0, 0.25, -0.8173, 0, 0.25, -0.8173, 1, 1.2674, -0.8173, 1, 0.25, 0.8, 1, 1.2674, 0.8, 0, 1.2674, 0.8, 1, 0.25, 0.8, 1, 0.25, 0.8, 0, 1.2674, 0.8, 0, 0.25)
@@ -84,7 +84,9 @@ shape = SubResource("ConcavePolygonShape3D_fhm28")
 [node name="Slope" parent="TrapdoorMesh" instance=ExtResource("8_d1edf")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+y_offset = 0.5
 slope_length = 2.0
+slope_width = 0.9
 slope_direction = 3
 change_brightness = true
 
@@ -108,6 +110,7 @@ script = ExtResource("11_qewoq")
 [node name="HeightBed" parent="TrapdoorMesh" instance=ExtResource("12_8pck4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.88)
 area_size = Vector2(1, 0.75)
+height = 0.125
 
 [node name="SoundChanger" parent="TrapdoorMesh" instance=ExtResource("12_l6l8l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
