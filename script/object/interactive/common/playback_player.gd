@@ -183,6 +183,7 @@ func _physics_process(_delta: float) -> void:
 				Global.ghost_tracker[file]["timer"] = 0
 				replay = true
 			else:
+				Global.ghost_tracker.erase(file)
 				self.process_mode = Node.PROCESS_MODE_DISABLED
 		
 		else:
@@ -247,20 +248,21 @@ func _physics_process(_delta: float) -> void:
 					EventBus.nifty_set_pixels.emit(recording_data.draw_mode[recording_reader_draw][1])
 					recording_reader_draw += 1
 		
-		if Global.ghost_tracker[file]["warp_timer"] <= recording_data["warp_out"].size() -1:
-			if recording_timer == recording_data.warp_out[Global.ghost_tracker[file]["warp_timer"]][0]:
-				if recording_data.warp_out[
-												Global.ghost_tracker[file]["warp_timer"]
-											][1] == get_tree().get_current_scene().scene_file_path:
-					for spawn in get_tree().get_nodes_in_group("spawn"):
-						if spawn.warp_id == recording_data.warp_out[Global.ghost_tracker[file]["warp_timer"]][2]:
-							global_position = spawn.global_position
-							unfreeze()
-				else:
-					if Global.ghost_tracker[file]["warp_timer"] > 0:
-						freeze()
-					
-				Global.ghost_tracker[file]["warp_timer"] += 1
+		if Global.ghost_tracker[file].has("warp_timer"):
+			if Global.ghost_tracker[file]["warp_timer"] <= recording_data["warp_out"].size() -1:
+				if recording_timer == recording_data.warp_out[Global.ghost_tracker[file]["warp_timer"]][0]:
+					if recording_data.warp_out[
+													Global.ghost_tracker[file]["warp_timer"]
+												][1] == get_tree().get_current_scene().scene_file_path:
+						for spawn in get_tree().get_nodes_in_group("spawn"):
+							if spawn.warp_id == recording_data.warp_out[Global.ghost_tracker[file]["warp_timer"]][2]:
+								global_position = spawn.global_position
+								unfreeze()
+					else:
+						if Global.ghost_tracker[file]["warp_timer"] > 0:
+							freeze()
+						
+					Global.ghost_tracker[file]["warp_timer"] += 1
 
 
 func init() -> void:

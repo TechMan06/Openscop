@@ -7,6 +7,8 @@ class_name CameraZone
 @export var anim_speed_start: Vector3 = Vector3(1.0, 1.0, 1.0)
 @export var target_pos_end: Vector3 = Vector3.ZERO
 @export var anim_speed_end: Vector3 = Vector3(1.0, 1.0, 1.0)
+@export var reset_camera_on_end: bool = false
+@export var undo_on_reentrance: bool = false
 @export_category("Parallel Animations")
 @export var move_parallel_start: bool = false
 @export var move_parallel_end: bool = false
@@ -15,7 +17,8 @@ class_name CameraZone
 @export var move_y: bool = true
 @export var move_z: bool = true
 
-
+var triggered: bool = false
+var enabled: bool = true
 var _original_pos: Vector3
 var _animation_flags = [false, false, false]
 var camera_marker: CameraMarker
@@ -49,7 +52,7 @@ func get_anim_speed(target_pos: Vector3) -> float:
 
 func _on_body_entered(body: Node3D) -> void:
 	if !Engine.is_editor_hint():
-		if body is Player && camera_marker.camera_mode != 0:
+		if body is Player && camera_marker.camera_mode != 0 and enabled:
 			_original_pos = camera_marker.global_position
 			camera_focus.global_position = _original_pos
 			camera_marker.camera_mode = camera_marker.CameraModes.COPY
@@ -91,7 +94,6 @@ func _on_body_entered(body: Node3D) -> void:
 				else:
 					_animation_flags[1] = true
 				
-				
 				if _original_pos.z != target_pos_start.z && move_z:
 					var _z_animation: Tween = create_tween()
 
@@ -107,6 +109,18 @@ func _on_body_entered(body: Node3D) -> void:
 					_animation_flags[2] = true
 				else:
 					_animation_flags[2] = true
+				
+				var times_array: Array[float] = [
+													anim_speed_start.x * get_anim_speed(target_pos_start),
+													anim_speed_start.y * get_anim_speed(target_pos_start),
+													anim_speed_start.z * get_anim_speed(target_pos_start)
+												]
+				
+				if reset_camera_on_end:
+					await get_tree().create_timer(times_array.max()).timeout
+				
+					reset_camera(body)
+			
 			else:
 				var _move_parallel: Tween = create_tween()
 				
@@ -120,11 +134,14 @@ func _on_body_entered(body: Node3D) -> void:
 				await _move_parallel.finished
 				
 				_animation_flags = [true, true, true]
+				
+				if reset_camera_on_end:
+					reset_camera(body)
 
 
 func _on_body_exited(body: Node3D) -> void:
 	if !Engine.is_editor_hint():
-		if body is Player:
+		if body is Player and not get_parent() is ZoneSwitcher:
 			
 			while _animation_flags != [true, true, true]:
 				await get_tree().create_timer(1.0, false).timeout

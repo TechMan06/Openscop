@@ -77,13 +77,7 @@ func _physics_process(delta: float) -> void:
 			
 			entity.velocity.z = 0.0
 		
-		if entity.player_stats != null && entity.player_stats.character_id == 2:
-			entity.target_velocity.x = lerp(
-										entity.target_velocity.x, 
-										normalized_h_v.x * -1.0 * entity._movement_speed, 
-										delta * entity._ACCELERATION
-									)
-		else:
+		if entity.player_stats != null:
 			entity.target_velocity.x = lerp(
 										entity.target_velocity.x, 
 										normalized_h_v.x * entity._movement_speed, 

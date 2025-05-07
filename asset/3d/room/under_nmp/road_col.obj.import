@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cibgnqvppe0p"
+path="res://.godot/imported/road_col.obj-2f4537d564c77a2363ba1d2555b838ae.mesh"
+
+[deps]
+
+files=["res://.godot/imported/road_col.obj-2f4537d564c77a2363ba1d2555b838ae.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/road_col.obj"
+dest_files=["res://.godot/imported/road_col.obj-2f4537d564c77a2363ba1d2555b838ae.mesh", "res://.godot/imported/road_col.obj-2f4537d564c77a2363ba1d2555b838ae.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c4bikasmn2es8"
+path="res://.godot/imported/hallway2_col.obj-158a17d489783950f6234b2824e5d2a5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hallway2_col.obj-158a17d489783950f6234b2824e5d2a5.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/hallway2_col.obj"
+dest_files=["res://.godot/imported/hallway2_col.obj-158a17d489783950f6234b2824e5d2a5.mesh", "res://.godot/imported/hallway2_col.obj-158a17d489783950f6234b2824e5d2a5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

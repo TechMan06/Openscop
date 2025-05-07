@@ -62,7 +62,11 @@ func _ready() -> void:
 	
 	update_sheet()
 	
-	if player_stats.character_id > 2 && Global.global_data.gen > 6 && Global.global_data.gen < 9:
+	if (
+			player_stats.character_id == 2 and 
+			Global.global_data.gen > 6 and 
+			Global.global_data.gen < 9
+		):
 		_movement_speed = 6.0
 	else:
 		_movement_speed = 5.0
@@ -163,16 +167,27 @@ func _handle_input() -> void:
 					int(!player_stats.retrace_steps) - int(player_stats.retrace_steps)
 					)
 			)
-			
-		_h = (
-				(
-					Input.get_action_strength("pressed_right") 
-					- Input.get_action_strength("pressed_left")
-				)
-				* (
-					int(!player_stats.retrace_steps) - int(player_stats.retrace_steps)
+		
+		if player_stats.character_id == 2:
+			_h = (
+					(
+						Input.get_action_strength("pressed_left") 
+						- Input.get_action_strength("pressed_right")
 					)
-			)
+					* (
+						int(!player_stats.retrace_steps) - int(player_stats.retrace_steps)
+						) 
+				)
+		else:
+			_h = (
+					(
+						Input.get_action_strength("pressed_right") 
+						- Input.get_action_strength("pressed_left")
+					)
+					* (
+						int(!player_stats.retrace_steps) - int(player_stats.retrace_steps)
+						) 
+				)
 		
 	if control_device != 0 && player_stats.p2talk_enabled && control_mode == 0:
 		if Input.is_action_just_pressed("pressed_action"):

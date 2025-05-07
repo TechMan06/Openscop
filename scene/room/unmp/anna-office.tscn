@@ -137,10 +137,21 @@ warp_direction = 1
 scene = "res://scene/room/unmp/hallway1.tscn"
 loading_preset = ExtResource("18_pwi4q")
 
+[node name="Warp2" parent="." instance=ExtResource("17_ysbwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
+warp_direction = 2
+scene = "res://scene/room/unmp/hallway2.tscn"
+loading_preset = ExtResource("18_pwi4q")
+
 [node name="SpawnClass" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 script = ExtResource("19_u5aud")
 scene_path = "res://scene/room/unmp/hallway1.tscn"
+
+[node name="SpawnClass2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
+script = ExtResource("19_u5aud")
+scene_path = "res://scene/room/unmp/hallway2.tscn"
 
 [node name="PictureTrigger" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3.5)

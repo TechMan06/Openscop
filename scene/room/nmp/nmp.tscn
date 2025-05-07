@@ -73,6 +73,9 @@ data = PackedVector3Array(-1.5, 1, -0.5, -1.5, 0, -0.5, -1.5, 1, -3.5, -1.5, 1, 
 
 [node name="Plane" type="Node3D"]
 script = ExtResource("1_xubgh")
+level_slogan = "Have you found anything weird lately?
+
+There is much to find in this place."
 footstep_sound = 1
 environment_settings = ExtResource("2_yoyrk")
 

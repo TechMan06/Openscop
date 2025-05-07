@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cje18un5bjg20"
+path="res://.godot/imported/road.obj-bf4c2e8e05a27cfd9432a7ca2fb84c4f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/road.obj-bf4c2e8e05a27cfd9432a7ca2fb84c4f.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/road.obj"
+dest_files=["res://.godot/imported/road.obj-bf4c2e8e05a27cfd9432a7ca2fb84c4f.mesh", "res://.godot/imported/road.obj-bf4c2e8e05a27cfd9432a7ca2fb84c4f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

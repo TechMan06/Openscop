@@ -21,6 +21,7 @@ signal camera_spawned(camera: CameraMarker)
 signal camera_earthquake(value: bool)
 signal camera_shake_amount(value: float)
 signal camera_zone_spawned(camera_zone: CameraZone)
+signal camera_placer_spawned(camera_tweener: CameraPlacer)
 signal camera_shake_speed(value: float)
 
 signal unlock_nmp

@@ -304,14 +304,6 @@ func _physics_process(_delta: float) -> void:
 		
 		Global.ghost_tracker[ghost]["timer"] += 1
 
-#		if Global.ghost_tracker[ghost]["timer"] == Global.ghost_tracker[ghost]["data"].warp_out[Global.ghost_tracker[ghost]["warp_timer"]][0]:
-#			if get_tree().get_current_scene().scene_file_path == Global.ghost_tracker[ghost]["data"].warp_out[Global.ghost_tracker[ghost]["warp_timer"]][1]:
-#				for live_ghost in get_tree().get_nodes_in_group("playback_player"):
-#					live_ghosts.append(live_ghost.file)
-
-				#if live_ghosts.find(Global.ghost_tracker[ghost]["file"]) == -1:
-
-
 
 func _process(delta: float) -> void:
 	if !Global.is_game_paused:

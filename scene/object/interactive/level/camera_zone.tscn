@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="4_62bld"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j21mq"]
+resource_local_to_scene = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_vm5i8"]
 flip_faces = true
@@ -50,6 +51,8 @@ shader_parameter/depth_offset = null
 [node name="ZoneArea" type="Area3D"]
 process_mode = 1
 script = ExtResource("1_7aoeq")
+reset_camera_on_end = null
+undo_on_reentrance = null
 
 [node name="ZoneCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_j21mq")
