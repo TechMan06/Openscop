@@ -47,12 +47,14 @@ texture = ExtResource("4_q7apa")
 expand_mode = 1
 
 [node name="CursorOrigin" type="Marker2D" parent="Keyboard"]
-position = Vector2(8, 34)
+position = Vector2(0, 26)
 
 [node name="Cursor" type="ColorRect" parent="Keyboard/CursorOrigin"]
 unique_name_in_owner = true
-offset_right = 16.0
-offset_bottom = 19.0
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 24.0
+offset_bottom = 28.0
 
 [node name="KeyboardLetters" type="Marker2D" parent="Keyboard"]
 unique_name_in_owner = true

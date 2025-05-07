@@ -9,54 +9,7 @@ const APPEAR_ANIM_SPEED: float = 0.5
 @export var file_select: bool = false
 @export var attach_to: Node
 
-var cursor_pos: Vector2i:
-	set(_value):
-		cursor_pos = _value
-		
-		create_tween().tween_property(
-										cursor, 
-										"position", 
-										Vector2(
-													cursor_pos.x * cursor.size.x + 
-													(offsets.x * int(cursor_pos.x > 0)),
-													cursor_pos.y * cursor.size.y + 
-													(offsets.y * int(cursor_pos.y > 0))
-												), 
-										ANIM_SPEED
-									).set_trans(Tween.TRANS_SINE)
-	
-		for letter in keyboard_letters.get_children():
-			if letter.get_index() == ((cursor_pos.y * 13) + cursor_pos.x):
-				create_tween().tween_method(
-											func (color:Color) -> void:
-												letter.add_theme_color_override("font_color", color), 
-											letter.get_theme_color("font_color"), 
-											(Color.WHITE if background == 3 else Color.BLACK), 
-											ANIM_SPEED
-										)
-			else:
-				create_tween().tween_method(
-											func (color:Color) -> void:
-												letter.add_theme_color_override("font_color", color), 
-											letter.get_theme_color("font_color"), 
-											(Color.BLACK if background == 3 else Color.WHITE), 
-											ANIM_SPEED
-										)
-		
-		if cursor_pos.y == 5 && cursor_pos.x == 11:
-			create_tween().tween_property(
-											keyboard_arrow, 
-											"modulate", 
-											(Color.WHITE if background == 3 else Color.BLACK), 
-											ANIM_SPEED
-										)
-		else:
-			create_tween().tween_property(
-											keyboard_arrow, 
-											"modulate", 
-											(Color.BLACK if background == 3 else Color.WHITE), 
-											ANIM_SPEED
-										)
+var cursor_pos: Vector2i = Vector2i(0, 0)
 		
 var offsets: Vector2i = Vector2i(1,2)
 var loaded: bool = false
@@ -223,20 +176,20 @@ func _ready() -> void:
 		get_tree().paused = true
 		
 		create_tween().tween_property(
-										keyboard, 
-										"position:y", 
-										38.0, 
-										APPEAR_ANIM_SPEED
-									).set_trans(Tween.TRANS_SINE)
+											keyboard, 
+											"position:y", 
+											38.0, 
+											APPEAR_ANIM_SPEED
+										).set_trans(Tween.TRANS_SINE)
 	else:
 		await get_tree().create_timer(0.75, true).timeout
 		whoosh_sound.play() 
 		create_tween().tween_property(
-										keyboard, 
-										"position:y", 
-										23.0, 
-										APPEAR_ANIM_SPEED
-									).set_trans(Tween.TRANS_SINE)
+											keyboard, 
+											"position:y", 
+											23.0, 
+											APPEAR_ANIM_SPEED
+										).set_trans(Tween.TRANS_SINE)
 	
 	if ask:
 		input_field.text="Ask: ?"
@@ -244,32 +197,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	var new_cursor_pos = cursor_pos
 	
-	if cursor_pos.x > 12:
-		if cursor_pos.y != 5:
-			cursor_pos.x = 0
-			cursor_pos.y += 1
-		else:
-			cursor_pos.y = 0
-			cursor_pos.x = 0
-		
-	if cursor_pos.x < 0:
-		if cursor_pos.y != 0:
-			cursor_pos.x = 12
-			cursor_pos.y -= 1
-		else:
-			cursor_pos.y = 5
-			cursor_pos.x = 12
-			
-	if cursor_pos.y < 0:
-		cursor_pos.y = 5
-	
-	if cursor_pos.y > 5:
-		cursor_pos.y = 0
-	
-	#if cursor_pos.x<14 && cursor_pos.x>-1:
-		
-
 	if !disabled:
 		if file_select:
 			if (
@@ -281,30 +210,30 @@ func _process(_delta: float) -> void:
 				select_sound.play()
 		
 		if Input.is_action_just_pressed("pressed_up"):
-			cursor_pos.y -= 1
+			new_cursor_pos.y -= 1
 		
 		if Input.is_action_just_pressed("pressed_down"):
-			cursor_pos.y += 1
+			new_cursor_pos.y += 1
 
 		if Input.is_action_just_pressed("pressed_left"):
-			cursor_pos.x -= 1
+			new_cursor_pos.x -= 1
 
 		if Input.is_action_just_pressed("pressed_right"):
-			cursor_pos.x += 1
+			new_cursor_pos.x += 1
 
-		if Input.is_action_just_pressed("pressed_action") && cursor_pos.x < 13 && cursor_pos.y < 6:
-			if cursor_pos != Vector2i(11, 5):
+		if Input.is_action_just_pressed("pressed_action") && new_cursor_pos.x < 13 && new_cursor_pos.y < 6:
+			if new_cursor_pos != Vector2i(11, 5):
 				if input_field.text.length() <= 27:
 					if ask:
 						input_field.text = input_field.text.left(-1)
-						input_field.text += characters[cursor_pos.y][cursor_pos.x][0]
+						input_field.text += characters[new_cursor_pos.y][new_cursor_pos.x][0]
 						input_field.text += "?"
 					else:
 						if !file_select:
-							input_field.text += characters[cursor_pos.y][cursor_pos.x][0]
+							input_field.text += characters[new_cursor_pos.y][new_cursor_pos.x][0]
 						else:
 							if input_field.text.length() < 18:
-								input_field.text += characters[cursor_pos.y][cursor_pos.x][0]
+								input_field.text += characters[new_cursor_pos.y][new_cursor_pos.x][0]
 			else:
 				if ask:
 					if input_field.text.length() > 6:
@@ -378,6 +307,82 @@ func _process(_delta: float) -> void:
 		EventBus.finished_typing.emit("", attach_to)
 		
 		queue_free()
+	
+	
+	if new_cursor_pos.x > 12:
+		if new_cursor_pos.y != 5:
+			new_cursor_pos.x = 0
+			new_cursor_pos.y += 1
+		else:
+			new_cursor_pos.y = 0
+			new_cursor_pos.x = 0
+		cursor.position = Vector2i(0, 8 + (new_cursor_pos.y * 19) + new_cursor_pos.y)
+		
+	if new_cursor_pos.x < 0:
+		if new_cursor_pos.y != 0:
+			new_cursor_pos.x = 12
+			new_cursor_pos.y -= 1
+		else:
+			new_cursor_pos.y = 5
+			new_cursor_pos.x = 12
+		cursor.position = Vector2i(210, 8 + (new_cursor_pos.y * 19) + new_cursor_pos.y)
+			
+	if new_cursor_pos.y < 0:
+		cursor.position = Vector2i(cursor.position.x, 117)
+		new_cursor_pos.y = 5
+	
+	if new_cursor_pos.y > 5:
+		cursor.position = Vector2i(cursor.position.x, 0)
+		new_cursor_pos.y = 0
+	
+	if cursor_pos != new_cursor_pos:
+		cursor_pos = new_cursor_pos
+		
+		#9 + (self.Position.X * 15) + (self.OFFSET.X * self.Position.X),
+		#8 + (self.Position.Y * 19) + (self.OFFSET.Y * self.Position.Y)
+				
+		create_tween().tween_property(
+										cursor, 
+										"position", 
+										Vector2(
+													9 + (cursor_pos.x * 15) + cursor_pos.x,
+													8 + (cursor_pos.y * 19) + cursor_pos.y
+												), 
+										ANIM_SPEED
+									).set_trans(Tween.TRANS_SINE)
+	
+		for letter in keyboard_letters.get_children():
+			if letter.get_index() == ((cursor_pos.y * 13) + cursor_pos.x):
+				create_tween().tween_method(
+											func (color:Color) -> void:
+												letter.add_theme_color_override("font_color", color), 
+											letter.get_theme_color("font_color"), 
+											(Color.WHITE if background == 3 else Color.BLACK), 
+											ANIM_SPEED
+										)
+			else:
+				create_tween().tween_method(
+											func (color:Color) -> void:
+												letter.add_theme_color_override("font_color", color), 
+											letter.get_theme_color("font_color"), 
+											(Color.BLACK if background == 3 else Color.WHITE), 
+											ANIM_SPEED
+										)
+		
+		if cursor_pos.y == 5 && cursor_pos.x == 11:
+			create_tween().tween_property(
+											keyboard_arrow, 
+											"modulate", 
+											(Color.WHITE if background == 3 else Color.BLACK), 
+											ANIM_SPEED
+										)
+		else:
+			create_tween().tween_property(
+											keyboard_arrow, 
+											"modulate", 
+											(Color.BLACK if background == 3 else Color.WHITE), 
+											ANIM_SPEED
+										)
 
 
 func _change_background(color_id: int) -> void:
