@@ -30,7 +30,6 @@ var demos: Array[RecordingData]
 @onready var road_mesh: MeshInstance3D = %RoadMesh
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var recording_list: PackedStringArray = DirAccess.get_files_at("user://recordings")
 	var allowed_recordings: RecordingData
@@ -64,7 +63,6 @@ func _ready() -> void:
 	EventBus.finished_typing.connect(_on_file_created)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	timer += 1
 	logo_timer += delta
@@ -95,26 +93,42 @@ func _process(delta: float) -> void:
 		
 		await card_timer.timeout
 		
-		create_tween().tween_property(title, "position:x", -240.0, 1.0).set_trans(Tween.TRANS_BACK)
-		create_tween().tween_property($LogoOrigin, "position:x", 3.5, 1.0).set_trans(Tween.TRANS_BACK)
+		var logo_origin_pos: float = 3.921
+		var logo_scale: float = logo_origin_pos - 3.5
 		
-		var _scale_logo: Tween = create_tween().set_parallel()
+		var logo_tween: Tween = create_tween().set_parallel()
+		var logo_pos: int = 26
+		var logo_scale_1: float = logo_scale * (logo_pos / 320.0)
 		
-		_scale_logo.tween_property(logo_mesh, "scale:y", 0.75, 0.5).set_trans(Tween.TRANS_SINE)
-		_scale_logo.tween_property(logo_mesh,"scale:x",1.25,0.5).set_trans(Tween.TRANS_SINE)
+		logo_tween.tween_property(title, "position:x", logo_pos, .25).set_trans(Tween.TRANS_SINE)
+		logo_tween.tween_property(logo_mesh, "scale:x", 1.5, .25).set_trans(Tween.TRANS_SINE)
+		logo_tween.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale_1, .25).set_trans(Tween.TRANS_SINE)
+		logo_tween.tween_property(file_select, "position:x", 320 + logo_pos, .25).set_trans(Tween.TRANS_SINE)
 		
-		await _scale_logo.finished
-		
-		var _scale_logo_2: Tween = create_tween().set_parallel()
-		
-		_scale_logo_2.tween_property(logo_mesh, "scale:y", 1.5, 0.25).set_trans(Tween.TRANS_SINE)
-		_scale_logo_2.tween_property(logo_mesh, "scale:x", 0.25, 0.25).set_trans(Tween.TRANS_SINE)
+		await logo_tween.finished
 		
 		$Whistle.play()
 		
-		create_tween().tween_property(file_select, "position:x", 0.0, 1.0).set_trans(Tween.TRANS_BACK)
+		var logo_tween_2: Tween = create_tween().set_parallel()
+		var logo_pos_2: int = -345
+		var logo_scale_2: float = logo_scale * (logo_pos_2 / 320.0)
 		
-		await _scale_logo_2.finished
+		create_tween().tween_property(logo_mesh, "scale:x", 0, .3).set_trans(Tween.TRANS_SINE)
+		logo_tween_2.tween_property(title, "position:x", logo_pos_2, .5).set_trans(Tween.TRANS_SINE)
+		logo_tween_2.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale_2, .5).set_trans(Tween.TRANS_SINE)
+		logo_tween_2.tween_property(file_select, "position:x", 320 + logo_pos_2, .5).set_trans(Tween.TRANS_SINE)
+		
+		await logo_tween_2.finished
+		
+		var logo_tween_3: Tween = create_tween().set_parallel()
+		var logo_pos_3: int = -320
+		var logo_scale_3: float = logo_scale * (logo_pos_3 / 320.0)
+		
+		logo_tween_3.tween_property(title, "position:x", logo_pos_3, .25).set_trans(Tween.TRANS_SINE)
+		logo_tween_3.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale_3, .25).set_trans(Tween.TRANS_SINE)
+		logo_tween_3.tween_property(file_select, "position:x", 320 + logo_pos_3, .25).set_trans(Tween.TRANS_SINE)
+		
+		await logo_tween_3.finished
 		
 		title_stage = 1
 	
@@ -158,28 +172,41 @@ func _process(delta: float) -> void:
 						create_tween().tween_property(file, "position:x", 334., 0.45).set_trans(Tween.TRANS_SINE)
 				
 		if Input.is_action_just_pressed("pressed_triangle"):
-			create_tween().tween_property(title, "position:x", 0., 1.).set_trans(Tween.TRANS_BACK)
-			create_tween().tween_property(start_button, "position:x", 0., 1.).set_trans(Tween.TRANS_BACK)
-			
-			var _move_files: Tween = create_tween()
-			
-			_move_files.tween_property(file_select, "position:x", 320., 1.).set_trans(Tween.TRANS_BACK)
-			
 			start_button.frame_coords.y = 0
-			
 			create_tween().tween_property(logo_origin, "position:x", 3.921, 1.).set_trans(Tween.TRANS_BACK)
 			
-			var _scale_logo: Tween = create_tween().set_parallel()
-			
-			_scale_logo.tween_property(logo_mesh, "scale:x", 1.0, 0.5).set_trans(Tween.TRANS_BACK)
-			
-			await _scale_logo.finished
-			
-			var _scale_logo_2: Tween = create_tween().set_parallel()
-			
-			_scale_logo_2.tween_property(logo_mesh, "scale:y", 1., 1.).set_trans(Tween.TRANS_BACK)
-			
-			await _scale_logo_2.finished
+			var logo_origin_pos: float = 3.921
+			var logo_scale: float = logo_origin_pos - 3.5
+		
+			var logo_tween: Tween = create_tween().set_parallel()
+			var logo_pos: int = -345
+			var logo_scale_1: float = logo_scale * (logo_pos / 320.0)
+		
+			logo_tween.tween_property(title, "position:x", logo_pos, .25).set_trans(Tween.TRANS_SINE)
+			logo_tween.tween_property(logo_mesh, "scale:x", 1.5, .25).set_trans(Tween.TRANS_SINE)
+			logo_tween.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale_1, .25).set_trans(Tween.TRANS_SINE)
+			logo_tween.tween_property(file_select, "position:x", 320 + logo_pos, .25).set_trans(Tween.TRANS_SINE)
+		
+			await logo_tween.finished
+		
+			var logo_tween_2: Tween = create_tween().set_parallel()
+			var logo_pos_2: int = 26
+			var logo_scale_2: float = logo_scale * (logo_pos_2 / 320.0)
+		
+			logo_tween_2.tween_property(logo_mesh, "scale:x", 1, .5).set_trans(Tween.TRANS_SINE)
+			logo_tween_2.tween_property(title, "position:x", logo_pos_2, .5).set_trans(Tween.TRANS_SINE)
+			logo_tween_2.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale_2, .5).set_trans(Tween.TRANS_SINE)
+			logo_tween_2.tween_property(file_select, "position:x", 320 + logo_pos_2, .5).set_trans(Tween.TRANS_SINE)
+		
+			await logo_tween_2.finished
+		
+			var logo_tween_3: Tween = create_tween().set_parallel()
+			var logo_pos_3: int = 0
+			var logo_scale_3: float = logo_scale * (logo_pos_3 / 320.0)
+		
+			logo_tween_3.tween_property(title, "position:x", logo_pos_3, .25).set_trans(Tween.TRANS_SINE)
+			logo_tween_3.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale, .25).set_trans(Tween.TRANS_SINE)
+			logo_tween_3.tween_property(file_select, "position:x", 320 + logo_pos_3, .25).set_trans(Tween.TRANS_SINE)
 			
 			selected_file = 0
 			

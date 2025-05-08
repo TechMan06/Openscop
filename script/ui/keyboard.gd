@@ -338,18 +338,15 @@ func _process(_delta: float) -> void:
 	if cursor_pos != new_cursor_pos:
 		cursor_pos = new_cursor_pos
 		
-		#9 + (self.Position.X * 15) + (self.OFFSET.X * self.Position.X),
-		#8 + (self.Position.Y * 19) + (self.OFFSET.Y * self.Position.Y)
-				
 		create_tween().tween_property(
-										cursor, 
-										"position", 
-										Vector2(
-													9 + (cursor_pos.x * 15) + cursor_pos.x,
-													8 + (cursor_pos.y * 19) + cursor_pos.y
-												), 
-										ANIM_SPEED
-									).set_trans(Tween.TRANS_SINE)
+											cursor, 
+											"position", 
+											Vector2(
+														9 + (cursor_pos.x * 15) + cursor_pos.x,
+														8 + (cursor_pos.y * 19) + cursor_pos.y
+													), 
+											ANIM_SPEED
+										).set_trans(Tween.TRANS_SINE)
 	
 		for letter in keyboard_letters.get_children():
 			if letter.get_index() == ((cursor_pos.y * 13) + cursor_pos.x):
@@ -362,12 +359,12 @@ func _process(_delta: float) -> void:
 										)
 			else:
 				create_tween().tween_method(
-											func (color:Color) -> void:
-												letter.add_theme_color_override("font_color", color), 
-											letter.get_theme_color("font_color"), 
-											(Color.BLACK if background == 3 else Color.WHITE), 
-											ANIM_SPEED
-										)
+												func (color:Color) -> void:
+													letter.add_theme_color_override("font_color", color), 
+												letter.get_theme_color("font_color"), 
+												(Color.BLACK if background == 3 else Color.WHITE), 
+												ANIM_SPEED
+											)
 		
 		if cursor_pos.y == 5 && cursor_pos.x == 11:
 			create_tween().tween_property(
