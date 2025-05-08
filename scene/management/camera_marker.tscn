@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://script/object/environment/camera_marker.gd" id="1_gk2uh"]
 
 [node name="CameraMarker" type="Marker3D"]
+process_mode = 1
 top_level = true
 script = ExtResource("1_gk2uh")
 

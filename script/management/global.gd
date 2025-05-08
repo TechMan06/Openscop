@@ -2,6 +2,8 @@ extends Node
 
 signal boot_game
 
+@export var level_slogans: Array[SloganResource]
+
 var global_data: GlobalData = load("res://resource/management/global_data.tres")
 var clock_float: float = 0.0
 var custom_sheet: ImageTexture

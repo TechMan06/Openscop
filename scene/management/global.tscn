@@ -1,7 +1,79 @@
-[gd_scene load_steps=2 format=3 uid="uid://xhrqveke86bt"]
+[gd_scene load_steps=14 format=3 uid="uid://xhrqveke86bt"]
 
 [ext_resource type="Script" path="res://script/management/global.gd" id="1_kuayh"]
+[ext_resource type="Script" path="res://script/resource/slogan_resource.gd" id="2_2y310"]
+
+[sub_resource type="Resource" id="Resource_eyu76"]
+script = ExtResource("2_2y310")
+slogan = "We hope you are enjoying the game."
+even_care = true
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_wgjh6"]
+script = ExtResource("2_2y310")
+slogan = "Take them home!"
+even_care = true
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_qhc81"]
+script = ExtResource("2_2y310")
+slogan = "You're in the other place too!"
+even_care = true
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_g3pin"]
+script = ExtResource("2_2y310")
+slogan = "The pets really seem to like you.
+
+Thanks for playing Petscop."
+even_care = true
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_i1baq"]
+script = ExtResource("2_2y310")
+slogan = "There is so much to discover in the world of Petscop."
+even_care = true
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_w6j05"]
+script = ExtResource("2_2y310")
+slogan = "Your butt leaves a cavity in the chair."
+even_care = false
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_b23kg"]
+script = ExtResource("2_2y310")
+slogan = "There are no changes, only replacements."
+even_care = false
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_b2m8s"]
+script = ExtResource("2_2y310")
+slogan = "Everything is a trick."
+even_care = false
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_wqxt2"]
+script = ExtResource("2_2y310")
+slogan = "The ghost room is a ship in a bottle."
+even_care = false
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_o7plp"]
+script = ExtResource("2_2y310")
+slogan = "I'll come out in a minute. Keep playing."
+even_care = false
+newmaker_plane = true
+
+[sub_resource type="Resource" id="Resource_6prwb"]
+script = ExtResource("2_2y310")
+slogan = "Have you found anything weird lately?
+
+There is much to find in this place."
+even_care = false
+newmaker_plane = true
 
 [node name="Global" type="Node"]
 process_mode = 3
 script = ExtResource("1_kuayh")
+level_slogans = Array[ExtResource("2_2y310")]([SubResource("Resource_eyu76"), SubResource("Resource_wgjh6"), SubResource("Resource_qhc81"), SubResource("Resource_g3pin"), SubResource("Resource_i1baq"), SubResource("Resource_w6j05"), SubResource("Resource_b23kg"), SubResource("Resource_b2m8s"), SubResource("Resource_wqxt2"), SubResource("Resource_o7plp"), SubResource("Resource_6prwb")])

@@ -2,7 +2,7 @@ extends Resource
 class_name PlayerStats
 
 
-@export var character_id: int = 2
+@export var character_id: int = 0
 @export var control_mode: int
 @export var input_enabled: bool = true
 @export var p2talk_enabled: bool = true

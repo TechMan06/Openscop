@@ -25,6 +25,7 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export var loading_preset: LoadingPreset
 @export_enum("None:0", "GiftPlane:1", "EvenCare:2", "Level 2:3") var background_music: int = 0
 @export var allow_recording: bool = true
+@export var use_slogan_list: bool = true
 @export_multiline var level_slogan: String = ""
 @export var school_preset: bool = false
 @export var spawn_player: bool = true
@@ -93,6 +94,23 @@ func _ready() -> void:
 	SaveManager.get_data().room_path = get_tree().get_current_scene().scene_file_path
 	
 	self.set_process_mode(Node.PROCESS_MODE_ALWAYS)
+	
+	if use_slogan_list:
+		var valid_slogans: Array[String]
+		
+		for slogan in Global.level_slogans:
+			if (
+					hardcoded_properties == HardcodedProperties.EVEN_CARE or 
+					hardcoded_properties == HardcodedProperties.RONETH_ROOM or
+					hardcoded_properties == HardcodedProperties.ODD_CARE_PIANO_ROOM
+				):
+					if slogan.even_care:
+						valid_slogans.append(slogan.slogan)
+			else:
+				if slogan.newmaker_plane:
+					valid_slogans.append(slogan.slogan)
+			
+		level_slogan = valid_slogans.pick_random()
 	
 	if RecordingManager.replay:
 		if RecordingManager.demo:
@@ -214,13 +232,16 @@ func _ready() -> void:
 		add_child(_player_instance)
 		
 		_player_instance.set_footstep_sound(footstep_sound)
-
+		
+		var player_spawn: SpawnClass
+		
 		if _player_instance.player_stats.scene_info != []:
 			for spawn in get_tree().get_nodes_in_group("spawn"):
 				if (
 						spawn.scene_path == _player_instance.player_stats.scene_info[0] and
 						spawn.warp_id == _player_instance.player_stats.scene_info[1]
 					):
+					player_spawn = spawn
 					_player_instance.global_position = spawn.global_position
 					_player_instance.direction = spawn.player_direction
 		else:
@@ -247,7 +268,7 @@ func _ready() -> void:
 			add_child(_player_camera)
 			
 			_player_camera.global_position = _player_camera.global_position + camera_offset
-			
+
 			if !allow_horizontal_movement:
 				_player_camera.global_position.x = place_camera_at.x
 				
@@ -256,6 +277,11 @@ func _ready() -> void:
 			
 			if !allow_front_movement:
 				_player_camera.global_position.z = place_camera_at.z
+	
+			if player_spawn != null:
+				if player_spawn.place_camera:
+					_player_camera.global_position = player_spawn.place_camera_at
+	
 	else:
 		fog_focus_on_player = false
 		focus_on_player = false

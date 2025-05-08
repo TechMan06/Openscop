@@ -42,7 +42,6 @@ func _ready() -> void:
 	
 	EventBus.camera_spawned.emit(self)
 	EventBus.camera_zone_spawned.connect(_on_camera_zone_spawned)
-	EventBus.camera_placer_spawned.connect(_on_camera_placer_spawned)
 	EventBus.camera_earthquake.connect(do_earthquake)
 	EventBus.camera_shake_amount.connect(set_shake_amount)
 	EventBus.camera_shake_speed.connect(set_shake_speed)
@@ -204,10 +203,6 @@ func set_speed(value: float) -> void:
 
 
 func _on_camera_zone_spawned(zone: Node3D) -> void:
-	zone.camera_marker = self
-
-
-func _on_camera_placer_spawned(zone: Node3D) -> void:
 	zone.camera_marker = self
 
 

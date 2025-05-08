@@ -1,0 +1,194 @@
+[gd_scene load_steps=15 format=3 uid="uid://dcxk34gnf240i"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_ws4cn"]
+[ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_5wwdp"]
+[ext_resource type="Resource" uid="uid://b3low0aayig4v" path="res://resource/environment/under_nmp2.tres" id="3_1k4nh"]
+[ext_resource type="ArrayMesh" uid="uid://cje18un5bjg20" path="res://asset/3d/room/under_nmp/road.obj" id="4_4mlx7"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="5_ckdda"]
+[ext_resource type="Texture2D" uid="uid://f40rhprpw6tx" path="res://asset/3d/room/under_nmp/unmp_hallway_placeholder.png" id="6_m68ur"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="6_mp3fa"]
+[ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="7_v8tcy"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="9_8egvh"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="10_cavb0"]
+[ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="11_mfco7"]
+[ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="12_73kry"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0w4dt"]
+render_priority = 0
+shader = ExtResource("5_ckdda")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("6_m68ur")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vlcmg"]
+data = PackedVector3Array(6.5, -1, -1.5, -2.5, -1, -1.5, 6.5, 1, -1.5, 6.5, 1, -1.5, -2.5, -1, -1.5, -2.5, 1, -1.5, -2.5, -1, 1, 5.5, -1, 1, -2.5, 1, 1, -2.5, 1, 1, 5.5, -1, 1, 5.5, 1, 1, 5.5, 1, 1, 5.5, -1, 1, 5.5, 1, 1.5, 5.5, 1, 1.5, 5.5, -1, 1, 5.5, -1, 1.5, 6.5, -1, -1.5, 6.5, 1, -1.5, 6.5, -1, -2.5, 6.5, -1, -2.5, 6.5, 1, -1.5, 6.5, 1, -2.5, 5.5, 1, 1.5, 5.5, -1, 1.5, 6.5, 1, 1.5, 6.5, 1, 1.5, 5.5, -1, 1.5, 6.5, -1, 1.5, 6.5, -1, -2.5, 6.5, 1, -2.5, 7.5, -1, -2.5, 7.5, -1, -2.5, 6.5, 1, -2.5, 7.5, 1, -2.5, 6.5, 1, 1.5, 6.5, -1, 1.5, 6.5, 1, 2.5, 6.5, 1, 2.5, 6.5, -1, 1.5, 6.5, -1, 2.5, 7.5, -1, -2.5, 7.5, 1, -2.5, 7.5, -1, -3.5, 7.5, -1, -3.5, 7.5, 1, -2.5, 7.5, 1, -3.5, 6.5, 1, 2.5, 6.5, -1, 2.5, 7.5, 1, 2.5, 7.5, 1, 2.5, 6.5, -1, 2.5, 7.5, -1, 2.5, 7.5, -1, -3.5, 7.5, 1, -3.5, 8.5, -1, -3.5, 8.5, -1, -3.5, 7.5, 1, -3.5, 8.5, 1, -3.5, 7.5, 1, 2.5, 7.5, -1, 2.5, 7.5, 1, 3.5, 7.5, 1, 3.5, 7.5, -1, 2.5, 7.5, -1, 3.5, 8.5, -1, -3.5, 8.5, 1, -3.5, 8.5, -1, -4.5, 8.5, -1, -4.5, 8.5, 1, -3.5, 8.5, 1, -4.5, 7.5, 1, 3.5, 7.5, -1, 3.5, 8.5, 1, 3.5, 8.5, 1, 3.5, 7.5, -1, 3.5, 8.5, -1, 3.5, 8.5, -1, -4.5, 8.5, 1, -4.5, 9.5, -1, -4.5, 9.5, -1, -4.5, 8.5, 1, -4.5, 9.5, 1, -4.5, 8.5, 1, 4.25, 8.5, -1, 4.25, 9.5, 1, 4.25, 9.5, 1, 4.25, 8.5, -1, 4.25, 9.5, -1, 4.25, 9.5, -1, -4.5, 9.5, 1, -4.5, 9.5, -1, -5.5, 9.5, -1, -5.5, 9.5, 1, -4.5, 9.5, 1, -5.5, 9.5, 1, 5, 9.5, -1, 5, 16.5, 1, 5, 16.5, 1, 5, 9.5, -1, 5, 16.5, -1, 5, 9.5, -1, -5.5, 9.5, 1, -5.5, 16.5, -1, -5.5, 16.5, -1, -5.5, 9.5, 1, -5.5, 16.5, 1, -5.5, 16.5, -1, -5.5, 16.5, 1, -5.5, 16.5, -1, -5.5, 16.5, -1, -5.5, 16.5, 1, -5.5, 16.5, 1, -5.5, 16.5, 1, 5, 16.5, -1, 5, 16.5, 1, 29.5, 16.5, 1, 29.5, 16.5, -1, 5, 16.5, -1, 29.5, 16.5, -1, -5.5, 16.5, 1, -5.5, 16.5, -1, -11.5, 16.5, -1, -11.5, 16.5, 1, -5.5, 16.5, 1, -11.5, 16.5, -1, -11.5, 16.5, 1, -11.5, 12.5, -1, -11.5, 12.5, -1, -11.5, 16.5, 1, -11.5, 12.5, 1, -11.5, 12.5, -1, -11.5, 12.5, 1, -11.5, 12.5, -1, -34.5, 12.5, -1, -34.5, 12.5, 1, -11.5, 12.5, 1, -34.5, 19.5, 1, -11.5, 19.5, 1, -5.5, 19.5, -1, -11.5, 19.5, -1, -11.5, 19.5, 1, -5.5, 19.5, -1, -5.5, 19.5, 1, -11.5, 19.5, -1, -11.5, 23.5, 1, -11.5, 23.5, 1, -11.5, 19.5, -1, -11.5, 23.5, -1, -11.5, 23.5, 1, -11.5, 23.5, -1, -11.5, 23.5, 1, -34.5, 23.5, 1, -34.5, 23.5, -1, -11.5, 23.5, -1, -34.5, 19.5, -1, -5.5, 19.5, 1, -5.5, 26.5, -1, -5.5, 26.5, -1, -5.5, 19.5, 1, -5.5, 26.5, 1, -5.5, 26.5, -1, -5.5, 26.5, 1, -5.5, 26.5, -1, -9.5, 26.5, -1, -9.5, 26.5, 1, -5.5, 26.5, 1, -9.5, 28.5, 1, -9.5, 28.5, 1, -5.5, 28.5, -1, -9.5, 28.5, -1, -9.5, 28.5, 1, -5.5, 28.5, -1, -5.5, 28.5, -1, -5.5, 28.5, 1, -5.5, 38.5, -1, -5.5, 38.5, -1, -5.5, 28.5, 1, -5.5, 38.5, 1, -5.5, 38.5, -1, -5.5, 38.5, 1, -5.5, 38.5, -1, -0.5, 38.5, -1, -0.5, 38.5, 1, -5.5, 38.5, 1, -0.5, 38.5, -1, -0.5, 38.5, 1, -0.5, 40.5, -1, -0.5, 40.5, -1, -0.5, 38.5, 1, -0.5, 40.5, 1, -0.5, 40.5, 1, 1, 38.5, 1, 1, 40.5, -1, 1, 40.5, -1, 1, 38.5, 1, 1, 38.5, -1, 1, 38.5, -1, 1, 38.5, 1, 1, 38.5, -1, 5, 38.5, -1, 5, 38.5, 1, 1, 38.5, 1, 5, 38.5, -1, 5, 38.5, 1, 5, 19.5, -1, 5, 19.5, -1, 5, 38.5, 1, 5, 19.5, 1, 5, 19.5, -1, 5, 19.5, 1, 5, 19.5, -1, 29.5, 19.5, -1, 29.5, 19.5, 1, 5, 19.5, 1, 29.5, 8.5, 1, 3.5, 8.5, -1, 3.5, 8.5, 1, 4.25, 8.5, 1, 4.25, 8.5, -1, 3.5, 8.5, -1, 4.25, 9.5, 1, 4.25, 9.5, -1, 4.25, 9.5, 1, 5, 9.5, 1, 5, 9.5, -1, 4.25, 9.5, -1, 5)
+
+[node name="road" type="Node3D"]
+script = ExtResource("1_ws4cn")
+room_name = "road"
+loading_preset = ExtResource("2_5wwdp")
+footstep_sound = 5
+allow_front_movement = false
+camera_distance = 12.18
+limit_camera_horizontal = true
+horizontal_limit = Vector2(5.5, 34.5)
+environment_settings = ExtResource("3_1k4nh")
+
+[node name="NiftyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_4mlx7")
+surface_material_override/0 = SubResource("ShaderMaterial_0w4dt")
+script = ExtResource("6_mp3fa")
+
+[node name="TextureLoader" type="Node" parent="NiftyMesh"]
+script = ExtResource("7_v8tcy")
+protected_texture_path = "res://asset/3d/room/under_nmp/unmp_hallway.png"
+
+[node name="LevelCollision" type="StaticBody3D" parent="."]
+
+[node name="LevelShape" type="CollisionShape3D" parent="LevelCollision"]
+shape = SubResource("ConcavePolygonShape3D_vlcmg")
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -0.5)
+script = ExtResource("9_8egvh")
+scene_path = "res://scene/room/unmp/hallway2.tscn"
+place_camera = null
+place_camera_at = null
+
+[node name="Warp" parent="." instance=ExtResource("10_cavb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -0.5)
+warp_direction = 2
+scene = "res://scene/room/unmp/hallway2.tscn"
+loading_preset = ExtResource("11_mfco7")
+
+[node name="Warp2" parent="." instance=ExtResource("10_cavb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -0.5)
+warp_direction = 2
+scene = "res://scene/room/unmp/hallway2.tscn"
+loading_preset = ExtResource("11_mfco7")
+
+[node name="PieceArea" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 3.5)
+
+[node name="PieceArea2" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 3.5)
+
+[node name="PieceArea3" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 3.5)
+
+[node name="PieceArea4" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 3.5)
+
+[node name="PieceArea5" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3.5)
+
+[node name="PieceArea6" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4.5)
+
+[node name="PieceArea7" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -4.5)
+
+[node name="PieceArea8" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4.5)
+
+[node name="PieceArea9" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -4.5)
+
+[node name="PieceArea10" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -4.5)
+
+[node name="PieceArea11" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, -15)
+
+[node name="PieceArea12" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, -17)
+
+[node name="PieceArea13" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, -19)
+
+[node name="PieceArea14" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, -21)
+
+[node name="PieceArea15" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, -23)
+
+[node name="PieceArea16" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -19)
+
+[node name="PieceArea17" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -21)
+
+[node name="PieceArea18" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -23)
+
+[node name="PieceArea19" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -25)
+
+[node name="PieceArea20" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, -1)
+
+[node name="PieceArea21" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, -1)
+
+[node name="PieceArea22" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, -1)
+
+[node name="PieceArea23" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 0, -3)
+
+[node name="PieceArea24" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, -3)
+
+[node name="PieceArea25" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0, -3)
+
+[node name="PieceArea26" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, 3.5)
+
+[node name="PieceArea27" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, 1.5)
+
+[node name="PieceArea28" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, -0.5)
+
+[node name="PieceArea29" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, -2.5)
+
+[node name="PieceArea30" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -15)
+
+[node name="PieceArea31" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -17)
+
+[node name="PieceArea32" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -19)
+
+[node name="PieceArea33" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -21)
+
+[node name="PieceArea34" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -22.5)
+
+[node name="PieceArea35" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -14)
+
+[node name="PieceArea36" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -8)
+
+[node name="PieceArea37" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -5)
+
+[node name="PieceArea38" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -2)
+
+[node name="PieceArea39" parent="." instance=ExtResource("12_73kry")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -11)
