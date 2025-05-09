@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=3 uid="uid://biux83ixkxvoo"]
+
+[ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="1_nh5yi"]
+[ext_resource type="Texture2D" uid="uid://bsovijq6ri3ux" path="res://output.png" id="2_smj1c"]
+[ext_resource type="Texture2D" uid="uid://kx6mh4w8m2r" path="res://asset/2d/ui/pause/optionsmenu_buttons.png" id="3_enfm1"]
+[ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="4_fkb80"]
+[ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="5_fial3"]
+[ext_resource type="Texture2D" uid="uid://brke37fddtcy6" path="res://asset/2d/ui/pause/optionsmenu_icons.png" id="6_cmuim"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibh5m"]
+atlas = ExtResource("4_fkb80")
+region = Rect2(0, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge7r2"]
+atlas = ExtResource("4_fkb80")
+region = Rect2(136, 34, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ca1xm"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ibh5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge7r2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47htf"]
+atlas = ExtResource("4_fkb80")
+region = Rect2(102, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr88f"]
+atlas = ExtResource("4_fkb80")
+region = Rect2(238, 34, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdyug"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_47htf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr88f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="OptionsMenu" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("1_nh5yi")
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_smj1c")
+
+[node name="VolumeMenu" type="Sprite2D" parent="."]
+position = Vector2(131, 44)
+texture = ExtResource("3_enfm1")
+centered = false
+hframes = 2
+vframes = 4
+
+[node name="GraphicsMenu" type="Sprite2D" parent="."]
+position = Vector2(131, 74)
+texture = ExtResource("3_enfm1")
+centered = false
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="ControlsMenu" type="Sprite2D" parent="."]
+position = Vector2(131, 104)
+texture = ExtResource("3_enfm1")
+centered = false
+hframes = 2
+vframes = 4
+frame = 4
+
+[node name="SoundMenu" type="Sprite2D" parent="."]
+position = Vector2(131, 134)
+texture = ExtResource("3_enfm1")
+centered = false
+hframes = 2
+vframes = 4
+frame = 6
+
+[node name="InfoButtonsOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CrossButton" type="AnimatedSprite2D" parent="InfoButtonsOrigin"]
+position = Vector2(81, 201)
+sprite_frames = SubResource("SpriteFrames_ca1xm")
+autoplay = "default"
+
+[node name="SelectPet" type="Label" parent="InfoButtonsOrigin"]
+offset_left = 92.0
+offset_top = 200.0
+offset_right = 168.0
+offset_bottom = 223.0
+text = "Select"
+label_settings = ExtResource("5_fial3")
+
+[node name="TriangleButton" type="AnimatedSprite2D" parent="InfoButtonsOrigin"]
+position = Vector2(176, 201)
+sprite_frames = SubResource("SpriteFrames_cdyug")
+autoplay = "default"
+
+[node name="GoBack" type="Label" parent="InfoButtonsOrigin"]
+offset_left = 187.0
+offset_top = 200.0
+offset_right = 263.0
+offset_bottom = 223.0
+text = "Go Back"
+label_settings = ExtResource("5_fial3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(86, 147)
+texture = ExtResource("6_cmuim")
+hframes = 4
+frame = 3
