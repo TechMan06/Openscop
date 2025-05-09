@@ -6,7 +6,6 @@ extends Control
 @onready var boot_screen_toggle = %BootScreenToggle
 
 
-
 func _ready() -> void:
 	BGMusic.stop()
 	credits_text.scroll_to_line(1)

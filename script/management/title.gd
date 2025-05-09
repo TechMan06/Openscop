@@ -162,14 +162,17 @@ func _process(delta: float) -> void:
 				
 				HUD.create_keyboard(3, false, false, true)
 				
-				create_tween().tween_property(file_select_buttons, "position:y", 50.0, 0.5).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property(file_select_buttons_2, "position:y", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
-				
 				for file in files.get_children():
 					if file.get_index() % 2 == 0:
 						create_tween().tween_property(file, "position:x", -266., 0.45).set_trans(Tween.TRANS_SINE)
 					else:
 						create_tween().tween_property(file, "position:x", 334., 0.45).set_trans(Tween.TRANS_SINE)
+						
+				var button_tween: Tween = create_tween().set_parallel()
+				button_tween.tween_property(file_select_buttons, "position:y", 50.0, 0.5).set_trans(Tween.TRANS_SINE)
+				
+				await button_tween.finished
+				create_tween().tween_property(file_select_buttons_2, "position:y", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
 				
 		if Input.is_action_just_pressed("pressed_triangle"):
 			start_button.frame_coords.y = 0
@@ -205,7 +208,7 @@ func _process(delta: float) -> void:
 			var logo_scale_3: float = logo_scale * (logo_pos_3 / 320.0)
 		
 			logo_tween_3.tween_property(title, "position:x", logo_pos_3, .25).set_trans(Tween.TRANS_SINE)
-			logo_tween_3.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale, .25).set_trans(Tween.TRANS_SINE)
+			logo_tween_3.tween_property(logo_origin, "position:x", logo_origin_pos + logo_scale_3, .25).set_trans(Tween.TRANS_SINE)
 			logo_tween_3.tween_property(file_select, "position:x", 320 + logo_pos_3, .25).set_trans(Tween.TRANS_SINE)
 			
 			selected_file = 0
@@ -270,6 +273,7 @@ func _process(delta: float) -> void:
 	
 	if title_stage == 4:
 		if Input.is_action_pressed("pressed_triangle"):
+			create_tween().tween_property(file_select_buttons_2, "position:y", 50.0, 0.5).set_trans(Tween.TRANS_SINE)
 			for file in files.get_children():
 				if file.get_index() % 2 == 0:
 					create_tween().tween_property(file, "position:x" , 26., 0.5).set_trans(Tween.TRANS_SINE)
@@ -372,9 +376,6 @@ func _on_file_created(file_name: String, attach_node: Node) -> void:
 		_default_data.player_data = PlayerStats.new()
 		SaveManager.save_data(_default_data, selected_file)
 		check_files()
-
-	create_tween().tween_property(file_select_buttons, "position:y", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
-	create_tween().tween_property(file_select_buttons_2, "position:y", 50.0, 0.5).set_trans(Tween.TRANS_SINE)
 	
 	for file in files.get_children():
 		if file.get_index() == selected_file:
@@ -387,9 +388,8 @@ func _on_file_created(file_name: String, attach_node: Node) -> void:
 			create_tween().tween_property(file, "position:x" , 26.0, 0.5).set_trans(Tween.TRANS_SINE)
 		else:
 			create_tween().tween_property(file, "position:x" , 93.0, 0.5).set_trans(Tween.TRANS_SINE)
-	
+			
 	create_tween().tween_property(file_select_buttons, "position:y", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
-	create_tween().tween_property(file_select_buttons_2, "position:y", 50.0, 0.5).set_trans(Tween.TRANS_SINE)
 
 
 func _on_demo_timer_timeout() -> void:
