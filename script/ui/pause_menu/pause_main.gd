@@ -5,6 +5,7 @@ const BUTTON_OFFSET: float = 10
 const SCREEN_ANIM_TIME: float = 1.0
 const MINI_SCREEN_SIZE: float = 0.5
 const PETS_MENU: PackedScene = preload("res://scene/ui/pause_menu/pets_menu.tscn")
+const OPTIONS_MENU: PackedScene = preload("res://scene/ui/pause_menu/options_menu.tscn")
 const QUIT_MENU: PackedScene = preload("res://scene/ui/pause_menu/quit_buttons.tscn")
 
 var level_slogan: String = ""
@@ -110,6 +111,7 @@ func _process(_delta: float) -> void:
 					unlocked_nmp = true
 			else:
 				current_key = 0
+		
 		if Input.is_action_just_pressed("pressed_start") && Global.can_unpause:
 			unpause_game()
 		
@@ -138,6 +140,9 @@ func _process(_delta: float) -> void:
 				main_menu.visible = false
 				
 				match _selected_option:
+					1:
+						sub_menu.add_child(OPTIONS_MENU.instantiate())
+					
 					2:
 						sub_menu.add_child(PETS_MENU.instantiate())
 						

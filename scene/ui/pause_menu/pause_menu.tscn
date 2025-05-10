@@ -19,11 +19,11 @@
 [ext_resource type="AudioStream" uid="uid://mmkhc5kb3o70" path="res://sfx/pause/select1.wav" id="17_1m5mx"]
 [ext_resource type="AudioStream" uid="uid://b3ptbmyyksd43" path="res://sfx/pause/select2.wav" id="18_4wvin"]
 
-[sub_resource type="Gradient" id="Gradient_sgktk"]
+[sub_resource type="Gradient" id="Gradient_wu3tr"]
 colors = PackedColorArray(0.992157, 0.894118, 0.988235, 0, 0.992157, 0.894118, 0.988235, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_c7snj"]
-gradient = SubResource("Gradient_sgktk")
+gradient = SubResource("Gradient_wu3tr")
 width = 320
 height = 1
 
@@ -433,7 +433,7 @@ unique_name_in_owner = true
 position = Vector2(-11, 1)
 sprite_frames = SubResource("SpriteFrames_deb8a")
 autoplay = "default"
-frame_progress = 0.784935
+frame = 1
 
 [node name="Resume" type="Label" parent="Main/InfoContainer/InfoVBox/SelectHBox"]
 layout_mode = 2

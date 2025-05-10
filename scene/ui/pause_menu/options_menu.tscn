@@ -1,11 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://biux83ixkxvoo"]
+[gd_scene load_steps=24 format=3 uid="uid://biux83ixkxvoo"]
 
+[ext_resource type="Script" path="res://script/ui/pause_menu/options_menu.gd" id="1_6480o"]
 [ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="1_nh5yi"]
-[ext_resource type="Texture2D" uid="uid://bsovijq6ri3ux" path="res://output.png" id="2_smj1c"]
 [ext_resource type="Texture2D" uid="uid://kx6mh4w8m2r" path="res://asset/2d/ui/pause/optionsmenu_buttons.png" id="3_enfm1"]
 [ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="4_fkb80"]
 [ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="5_fial3"]
 [ext_resource type="Texture2D" uid="uid://brke37fddtcy6" path="res://asset/2d/ui/pause/optionsmenu_icons.png" id="6_cmuim"]
+[ext_resource type="AudioStream" uid="uid://b18ajvqy3kl3u" path="res://sfx/pause/selected.wav" id="7_ln3i2"]
+[ext_resource type="AudioStream" uid="uid://mmkhc5kb3o70" path="res://sfx/pause/select1.wav" id="8_1qpwj"]
+[ext_resource type="AudioStream" uid="uid://b3ptbmyyksd43" path="res://sfx/pause/select2.wav" id="9_g278y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibh5m"]
 atlas = ExtResource("4_fkb80")
@@ -51,6 +54,76 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_vm411"]
+offsets = PackedFloat32Array(0.25, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7jx4t"]
+gradient = SubResource("Gradient_vm411")
+width = 320
+height = 240
+fill_from = Vector2(0, 0.5)
+fill_to = Vector2(0, 1)
+repeat = 2
+
+[sub_resource type="Gradient" id="Gradient_epvyb"]
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f1s0d"]
+gradient = SubResource("Gradient_epvyb")
+width = 320
+height = 240
+fill_from = Vector2(0.5, 0)
+repeat = 2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ol6jj"]
+streams_count = 2
+playback_mode = 2
+random_pitch = 1.0
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("8_1qpwj")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("9_g278y")
+stream_1/weight = 1.0
+
+[sub_resource type="Animation" id="Animation_ykkh3"]
+resource_name = "cursor"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CursorPos/Cursor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(120, 24), Vector2(112, 24)]
+}
+
+[sub_resource type="Animation" id="Animation_0ev8l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CursorPos/Cursor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(120, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rqf48"]
+_data = {
+"RESET": SubResource("Animation_0ev8l"),
+"cursor": SubResource("Animation_ykkh3")
+}
+
 [node name="OptionsMenu" type="Control"]
 texture_filter = 1
 layout_mode = 3
@@ -59,27 +132,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6480o")
 
 [node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 320.0
 offset_bottom = 240.0
 texture = ExtResource("1_nh5yi")
 stretch_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_smj1c")
+[node name="OptionButtons" type="Marker2D" parent="."]
+z_index = 1
 
-[node name="VolumeMenu" type="Sprite2D" parent="."]
+[node name="VolumeMenu" type="Sprite2D" parent="OptionButtons"]
 position = Vector2(131, 44)
 texture = ExtResource("3_enfm1")
 centered = false
 hframes = 2
 vframes = 4
 
-[node name="GraphicsMenu" type="Sprite2D" parent="."]
+[node name="GraphicsMenu" type="Sprite2D" parent="OptionButtons"]
 position = Vector2(131, 74)
 texture = ExtResource("3_enfm1")
 centered = false
@@ -87,7 +159,7 @@ hframes = 2
 vframes = 4
 frame = 2
 
-[node name="ControlsMenu" type="Sprite2D" parent="."]
+[node name="ControlsMenu" type="Sprite2D" parent="OptionButtons"]
 position = Vector2(131, 104)
 texture = ExtResource("3_enfm1")
 centered = false
@@ -95,7 +167,8 @@ hframes = 2
 vframes = 4
 frame = 4
 
-[node name="SoundMenu" type="Sprite2D" parent="."]
+[node name="SoundMenu" type="Sprite2D" parent="OptionButtons"]
+unique_name_in_owner = true
 position = Vector2(131, 134)
 texture = ExtResource("3_enfm1")
 centered = false
@@ -105,8 +178,10 @@ frame = 6
 
 [node name="InfoButtonsOrigin" type="Marker2D" parent="."]
 unique_name_in_owner = true
+z_index = 1
 
 [node name="CrossButton" type="AnimatedSprite2D" parent="InfoButtonsOrigin"]
+unique_name_in_owner = true
 position = Vector2(81, 201)
 sprite_frames = SubResource("SpriteFrames_ca1xm")
 autoplay = "default"
@@ -120,9 +195,11 @@ text = "Select"
 label_settings = ExtResource("5_fial3")
 
 [node name="TriangleButton" type="AnimatedSprite2D" parent="InfoButtonsOrigin"]
+unique_name_in_owner = true
 position = Vector2(176, 201)
 sprite_frames = SubResource("SpriteFrames_cdyug")
 autoplay = "default"
+frame = 1
 
 [node name="GoBack" type="Label" parent="InfoButtonsOrigin"]
 offset_left = 187.0
@@ -132,8 +209,53 @@ offset_bottom = 223.0
 text = "Go Back"
 label_settings = ExtResource("5_fial3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(86, 147)
+[node name="CursorPos" type="Marker2D" parent="."]
+z_index = 1
+
+[node name="Cursor" type="Sprite2D" parent="CursorPos"]
+unique_name_in_owner = true
+position = Vector2(120, 24)
 texture = ExtResource("6_cmuim")
+centered = false
+offset = Vector2(-65, 0)
 hframes = 4
-frame = 3
+
+[node name="Gradient2" type="TextureRect" parent="."]
+z_as_relative = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 240.0
+texture = SubResource("GradientTexture2D_7jx4t")
+stretch_mode = 1
+
+[node name="Gradient3" type="TextureRect" parent="."]
+z_as_relative = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 240.0
+texture = SubResource("GradientTexture2D_f1s0d")
+stretch_mode = 1
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ln3i2")
+bus = &"HUD_SFX"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ol6jj")
+bus = &"HUD_SFX"
+
+[node name="CursorAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+autoplay = "cursor"
+libraries = {
+"": SubResource("AnimationLibrary_rqf48")
+}
+
+[node name="SubMenu" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
