@@ -1,6 +1,7 @@
 extends Control
 
 const CURSOR_SPEED: float = 0.5
+const SOUND_TEST: PackedScene = preload("res://scene/ui/pause_menu/sound_test.tscn")
 
 var selected_option: int = 0:
 	set(value):
@@ -22,6 +23,9 @@ var returning: bool = false
 
 
 func _ready() -> void:
+	EventBus.return_to_options.connect(unfreeze)
+	
+	
 	if RecordingManager.replay or RecordingManager.demo:
 		sound_menu.queue_free()
 	
@@ -55,11 +59,23 @@ func _process(delta: float) -> void:
 					button.frame_coords.x = 0
 			
 			if Input.is_action_just_pressed("pressed_action"):
-				$SelectSound.play()
-				cursor_anim.pause()
-				cross_button.pause()
-				triangle_button.pause()
 				in_menu = true
+				
+				if selected_option > 1:
+					HUD.fade_animation(Color(1.0, 0.85, 1.0))
+				
+					await HUD.transition_middle
+				
+					$SelectSound.play()
+					cursor_anim.pause()
+					cross_button.pause()
+					triangle_button.pause()
+					
+					
+					match selected_option:
+						3:
+							BGMusic.mute()
+							sub_menu.add_child(SOUND_TEST.instantiate())
 			
 			if Input.is_action_just_pressed("pressed_triangle"):
 				returning = true
@@ -71,3 +87,10 @@ func _process(delta: float) -> void:
 				EventBus.return_to_pause.emit()
 				
 				queue_free()
+
+
+func unfreeze() -> void:
+	in_menu = false
+	cursor_anim.play()
+	cross_button.play()
+	triangle_button.play()

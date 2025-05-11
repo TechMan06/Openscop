@@ -5,6 +5,10 @@ signal start_scene
 signal crash_game
 
 signal return_to_pause
+signal return_to_options
+signal return_to_sound_test
+signal return_to_secret
+
 signal text_finished
 signal text_started
 

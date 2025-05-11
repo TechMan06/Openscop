@@ -23,6 +23,7 @@ var _player_instance: Player = PLAYER_SCENE.instantiate()
 @export_subgroup("Level Settings")
 @export var room_name: String = ""
 @export var loading_preset: LoadingPreset
+@export var save_bgm_to_sound_test: bool = true
 @export_enum("None:0", "GiftPlane:1", "EvenCare:2", "Level 2:3") var background_music: int = 0
 @export var allow_recording: bool = true
 @export var use_slogan_list: bool = true
@@ -183,8 +184,21 @@ func _ready() -> void:
 		RenderingServer.global_shader_parameter_set("fog_enabled", false)
 	
 	if Global.global_data.gen > 2:
-		if !SaveManager.get_data().unlocked_nmp:
+		if (
+				hardcoded_properties == HardcodedProperties.EVEN_CARE or
+				hardcoded_properties == HardcodedProperties.ODD_CARE_PIANO_ROOM or
+				hardcoded_properties == HardcodedProperties.RONETH_ROOM
+			):
+			if !SaveManager.get_data().unlocked_nmp:
+				BGMusic.play_track(background_music)
+		else:
 			BGMusic.play_track(background_music)
+			
+		if (
+				save_bgm_to_sound_test and 
+				SaveManager.get_data().sounds.find(BGMusic.stream.get_path()) == -1
+			):
+			SaveManager.get_data().sounds.append(BGMusic.stream.get_path())
 	else:
 		BGMusic.stream_paused = true
 	

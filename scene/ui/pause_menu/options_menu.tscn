@@ -54,24 +54,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_vm411"]
+[sub_resource type="Gradient" id="Gradient_qh1x6"]
 offsets = PackedFloat32Array(0.25, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7jx4t"]
-gradient = SubResource("Gradient_vm411")
+gradient = SubResource("Gradient_qh1x6")
 width = 320
 height = 240
 fill_from = Vector2(0, 0.5)
 fill_to = Vector2(0, 1)
 repeat = 2
 
-[sub_resource type="Gradient" id="Gradient_epvyb"]
+[sub_resource type="Gradient" id="Gradient_6ebhg"]
 offsets = PackedFloat32Array(0.5, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_f1s0d"]
-gradient = SubResource("Gradient_epvyb")
+gradient = SubResource("Gradient_6ebhg")
 width = 320
 height = 240
 fill_from = Vector2(0.5, 0)
@@ -247,12 +247,14 @@ bus = &"HUD_SFX"
 [node name="CursorAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 autoplay = "cursor"
+speed_scale = 1.5
 libraries = {
 "": SubResource("AnimationLibrary_rqf48")
 }
 
 [node name="SubMenu" type="Control" parent="."]
 unique_name_in_owner = true
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -21,4 +21,8 @@ class_name SaveData
 @export var cage: Dictionary = {}
 @export var trapdoor: Dictionary = {}
 @export var anna_phone: Array[int]
-
+#MISC
+@export var sounds: Array[String] = [
+	"res://music/garalina.ogg",
+	"res://music/petscop.ogg"
+]
