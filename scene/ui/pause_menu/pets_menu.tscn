@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://g76vknb3n6cd"]
+[gd_scene load_steps=25 format=3 uid="uid://g76vknb3n6cd"]
 
 [ext_resource type="Script" path="res://script/ui/pause_menu/pets.gd" id="1_l3pxi"]
 [ext_resource type="Resource" uid="uid://w06mrcdadgdp" path="res://resource/pet/amber.tres" id="2_nt3v8"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="12_p8u00"]
 [ext_resource type="AudioStream" uid="uid://bpvbvscg87h3n" path="res://sfx/pause/petselected.wav" id="13_4dloi"]
 [ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="14_yox3x"]
+[ext_resource type="AudioStream" uid="uid://cas1nbqcoxbmu" path="res://sfx/pause/locked.wav" id="15_ibi4w"]
+[ext_resource type="AudioStream" uid="uid://bi1uqu6lghp6c" path="res://sfx/pause/invalid.wav" id="16_k7qwv"]
 [ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="16_ntrkb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibh5m"]
@@ -89,6 +91,14 @@ bus = &"HUD_SFX"
 
 [node name="PetSelected" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_4dloi")
+bus = &"HUD_SFX"
+
+[node name="PetLocked" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_ibi4w")
+bus = &"HUD_SFX"
+
+[node name="PetInvalid" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_k7qwv")
 bus = &"HUD_SFX"
 
 [node name="InfoButtonsOrigin" type="Marker2D" parent="."]

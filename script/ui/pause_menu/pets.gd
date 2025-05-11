@@ -14,7 +14,7 @@ var can_select: bool = true
 var can_leave: bool = true
 var can_return: bool = false
 
-@onready var room: Level = get_tree().get_current_scene()
+@onready var room: Level
 @onready var cursor_sound: AudioStreamPlayer = $CursorSound
 @onready var buttons_origin: Marker2D = %ButtonsOrigin
 @onready var info_buttons_origin: Marker2D = %InfoButtonsOrigin
@@ -24,12 +24,15 @@ var can_return: bool = false
 func _ready() -> void:
 	EventBus.text_finished.connect(leave_bio)
 	
-	if (
-			room.hardcoded_properties == room.HardcodedProperties.EVEN_CARE or
-			room.hardcoded_properties == room.HardcodedProperties.RONETH_ROOM
-		):
-		pets_array = [pets_array[0], pets_array[1], pets_array[2], pets_array[3], pets_array[4], pets_array[5]]
-	
+	if room is Level:
+		room = get_tree().get_current_scene()
+		
+		if (
+				room.hardcoded_properties == room.HardcodedProperties.EVEN_CARE or
+				room.hardcoded_properties == room.HardcodedProperties.RONETH_ROOM
+			):
+			pets_array = [pets_array[0], pets_array[1], pets_array[2], pets_array[3], pets_array[4], pets_array[5]]
+		
 	var _row: float = 0
 	
 	for pet in pets_array:
@@ -71,54 +74,58 @@ func _process(_delta: float) -> void:
 			selected_option += 1
 			cursor_sound.play()
 	
-		if (
-				Input.is_action_just_pressed("pressed_action") 
-				and SaveManager._data.pet.find(pets_array[selected_option].pet_id_name) != -1
-			):
-			can_select = false
-			can_leave = false
-			$PetSelected.play()
-			
-			var _move_buttons: Tween = create_tween().set_trans(Tween.TRANS_SINE)
-			
-			_move_buttons.tween_property(info_buttons_origin, "position:y", 46.0, INFO_SPEED)
-			_move_buttons.tween_property(info_buttons_origin_2, "position:y", 0.0, INFO_SPEED)
-			
-			for button in buttons_origin.get_children():
-				if button.get_index() != selected_option:
-					if button.get_index() % 2:
-						create_tween().tween_property(
-														button, 
-														"global_position:x", 
-														324, 
-														BUTTON_SPEED
-													).set_trans(Tween.TRANS_SINE)
-					else:
-						create_tween().tween_property(
-														button, 
-														"global_position:x", 
-														-128, 
-														BUTTON_SPEED
-													).set_trans(Tween.TRANS_SINE)
-			
-			await get_tree().create_timer(BUTTON_SPEED, true).timeout
-			
-			original_button_pos = buttons_origin.get_child(selected_option).global_position
-			
-			var _button_tween: Tween = create_tween()
-			
-			_button_tween.tween_property(
-											buttons_origin.get_child(selected_option), 
-											"global_position", 
-											Vector2(89., 29.), 
-											0.5
-										).set_trans(Tween.TRANS_SINE)
-			
-			await _button_tween.finished
-			
-			HUD.create_textbox(load("res://resource/textbox/pet.tres"), pets_array[selected_option].pet_textbox, true)
-			reading_bio = true
-			can_return = true
+		if Input.is_action_just_pressed("pressed_action"):
+			if SaveManager._data.pet.find(pets_array[selected_option].pet_id_name) != -1:
+				can_select = false
+				can_leave = false
+				$PetSelected.play()
+				
+				var _move_buttons: Tween = create_tween().set_trans(Tween.TRANS_SINE)
+				
+				_move_buttons.tween_property(info_buttons_origin, "position:y", 46.0, INFO_SPEED)
+				_move_buttons.tween_property(info_buttons_origin_2, "position:y", 0.0, INFO_SPEED)
+				
+				for button in buttons_origin.get_children():
+					if button.get_index() != selected_option:
+						if button.get_index() % 2:
+							create_tween().tween_property(
+															button, 
+															"global_position:x", 
+															324, 
+															BUTTON_SPEED
+														).set_trans(Tween.TRANS_SINE)
+						else:
+							create_tween().tween_property(
+															button, 
+															"global_position:x", 
+															-128, 
+															BUTTON_SPEED
+														).set_trans(Tween.TRANS_SINE)
+				
+				await get_tree().create_timer(BUTTON_SPEED, true).timeout
+				
+				original_button_pos = buttons_origin.get_child(selected_option).global_position
+				
+				var _button_tween: Tween = create_tween()
+				
+				_button_tween.tween_property(
+												buttons_origin.get_child(selected_option), 
+												"global_position", 
+												Vector2(89., 29.), 
+												0.5
+											).set_trans(Tween.TRANS_SINE)
+				
+				await _button_tween.finished
+				
+				HUD.create_textbox(
+										load("res://resource/textbox/pet.tres"), 
+										pets_array[selected_option].pet_textbox, 
+										true
+									)
+				reading_bio = true
+				can_return = true
+			else:
+				$PetLocked.play()
 	
 	for button in buttons_origin.get_children():
 		button.focused = buttons_origin.get_child(selected_option) == button
