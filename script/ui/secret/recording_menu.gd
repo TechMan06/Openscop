@@ -40,6 +40,7 @@ var triangle_allowed: bool = false
 var action_allowed: bool = true
 var checking_recording: bool
 var original_button_y: float
+var returning: bool = false
 
 
 @onready var recording_buttons: Marker2D = %RecordingButtons
@@ -49,11 +50,10 @@ var original_button_y: float
 @onready var cursor_sound: AudioStreamPlayer = %CursorSound
 @onready var gen_number: Label = %GenNumber
 @onready var rot_toggle: Label = %RotToggle
-@onready var button_left = %ButtonLeft
-@onready var button_right = %ButtonRight
+@onready var button_left: AnimatedSprite2D = %ButtonLeft
+@onready var button_right: AnimatedSprite2D = %ButtonRight
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	recording_list = DirAccess.get_files_at("user://recordings")
 	
@@ -120,11 +120,10 @@ func _ready() -> void:
 	outline_buttons.visible = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if !checking_recording:
 		if action_allowed:
-			if Input.is_action_just_pressed("pressed_up") && selected_option!=0:
+			if Input.is_action_just_pressed("pressed_up") && selected_option != 0:
 				selected_option-=1
 				cursor_sound.play()
 			
@@ -185,8 +184,20 @@ func _process(_delta: float) -> void:
 			recording_options.visible = true
 			selected_gen = _selected_button.recording_resource.gen
 			selected_rot = _selected_button.recording_resource.rotation
+		
+		if Input.is_action_just_pressed("pressed_triangle"):
+			returning = true
+				
+			HUD.fade_animation(Color(0.97, 0.27, 0.07))
+			
+			await HUD.transition_middle
+			
+			EventBus.return_to_secret.emit()
+			
+			queue_free()
+		
 	else:
-		if Input.is_action_just_pressed("pressed_triangle") && triangle_allowed:
+		if Input.is_action_just_pressed("pressed_triangle") and triangle_allowed:
 			triangle_allowed = false
 			
 			for button in recording_buttons.get_children():
@@ -261,6 +272,20 @@ func _process(_delta: float) -> void:
 																				).recording_resource
 				
 				get_tree().paused = false
+				
+				var pause_menu_submenu: Control = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+				
+				if pause_menu_submenu is Control:
+					pause_menu_submenu.get_child(0).queue_free()
+					
+					self.reparent(pause_menu_submenu)
+					
+					EventBus.return_to_pause.emit()
+					
+					pause_menu_submenu.get_parent().unpause_game()
+					
+					await get_tree().create_timer(0.5).timeout
+				
 				RecordingManager.load_recording(_recording_data.name, selected_gen)
 				#$recording_header.text="Name: "+Global.recording_name+"\nGen: "+str(Global.global_data.gen)
 		

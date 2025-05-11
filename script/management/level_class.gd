@@ -194,6 +194,7 @@ func _ready() -> void:
 			
 		if (
 				save_bgm_to_sound_test and 
+				background_music > 0 and
 				SaveManager.get_data().sounds.find(BGMusic.stream.get_path()) == -1
 			):
 			SaveManager.get_data().sounds.append(BGMusic.stream.get_path())
@@ -290,10 +291,10 @@ func _ready() -> void:
 			if !allow_front_movement:
 				_player_camera.global_position.z = place_camera_at.z
 	
-			if player_spawn != null:
+			if player_spawn is SpawnClass and player_spawn != null:
 				if player_spawn.place_camera:
 					_player_camera.global_position = player_spawn.place_camera_at
-	
+
 	else:
 		fog_focus_on_player = false
 		focus_on_player = false

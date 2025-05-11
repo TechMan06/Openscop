@@ -61,8 +61,6 @@ shape = SubResource("ConcavePolygonShape3D_vlcmg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -0.5)
 script = ExtResource("9_8egvh")
 scene_path = "res://scene/room/unmp/hallway2.tscn"
-place_camera = null
-place_camera_at = null
 
 [node name="Warp" parent="." instance=ExtResource("10_cavb0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -0.5)

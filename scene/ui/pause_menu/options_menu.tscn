@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://biux83ixkxvoo"]
+[gd_scene load_steps=21 format=3 uid="uid://biux83ixkxvoo"]
 
 [ext_resource type="Script" path="res://script/ui/pause_menu/options_menu.gd" id="1_6480o"]
 [ext_resource type="Texture2D" uid="uid://duemcbgcobylk" path="res://asset/2d/ui/pause/tile.png" id="1_nh5yi"]
-[ext_resource type="Texture2D" uid="uid://bsovijq6ri3ux" path="res://output.png" id="2_smj1c"]
 [ext_resource type="Texture2D" uid="uid://kx6mh4w8m2r" path="res://asset/2d/ui/pause/optionsmenu_buttons.png" id="3_enfm1"]
 [ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="4_fkb80"]
 [ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="5_fial3"]
@@ -217,9 +216,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_smj1c")

@@ -1,5 +1,6 @@
 extends Control
 
+const SECRET_MENU: PackedScene = preload("res://scene/ui/secret_menu/secret_menu.tscn")
 const BUTTON_ANIM: int = 5
 const ANIM_SPEED: float = 0.75
 
@@ -14,9 +15,10 @@ var returning: bool = false
 @onready var sound_test_icon: TextureRect = %SoundTestIcon
 @onready var sound_name: Label = %SoundName
 @onready var sound_player: AudioStreamPlayer = %SoundPlayer
-@onready var button_anim = $ButtonAnim
-@onready var button_right = %ButtonRight
-@onready var button_left = %ButtonLeft
+@onready var button_anim: AnimationPlayer = $ButtonAnim
+@onready var button_right: AnimatedSprite2D = %ButtonRight
+@onready var button_left: AnimatedSprite2D = %ButtonLeft
+@onready var sub_menu: Control = %SubMenu
 
 
 @export var sounds: Array[SoundResource]
@@ -71,6 +73,15 @@ func _process(_delta: float) -> void:
 				BGMusic.unmute()
 				
 				queue_free()
+			
+			if Input.is_action_just_pressed("pressed_square"):
+				in_menu = true
+				
+				HUD.fade_animation(Color(0.97, 0.27, 0.07))
+				
+				await HUD.transition_middle
+				
+				sub_menu.add_child(SECRET_MENU.instantiate())
 
 
 func load_sound(id: int) -> void:

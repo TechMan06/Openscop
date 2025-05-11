@@ -1,11 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://cf0dgbbv434jf"]
+[gd_scene load_steps=19 format=3 uid="uid://cf0dgbbv434jf"]
 
 [ext_resource type="Script" path="res://script/ui/secret/recording_menu.gd" id="1_ogyyj"]
 [ext_resource type="Texture2D" uid="uid://bn474tibrlali" path="res://asset/2d/ui/pause/secret_tile.png" id="2_d6s2i"]
 [ext_resource type="AudioStream" uid="uid://6xc8aacvnaal" path="res://sfx/pause/petselect.wav" id="2_lp7tv"]
 [ext_resource type="AudioStream" uid="uid://bpvbvscg87h3n" path="res://sfx/pause/petselected.wav" id="3_677t1"]
 [ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="4_35tda"]
-[ext_resource type="Texture2D" uid="uid://bsovijq6ri3ux" path="res://output.png" id="5_c5nnu"]
 [ext_resource type="Texture2D" uid="uid://gnvq77ytspgo" path="res://asset/2d/ui/button_outline.png" id="6_1dhai"]
 
 [sub_resource type="Gradient" id="Gradient_yc73v"]
@@ -85,6 +84,7 @@ texture_filter = 1
 script = ExtResource("1_ogyyj")
 
 [node name="Background" type="TextureRect" parent="."]
+z_index = -1
 offset_right = 320.0
 offset_bottom = 240.0
 texture = ExtResource("2_d6s2i")
@@ -179,13 +179,6 @@ offset_right = 33.0
 offset_bottom = 19.0
 text = "Play"
 label_settings = SubResource("LabelSettings_li21c")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-z_index = -4
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("5_c5nnu")
 
 [node name="OutlineButtons" type="Marker2D" parent="."]
 unique_name_in_owner = true
