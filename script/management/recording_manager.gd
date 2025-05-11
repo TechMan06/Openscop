@@ -87,7 +87,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			if recording_timer <= recording_data.p1_data[recording_data.p1_data.size() - 1][0]:
 				if recording_timer == recording_data.p1_data[recording_reader_p1][0]:
-
+					
 					for input in input_array:
 						if input_array.find(input) < 15:
 							_parse_input(input_array.find(input) + 2)
