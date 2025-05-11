@@ -21,7 +21,8 @@ var cursor_tween: Tween
 
 func _ready() -> void:
 	EventBus.return_to_secret.connect(unfreeze)
-
+	RecordingManager.stop_recording()
+	
 	cursor_tween = create_tween().set_loops()
 	cursor_tween.tween_property(cursor, "position:x", -CURSOR_PIXELS, CURSOR_SPEED).set_trans(Tween.TRANS_SINE).as_relative()
 	cursor_tween.tween_property(cursor, "position:x", CURSOR_PIXELS, CURSOR_SPEED).set_trans(Tween.TRANS_SINE).as_relative()

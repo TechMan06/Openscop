@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://byl86bdg2utxs"]
+[gd_scene load_steps=34 format=3 uid="uid://byl86bdg2utxs"]
 
 [ext_resource type="Script" path="res://script/ui/pause_menu/sound_test.gd" id="1_xlgej"]
 [ext_resource type="Script" path="res://script/resource/sound_resource.gd" id="2_8c4g6"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dlqqqj582qfrn" path="res://asset/2d/ui/pause/sound_test_icon.png" id="4_cdkrl"]
 [ext_resource type="AudioStream" uid="uid://cxqsh40sckwcr" path="res://music/petscop.ogg" id="4_yhl61"]
 [ext_resource type="Texture2D" uid="uid://1rnjwjynhhtu" path="res://asset/2d/ui/pause/sound_test_box.png" id="5_5rigd"]
+[ext_resource type="AudioStream" uid="uid://r6rrqiroxswt" path="res://sfx/pets/care_uh_oh.wav" id="5_n3yq5"]
+[ext_resource type="AudioStream" uid="uid://tmmqurvbcpjg" path="res://sfx/pets/care_bye_bye.wav" id="6_ryclc"]
 [ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="6_y6c7e"]
 [ext_resource type="Texture2D" uid="uid://bjpl673weodmi" path="res://asset/2d/ui/psx_buttons.png" id="10_gfqmc"]
 
@@ -20,6 +22,16 @@ name = "Garalina"
 script = ExtResource("2_8c4g6")
 sound = ExtResource("4_yhl61")
 name = "Petscop"
+
+[sub_resource type="Resource" id="Resource_06klt"]
+script = ExtResource("2_8c4g6")
+sound = ExtResource("5_n3yq5")
+name = "Care Says \"Uh-Oh\""
+
+[sub_resource type="Resource" id="Resource_73upo"]
+script = ExtResource("2_8c4g6")
+sound = ExtResource("6_ryclc")
+name = "Care Says \"Bye-Bye\""
 
 [sub_resource type="Gradient" id="Gradient_vm411"]
 offsets = PackedFloat32Array(0.25, 1)
@@ -189,7 +201,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xlgej")
-sounds = Array[ExtResource("2_8c4g6")]([SubResource("Resource_8o4h0"), SubResource("Resource_msuy7")])
+sounds = Array[ExtResource("2_8c4g6")]([SubResource("Resource_8o4h0"), SubResource("Resource_msuy7"), SubResource("Resource_06klt"), SubResource("Resource_73upo")])
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0

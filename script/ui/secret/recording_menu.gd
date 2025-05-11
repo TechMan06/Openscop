@@ -41,6 +41,7 @@ var action_allowed: bool = true
 var checking_recording: bool
 var original_button_y: float
 var returning: bool = false
+var in_recording: bool = false
 
 
 @onready var recording_buttons: Marker2D = %RecordingButtons
@@ -265,29 +266,44 @@ func _process(_delta: float) -> void:
 										"user://recordings/" + _recording_data.name + ".tres"
 									)
 		
-		if options_selected_option == 2:
-			if Input.is_action_just_pressed("pressed_action"):
-				var _recording_data: RecordingData = recording_buttons.get_child(
-																					selected_option
-																				).recording_resource
+		if (
+				options_selected_option == 2 and
+				Input.is_action_just_pressed("pressed_action") and
+				!in_recording
+			):
+			var _recording_data: RecordingData = recording_buttons.get_child(selected_option).recording_resource
+			in_recording = true
+			triangle_allowed = false
+			
+			$RecordingSelected.play()
+			
+			get_tree().paused = false
+			
+			if get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent() != null:
+				var pause_menu_submenu: Control
 				
-				get_tree().paused = false
+				pause_menu_submenu = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
 				
-				var pause_menu_submenu: Control = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+				pause_menu_submenu.get_child(0).queue_free()
 				
-				if pause_menu_submenu is Control:
-					pause_menu_submenu.get_child(0).queue_free()
-					
-					self.reparent(pause_menu_submenu)
-					
-					EventBus.return_to_pause.emit()
-					
-					pause_menu_submenu.get_parent().unpause_game()
-					
-					await get_tree().create_timer(0.5).timeout
+				HUD.fade_animation(Color(1.0, 0.85, 1.0))
+				
+				self.reparent(pause_menu_submenu)
+				
+				
+				await HUD.transition_middle
+				
+				visible = false
+				EventBus.return_to_pause.emit()
+				
+				pause_menu_submenu.get_parent().unpause_game()
+				
+				await get_tree().create_timer(0.5).timeout
 				
 				RecordingManager.load_recording(_recording_data.name, selected_gen)
 				#$recording_header.text="Name: "+Global.recording_name+"\nGen: "+str(Global.global_data.gen)
+			else:
+				RecordingManager.load_recording(_recording_data.name, selected_gen)
 		
 		for option in recording_options.get_children():
 			if option.get_index() == options_selected_option:

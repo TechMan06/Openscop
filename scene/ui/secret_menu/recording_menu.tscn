@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://cf0dgbbv434jf"]
+[gd_scene load_steps=20 format=3 uid="uid://cf0dgbbv434jf"]
 
 [ext_resource type="Script" path="res://script/ui/secret/recording_menu.gd" id="1_ogyyj"]
 [ext_resource type="Texture2D" uid="uid://bn474tibrlali" path="res://asset/2d/ui/pause/secret_tile.png" id="2_d6s2i"]
 [ext_resource type="AudioStream" uid="uid://6xc8aacvnaal" path="res://sfx/pause/petselect.wav" id="2_lp7tv"]
 [ext_resource type="AudioStream" uid="uid://bpvbvscg87h3n" path="res://sfx/pause/petselected.wav" id="3_677t1"]
 [ext_resource type="FontFile" uid="uid://bjwx5xagm3xgk" path="res://asset/2d/font/ttf/PetscopWide.ttf" id="4_35tda"]
+[ext_resource type="AudioStream" uid="uid://2fddi2xlt5vn" path="res://sfx/ui/recording_selected.wav" id="5_l5f6y"]
 [ext_resource type="Texture2D" uid="uid://gnvq77ytspgo" path="res://asset/2d/ui/button_outline.png" id="6_1dhai"]
 
 [sub_resource type="Gradient" id="Gradient_yc73v"]
@@ -80,6 +81,7 @@ animations = [{
 }]
 
 [node name="RecordingMenu" type="Marker2D"]
+z_index = 5
 texture_filter = 1
 script = ExtResource("1_ogyyj")
 
@@ -115,6 +117,10 @@ bus = &"HUD_SFX"
 
 [node name="PetSelected" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_677t1")
+bus = &"HUD_SFX"
+
+[node name="RecordingSelected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_l5f6y")
 bus = &"HUD_SFX"
 
 [node name="RecordingOptions" type="Marker2D" parent="."]

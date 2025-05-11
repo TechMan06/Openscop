@@ -25,5 +25,7 @@ class_name SaveData
 #MISC
 @export var sounds: Array[String] = [
 	"res://music/garalina.ogg",
-	"res://music/petscop.ogg"
+	"res://music/petscop.ogg",
+	"res://sfx/pets/care_bye_bye.wav",
+	"res://sfx/pets/care_uh_oh.wav"
 ]

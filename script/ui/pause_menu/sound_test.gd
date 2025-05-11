@@ -10,7 +10,7 @@ var sound_id: int = 0:
 		sound_id = value
 var in_menu: bool = false
 var returning: bool = false
-
+var bye_bye_counter: int = 0
 
 @onready var sound_test_icon: TextureRect = %SoundTestIcon
 @onready var sound_name: Label = %SoundName
@@ -54,6 +54,17 @@ func _process(_delta: float) -> void:
 				button_right.play(&"pressed")
 			
 			if Input.is_action_just_pressed("pressed_action"):
+				if sounds[sound_id].sound.get_path() == "res://sfx/pets/care_bye_bye.wav":
+					bye_bye_counter += 1
+				else:
+					if (
+							sounds[sound_id].sound.get_path() == "res://sfx/pets/care_uh_oh.wav" and
+							bye_bye_counter > 360
+						):
+						recording_menu()
+					else:
+						bye_bye_counter = 0
+				
 				if !button_anim.is_playing():
 					button_anim.play(&"button_anim")
 				else:
@@ -75,13 +86,17 @@ func _process(_delta: float) -> void:
 				queue_free()
 			
 			if Input.is_action_just_pressed("pressed_square"):
-				in_menu = true
-				
-				HUD.fade_animation(Color(0.97, 0.27, 0.07))
-				
-				await HUD.transition_middle
-				
-				sub_menu.add_child(SECRET_MENU.instantiate())
+				recording_menu()
+
+
+func recording_menu() -> void:
+	in_menu = true
+	
+	HUD.fade_animation(Color(0.97, 0.27, 0.07))
+
+	await HUD.transition_middle
+
+	sub_menu.add_child(SECRET_MENU.instantiate())
 
 
 func load_sound(id: int) -> void:
