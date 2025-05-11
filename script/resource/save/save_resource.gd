@@ -7,6 +7,7 @@ class_name SaveData
 @export var save_name: String = ""
 @export var room_name: String = ""
 @export var loading_preset: LoadingPreset
+@export var loading_preset_path: String
 @export var room_path: String = ""
 #ROOM INFO
 @export var piece_log: Dictionary = {}

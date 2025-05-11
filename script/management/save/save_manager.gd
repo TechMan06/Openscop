@@ -32,7 +32,14 @@ func load_slot(slot: int = 0) -> void:
 func load_game(slot: int = 0) -> void:
 	if ResourceLoader.exists("user://savedata/save" + str(slot) + ".tres"):
 		_data = load("user://savedata/save" + str(slot) + ".tres")
-		Global.warp_to(_data.room_path, _data.loading_preset)
+		
+		if (
+				Global.global_data.gen < 4 and 
+				_data.loading_preset_path == "res://resource/loading_preset/ec.tres"
+			):
+			_data.loading_preset_path = "res://resource/loading_preset/ec_old.tres"
+
+		Global.warp_to(_data.room_path, load(_data.loading_preset_path))
 
 
 func save_data(data: SaveData, slot: int) -> void:

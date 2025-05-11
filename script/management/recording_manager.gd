@@ -119,8 +119,8 @@ func _physics_process(_delta: float) -> void:
 func _parse_input(index: int) -> void:
 	if recording_data.p1_data[recording_reader_p1][index] != 0:
 		var _parsed_button: bool = _number_parser(recording_data.p1_data[recording_reader_p1][index])
-		input_sim[index - 1].set_pressed(_parsed_button)
-		Input.parse_input_event(input_sim[index - 1])
+		input_sim[index - 2].set_pressed(_parsed_button)
+		Input.parse_input_event(input_sim[index - 2])
 
 
 func start_recording() -> void:
@@ -220,15 +220,24 @@ func load_recording(filename: String, gen: int = 8) -> void:
 		
 		Global.global_data.gen = gen
 		
-		Global.warp_to(recording_data.save_data.room_path, recording_data.save_data.loading_preset)
+		var recording_loading_preset: String = recording_data.save_data.loading_preset_path
+		
+		if gen < 4:
+			if recording_loading_preset == "res://resource/loading_preset/ec.tres":
+				recording_loading_preset = "res://resource/loading_preset/ec_old.tres"
+		else:
+			if demo:
+				recording_loading_preset = "res://resource/loading_preset/ec_demo.tres"
+		
+		Global.warp_to(recording_data.save_data.room_path, load(recording_loading_preset))
 		Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")
 		
 		await get_tree().create_timer(HUD.FADE_SPEED).timeout
 		
 		if !demo:
 			HUD.display_label(true, filename , gen)
-		
-		HUD.demo_card.play(&"on")
+		else:
+			HUD.demo_card.play(&"on")
 		
 		await EventBus.start_scene
 		

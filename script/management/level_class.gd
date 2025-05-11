@@ -90,8 +90,14 @@ func _ready() -> void:
 	EventBus.nifty_set_pixels.connect(nifty_set_pixels)
 	Console.nifty.connect(_nifty)
 	
+	match hardcoded_properties:
+		HardcodedProperties.EVEN_CARE:
+			if Global.global_data.gen < 4:
+				loading_preset = load("res://resource/loading_preset/ec_old.tres")
+	
 	SaveManager.get_data().room_name = room_name
 	SaveManager.get_data().loading_preset = loading_preset
+	SaveManager.get_data().loading_preset_path = loading_preset.get_path()
 	SaveManager.get_data().room_path = get_tree().get_current_scene().scene_file_path
 	
 	self.set_process_mode(Node.PROCESS_MODE_ALWAYS)
@@ -125,14 +131,6 @@ func _ready() -> void:
 														SaveManager.get_data().player_data.scene_info[2], 
 														SaveManager.get_data().player_data.scene_info[1]
 													])
-	
-	match hardcoded_properties:
-		HardcodedProperties.EVEN_CARE:
-			if Global.global_data.gen < 4:
-				loading_preset = load("res://resource/loading_preset/ec_old.tres")
-			elif RecordingManager.demo:
-				loading_preset = load("res://resource/loading_preset/ec_demo.tres")
-	
 	
 	if Global.global_data.gen < 5 and background_music == 2:
 		background_music = 3
