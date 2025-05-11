@@ -1,5 +1,6 @@
 extends Control
 
+const CURSOR_PIXELS: int = 8.0
 const CURSOR_SPEED: float = 0.5
 const SOUND_TEST: PackedScene = preload("res://scene/ui/pause_menu/sound_test.tscn")
 
@@ -10,6 +11,7 @@ var selected_option: int = 0:
 
 var in_menu: bool = false
 var returning: bool = false
+var cursor_tween: Tween
 
 @onready var cursor: Sprite2D = %Cursor
 @onready var cursor_pos: Marker2D = $CursorPos
@@ -17,14 +19,17 @@ var returning: bool = false
 @onready var sound_menu: Sprite2D = %SoundMenu
 @onready var sub_menu: Control = %SubMenu
 @onready var button_sound: AudioStreamPlayer = $ButtonSound
-@onready var cursor_anim: AnimationPlayer = %CursorAnim
+#@onready var cursor_anim: AnimationPlayer = %CursorAnim
 @onready var cross_button: AnimatedSprite2D = %CrossButton
 @onready var triangle_button: AnimatedSprite2D = %TriangleButton
 
 
 func _ready() -> void:
 	EventBus.return_to_options.connect(unfreeze)
-	
+
+	cursor_tween = create_tween().set_loops()
+	cursor_tween.tween_property(cursor, "position:x", -CURSOR_PIXELS, CURSOR_SPEED).set_trans(Tween.TRANS_SINE).as_relative()
+	cursor_tween.tween_property(cursor, "position:x", CURSOR_PIXELS, CURSOR_SPEED).set_trans(Tween.TRANS_SINE).as_relative()
 	
 	if RecordingManager.replay or RecordingManager.demo:
 		sound_menu.queue_free()
@@ -58,24 +63,23 @@ func _process(delta: float) -> void:
 				else:
 					button.frame_coords.x = 0
 			
-			if Input.is_action_just_pressed("pressed_action"):
+			if Input.is_action_just_pressed("pressed_action") and selected_option > 1:
 				in_menu = true
 				
-				if selected_option > 1:
-					HUD.fade_animation(Color(1.0, 0.85, 1.0))
+				HUD.fade_animation(Color(1.0, 0.85, 1.0))
+			
+				await HUD.transition_middle
+			
+				$SelectSound.play()
+				#cursor_tween.set_process(false)
+				cross_button.pause()
+				triangle_button.pause()
 				
-					await HUD.transition_middle
 				
-					$SelectSound.play()
-					cursor_anim.pause()
-					cross_button.pause()
-					triangle_button.pause()
-					
-					
-					match selected_option:
-						3:
-							BGMusic.mute()
-							sub_menu.add_child(SOUND_TEST.instantiate())
+				match selected_option:
+					3:
+						BGMusic.mute()
+						sub_menu.add_child(SOUND_TEST.instantiate())
 			
 			if Input.is_action_just_pressed("pressed_triangle"):
 				returning = true
@@ -91,6 +95,6 @@ func _process(delta: float) -> void:
 
 func unfreeze() -> void:
 	in_menu = false
-	cursor_anim.play()
+	cursor.paused = false
 	cross_button.play()
 	triangle_button.play()

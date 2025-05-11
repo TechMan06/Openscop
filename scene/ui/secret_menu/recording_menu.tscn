@@ -10,9 +10,9 @@
 
 [sub_resource type="Gradient" id="Gradient_yc73v"]
 offsets = PackedFloat32Array(0.25, 1)
-colors = PackedColorArray(0.968627, 0.270588, 0.0705882, 0, 0.968627, 0.270588, 0.0705882, 1)
+colors = PackedColorArray(0.952941, 0.368627, 0.176471, 0, 0.952941, 0.368627, 0.176471, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_yrjri"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rm8xd"]
 gradient = SubResource("Gradient_yc73v")
 width = 320
 height = 240
@@ -22,9 +22,9 @@ repeat = 2
 
 [sub_resource type="Gradient" id="Gradient_y6nvx"]
 offsets = PackedFloat32Array(0.5, 1)
-colors = PackedColorArray(0.968627, 0.270588, 0.0705882, 0, 0.968627, 0.270588, 0.0705882, 1)
+colors = PackedColorArray(0.952941, 0.368627, 0.176471, 0, 0.952941, 0.368627, 0.176471, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3xnuu"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4bgtd"]
 gradient = SubResource("Gradient_y6nvx")
 width = 320
 height = 240
@@ -94,14 +94,14 @@ stretch_mode = 1
 z_as_relative = false
 offset_right = 320.0
 offset_bottom = 240.0
-texture = SubResource("GradientTexture2D_yrjri")
+texture = SubResource("GradientTexture2D_rm8xd")
 stretch_mode = 1
 
 [node name="Gradient3" type="TextureRect" parent="."]
 z_as_relative = false
 offset_right = 320.0
 offset_bottom = 240.0
-texture = SubResource("GradientTexture2D_3xnuu")
+texture = SubResource("GradientTexture2D_4bgtd")
 stretch_mode = 1
 
 [node name="RecordingButtons" type="Marker2D" parent="."]
