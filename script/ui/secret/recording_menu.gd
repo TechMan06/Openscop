@@ -166,6 +166,8 @@ func _process(_delta: float) -> void:
 			original_button_y = _selected_button.global_position.y
 			
 			if _selected_button.get_index() % 3 != 0 && _selected_button.get_index() != 0:
+				$PetSelected.play()
+				
 				var _button_tween: Tween = create_tween()
 				
 				_button_tween.tween_property(
