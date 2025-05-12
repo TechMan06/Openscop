@@ -27,6 +27,8 @@ var code_array: Array[String] = [
 									"pressed_start"
 								]
 var unlocked_nmp: bool = false
+var inside_wheel: bool = false
+var wheel_id: int = 0
 
 @onready var main_menu: Control = %Main
 @onready var buttons_origin: Marker2D = %ButtonsOrigin
@@ -45,6 +47,8 @@ func _ready() -> void:
 	if RecordingManager.replay:
 		buttons_origin.get_child(4).queue_free()
 	
+	EventBus.pause_leave_sfx.connect(leave_sfx)
+	EventBus.game_paused.emit()
 	EventBus.destroy_hud.connect(_on_destruction)
 	EventBus.destroy_pause.connect(_on_destruction)
 	EventBus.return_to_pause.connect(_on_return_to_pause)
@@ -144,7 +148,12 @@ func _process(_delta: float) -> void:
 						sub_menu.add_child(OPTIONS_MENU.instantiate())
 					
 					2:
-						sub_menu.add_child(PETS_MENU.instantiate())
+						var pet_menu_instance: Control = PETS_MENU.instantiate()
+						
+						pet_menu_instance.inside_wheel = inside_wheel
+						pet_menu_instance.wheel_id = wheel_id
+						
+						sub_menu.add_child(pet_menu_instance)
 						
 				_in_menu = true
 			else:
@@ -211,6 +220,7 @@ func unpause_game() -> void:
 		SaveManager.get_data().unlocked_nmp = true
 		EventBus.unlock_nmp.emit()
 	
+	EventBus.game_unpaused.emit()
 	queue_free()
 
 
@@ -229,6 +239,10 @@ func _on_destruction() -> void:
 	Global.can_pause = true
 	Global.can_unpause = false
 	queue_free()
+
+
+func leave_sfx() -> void:
+	$LeaveSound.play()
 
 
 func crash_pause_menu() -> void:

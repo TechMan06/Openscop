@@ -18,6 +18,8 @@ var nifty_code: Array[String] = ["pressed_l2","pressed_square","pressed_r1","pre
 var input_counter: int = 0
 var last_input: String = ""
 var _player_instance: Player = PLAYER_SCENE.instantiate()
+var inside_wheel: bool = false
+var wheel_id: int = 0
 
 @export_category("Level Manipulator")
 @export_subgroup("Level Settings")
@@ -364,6 +366,7 @@ func _process(delta: float) -> void:
 			if hardcoded_properties == HardcodedProperties.RONETH_ROOM:
 				_pause_instance.secret_code = true
 			
+			_pause_instance.inside_wheel = inside_wheel
 			_pause_instance.level_slogan = level_slogan
 			
 			add_child(_pause_instance)

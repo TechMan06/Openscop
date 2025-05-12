@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dti4mcuo1gyta"
+path="res://.godot/imported/child_wheel.obj-124855dfc9067b216bbc14122eb20f5f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/child_wheel.obj-124855dfc9067b216bbc14122eb20f5f.mesh"]
+
+source_file="res://asset/3d/object/child_wheel.obj"
+dest_files=["res://.godot/imported/child_wheel.obj-124855dfc9067b216bbc14122eb20f5f.mesh", "res://.godot/imported/child_wheel.obj-124855dfc9067b216bbc14122eb20f5f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

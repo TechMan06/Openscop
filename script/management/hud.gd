@@ -26,8 +26,10 @@ func _ready() -> void:
 	return
 
 
-func create_textbox(preset: TextboxResource = DEFAULT_TEXTBOX, text: String = "No Text.", process_always: bool = false) -> void:
+func create_textbox(preset: TextboxResource = DEFAULT_TEXTBOX, text: String = "No Text.", placeholder_strings: Array = [], process_always: bool = false) -> void:
 	var _textbox_instance: Panel = TEXTBOX_SCENE.instantiate()
+	
+	_textbox_instance.placeholder_strings = placeholder_strings
 	_textbox_instance.preset = preset
 	
 	if process_always:

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1fronsmsftx3"]
+
+[ext_resource type="PackedScene" uid="uid://bvts6yrhq4hnm" path="res://scene/object/interactive/common/pet_object.tscn" id="1_m5oyx"]
+[ext_resource type="AudioStream" uid="uid://dsuk3da8t0ph0" path="res://sfx/pets/care_a_cry.wav" id="2_e5bt7"]
+[ext_resource type="Texture2D" uid="uid://bktvqhjhg6ikv" path="res://asset/2d/sprite/object/pet/care_a_standing.png" id="3_6omgc"]
+
+[node name="care_a" type="Marker3D"]
+
+[node name="PetObject" parent="." instance=ExtResource("1_m5oyx")]
+pet_name = "care_a"
+cry_sound_file = ExtResource("2_e5bt7")
+pet_sprite = ExtResource("3_6omgc")
+sprite_offset = Vector2(0, 32)

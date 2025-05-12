@@ -92,6 +92,11 @@
 		"You don't have to love them \nright away."
 	],
 
+	"library_wheel": [
+		"You've decided to leave {0}.",
+		"If you change your mind within 6 months, you can take {1} back.",
+		"What month is it anyway? What\nyear is it?"
+	],
 	
 	"amber": [
 		"Amber is a young ball.",

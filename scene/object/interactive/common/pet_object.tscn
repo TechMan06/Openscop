@@ -27,7 +27,6 @@ script = ExtResource("1_3hxus")
 
 [node name="PetSprite" type="Sprite3D" parent="."]
 material_override = SubResource("ShaderMaterial_floj4")
-offset = Vector2(0, 32)
 pixel_size = 0.03
 
 [node name="PetArea" type="Area3D" parent="."]

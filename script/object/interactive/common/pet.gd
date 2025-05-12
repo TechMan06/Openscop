@@ -7,6 +7,8 @@ signal caught
 
 const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 
+var despawn: bool = true
+
 @export_category("General Settings")
 @export var pet_name: String
 @export var cry_sound_file: AudioStream
@@ -72,7 +74,7 @@ func _ready() -> void:
 		
 		$PetArea/PetCollision.get_shape().size = Vector3(hitbox_size, hitbox_size, hitbox_size)
 		
-		if SaveManager.get_data().pet.find(pet_name) != -1:
+		if SaveManager.get_data().pet.find(pet_name) != -1 and despawn:
 			queue_free()
 
 
@@ -89,6 +91,10 @@ func _on_pet_area_body_entered(body: Node3D) -> void:
 			caught.emit()
 			was_caught = true
 			cry_sound.play()
+			
+			if SaveManager.get_data().sounds.find(cry_sound.get_path()) == -1:
+				SaveManager.get_data().sounds.append(cry_sound.get_path())
+			
 			pet_sprite3d.get_material_override().set_shader_parameter("billboard", false)
 			
 			if body is Player:

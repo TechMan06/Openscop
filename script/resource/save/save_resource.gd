@@ -14,7 +14,7 @@ class_name SaveData
 @export var has_bucket: bool = false
 @export var bucket_direction: int = 0
 #GAME
-@export var pet: Array[String]
+@export var pet: Array[String] = ["care_nlm"]
 @export var corrupted: bool
 @export var unlocked_nmp: bool = false
 @export var unlocked_odd_care: bool = false
@@ -22,6 +22,9 @@ class_name SaveData
 @export var cage: Dictionary = {}
 @export var trapdoor: Dictionary = {}
 @export var anna_phone: Array[int]
+@export var wheel: Dictionary
+@export var wheel_pet: Array[String]
+@export var library_pet: Array[String]
 #MISC
 @export var sounds: Array[String] = [
 	"res://music/garalina.ogg",

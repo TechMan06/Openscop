@@ -9,6 +9,7 @@ const _TYPING_SOUND_VOLUME: float = 5.0
 
 var preset: TextboxResource
 var text: Array = ["No Text"]
+var placeholder_strings: Array = []
 var clean_text: Array = []
 #AMOUNT OF CHARS ON DISPLAY, PAGE OF TEXTBOX.
 var _chars: int = 0
@@ -29,13 +30,21 @@ var _disabled: bool = false
 func _ready() -> void:
 	EventBus.destroy_hud.connect(queue_free)
 	EventBus.text_started.emit()
+	Global.reading_text = true
 	
 	theme = preset.background
 	position = preset.position
 	size = preset.size
 	
-	for textboxes in text:
-		clean_text.append(Global.strip_bbcode(textboxes))
+	var textbox_iterator: int = 0
+	
+	if placeholder_strings != []:
+		for textbox in text:
+			text[textbox_iterator] = textbox.format(placeholder_strings)
+			textbox_iterator += 1
+	
+	for textbox in text:
+		clean_text.append(Global.strip_bbcode(textbox))
 	
 	_textbox_label.visible_characters = 0
 	
@@ -104,6 +113,7 @@ func _process(_delta: float) -> void:
 						_closing_sound.play()
 						await _closing_sound.finished
 					
+					Global.reading_text = false
 					queue_free()
 
 	if preset.destructible && Input.is_action_just_pressed("pressed_triangle"):

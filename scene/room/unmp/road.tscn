@@ -80,6 +80,12 @@ warp_direction = 1
 scene = "res://scene/room/unmp/gg-aa.tscn"
 loading_preset = ExtResource("11_mfco7")
 
+[node name="Warp4" parent="." instance=ExtResource("10_cavb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, 0)
+warp_direction = 1
+scene = "res://scene/room/unmp/gg-aa.tscn"
+loading_preset = ExtResource("11_mfco7")
+
 [node name="SpawnClass2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
 script = ExtResource("9_8egvh")

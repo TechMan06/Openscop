@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://g76vknb3n6cd"]
+[gd_scene load_steps=26 format=3 uid="uid://g76vknb3n6cd"]
 
 [ext_resource type="Script" path="res://script/ui/pause_menu/pets.gd" id="1_l3pxi"]
 [ext_resource type="Resource" uid="uid://w06mrcdadgdp" path="res://resource/pet/amber.tres" id="2_nt3v8"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://cas1nbqcoxbmu" path="res://sfx/pause/locked.wav" id="15_ibi4w"]
 [ext_resource type="AudioStream" uid="uid://bi1uqu6lghp6c" path="res://sfx/pause/invalid.wav" id="16_k7qwv"]
 [ext_resource type="LabelSettings" uid="uid://cb1c82a2dubgn" path="res://resource/theme/font/default.tres" id="16_ntrkb"]
+[ext_resource type="Texture2D" uid="uid://dgedlk5g516a3" path="res://asset/2d/ui/pause/child_library_warn.png" id="20_4xyvy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibh5m"]
 atlas = ExtResource("14_yox3x")
@@ -163,3 +164,46 @@ offset_right = 294.0
 offset_bottom = 220.0
 text = "Go Back"
 label_settings = ExtResource("16_ntrkb")
+
+[node name="WheelOptions" type="Marker2D" parent="."]
+
+[node name="CrossButton" type="AnimatedSprite2D" parent="WheelOptions"]
+position = Vector2(84, 198)
+sprite_frames = SubResource("SpriteFrames_354ix")
+autoplay = "default"
+
+[node name="Drop" type="Label" parent="WheelOptions"]
+offset_left = 95.0
+offset_top = 197.0
+offset_right = 171.0
+offset_bottom = 220.0
+text = "Drop"
+label_settings = ExtResource("16_ntrkb")
+
+[node name="TriangleButton" type="AnimatedSprite2D" parent="WheelOptions"]
+position = Vector2(167, 198)
+sprite_frames = SubResource("SpriteFrames_qlfhw")
+autoplay = "default"
+frame = 1
+
+[node name="GoBack" type="Label" parent="WheelOptions"]
+offset_left = 178.0
+offset_top = 197.0
+offset_right = 254.0
+offset_bottom = 220.0
+text = "Go Back"
+label_settings = ExtResource("16_ntrkb")
+
+[node name="WarnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ChildLibraryWarn" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 98.0
+offset_top = 75.0
+offset_right = 223.0
+offset_bottom = 120.0
+texture = ExtResource("20_4xyvy")
+
+[connection signal="timeout" from="WarnTimer" to="." method="_on_warn_timeout"]

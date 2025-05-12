@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dk8wgbobiciem"]
+[gd_scene load_steps=17 format=3 uid="uid://dk8wgbobiciem"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_8atnx"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_2tn21"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="9_qbkwh"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="10_6mosi"]
 [ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="11_p7pr7"]
+[ext_resource type="PackedScene" uid="uid://81irwd2lletp" path="res://scene/object/interactive/unmp/wheel.tscn" id="13_rxa8v"]
 
 [sub_resource type="Resource" id="Resource_4wbrp"]
 script = ExtResource("3_w7lns")
@@ -40,8 +41,8 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nnr1p"]
-data = PackedVector3Array(1.5, -0.8, -0.5, -1, -0.8, -0.5, 1.5, 0.8, -0.5, 1.5, 0.8, -0.5, -1, -0.8, -0.5, -1, 0.8, -0.5, -1, -0.8, 1, 1.5, -0.8, 1, -1, 0.8, 1, -1, 0.8, 1, 1.5, -0.8, 1, 1.5, 0.8, 1, 1.5, 0.8, 1, 1.5, -0.8, 1, 1.5, 0.8, 3, 1.5, 0.8, 3, 1.5, -0.8, 1, 1.5, -0.8, 3, 1.5, -0.8, -0.5, 1.5, 0.8, -0.5, 1.5, -0.8, -2.5, 1.5, -0.8, -2.5, 1.5, 0.8, -0.5, 1.5, 0.8, -2.5, 1.5, -0.8, -2.5, 1.5, 0.8, -2.5, 27, -0.8, -2.5, 27, -0.8, -2.5, 1.5, 0.8, -2.5, 27, 0.8, -2.5, 27, -0.8, -2.5, 27, 0.8, -2.5, 27, -0.8, -3.5, 27, -0.8, -3.5, 27, 0.8, -2.5, 27, 0.8, -3.5, 27, -0.8, -3.5, 27, 0.8, -3.5, 30.75, -0.8, -3.5, 30.75, -0.8, -3.5, 27, 0.8, -3.5, 30.75, 0.8, -3.5, 30.75, -0.8, -3.5, 30.75, 0.8, -3.5, 30.75, -0.8, -9.5, 30.75, -0.8, -9.5, 30.75, 0.8, -3.5, 30.75, 0.8, -9.5, 32.25, -0.8, -9.5, 32.25, 0.8, -9.5, 32.25, -0.8, -3.5, 32.25, -0.8, -3.5, 32.25, 0.8, -9.5, 32.25, 0.8, -3.5, 32.25, -0.8, -3.5, 32.25, 0.8, -3.5, 40.5, -0.8, -3.5, 40.5, -0.8, -3.5, 32.25, 0.8, -3.5, 40.5, 0.8, -3.5, 40.5, -0.8, -3.5, 40.5, 0.8, -3.5, 40.5, -0.8, -0.5, 40.5, -0.8, -0.5, 40.5, 0.8, -3.5, 40.5, 0.8, -0.5, 40.5, -0.8, -0.5, 40.5, 0.8, -0.5, 42.5, -0.8, -0.5, 42.5, -0.8, -0.5, 40.5, 0.8, -0.5, 42.5, 0.8, -0.5, 1.5, 0.8, 3, 1.5, -0.8, 3, 40.5, 0.8, 3, 40.5, 0.8, 3, 1.5, -0.8, 3, 40.5, -0.8, 3, 40.5, 0.8, 3, 40.5, -0.8, 3, 40.5, 0.8, 1, 40.5, 0.8, 1, 40.5, -0.8, 3, 40.5, -0.8, 1, 40.5, 0.8, 1, 40.5, -0.8, 1, 42.5, 0.8, 1, 42.5, 0.8, 1, 40.5, -0.8, 1, 42.5, -0.8, 1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ct2v4"]
+data = PackedVector3Array(1.5, -0.8, -0.5, -1, -0.8, -0.5, 1.5, 0.8, -0.5, 1.5, 0.8, -0.5, -1, -0.8, -0.5, -1, 0.8, -0.5, -1, -0.8, 1, 1.5, -0.8, 1, -1, 0.8, 1, -1, 0.8, 1, 1.5, -0.8, 1, 1.5, 0.8, 1, 1.5, 0.8, 1, 1.5, -0.8, 1, 1.5, 0.8, 3, 1.5, 0.8, 3, 1.5, -0.8, 1, 1.5, -0.8, 3, 2.5, -0.8, -2.5, 2.5, 0.8, -2.5, 26.5, -0.8, -2.5, 26.5, -0.8, -2.5, 2.5, 0.8, -2.5, 26.5, 0.8, -2.5, 26.5, -0.8, -2.5, 26.5, 0.8, -2.5, 26.5, -0.8, -3.5, 26.5, -0.8, -3.5, 26.5, 0.8, -2.5, 26.5, 0.8, -3.5, 26.5, -0.8, -3.5, 26.5, 0.8, -3.5, 30.75, -0.8, -3.5, 30.75, -0.8, -3.5, 26.5, 0.8, -3.5, 30.75, 0.8, -3.5, 30.75, -0.8, -3.5, 30.75, 0.8, -3.5, 30.75, -0.8, -9.5, 30.75, -0.8, -9.5, 30.75, 0.8, -3.5, 30.75, 0.8, -9.5, 33, -0.8, -3.5, 33, 0.8, -3.5, 40.5, -0.8, -3.5, 40.5, -0.8, -3.5, 33, 0.8, -3.5, 40.5, 0.8, -3.5, 40.5, -0.8, -3.5, 40.5, 0.8, -3.5, 40.5, -0.8, -0.5, 40.5, -0.8, -0.5, 40.5, 0.8, -3.5, 40.5, 0.8, -0.5, 40.5, -0.8, -0.5, 40.5, 0.8, -0.5, 42.5, -0.8, -0.5, 42.5, -0.8, -0.5, 40.5, 0.8, -0.5, 42.5, 0.8, -0.5, 1.5, 0.8, 3, 1.5, -0.8, 3, 40.5, 0.8, 3, 40.5, 0.8, 3, 1.5, -0.8, 3, 40.5, -0.8, 3, 40.5, 0.8, 3, 40.5, -0.8, 3, 40.5, 0.8, 1, 40.5, 0.8, 1, 40.5, -0.8, 3, 40.5, -0.8, 1, 40.5, 0.8, 1, 40.5, -0.8, 1, 42.5, 0.8, 1, 42.5, 0.8, 1, 40.5, -0.8, 1, 42.5, -0.8, 1, 1.5, -0.8, -3.5, 1.5, 0.8, -3.5, 2.5, -0.8, -3.5, 2.5, -0.8, -3.5, 1.5, 0.8, -3.5, 2.5, 0.8, -3.5, 32, -0.8, -2.5, 32, 0.8, -2.5, 33, -0.8, -2.5, 33, -0.8, -2.5, 32, 0.8, -2.5, 33, 0.8, -2.5, 1.5, -0.8, -3.5, 1.5, -0.8, -0.5, 1.5, 0.8, -3.5, 1.5, 0.8, -3.5, 1.5, -0.8, -0.5, 1.5, 0.8, -0.5, 33, 0.8, -3.5, 33, -0.8, -3.5, 33, 0.8, -2.5, 33, 0.8, -2.5, 33, -0.8, -3.5, 33, -0.8, -2.5, 32, -0.8, -2.5, 32, -0.8, -9.5, 32, 0.8, -2.5, 32, 0.8, -2.5, 32, -0.8, -9.5, 32, 0.8, -9.5, 2.5, 0.8, -2.5, 2.5, -0.8, -2.5, 2.5, 0.8, -3.5, 2.5, 0.8, -3.5, 2.5, -0.8, -2.5, 2.5, -0.8, -3.5)
 
 [node name="gg-aa" type="Node3D"]
 script = ExtResource("1_8atnx")
@@ -66,7 +67,7 @@ protected_texture_path = "res://asset/3d/room/under_nmp/ggaa.png"
 [node name="LevelCollision" type="StaticBody3D" parent="."]
 
 [node name="LevelShape" type="CollisionShape3D" parent="LevelCollision"]
-shape = SubResource("ConcavePolygonShape3D_nnr1p")
+shape = SubResource("ConcavePolygonShape3D_ct2v4")
 
 [node name="SpawnClass" type="Marker3D" parent="."]
 script = ExtResource("9_kryej")
@@ -77,6 +78,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 warp_direction = 2
 scene = "res://scene/room/unmp/road.tscn"
 loading_preset = ExtResource("11_p7pr7")
+
+[node name="Wheel" parent="." instance=ExtResource("13_rxa8v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.25, 0.25, -4.5)
 
 [node name="PieceArea" parent="." instance=ExtResource("9_qbkwh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)

@@ -40,16 +40,22 @@ Download the "Seamless" Version
 
 
 Cellar:
+
 Cellar Gauge 1: https://www.textures.com/download/gauges-0011/7878
+
 Cellar Gauge 2: https://www.textures.com/download/gauges-0118/60936
 
 
 
 
 Under the Newmaker Plane:
+
 Road: https://www.textures.com/download/roads-0156/107028
+
 GG-AA Room Floor: https://www.textures.com/download/concrete-new-0012/11262
 
+GG-AA Wheel: https://www.textures.com/download/heavy-rust-pbr0704/140642
+Download the "Albedo"
 
 
 School:

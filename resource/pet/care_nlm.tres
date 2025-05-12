@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="PetResource" load_steps=4 format=3 uid="uid://dfy6qgqc2gy2s"]
+[gd_resource type="Resource" script_class="PetResource" load_steps=5 format=3 uid="uid://dfy6qgqc2gy2s"]
 
 [ext_resource type="Texture2D" uid="uid://bmwt0e5j5i0fu" path="res://asset/2d/ui/pause/pets/care_nlm.png" id="1_g17ko"]
 [ext_resource type="Texture2D" uid="uid://5mdf2cs4bnmf" path="res://asset/2d/ui/pause/pets/care_nlm_name.png" id="2_d4mu3"]
+[ext_resource type="PackedScene" uid="uid://drmqy27s0nhr5" path="res://scene/object/pet/care_nlm.tscn" id="3_4shsm"]
 [ext_resource type="Script" path="res://script/resource/pet_resource.gd" id="3_qampk"]
 
 [resource]
@@ -10,3 +11,7 @@ pet_icon = ExtResource("1_g17ko")
 pet_name = ExtResource("2_d4mu3")
 pet_textbox = "care_nlm"
 pet_id_name = "care_nlm"
+pet_string_name = "[color=#e4dc49]Care NLM[/color]"
+human = true
+egg = false
+pet_scene = ExtResource("3_4shsm")

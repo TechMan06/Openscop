@@ -275,7 +275,7 @@ func _process(_delta: float) -> void:
 			in_recording = true
 			triangle_allowed = false
 			
-			$RecordingSelected.play()
+			EventBus.pause_leave_sfx.emit()
 			
 			get_tree().paused = false
 			

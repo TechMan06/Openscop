@@ -8,6 +8,7 @@ signal return_to_pause
 signal return_to_options
 signal return_to_sound_test
 signal return_to_secret
+signal pause_leave_sfx
 
 signal text_finished
 signal text_started
@@ -20,6 +21,8 @@ signal p2talk_type(word: String, buttons: String)
 
 signal player_spawned(player_obj: Player)
 signal playback_player_spawned(playback_player_obj: PlaybackPlayer)
+
+signal place_pet(wheel_id: int, pet: PetResource)
 
 signal camera_spawned(camera: CameraMarker)
 signal camera_earthquake(value: bool)
@@ -34,6 +37,9 @@ signal nifty_upload(texture: Image)
 signal nifty_finished(texture: Image, draw_layer_texture: Image, pixel_array: Array[Vector2i])
 signal nifty_set_pixels(array: Array[Vector2i])
 
+
+signal game_unpaused
+signal game_paused
 signal destroy_pause
 signal destroy_hud
 
