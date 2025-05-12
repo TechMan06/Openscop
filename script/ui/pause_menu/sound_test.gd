@@ -71,7 +71,7 @@ func _process(_delta: float) -> void:
 					button_anim.stop()
 					button_anim.play(&"button_anim")
 				
-				sound_player.play()
+					sound_player.play()
 			
 			if Input.is_action_just_pressed("pressed_triangle"):
 				returning = true
@@ -101,16 +101,20 @@ func recording_menu() -> void:
 
 func load_sound(id: int) -> void:
 	if id > -1 and id < sounds.size():
-		if SaveManager.get_data().sounds.find(sounds[id].sound.get_path()) != -1:
-			sound_name.text = hex(id).pad_zeros(2) + ". " + sounds[id].name
-			sound_player.volume_db = 0.0
-			sound_player.stream = sounds[id].sound
+		if sounds[id] != null:
+			if SaveManager.get_data().sounds.find(sounds[id].sound.get_path()) != -1:
+				sound_name.text = hex(id).pad_zeros(2) + ". " + sounds[id].name
+				sound_player.volume_db = 0.0
+				sound_player.stream = sounds[id].sound
+			else:
+				sound_name.text = str(id).pad_zeros(2) + ". ?????"
+				sound_player.volume_db = -80.0
 		else:
 			sound_name.text = str(id).pad_zeros(2) + ". ?????"
 			sound_player.volume_db = -80.0
 
 
 func hex(number: int) -> String:
-	var string: String = String.num_int64(number, 16 ,true)
+	var string: String = String.num_int64(number, 64, true)
 	
 	return string

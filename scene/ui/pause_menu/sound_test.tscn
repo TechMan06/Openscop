@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://byl86bdg2utxs"]
+[gd_scene load_steps=46 format=3 uid="uid://byl86bdg2utxs"]
 
 [ext_resource type="Script" path="res://script/ui/pause_menu/sound_test.gd" id="1_xlgej"]
 [ext_resource type="Script" path="res://script/resource/sound_resource.gd" id="2_8c4g6"]
@@ -41,6 +41,27 @@ script = ExtResource("2_8c4g6")
 sound = ExtResource("7_lw8jy")
 name = "Work Zone (Level 2)"
 
+[sub_resource type="AudioStream" id="AudioStream_2d14i"]
+
+[sub_resource type="Resource" id="Resource_sc77o"]
+script = ExtResource("2_8c4g6")
+sound = SubResource("AudioStream_2d14i")
+name = "OOC"
+
+[sub_resource type="AudioStream" id="AudioStream_khqoe"]
+
+[sub_resource type="Resource" id="Resource_chhpq"]
+script = ExtResource("2_8c4g6")
+sound = SubResource("AudioStream_khqoe")
+name = "Driving"
+
+[sub_resource type="AudioStream" id="AudioStream_0s3w2"]
+
+[sub_resource type="Resource" id="Resource_x1raw"]
+script = ExtResource("2_8c4g6")
+sound = SubResource("AudioStream_0s3w2")
+name = "School"
+
 [sub_resource type="Resource" id="Resource_06klt"]
 script = ExtResource("2_8c4g6")
 sound = ExtResource("5_n3yq5")
@@ -50,10 +71,6 @@ name = "Care Says \"Uh-Oh\""
 script = ExtResource("2_8c4g6")
 sound = ExtResource("6_ryclc")
 name = "Care Says \"Bye-Bye\""
-
-[sub_resource type="Resource" id="Resource_ds7pk"]
-script = ExtResource("2_8c4g6")
-name = ""
 
 [sub_resource type="Gradient" id="Gradient_vm411"]
 offsets = PackedFloat32Array(0.25, 1)
@@ -223,7 +240,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xlgej")
-sounds = Array[ExtResource("2_8c4g6")]([SubResource("Resource_8o4h0"), SubResource("Resource_msuy7"), SubResource("Resource_o2u8s"), SubResource("Resource_6fqjt"), SubResource("Resource_pgqls"), SubResource("Resource_06klt"), SubResource("Resource_73upo"), SubResource("Resource_ds7pk")])
+sounds = Array[ExtResource("2_8c4g6")]([SubResource("Resource_8o4h0"), SubResource("Resource_msuy7"), SubResource("Resource_o2u8s"), SubResource("Resource_6fqjt"), SubResource("Resource_pgqls"), null, null, null, null, null, SubResource("Resource_sc77o"), SubResource("Resource_chhpq"), SubResource("Resource_x1raw"), SubResource("Resource_06klt"), SubResource("Resource_73upo")])
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
