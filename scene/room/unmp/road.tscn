@@ -74,6 +74,17 @@ warp_direction = 2
 scene = "res://scene/room/unmp/hallway2.tscn"
 loading_preset = ExtResource("11_mfco7")
 
+[node name="Warp3" parent="." instance=ExtResource("10_cavb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, 0, 0)
+warp_direction = 1
+scene = "res://scene/room/unmp/gg-aa.tscn"
+loading_preset = ExtResource("11_mfco7")
+
+[node name="SpawnClass2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
+script = ExtResource("9_8egvh")
+scene_path = "res://scene/room/unmp/gg-aa.tscn"
+
 [node name="PieceArea" parent="." instance=ExtResource("12_73kry")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 3.5)
 
