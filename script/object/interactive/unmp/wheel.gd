@@ -49,9 +49,11 @@ func pause_anim() -> void:
 
 
 func unpause_anim() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
 	if rotation_tween != null:
-		if !rotation_tween.finished:
-			rotation_tween.play()
+		rotation_tween.play()
 
 
 func rotate_wheel() -> void:

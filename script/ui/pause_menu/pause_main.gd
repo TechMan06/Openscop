@@ -238,6 +238,7 @@ func _on_destruction() -> void:
 	Global.is_game_paused = false
 	Global.can_pause = true
 	Global.can_unpause = false
+	EventBus.game_unpaused.emit()
 	queue_free()
 
 
