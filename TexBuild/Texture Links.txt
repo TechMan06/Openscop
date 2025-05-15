@@ -57,6 +57,15 @@ GG-AA Room Floor: https://www.textures.com/download/concrete-new-0012/11262
 GG-AA Wheel: https://www.textures.com/download/heavy-rust-pbr0704/140642
 Download the "Albedo"
 
+Child Library Easel: https://www.textures.com/download/fabric-plain-0020/3135
+Download the "Seamless" Version
+
+Child Library Tiles: https://www.textures.com/download/tiles-plain-0066/51743
+Download the "Seamless" Version
+
+Child Library Wall: https://www.textures.com/download/marble-other-0097/4373
+Download the "Seamless" Version
+
 
 School:
 

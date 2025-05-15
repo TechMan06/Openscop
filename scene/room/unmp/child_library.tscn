@@ -1,0 +1,133 @@
+[gd_scene load_steps=22 format=3 uid="uid://s8eudqti5a7c"]
+
+[ext_resource type="Script" path="res://script/management/level_class.gd" id="1_rwqro"]
+[ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_s4osq"]
+[ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_4ytrn"]
+[ext_resource type="ArrayMesh" uid="uid://bfhu30yjatisr" path="res://asset/3d/room/under_nmp/child_library.obj" id="4_37ekl"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="5_hvoot"]
+[ext_resource type="Texture2D" uid="uid://pymg65wd0qt2" path="res://asset/3d/room/under_nmp/child_library_placeholder.png" id="6_qsxxs"]
+[ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_jhkia"]
+[ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="8_1tapf"]
+[ext_resource type="PackedScene" uid="uid://81irwd2lletp" path="res://scene/object/interactive/unmp/wheel.tscn" id="9_06lja"]
+[ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="10_rju4e"]
+[ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="11_4oiwd"]
+[ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="12_l2hey"]
+[ext_resource type="ArrayMesh" uid="uid://cif2coblpqlxn" path="res://asset/3d/object/child_library_easel0.obj" id="13_wph35"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="14_0s0as"]
+[ext_resource type="ArrayMesh" uid="uid://blksen1oclgey" path="res://asset/3d/object/child_library_easel1.obj" id="15_vof7r"]
+[ext_resource type="ArrayMesh" uid="uid://bwnw8whkdi04i" path="res://asset/3d/object/child_library_table.obj" id="16_tckau"]
+
+[sub_resource type="Resource" id="Resource_qmc8g"]
+script = ExtResource("3_4ytrn")
+sky_color = Color(0, 0, 0, 1)
+scroll_speed = 0.2
+offset_y = 0.25
+ambient_color = Color(0.7, 0.7, 0.7, 1)
+environment_darkness = 0.7
+enable_fog = true
+fog_color = Color(0, 0, 0, 1)
+fog_radius = 5.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7x8ii"]
+render_priority = 0
+shader = ExtResource("5_hvoot")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("6_qsxxs")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xpq6b"]
+data = PackedVector3Array(8.5, -0.5, -10.5, 6.625, -0.5, -10.5, 8.5, 0.5, -10.5, 8.5, 0.5, -10.5, 6.625, -0.5, -10.5, 6.625, 0.5, -10.5, 0.625, -0.5, 1.5, 0.625, -0.5, -1, 0.625, 0.5, 1.5, 0.625, 0.5, 1.5, 0.625, -0.5, -1, 0.625, 0.5, -1, -0.625, -0.5, -1, -0.625, -0.5, 1.5, -0.625, 0.5, -1, -0.625, 0.5, -1, -0.625, -0.5, 1.5, -0.625, 0.5, 1.5, -3.5, -0.5, -8.5, -3.5, -0.5, -3, -3.5, 0.5, -8.5, -3.5, 0.5, -8.5, -3.5, -0.5, -3, -3.5, 0.5, -3, 0.625, -0.5, -1, 2.5, -0.5, -1, 0.625, 0.5, -1, 0.625, 0.5, -1, 2.5, -0.5, -1, 2.5, 0.5, -1, -3.5, -0.5, -3, -2.5, -0.5, -3, -3.5, 0.5, -3, -3.5, 0.5, -3, -2.5, -0.5, -3, -2.5, 0.5, -3, -1.5, -0.5, -1, -0.625, -0.5, -1, -1.5, 0.5, -1, -1.5, 0.5, -1, -0.625, -0.5, -1, -0.625, 0.5, -1, -2.5, -0.5, -3, -2.5, -0.5, -2, -2.5, 0.5, -3, -2.5, 0.5, -3, -2.5, -0.5, -2, -2.5, 0.5, -2, -2.5, -0.5, -2, -1.5, -0.5, -2, -2.5, 0.5, -2, -2.5, 0.5, -2, -1.5, -0.5, -2, -1.5, 0.5, -2, -1.5, -0.5, -2, -1.5, -0.5, -1, -1.5, 0.5, -2, -1.5, 0.5, -2, -1.5, -0.5, -1, -1.5, 0.5, -1, 2.5, -0.5, -1, 2.5, -0.5, -3.5, 2.5, 0.5, -1, 2.5, 0.5, -1, 2.5, -0.5, -3.5, 2.5, 0.5, -3.5, 0.5, -0.5, -4.5, 2.5, -0.5, -4.5, 0.5, 0.5, -4.5, 0.5, 0.5, -4.5, 2.5, -0.5, -4.5, 2.5, 0.5, -4.5, 8.5, -0.5, -5.5, 8.5, -0.5, -10.5, 8.5, 0.5, -5.5, 8.5, 0.5, -5.5, 8.5, -0.5, -10.5, 8.5, 0.5, -10.5, 5.375, -0.5, -10.5, 5.375, 0.5, -10.5, 5.375, -0.5, -13.5, 5.375, -0.5, -13.5, 5.375, 0.5, -10.5, 5.375, 0.5, -13.5, 5.375, -0.5, -10.5, 0, -0.5, -10.5, 5.375, 0.5, -10.5, 5.375, 0.5, -10.5, 0, -0.5, -10.5, 0, 0.5, -10.5, 6.625, 0.5, -10.5, 6.625, -0.5, -10.5, 6.625, 0.5, -13.5, 6.625, 0.5, -13.5, 6.625, -0.5, -10.5, 6.625, -0.5, -13.5, 0, -0.5, -8.5, -3.5, -0.5, -8.5, 0, 0.5, -8.5, 0, 0.5, -8.5, -3.5, -0.5, -8.5, -3.5, 0.5, -8.5, 0, -0.5, -10.5, 0, -0.5, -8.5, 0, 0.5, -10.5, 0, 0.5, -10.5, 0, -0.5, -8.5, 0, 0.5, -8.5, 0.5, -0.5, -3.5, 0.5, -0.5, -4.5, 0.5, 0.5, -3.5, 0.5, 0.5, -3.5, 0.5, -0.5, -4.5, 0.5, 0.5, -4.5, 2.5, -0.5, -3.5, 0.5, -0.5, -3.5, 2.5, 0.5, -3.5, 2.5, 0.5, -3.5, 0.5, -0.5, -3.5, 0.5, 0.5, -3.5, 2.5, -0.5, -5.5, 8.5, -0.5, -5.5, 2.5, 0.5, -5.5, 2.5, 0.5, -5.5, 8.5, -0.5, -5.5, 8.5, 0.5, -5.5, 2.5, -0.5, -4.5, 2.5, -0.5, -5.5, 2.5, 0.5, -4.5, 2.5, 0.5, -4.5, 2.5, -0.5, -5.5, 2.5, 0.5, -5.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnmuh"]
+render_priority = 0
+shader = ExtResource("14_0s0as")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(0.05, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7bq6"]
+render_priority = 0
+shader = ExtResource("14_0s0as")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[node name="child_library" type="Node3D"]
+script = ExtResource("1_rwqro")
+room_name = "child-library"
+loading_preset = ExtResource("2_s4osq")
+footstep_sound = 5
+camera_offset = Vector3(-0.5, 0, 0)
+allow_front_movement = false
+camera_distance = 5.5
+environment_settings = SubResource("Resource_qmc8g")
+
+[node name="NiftyMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_37ekl")
+surface_material_override/0 = SubResource("ShaderMaterial_7x8ii")
+script = ExtResource("7_jhkia")
+
+[node name="TextureLoader" type="Node" parent="NiftyMesh"]
+script = ExtResource("8_1tapf")
+protected_texture_path = "res://asset/3d/room/under_nmp/child_library.png"
+
+[node name="NiftyMesh2" type="MeshInstance3D" parent="."]
+mesh = ExtResource("15_vof7r")
+surface_material_override/0 = SubResource("ShaderMaterial_7x8ii")
+script = ExtResource("7_jhkia")
+
+[node name="TextureLoader" type="Node" parent="NiftyMesh2"]
+script = ExtResource("8_1tapf")
+protected_texture_path = "res://asset/3d/room/under_nmp/child_library.png"
+
+[node name="LevelCollision" type="StaticBody3D" parent="."]
+
+[node name="LevelShape" type="CollisionShape3D" parent="LevelCollision"]
+shape = SubResource("ConcavePolygonShape3D_xpq6b")
+
+[node name="Wheel" parent="." instance=ExtResource("9_06lja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -2.5)
+
+[node name="SpawnClass" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("10_rju4e")
+scene_path = "res://scene/room/unmp/child_library.tscn"
+place_camera = true
+place_camera_at = Vector3(-0.5, 0, 0)
+
+[node name="Warp" parent="." instance=ExtResource("11_4oiwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+scene = "res://scene/room/unmp/gg-aa.tscn"
+loading_preset = ExtResource("12_l2hey")
+
+[node name="Easel0" type="MeshInstance3D" parent="."]
+mesh = ExtResource("13_wph35")
+surface_material_override/0 = SubResource("ShaderMaterial_rnmuh")
+
+[node name="Table" type="MeshInstance3D" parent="."]
+mesh = ExtResource("16_tckau")
+skeleton = NodePath("../NiftyMesh2")
+surface_material_override/0 = SubResource("ShaderMaterial_i7bq6")

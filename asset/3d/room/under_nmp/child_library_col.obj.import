@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bw1hdibnw078e"
+path="res://.godot/imported/child_library_col.obj-dba104450d7584abbceb803da4db1c33.mesh"
+
+[deps]
+
+files=["res://.godot/imported/child_library_col.obj-dba104450d7584abbceb803da4db1c33.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/child_library_col.obj"
+dest_files=["res://.godot/imported/child_library_col.obj-dba104450d7584abbceb803da4db1c33.mesh", "res://.godot/imported/child_library_col.obj-dba104450d7584abbceb803da4db1c33.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,12 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://81irwd2lletp"]
+[gd_scene load_steps=14 format=3 uid="uid://81irwd2lletp"]
 
 [ext_resource type="Script" path="res://script/object/interactive/unmp/wheel.gd" id="1_o2i26"]
 [ext_resource type="ArrayMesh" uid="uid://dti4mcuo1gyta" path="res://asset/3d/object/child_wheel.obj" id="1_ptctd"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="2_ysm2u"]
 [ext_resource type="Texture2D" uid="uid://c7n0e33ga5l8r" path="res://asset/3d/object/wheel_placeholder.png" id="3_saue4"]
 [ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="4_4kk4y"]
+[ext_resource type="ArrayMesh" uid="uid://cjohifliqg2vf" path="res://asset/3d/object/child_wheel_alt.obj" id="6_j81s3"]
 [ext_resource type="PackedScene" uid="uid://cklrsj73ts2kt" path="res://scene/object/interactive/common/interaction_symbol.tscn" id="6_k07mm"]
+[ext_resource type="ArrayMesh" uid="uid://dr5uj7qenqurc" path="res://asset/3d/object/child_wheel_pillow.obj" id="7_f5v6s"]
 [ext_resource type="AudioStream" uid="uid://bxf2vxuvi7erk" path="res://sfx/object/wheel_turn.wav" id="7_yd6qe"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="8_6vav6"]
 [ext_resource type="AudioStream" uid="uid://gukc8nili0sb" path="res://sfx/object/wheel_place.wav" id="8_ls66p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rr87v"]
@@ -22,8 +25,22 @@ shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/tile_mode = false
 shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/per_quad_depth = false
-shader_parameter/adjustable_depth = false
-shader_parameter/depth_offset = null
+shader_parameter/adjustable_depth = true
+shader_parameter/depth_offset = Vector3(0, 0, -0.125)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp1ue"]
+render_priority = 0
+shader = ExtResource("8_6vav6")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = true
+shader_parameter/depth_offset = Vector3(0, 0, -0.125)
 
 [node name="Wheel" type="Marker3D"]
 process_mode = 3
@@ -40,6 +57,19 @@ surface_material_override/0 = SubResource("ShaderMaterial_rr87v")
 [node name="TextureLoader" type="Node" parent="WheelRot/WheelMesh"]
 script = ExtResource("4_4kk4y")
 protected_texture_path = "res://asset/3d/object/wheel.png"
+
+[node name="WheelMeshAlt" type="MeshInstance3D" parent="WheelRot"]
+mesh = ExtResource("6_j81s3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_rr87v")
+
+[node name="TextureLoader" type="Node" parent="WheelRot/WheelMeshAlt"]
+script = ExtResource("4_4kk4y")
+protected_texture_path = "res://asset/3d/object/wheel.png"
+
+[node name="WheelPillow" type="MeshInstance3D" parent="WheelRot/WheelMeshAlt"]
+mesh = ExtResource("7_f5v6s")
+surface_material_override/0 = SubResource("ShaderMaterial_rp1ue")
 
 [node name="PetObj" type="Marker3D" parent="WheelRot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.15)

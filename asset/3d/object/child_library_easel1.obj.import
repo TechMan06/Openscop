@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://blksen1oclgey"
+path="res://.godot/imported/child_library_easel1.obj-6194fb2362b9440099b07c71985d2f70.mesh"
+
+[deps]
+
+files=["res://.godot/imported/child_library_easel1.obj-6194fb2362b9440099b07c71985d2f70.mesh"]
+
+source_file="res://asset/3d/object/child_library_easel1.obj"
+dest_files=["res://.godot/imported/child_library_easel1.obj-6194fb2362b9440099b07c71985d2f70.mesh", "res://.godot/imported/child_library_easel1.obj-6194fb2362b9440099b07c71985d2f70.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

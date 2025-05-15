@@ -8,6 +8,7 @@ var rotation_tween: Tween
 
 @export_category("Phone Properties")
 @export var wheel_id: int
+@export var alt_model: bool = false
 @export var turned: bool = false
 
 @onready var wheel_rot: Marker3D = $WheelRot
@@ -20,11 +21,11 @@ func _ready() -> void:
 	EventBus.game_paused.connect(pause_anim)
 	EventBus.game_unpaused.connect(unpause_anim)
 	
+	$WheelRot/WheelMeshAlt.visible = alt_model
+	$WheelRot/WheelMesh.visible = !alt_model
+	
 	if get_tree().get_current_scene() is Level:
 		room = get_tree().get_current_scene()
-	
-	if turned:
-		SaveManager.get_data().wheel[str(wheel_id)][0] = [true, pet]
 	
 	if SaveManager.get_data().wheel.has(str(wheel_id)):
 		if SaveManager.get_data().wheel[str(wheel_id)][0]:
@@ -32,12 +33,14 @@ func _ready() -> void:
 	else:
 		SaveManager.get_data().wheel[str(wheel_id)] = [false, pet]
 	
+	if turned:
+		SaveManager.get_data().wheel[str(wheel_id)][0] = true
+	
 	pet = SaveManager.get_data().wheel[str(wheel_id)][1]
 	
 	if pet != null:
 		pet_obj.visible = true
 		place_pet()
-
 	
 	interaction_symbol.in_area.connect(_in_wheel)
 	interaction_symbol.triggered.connect(rotate_wheel)
@@ -64,10 +67,7 @@ func rotate_wheel() -> void:
 			
 			$TurnSound.play()
 			
-			if SaveManager.get_data().wheel.has(str(wheel_id)):
-				SaveManager.get_data().wheel[str(wheel_id)][0] = [false, null]
-			else:
-				SaveManager.get_data().wheel[str(wheel_id)] = [true, null]
+			SaveManager.get_data().wheel[str(wheel_id)][0] = !SaveManager.get_data().wheel[str(wheel_id)][0]
 			
 			rotation_tween = create_tween()
 			rotation_tween.tween_property(
@@ -80,6 +80,7 @@ func rotate_wheel() -> void:
 			await rotation_tween.finished
 			
 			if pet != null:
+				SaveManager.get_data().wheel[str(wheel_id)][1] = null
 				SaveManager.get_data().library_pet.append(pet.pet_id_name)
 				pet_obj.get_child(0).queue_free()
 				pet_obj.visible = false
@@ -129,8 +130,6 @@ func place_pet() -> void:
 			else:
 				pet_instance.get_child(0).despawn = false
 				pet_instance.get_child(0).disable_collection = true
-			
-			
 			
 			pet_obj.add_child(pet_instance)
 
