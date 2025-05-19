@@ -59,5 +59,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 stream = SubResource("AudioStreamRandomizer_m6ecn")
 panning_strength = 2.0
 bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

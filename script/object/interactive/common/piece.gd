@@ -3,6 +3,7 @@
 extends Area3D
 class_name Piece
 
+const PIECE_SEED: int = 26
 const ANIM_SPEED: int = 10
 const HOR_SPEED: int = 5
 const VER_SPEED: int = 5
@@ -34,7 +35,7 @@ func _ready() -> void:
 	if !Engine.is_editor_hint():
 		var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 		
-		rng.set_seed(SaveManager.get_data().save_seed)
+		rng.set_seed(PIECE_SEED)
 		
 		room_name = get_tree().get_current_scene().room_name
 		
