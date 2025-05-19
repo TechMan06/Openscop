@@ -74,6 +74,8 @@ func _process(delta: float) -> void:
 				
 				await HUD.transition_middle
 				
+				BGMusic.unmute()
+				
 				EventBus.return_to_sound_test.emit()
 				
 				queue_free()

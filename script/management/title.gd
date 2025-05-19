@@ -373,6 +373,7 @@ func _on_file_created(file_name: String, attach_node: Node) -> void:
 		_default_data.save_name = file_name
 		_default_data.room_path = "res://scene/room/gift_plane/gift_plane.tscn"
 		_default_data.loading_preset = load("res://resource/loading_preset/gift_load.tres")
+		_default_data.loading_preset_path = "res://resource/loading_preset/gift_load.tres"
 		_default_data.player_data = PlayerStats.new()
 		SaveManager.save_data(_default_data, selected_file)
 		check_files()

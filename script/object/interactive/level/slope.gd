@@ -214,6 +214,6 @@ func _on_slope_area_body_entered(body: Node3D) -> void:
 func _on_slope_area_body_exited(body):
 	if entities.find(body) != -1:
 		entities.erase(body)
-		
-		if !slope_up:
-			body.player_stats.entity_y = body.entity_min
+
+	if !slope_up:
+		body.player_stats.entity_y = body.entity_min

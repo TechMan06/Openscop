@@ -99,7 +99,10 @@ func _ready() -> void:
 	
 	SaveManager.get_data().room_name = room_name
 	SaveManager.get_data().loading_preset = loading_preset
-	SaveManager.get_data().loading_preset_path = loading_preset.get_path()
+	
+	if loading_preset != null:
+		SaveManager.get_data().loading_preset_path = loading_preset.get_path()
+	
 	SaveManager.get_data().room_path = get_tree().get_current_scene().scene_file_path
 	
 	self.set_process_mode(Node.PROCESS_MODE_ALWAYS)

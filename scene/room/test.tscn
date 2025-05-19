@@ -125,6 +125,8 @@ script = ExtResource("12_v5duc")
 [node name="Slope" parent="." instance=ExtResource("13_w8ply")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
 slope_length = 2.0
+slope_direction = 3
+slope_up = true
 
 [node name="Darkener" parent="." instance=ExtResource("14_jo3ns")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
@@ -138,7 +140,7 @@ scene = "res://scene/room/test.tscn"
 loading_preset = SubResource("Resource_1qxky")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -5, 0, -2)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -5, 2, -2)
 mesh = SubResource("BoxMesh_e5i30")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]

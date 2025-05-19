@@ -32,8 +32,8 @@ func _physics_process(delta: float) -> void:
 													)
 												)
 		
-		if entity.player_stats.entity_y >= 0.5:
-			entity.player_stats.entity_y -= 0.5
+		if entity.player_stats.entity_y > 0.0:
+			entity.player_stats.entity_y -= clamp(entity.player_stats.entity_y, 0.0, 0.5)
 		
 		entity_sprite.position.y = entity.entity_min + entity.player_stats.entity_y
 	

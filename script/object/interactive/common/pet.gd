@@ -92,8 +92,8 @@ func _on_pet_area_body_entered(body: Node3D) -> void:
 			was_caught = true
 			cry_sound.play()
 			
-			if SaveManager.get_data().sounds.find(cry_sound.get_path()) == -1:
-				SaveManager.get_data().sounds.append(cry_sound.get_path())
+			if SaveManager.get_data().sounds.find(cry_sound.get_stream().get_path()) == -1:
+				SaveManager.get_data().sounds.append(cry_sound.get_stream().get_path())
 			
 			pet_sprite3d.get_material_override().set_shader_parameter("billboard", false)
 			

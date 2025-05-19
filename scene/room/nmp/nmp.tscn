@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://4me8yyhhjy42"]
+[gd_scene load_steps=25 format=3 uid="uid://4me8yyhhjy42"]
 
 [ext_resource type="ArrayMesh" uid="uid://bvoytwwvqkwh" path="res://asset/3d/room/nmp/grass.obj" id="1_otb4p"]
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_xubgh"]
+[ext_resource type="Resource" uid="uid://byotx5pl4dp1j" path="res://resource/loading_preset/nmp_load.tres" id="2_abhgy"]
 [ext_resource type="Resource" uid="uid://v3gcw1nk78p2" path="res://resource/environment/nmp.tres" id="2_yoyrk"]
 [ext_resource type="Script" path="res://script/object/environment/grass.gd" id="4_pg4oa"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="5_gmsef"]
@@ -73,6 +74,8 @@ data = PackedVector3Array(-1.5, 1, -0.5, -1.5, 0, -0.5, -1.5, 1, -3.5, -1.5, 1, 
 
 [node name="Plane" type="Node3D"]
 script = ExtResource("1_xubgh")
+room_name = "newmaker-plane"
+loading_preset = ExtResource("2_abhgy")
 level_slogan = "Have you found anything weird lately?
 
 There is much to find in this place."
