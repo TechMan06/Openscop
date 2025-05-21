@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpyie5v77klte"]
+
+[ext_resource type="Texture2D" uid="uid://b0iky7v2otnd1" path="res://asset/2d/ui/child_library/canvas_bg_placeholder.png" id="2_vkoxi"]
+
+[node name="Canvas" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("2_vkoxi")

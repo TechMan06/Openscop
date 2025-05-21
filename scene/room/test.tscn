@@ -76,7 +76,8 @@ shader_parameter/depth_offset = Vector3(0, -4, 0)
 [node name="TestLevel" type="Node3D"]
 script = ExtResource("1_y30j2")
 loading_preset = ExtResource("2_e4std")
-level_slogan = "If you wanna be my lover, you gotta gotta be my friend"
+use_slogan_list = false
+level_slogan = "This is the level slogan!"
 footstep_sound = 1
 environment_settings = ExtResource("2_we153")
 
