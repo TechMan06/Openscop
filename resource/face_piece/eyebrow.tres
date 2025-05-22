@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FacePieceResource" load_steps=2 format=3 uid="uid://ba6r3a8ynt8be"]
+
+[ext_resource type="Script" path="res://script/resource/face_piece_resource.gd" id="1_v47c2"]
+
+[resource]
+script = ExtResource("1_v47c2")
+variations = 4
+has_none_option = true
+use_row = 1

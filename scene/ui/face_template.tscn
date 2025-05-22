@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://drac3e6i8y4lx"]
+
+[ext_resource type="Script" path="res://script/ui/child_face.gd" id="1_i8wj0"]
+[ext_resource type="Shader" path="res://shader/canvas/face_piece.gdshader" id="2_37c6s"]
+[ext_resource type="Script" path="res://script/ui/child_face_piece.gd" id="3_k7v2r"]
+[ext_resource type="Texture2D" uid="uid://ce8yguw8xekcc" path="res://asset/2d/ui/child_library/face_pieces.png" id="3_pdyol"]
+[ext_resource type="Resource" uid="uid://bce33vkexynd8" path="res://resource/face_piece/eye.tres" id="5_3n0yr"]
+[ext_resource type="Resource" uid="uid://ba6r3a8ynt8be" path="res://resource/face_piece/eyebrow.tres" id="5_i3d6g"]
+[ext_resource type="Script" path="res://script/resource/face_piece_resource.gd" id="7_5pjol"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_srns1"]
+shader = ExtResource("2_37c6s")
+shader_parameter/enabled = false
+shader_parameter/old_color = Color(0, 0, 0, 1)
+shader_parameter/new_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_aa7sv"]
+script = ExtResource("7_5pjol")
+variations = 5
+has_none_option = false
+use_row = 2
+
+[node name="FaceTemplate" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_i8wj0")
+
+[node name="EyeLeft" type="Sprite2D" parent="." node_paths=PackedStringArray("is_parent_of")]
+material = SubResource("ShaderMaterial_srns1")
+texture = ExtResource("3_pdyol")
+hframes = 5
+vframes = 3
+script = ExtResource("3_k7v2r")
+resource = ExtResource("5_3n0yr")
+is_parent_of = NodePath("../EyebrowLeft")
+horizontal_offset = null
+vertical_offset = null
+horizontal_placement = 0
+vertical_placement = 0
+
+[node name="EyeRight" type="Sprite2D" parent="." node_paths=PackedStringArray("is_parent_of")]
+material = SubResource("ShaderMaterial_srns1")
+position = Vector2(16, 0)
+texture = ExtResource("3_pdyol")
+hframes = 5
+vframes = 3
+script = ExtResource("3_k7v2r")
+resource = ExtResource("5_3n0yr")
+is_parent_of = NodePath("../EyebrowRight")
+horizontal_placement = 2
+vertical_placement = 0
+
+[node name="EyebrowLeft" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_srns1")
+position = Vector2(0, -7)
+texture = ExtResource("3_pdyol")
+hframes = 5
+vframes = 3
+frame = 5
+script = ExtResource("3_k7v2r")
+resource = ExtResource("5_i3d6g")
+vertical_placement = 0
+
+[node name="EyebrowRight" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_srns1")
+position = Vector2(16, -7)
+texture = ExtResource("3_pdyol")
+hframes = 5
+vframes = 3
+frame = 5
+script = ExtResource("3_k7v2r")
+resource = ExtResource("5_i3d6g")
+vertical_placement = 0
+
+[node name="Nose" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_srns1")
+position = Vector2(9, 7)
+texture = ExtResource("3_pdyol")
+hframes = 5
+vframes = 3
+frame = 10
+script = ExtResource("3_k7v2r")
+resource = SubResource("Resource_aa7sv")
+vertical_placement = 2

@@ -1,10 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpyie5v77klte"]
+[gd_scene load_steps=3 format=3 uid="uid://bpyie5v77klte"]
 
+[ext_resource type="Script" path="res://script/ui/child_library_canvas.gd" id="1_jm4di"]
 [ext_resource type="Texture2D" uid="uid://b0iky7v2otnd1" path="res://asset/2d/ui/child_library/canvas_bg_placeholder.png" id="2_vkoxi"]
 
 [node name="Canvas" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_jm4di")
+
+[node name="Faces" type="Marker2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+z_as_relative = false
+position = Vector2(112, 49)
 
 [node name="Background" type="TextureRect" parent="."]
+z_as_relative = false
 offset_right = 320.0
 offset_bottom = 240.0
 texture = ExtResource("2_vkoxi")
