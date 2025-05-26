@@ -1,6 +1,7 @@
 extends Node2D
 class_name ChildFace
 
+signal loading_finished
 
 var horizontal_offset_counter: int = 0
 var vertical_offset_counter: int = 0
@@ -9,12 +10,6 @@ var selected: bool = false
 @export var vertical_offsets: Array[int]
 @export var horizontal_offsets: Array[int]
 @export var expression: Array[int]
-
-
-func update_color(value: bool) -> void:
-	for face_piece in get_children():
-		face_piece.selected = value
-		face_piece.update()
 
 
 func _ready() -> void:
@@ -31,7 +26,21 @@ func _ready() -> void:
 	update()
 
 
+func update_color(value: bool) -> void:
+	for face_piece in get_children():
+		face_piece.selected = value
+		face_piece.update()
+		
+		if face_piece.get_child_count() > 0:
+			for face_piece_child in face_piece.get_children():
+				face_piece_child.selected = value
+				face_piece_child.update()
+
+
 func update() -> void:
+	vertical_offset_counter = 0
+	horizontal_offset_counter = 0
+	
 	for face_piece in get_children():
 		if face_piece is FacePiece:
 			face_piece.expression = expression[face_piece.get_index()]

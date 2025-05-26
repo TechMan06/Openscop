@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpyie5v77klte"]
+[gd_scene load_steps=4 format=3 uid="uid://bpyie5v77klte"]
 
 [ext_resource type="Script" path="res://script/ui/child_library_canvas.gd" id="1_jm4di"]
 [ext_resource type="Texture2D" uid="uid://b0iky7v2otnd1" path="res://asset/2d/ui/child_library/canvas_bg_placeholder.png" id="2_vkoxi"]
+[ext_resource type="PackedScene" uid="uid://drac3e6i8y4lx" path="res://scene/ui/face_template.tscn" id="3_7e68g"]
 
 [node name="Canvas" type="Node2D"]
 texture_filter = 1
@@ -18,3 +19,10 @@ z_as_relative = false
 offset_right = 320.0
 offset_bottom = 240.0
 texture = ExtResource("2_vkoxi")
+
+[node name="FaceTemplate" parent="." instance=ExtResource("3_7e68g")]
+visible = false
+position = Vector2(52, 52)
+vertical_offsets = Array[int]([4, 4, 0, 0, 0])
+horizontal_offsets = Array[int]([0, 0])
+expression = Array[int]([0, 0, 1, 1, 1])

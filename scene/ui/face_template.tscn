@@ -32,12 +32,11 @@ vframes = 3
 script = ExtResource("3_k7v2r")
 resource = ExtResource("5_3n0yr")
 is_parent_of = NodePath("../EyebrowLeft")
-horizontal_offset = null
-vertical_offset = null
+max_offset_options_horizontal = 3
 horizontal_placement = 0
 vertical_placement = 0
 
-[node name="EyeRight" type="Sprite2D" parent="." node_paths=PackedStringArray("is_parent_of")]
+[node name="EyeRight" type="Sprite2D" parent="EyeLeft" node_paths=PackedStringArray("is_parent_of", "is_child_of")]
 material = SubResource("ShaderMaterial_srns1")
 position = Vector2(16, 0)
 texture = ExtResource("3_pdyol")
@@ -45,7 +44,8 @@ hframes = 5
 vframes = 3
 script = ExtResource("3_k7v2r")
 resource = ExtResource("5_3n0yr")
-is_parent_of = NodePath("../EyebrowRight")
+is_parent_of = NodePath("../../EyebrowRight")
+is_child_of = NodePath("..")
 horizontal_placement = 2
 vertical_placement = 0
 
@@ -58,6 +58,7 @@ vframes = 3
 frame = 5
 script = ExtResource("3_k7v2r")
 resource = ExtResource("5_i3d6g")
+max_offset_options_vertical = 2
 vertical_placement = 0
 
 [node name="EyebrowRight" type="Sprite2D" parent="."]
@@ -69,6 +70,7 @@ vframes = 3
 frame = 5
 script = ExtResource("3_k7v2r")
 resource = ExtResource("5_i3d6g")
+max_offset_options_vertical = 2
 vertical_placement = 0
 
 [node name="Nose" type="Sprite2D" parent="."]
@@ -80,4 +82,6 @@ vframes = 3
 frame = 10
 script = ExtResource("3_k7v2r")
 resource = SubResource("Resource_aa7sv")
+expression = 2
+max_offset_options_vertical = 3
 vertical_placement = 2

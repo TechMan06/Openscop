@@ -11,6 +11,7 @@ var current_option: int = 0
 var options_available: int = 0
 var face_counter: int = 0
 var selectable: bool = false
+var offset_limit: int = 0
 
 var vertical_offsets: Array[int]
 var horizontal_offsets: Array[int]
@@ -22,8 +23,6 @@ var expression: Array[int]
 
 func _ready():
 	var face: ChildFace = FACE_EXPRESSION.instantiate()
-	
-	add_child(face)
 	
 	for face_piece in face.get_children():
 		expression.append(0)
@@ -54,6 +53,13 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("pressed_action"):
 			if current_state < expression_counter:
 				expression[current_state] = current_option
+			else:
+				if current_state != expression_counter + 2:
+					vertical_offsets[vertical_offset_counter] = current_option
+					vertical_offset_counter += 1
+				else:
+					horizontal_offsets[horizontal_offset_counter] = current_option
+					horizontal_offset_counter += 1
 			
 			current_state += 1
 			
@@ -61,11 +67,14 @@ func _process(_delta: float) -> void:
 		
 		if Input.is_action_just_pressed("pressed_triangle") and current_state > 0:
 			current_state -= 1
+			
+			if vertical_offset_counter > 0:
+				vertical_offset_counter -= 1
+			
 			refresh()
 
 
 func refresh() -> void:
-	print(expression)
 	face_counter = 0
 	current_option = 0
 	update()
@@ -120,29 +129,53 @@ func update() -> void:
 	else:
 		counter_face.queue_free()
 		
-		options_available = MAX_OFFSETS
-		
-		while face_counter <= MAX_OFFSETS:
-			var face: ChildFace = FACE_EXPRESSION.instantiate()
+		if current_state != expression_counter + 2:
+			options_available = counter_face.get_child(current_state - expression_counter).max_offset_options_vertical
+			
+			while face_counter <= options_available:
+				var face: ChildFace = FACE_EXPRESSION.instantiate()
 
-			faces.add_child(face)
-			
-			if face_counter == 0:
-				face.selected = true
-				face.update_color(true)
-			
-			face.expression = expression
+				faces.add_child(face)
+				
+				if face_counter == 0:
+					face.selected = true
+					face.update_color(true)
+				
+				face.expression = expression
 
-			face.vertical_offsets = vertical_offsets
-			face.horizontal_offsets = horizontal_offsets
-			face.vertical_offsets[vertical_offset_counter] = face_counter
-			face.horizontal_offsets[horizontal_offset_counter] = face_counter
-			face.position = Vector2(20 * face_counter, 35 * face_counter)
-			face.update()
-			face_counter += 1
+				face.vertical_offsets = vertical_offsets
+				face.horizontal_offsets = horizontal_offsets
+				face.vertical_offsets[vertical_offset_counter] = face_counter
+				face.position = Vector2(20 * face_counter, 35 * face_counter)
+				face.update()
+				face_counter += 1
+				
+				for expression in face.get_children():
+					if expression.get_index() > current_state:
+						expression.queue_free()
+		else:
+			options_available = counter_face.get_child(current_state - expression_counter).max_offset_options_horizontal
 			
-			for expression in face.get_children():
-				if expression.get_index() > current_state:
-					expression.queue_free()
+			while face_counter <= options_available:
+				var face: ChildFace = FACE_EXPRESSION.instantiate()
+
+				faces.add_child(face)
+				
+				if face_counter == 0:
+					face.selected = true
+					face.update_color(true)
+				
+				face.expression = expression
+
+				face.vertical_offsets = vertical_offsets
+				face.horizontal_offsets = horizontal_offsets
+				face.horizontal_offsets[horizontal_offset_counter] = face_counter
+				face.position = Vector2(20 * face_counter, 35 * face_counter)
+				face.update()
+				face_counter += 1
+				
+				for expression in face.get_children():
+					if expression.get_index() > current_state:
+						expression.queue_free()
 	
 	selectable = true
