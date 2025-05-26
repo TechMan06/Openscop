@@ -36,7 +36,7 @@ max_offset_options_horizontal = 3
 horizontal_placement = 0
 vertical_placement = 0
 
-[node name="EyeRight" type="Sprite2D" parent="EyeLeft" node_paths=PackedStringArray("is_parent_of", "is_child_of")]
+[node name="EyeRight" type="Sprite2D" parent="." node_paths=PackedStringArray("is_parent_of", "is_child_of")]
 material = SubResource("ShaderMaterial_srns1")
 position = Vector2(16, 0)
 texture = ExtResource("3_pdyol")
@@ -44,8 +44,8 @@ hframes = 5
 vframes = 3
 script = ExtResource("3_k7v2r")
 resource = ExtResource("5_3n0yr")
-is_parent_of = NodePath("../../EyebrowRight")
-is_child_of = NodePath("..")
+is_parent_of = NodePath("../EyebrowRight")
+is_child_of = NodePath("../EyeLeft")
 horizontal_placement = 2
 vertical_placement = 0
 
