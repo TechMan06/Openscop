@@ -42,6 +42,12 @@ signal game_unpaused
 signal game_paused
 signal destroy_pause
 signal destroy_hud
+signal create_face(
+						id: int,
+						expression: Array[int], 
+						horizontal_offset: Array[int], 
+						vertical_offset: Array[int]
+					)
 
 signal room_started(level: Level)
 signal gen_specific_object_spawned(settings: GenSpecific)

@@ -3,16 +3,22 @@ class_name ChildFace
 
 signal loading_finished
 
+var id: int = 0
 var horizontal_offset_counter: int = 0
 var vertical_offset_counter: int = 0
 var selected: bool = false
 
+@export var overworld: bool = false
 @export var vertical_offsets: Array[int]
 @export var horizontal_offsets: Array[int]
 @export var expression: Array[int]
 
 
 func _ready() -> void:
+	if overworld:
+		visible = false
+		EventBus.create_face.connect(apply_variables)
+	
 	for face_piece in get_children():
 		if face_piece is FacePiece:
 			expression.append(0)
@@ -24,6 +30,23 @@ func _ready() -> void:
 				vertical_offsets.append(0)
 	
 	update()
+
+
+func apply_variables(
+						new_id: int,
+						new_expression: Array[int], 
+						new_horizontal_offset: Array[int], 
+						new_vertical_offset: Array[int]
+					) -> void:
+	if new_id == id:
+		if !visible:
+			visible = true
+		
+		expression = new_expression
+		vertical_offsets = new_vertical_offset
+		horizontal_offsets = new_horizontal_offset
+		
+		update()
 
 
 func update_color(value: bool) -> void:

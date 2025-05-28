@@ -3,10 +3,9 @@ extends Node2D
 const FACE_EXPRESSION: PackedScene = preload("res://scene/ui/face_template.tscn")
 const MAX_OFFSETS: int = 3
 
+var id: int = 0
 var current_state: int = 0
 var expression_counter: int = 0
-var horizontal_offset_counter: int = 0
-var vertical_offset_counter: int = 0
 var current_option: int = 0
 var options_available: int = 0
 var face_counter: int = 0
@@ -18,11 +17,15 @@ var horizontal_offsets: Array[int]
 var expression: Array[int]
 
 
+@export var slides: Array[CanvasSlideResource]
+
 @onready var faces: Marker2D = %Faces
 
 
 func _ready():
 	var face: ChildFace = FACE_EXPRESSION.instantiate()
+	
+	SaveManager.get_data().player_data.input_enabled = false
 	
 	for face_piece in face.get_children():
 		expression.append(0)
@@ -51,32 +54,53 @@ func _process(_delta: float) -> void:
 			update_faces()
 		
 		if Input.is_action_just_pressed("pressed_action"):
-			if current_state < expression_counter:
-				expression[current_state] = current_option
-			else:
-				if current_state != expression_counter + 2:
-					vertical_offsets[vertical_offset_counter] = current_option
-					vertical_offset_counter += 1
-				else:
-					horizontal_offsets[horizontal_offset_counter] = current_option
-					horizontal_offset_counter += 1
+			match slides[current_state].affect:
+				0:
+					expression[slides[current_state].index_of_child_affected] = current_option
+				1:
+					vertical_offsets[
+										slides[current_state].index_of_child_affected
+									] = current_option
+				2:
+					horizontal_offsets[
+											slides[current_state].index_of_child_affected
+										] = current_option
 			
 			current_state += 1
 			
-			refresh()
+			if current_state == slides.size():
+				EventBus.create_face.emit(id, expression, horizontal_offsets, vertical_offsets)
+				SaveManager.get_data().player_data.input_enabled = true
+				queue_free()
+			else:
+				refresh()
 		
 		if Input.is_action_just_pressed("pressed_triangle") and current_state > 0:
-			current_state -= 1
-			
-			if vertical_offset_counter > 0:
-				vertical_offset_counter -= 1
-			
-			refresh()
+			if current_state != 0:
+				match slides[current_state].affect:
+					0:
+						expression[slides[current_state].index_of_child_affected] = 0
+					1:
+						vertical_offsets[
+											slides[current_state].index_of_child_affected
+										] = 0
+					2:
+						horizontal_offsets[
+												slides[current_state].index_of_child_affected
+											] = 0
+				
+				current_state -= 1
+				
+				refresh()
+			else:
+				SaveManager.get_data().player_data.input_enabled = true
+				queue_free()
 
 
 func refresh() -> void:
 	face_counter = 0
 	current_option = 0
+	
 	update()
 
 
@@ -100,82 +124,65 @@ func update() -> void:
 	
 	add_child(counter_face)
 	
-	if current_state < expression_counter:
-		options_available = counter_face.get_child(current_state).resource.variations - 1
+	match slides[current_state].affect:
+		0:
+			if current_state < expression_counter:
+				options_available = counter_face.get_child(
+																current_state
+															).resource.variations - 1
+			
+				if counter_face.get_child(current_state).resource.has_none_option:
+					options_available += 1
+		1:
+			options_available = counter_face.get_child(
+															slides[
+																		current_state
+																	].index_of_child_affected
+														).max_offset_options_vertical
+		2:
+			options_available = counter_face.get_child(
+															slides[
+																		current_state
+																	].index_of_child_affected
+														).max_offset_options_horizontal
 		
-		if counter_face.get_child(current_state).resource.has_none_option:
-			options_available += 1
-			
-		counter_face.queue_free()
+	counter_face.queue_free()
 
-		while face_counter <= options_available:
-			var face: ChildFace = FACE_EXPRESSION.instantiate()
+	while face_counter <= options_available:
+		var face: ChildFace = FACE_EXPRESSION.instantiate()
 
-			faces.add_child(face)
-			
-			if face_counter == 0:
-				face.selected = true
-				face.update_color(true)
-			
-			face.expression = expression
-			face.expression[current_state] = face_counter
-			face.position = Vector2(20 * face_counter, 35 * face_counter)
-			face.update()
-			face_counter += 1
-			
-			for expression in face.get_children():
-				if expression.get_index() > current_state:
-					expression.queue_free()
-	else:
-		counter_face.queue_free()
+		faces.add_child(face)
 		
-		if current_state != expression_counter + 2:
-			options_available = counter_face.get_child(current_state - expression_counter).max_offset_options_vertical
-			
-			while face_counter <= options_available:
-				var face: ChildFace = FACE_EXPRESSION.instantiate()
-
-				faces.add_child(face)
-				
-				if face_counter == 0:
-					face.selected = true
-					face.update_color(true)
-				
-				face.expression = expression
-
-				face.vertical_offsets = vertical_offsets
-				face.horizontal_offsets = horizontal_offsets
-				face.vertical_offsets[vertical_offset_counter] = face_counter
-				face.position = Vector2(20 * face_counter, 35 * face_counter)
-				face.update()
-				face_counter += 1
-				
-				for expression in face.get_children():
-					if expression.get_index() > current_state:
-						expression.queue_free()
-		else:
-			options_available = counter_face.get_child(current_state - expression_counter).max_offset_options_horizontal
-			
-			while face_counter <= options_available:
-				var face: ChildFace = FACE_EXPRESSION.instantiate()
-
-				faces.add_child(face)
-				
-				if face_counter == 0:
-					face.selected = true
-					face.update_color(true)
-				
-				face.expression = expression
-
-				face.vertical_offsets = vertical_offsets
-				face.horizontal_offsets = horizontal_offsets
-				face.horizontal_offsets[horizontal_offset_counter] = face_counter
-				face.position = Vector2(20 * face_counter, 35 * face_counter)
-				face.update()
-				face_counter += 1
-				
-				for expression in face.get_children():
-					if expression.get_index() > current_state:
-						expression.queue_free()
+		if face_counter == 0:
+			face.selected = true
+			face.update_color(true)
+		
+		face.vertical_offsets = vertical_offsets
+		face.horizontal_offsets = horizontal_offsets
+		face.expression = expression
+		
+		match slides[current_state].affect:
+			0:
+				face.expression[slides[current_state].index_of_child_affected] = face_counter
+			1:
+				face.vertical_offsets[
+											slides[current_state].index_of_child_affected
+										] = face_counter
+			2:
+				face.horizontal_offsets[
+											slides[
+														current_state
+													].index_of_child_affected
+										] = face_counter
+		
+		face.position = Vector2(20 * face_counter, 35 * face_counter)
+		
+		face.update()
+		
+		face_counter += 1
+		
+		for expression in face.get_children():
+			if expression.get_index() > current_state:
+				expression.queue_free()
 	
 	selectable = true

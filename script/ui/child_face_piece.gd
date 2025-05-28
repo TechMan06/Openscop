@@ -14,7 +14,7 @@ var extra_offset: Vector2i
 @export var selected: bool = false
 @export var expression: int = 0
 @export var is_parent_of: FacePiece
-@export var is_child_of: FacePiece
+@export var mirror_piece: FacePiece
 @export var max_offset_options_horizontal: int = 0
 @export var max_offset_options_vertical: int = 0
 
@@ -38,10 +38,10 @@ func update() -> void:
 		finished_load.emit()
 		sent = true
 	
-	if is_child_of == null:
+	if mirror_piece == null:
 		offset.x = extra_offset.x + (horizontal_offset * OFFSET_VALUE_HORIZONTAL * get_left_right(horizontal_placement))
 	else:
-		offset.x = is_child_of.extra_offset.x + (is_child_of.horizontal_offset * OFFSET_VALUE_HORIZONTAL * get_left_right(horizontal_placement))
+		offset.x = mirror_piece.extra_offset.x + (mirror_piece.horizontal_offset * OFFSET_VALUE_HORIZONTAL * get_left_right(horizontal_placement))
 	
 	offset.y = extra_offset.y + (vertical_offset * OFFSET_VALUE_VERTICAL * get_left_right(vertical_placement))
 	

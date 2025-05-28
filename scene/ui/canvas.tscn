@@ -1,18 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpyie5v77klte"]
+[gd_scene load_steps=15 format=3 uid="uid://bpyie5v77klte"]
 
 [ext_resource type="Script" path="res://script/ui/child_library_canvas.gd" id="1_jm4di"]
+[ext_resource type="Script" path="res://script/resource/canvas_slide.gd" id="2_5tgui"]
 [ext_resource type="Texture2D" uid="uid://b0iky7v2otnd1" path="res://asset/2d/ui/child_library/canvas_bg_placeholder.png" id="2_vkoxi"]
-[ext_resource type="PackedScene" uid="uid://drac3e6i8y4lx" path="res://scene/ui/face_template.tscn" id="3_7e68g"]
+
+[sub_resource type="Resource" id="Resource_xsgok"]
+script = ExtResource("2_5tgui")
+affect = 0
+index_of_child_affected = 0
+
+[sub_resource type="Resource" id="Resource_cdnfj"]
+script = ExtResource("2_5tgui")
+affect = 0
+index_of_child_affected = 1
+
+[sub_resource type="Resource" id="Resource_t164u"]
+script = ExtResource("2_5tgui")
+affect = 0
+index_of_child_affected = 2
+
+[sub_resource type="Resource" id="Resource_pfhh3"]
+script = ExtResource("2_5tgui")
+affect = 0
+index_of_child_affected = 3
+
+[sub_resource type="Resource" id="Resource_05h7b"]
+script = ExtResource("2_5tgui")
+affect = 0
+index_of_child_affected = 4
+
+[sub_resource type="Resource" id="Resource_p8rw2"]
+script = ExtResource("2_5tgui")
+affect = 1
+index_of_child_affected = 0
+
+[sub_resource type="Resource" id="Resource_oflqa"]
+script = ExtResource("2_5tgui")
+affect = 1
+index_of_child_affected = 1
+
+[sub_resource type="Resource" id="Resource_k5sky"]
+script = ExtResource("2_5tgui")
+affect = 2
+index_of_child_affected = 0
+
+[sub_resource type="Resource" id="Resource_a4fmo"]
+script = ExtResource("2_5tgui")
+affect = 1
+index_of_child_affected = 2
+
+[sub_resource type="Resource" id="Resource_sgrto"]
+script = ExtResource("2_5tgui")
+affect = 1
+index_of_child_affected = 3
+
+[sub_resource type="Resource" id="Resource_bg4ri"]
+script = ExtResource("2_5tgui")
+affect = 1
+index_of_child_affected = 4
 
 [node name="Canvas" type="Node2D"]
+process_mode = 1
 texture_filter = 1
 script = ExtResource("1_jm4di")
-
-[node name="Faces" type="Marker2D" parent="."]
-unique_name_in_owner = true
-z_index = 1
-z_as_relative = false
-position = Vector2(112, 49)
+slides = Array[ExtResource("2_5tgui")]([SubResource("Resource_xsgok"), SubResource("Resource_cdnfj"), SubResource("Resource_t164u"), SubResource("Resource_pfhh3"), SubResource("Resource_05h7b"), SubResource("Resource_p8rw2"), SubResource("Resource_oflqa"), SubResource("Resource_k5sky"), SubResource("Resource_a4fmo"), SubResource("Resource_sgrto"), SubResource("Resource_bg4ri")])
 
 [node name="Background" type="TextureRect" parent="."]
 z_as_relative = false
@@ -20,9 +71,7 @@ offset_right = 320.0
 offset_bottom = 240.0
 texture = ExtResource("2_vkoxi")
 
-[node name="FaceTemplate" parent="." instance=ExtResource("3_7e68g")]
-visible = false
-position = Vector2(52, 52)
-vertical_offsets = Array[int]([4, 4, 0, 0, 0])
-horizontal_offsets = Array[int]([0, 0])
-expression = Array[int]([0, 0, 1, 1, 1])
+[node name="Faces" type="Marker2D" parent="."]
+unique_name_in_owner = true
+z_as_relative = false
+position = Vector2(112, 49)

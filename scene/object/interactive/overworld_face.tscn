@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbthuj1ruvyii"]
+
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha_blend.gdshader" id="1_b4oe5"]
+[ext_resource type="Script" path="res://script/object/interactive/overworld_face.gd" id="1_xt5xe"]
+[ext_resource type="PackedScene" uid="uid://drac3e6i8y4lx" path="res://scene/ui/face_template.tscn" id="2_sfu2h"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_u03u6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_20ufh"]
+viewport_path = NodePath("FaceViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nr1a6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_b4oe5")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = SubResource("ViewportTexture_20ufh")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
+[node name="OverworldChildFace" type="Marker3D"]
+script = ExtResource("1_xt5xe")
+
+[node name="FaceMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_u03u6")
+surface_material_override/0 = SubResource("ShaderMaterial_nr1a6")
+
+[node name="FaceViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Face" parent="FaceViewport" instance=ExtResource("2_sfu2h")]
+unique_name_in_owner = true
+position = Vector2(24, 32)
+overworld = true

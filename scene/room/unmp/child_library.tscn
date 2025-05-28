@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://s8eudqti5a7c"]
+[gd_scene load_steps=24 format=3 uid="uid://s8eudqti5a7c"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_rwqro"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_s4osq"]
@@ -16,6 +16,8 @@
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="14_0s0as"]
 [ext_resource type="ArrayMesh" uid="uid://blksen1oclgey" path="res://asset/3d/object/child_library_easel1.obj" id="15_vof7r"]
 [ext_resource type="ArrayMesh" uid="uid://bwnw8whkdi04i" path="res://asset/3d/object/child_library_table.obj" id="16_tckau"]
+[ext_resource type="PackedScene" uid="uid://cbthuj1ruvyii" path="res://scene/object/interactive/overworld_face.tscn" id="17_s5n0o"]
+[ext_resource type="Script" path="res://script/object/trigger/canvas_trigger.gd" id="18_7twwh"]
 
 [sub_resource type="Resource" id="Resource_qmc8g"]
 script = ExtResource("3_4ytrn")
@@ -131,3 +133,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_rnmuh")
 mesh = ExtResource("16_tckau")
 skeleton = NodePath("../NiftyMesh2")
 surface_material_override/0 = SubResource("ShaderMaterial_i7bq6")
+
+[node name="OverworldChildFace" parent="." instance=ExtResource("17_s5n0o")]
+transform = Transform3D(1.51554, 0.226467, -0.845185, 0, 1.69037, 0.452933, 0.875, -0.392252, 1.4639, 1.1805, 1.17475, -4.28276)
+
+[node name="CanvasTrigger" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+script = ExtResource("18_7twwh")
+height_offset = 2.5
+min_distance = 0.75
