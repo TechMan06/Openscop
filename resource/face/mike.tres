@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FaceResource" load_steps=2 format=3 uid="uid://dr8r6ueg3xrvw"]
+
+[ext_resource type="Script" path="res://script/resource/face_resource.gd" id="1_nd0tt"]
+
+[resource]
+script = ExtResource("1_nd0tt")
+expression = Array[int]([2, 2, 1, 1, 2])
+horizontal_offsets = Array[int]([1, 0])
+vertical_offsets = Array[int]([0, 0, 0, 0, 0])
+textbox = ""

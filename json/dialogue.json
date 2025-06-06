@@ -172,6 +172,17 @@
 
 	"rebirth": [
 			"? You should start thinking about that."
-		]
+		],
+	
+	
+	"library_care": [
+		"[color=#e4dc49]Care[/color] is missing.",
+		"You may visit her room."
+	],
+
+	"library_mike": [
+		"Mike is not inside right now. He is dead.",
+		"You may visit his room."
+	]
 }
 

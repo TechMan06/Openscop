@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FaceResource" load_steps=2 format=3 uid="uid://bojuxs030ekmt"]
+
+[ext_resource type="Script" path="res://script/resource/face_resource.gd" id="1_remsg"]
+
+[resource]
+script = ExtResource("1_remsg")
+expression = Array[int]([1, 1, 0, 0, 0])
+horizontal_offsets = Array[int]([2, 0])
+vertical_offsets = Array[int]([0, 0, 0, 0, 2])
+textbox = "You found her."

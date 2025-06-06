@@ -138,7 +138,7 @@ func _on_arrow_timer_timeout() -> void:
 
 func _on_type_speed_timeout() -> void:
 	if _textbox <= text.size() - 1:
-		if _chars < text[_textbox].length():
+		if _chars < adjust_position(text[_textbox]):
 			_chars += 1
 			_check_character()
 			_type_speed.start()
@@ -164,3 +164,19 @@ func _check_character() -> void:
 		_type_speed.wait_time = _PUNCTUATION_WAIT
 		_typing_sound.playing = false
 		_typing_sound.volume_db = -80.
+
+
+func adjust_position(string: String) -> int:
+	var _regex = RegEx.new()
+	
+	_regex.compile("\\[.+?\\]")
+	
+	var _new_pos: int = string.length()
+	var _left_string: String = string.left(_new_pos)
+	var _prev_bbcode: Array[RegExMatch] = _regex.search_all(_left_string)
+	
+	for _result in _prev_bbcode:
+		_new_pos -= _result.get_string().length()
+	
+	#print(_new_pos)
+	return _new_pos

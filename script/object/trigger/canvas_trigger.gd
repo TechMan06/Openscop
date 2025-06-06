@@ -9,6 +9,7 @@ const CANVAS_SCENE: PackedScene = preload("res://scene/ui/canvas.tscn")
 func _on_trigger() -> void:
 	var canvas_instance: Node2D = CANVAS_SCENE.instantiate()
 	
-	canvas_instance.id = id
-	
-	add_child(canvas_instance)
+	if !Global.reading_text:
+		canvas_instance.id = id
+		
+		add_child(canvas_instance)

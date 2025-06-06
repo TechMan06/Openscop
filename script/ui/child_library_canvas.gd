@@ -11,6 +11,7 @@ var options_available: int = 0
 var face_counter: int = 0
 var selectable: bool = false
 var offset_limit: int = 0
+var face_sent: bool = false
 
 var vertical_offsets: Array[int]
 var horizontal_offsets: Array[int]
@@ -69,13 +70,17 @@ func _process(_delta: float) -> void:
 			current_state += 1
 			
 			if current_state == slides.size():
-				EventBus.create_face.emit(id, expression, horizontal_offsets, vertical_offsets)
+				if !face_sent:
+					EventBus.create_face.emit(id, expression, horizontal_offsets, vertical_offsets)
+					print("EXPRESSION: " + str(expression) + "\nHORIZONTAL_OFFSETS: " + str(horizontal_offsets) + "\nVERTICAL_OFFSETS: " + str(vertical_offsets))
+					face_sent = true
+				
 				SaveManager.get_data().player_data.input_enabled = true
 				queue_free()
 			else:
 				refresh()
 		
-		if Input.is_action_just_pressed("pressed_triangle") and current_state > 0:
+		if Input.is_action_just_pressed("pressed_triangle"):
 			if current_state != 0:
 				match slides[current_state].affect:
 					0:
