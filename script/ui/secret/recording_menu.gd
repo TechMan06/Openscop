@@ -26,11 +26,11 @@ var options_selected_option: int = 0:
 			0:
 				outline_buttons.position.y = 95
 				button_right_offset.position.x = 0
-				outline_buttons.visible = true
+				outline_buttons.visible = recording_options.visible
 			1:
-				outline_buttons.visible = true
 				outline_buttons.position.y = 130
 				button_right_offset.position.x = -11
+				outline_buttons.visible = recording_options.visible
 			2:
 				outline_buttons.visible = false
 		
@@ -142,6 +142,8 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("pressed_action") && action_allowed:
 			action_allowed = false
 			
+			$PetSelected.play()
+			
 			for button in recording_buttons.get_children():
 				if recording_buttons.get_child(selected_option) != button:
 					if button.get_index() % 2:
@@ -166,8 +168,6 @@ func _process(_delta: float) -> void:
 			original_button_y = _selected_button.global_position.y
 			
 			if _selected_button.get_index() % 3 != 0 && _selected_button.get_index() != 0:
-				$PetSelected.play()
-				
 				var _button_tween: Tween = create_tween()
 				
 				_button_tween.tween_property(
@@ -187,6 +187,8 @@ func _process(_delta: float) -> void:
 			selected_rot = _selected_button.recording_resource.rotation
 		
 		if Input.is_action_just_pressed("pressed_triangle"):
+			# TODO: Add Sound Effect
+			
 			returning = true
 				
 			HUD.fade_animation(Color(0.97, 0.27, 0.07))
@@ -207,24 +209,25 @@ func _process(_delta: float) -> void:
 													button, 
 													"position:x", 
 													0, 
-													1.0
+													0.5
 												).set_trans(Tween.TRANS_SINE)
 			
-			await get_tree().create_timer(1.0, true).timeout
-			
-			recording_options.visible=false
+			recording_options.visible = false
+			outline_buttons.visible = false
 			
 			var _button_tween = create_tween()
+			
 			_button_tween.tween_property(
 											recording_buttons.get_child(selected_option), 
 											"global_position:y", 
 											original_button_y, 
-											1.0
+											0.5
 										).set_trans(Tween.TRANS_SINE)
+			
 			await _button_tween.finished
 			
 			options_selected_option = 0
-			outline_buttons.visible = false
+			
 			checking_recording = false
 			triangle_allowed = true
 			action_allowed = true
