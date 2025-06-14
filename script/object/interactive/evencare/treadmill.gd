@@ -2,15 +2,21 @@
 extends Marker3D
 class_name Treadmill
 
+## Class used on Pen's treadmill, this is the physical treadmill object the player walks on.
+
+## This signal is sent to an object of the [TreadmillCounter] class to change the value of the treadmill counter.
 signal add_number(backwards: bool)
 
+
+## Objects of the [Entity] class that are currently on the treadmill.
 var entity_array: Array[Entity]
+## Direction the treadmill is currently moving to.
 var backwards: bool = false
 
-@export var treadmill_min: int = 0
-@export var treadmill_max: int = 0
 
+## [AnimatedSprite3D] object used on top of the treadmill.
 @onready var treadmill_top: AnimatedSprite3D = $TreadmillTop
+## [AudioStreamPlayer3D] object responsible for the sound effects played by the treadmill.
 @onready var treadmill_sound: AudioStreamPlayer3D = $TreadmillSound
 
 
@@ -73,10 +79,11 @@ func _on_treadmill_exited(body):
 
 
 func _place_player_on_treadmill(body: Entity) -> void:
-	if !body._treadmill:
-		body._treadmill = true
-		body.global_position.z = self.global_position.z
+	if body._treadmill:
+		return
 	
+	body._treadmill = true
+	body.global_position.z = self.global_position.z
 
 
 func _add_number() -> void:

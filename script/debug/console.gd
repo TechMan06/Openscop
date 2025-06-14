@@ -1,18 +1,23 @@
 extends Window
 
+## Code for the Console Autoload, responsible for receiving, parsing, processing and executing commands that affect the game or perform debug functions.
+
 signal load_recording(filename: String)
 signal nifty
 signal set_camera(cam_mode: int)
 
 #SHOUTOUTS TO IZZINT
-# TODO: fix tooltips
+## TODO: fix tooltips
 @export_category("Console")
 ## The [LineEdit] to be parsed.
 @export var console_input: LineEdit
 ## The [RichTextLabel] to display Console output.
 @export var console_output: RichTextLabel
+## [Button] object you can press to submit a button.
 @export var parse_button: Button
 
+
+## Variable used to decide whether to print recording data to the console.
 var recording_parse: bool = false
 
 
@@ -34,12 +39,14 @@ func _process(_delta: float) -> void:
 		_submit_command()
 
 
+## Splits the command string into arguments, empties the console and submits them.
 func _submit_command() -> void:
 	var command_array: PackedStringArray = console_input.text.split(" ")
 	console_input.text = ""
 	_parse_command(command_array)
 
 
+## Parses the command and affects the game accordingly.
 func _parse_command(input : Array) -> void:
 	console_log("[color=yellow]Command parsed: [/color]" + input[0])
 	
@@ -149,6 +156,7 @@ func _parse_command(input : Array) -> void:
 			console_log("[color=red]Invalid Command![/color]")
 
 
+## Check if the command has arguments.
 func check_valid_argument(input: Array) -> String:
 	if input.size() > 1:
 		return input[1]
@@ -156,6 +164,7 @@ func check_valid_argument(input: Array) -> String:
 		return ""
 
 
+## Prints text onto the console.
 func console_log(input: String, clear_console: bool = true) -> void:
 	console_output.append_text(input)
 	console_output.newline()

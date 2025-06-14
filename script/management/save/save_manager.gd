@@ -1,8 +1,14 @@
 extends Node
 
 
+## SaveManager Autoload, responsible for creating, loading and providing the game's save data to other parts of the game.
+
+
+## Path of the SaveData folder, this folder is created by the [Global] autoload in the [method Globa._ready] method.
 const SAVE_PATH: String = "user://savedata/"
 
+
+## The save data, uses a [SaveData] [Resource].
 var _data: SaveData = SaveData.new()
 var _player_stats: PlayerStats
 

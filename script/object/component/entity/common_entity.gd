@@ -1,8 +1,13 @@
 extends Node
 class_name EntityComponent
+## Common Compoenent used by the [PlaybackPlayer] and [Player] objects.
+## This Node is responsible for the player's physics and sprite animation.
 
+## [Entity] the component is assigned to.
 @export var entity: Entity
+## The [Sprite3D] that belongs to that [Entity].
 @export var entity_sprite: Sprite3D
+## Timer used with Pen's treadmill when using the Action or Triangle button to move on it.
 @export var treadmill_timer: Timer
 
 
@@ -99,7 +104,6 @@ func _physics_process(delta: float) -> void:
 			entity.is_walking = false
 	
 	if entity.is_walking:
-		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
 		if entity_sprite.frame_coords.x != entity_sprite.hframes - 1 && entity_sprite.hframes % 2 > 0:
 			entity._current_frame += entity._ANIMATION_SPEED * delta
 		else:
