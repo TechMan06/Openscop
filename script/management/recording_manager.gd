@@ -311,6 +311,9 @@ func recording_name() -> String:
 			if _recording_name.begins_with("family"):
 				_counter += 1
 		
-		_recording_filename = "family" + str(_counter)
+		if _counter > 0:
+			_recording_filename = "family" + str(_counter)
+		else:
+			return "family"
 	
 	return _recording_filename
