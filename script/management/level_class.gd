@@ -1,37 +1,42 @@
 @icon("res://icon/level.png")
 extends Node3D
 class_name Level 
-# do you think its worth it to make this a class? - izz
+## [center]Do you think its worth it to make this a class? - Izz[/center]
+## [center]Yes Izzint, it is! - Cheddar[/center]
+## 
+## This [Node] inherits the [Node3D] Node, it is responsible for setting up the level, the cameras, the level background, and setting up and spawning the pause menu, alongside many other things.
+## This documentation only explains the variables and functions, for information on using this node, check the GitHub documentation.
 
-const PAUSE_SCENE: PackedScene = preload("res://scene/ui/pause_menu/pause_menu.tscn")
-const FOG_FOCUS_OBJECT: PackedScene = preload("res://scene/object/instantiate/fog_focus.tscn")
-const CAMERA_OBJECT: PackedScene = preload("res://scene/management/camera_marker.tscn")
-const DRAW_MODE: PackedScene = preload("res://scene/ui/draw_mode.tscn")
-const PLAYER_SCENE: PackedScene = preload("res://scene/object/player/player.tscn")
 
-var environment_obj: WorldEnvironment = WorldEnvironment.new()
-var room_texture: Image
-var draw_texture: Image
+const PAUSE_SCENE: PackedScene = preload("res://scene/ui/pause_menu/pause_menu.tscn") ## The [PackedScene] for the pause menu.
+const FOG_FOCUS_OBJECT: PackedScene = preload("res://scene/object/instantiate/fog_focus.tscn") ## The [PackedScene] for the fog focus.
+const CAMERA_OBJECT: PackedScene = preload("res://scene/management/camera_marker.tscn") ## The [PackedScene] for the camera, uses the [CameraMarker] class.
+const DRAW_MODE: PackedScene = preload("res://scene/ui/draw_mode.tscn") ## The [PackedScene] for draw mode.
+const PLAYER_SCENE: PackedScene = preload("res://scene/object/player/player.tscn") ## The [PackedScene] for the [Player].
+
+var environment_obj: WorldEnvironment = WorldEnvironment.new() ## The [WorldEnvironment] object used in the level background.
+var room_texture: Image ## The texture for the main level [MeshInstance3D], provided by the [NiftyMesh].
+var draw_texture: Image ## The texture for the drawing made by the player in Draw Mode, applied on top of the [member Level.room_texture] using the [method.Level.nifty_set_pixels] function.
 
 #CODES
-var nifty_code: Array[String] = ["pressed_l2","pressed_square","pressed_r1","pressed_triangle","pressed_r2","pressed_up","pressed_r2","pressed_circle","pressed_r2","pressed_circle"]
-var input_counter: int = 0
-var last_input: String = ""
-var _player_instance: Player = PLAYER_SCENE.instantiate()
-var inside_wheel: bool = false
-var wheel_id: int = 0
+var nifty_code: Array[String] = ["pressed_l2","pressed_square","pressed_r1","pressed_triangle","pressed_r2","pressed_up","pressed_r2","pressed_circle","pressed_r2","pressed_circle"] ## The array containing the keys for unlocking the draw mode.
+var input_counter: int = 0 ## The counter that plays counts how many of the inputs in [method Level.nifty_code] have been pressed.
+var last_input: String = "" ## Checks the last input pressed to unlock Draw Mode.
+var _player_instance: Player = PLAYER_SCENE.instantiate() ## The [Player] scene instantiated.
+var inside_wheel: bool = false ## Sets whether the player is near the Child Library wheel, to spawn a special Pause Menu.
+var wheel_id: int = 0 ## The ID of the wheel the player is currently next to.
 
 @export_category("Level Manipulator")
 @export_subgroup("Level Settings")
-@export var room_name: String = ""
-@export var loading_preset: LoadingPreset
-@export var save_bgm_to_sound_test: bool = true
-@export_enum("None:0", "GiftPlane:1", "EvenCare:2", "Level 2:3") var background_music: int = 0
-@export var allow_recording: bool = true
-@export var use_slogan_list: bool = true
-@export_multiline var level_slogan: String = ""
-@export var school_preset: bool = false
-@export var spawn_player: bool = true
+@export var room_name: String = "" ## The internal name of the level, used on [member SaveData.piece_log] to identify each room.
+@export var loading_preset: LoadingPreset ## The [LoadingPreset] used for the loading screen when this room is accessed via the level select.
+@export var save_bgm_to_sound_test: bool = true ## Whether to save the background music to the sound test.
+@export_enum("None:0", "GiftPlane:1", "EvenCare:2", "Level 2:3") var background_music: int = 0 ## Background music of the level.
+@export var allow_recording: bool = true ## Whether to do recordings in this room using [RecordingManager], if disabled, the room won't start recording when the player enters it. If [RecordingManager] is already recording, it stops recording when the room is started, default value is [code]true[/code].
+@export var use_slogan_list: bool = true ## Whether to use the pre-defined slogan list provided by the [Global] Node, default value is [code]true[/code].
+@export_multiline var level_slogan: String = "" ## If [member Level.use_slogan_list] is [code]false[/code], use the slogan written in this variable.
+@export var school_preset: bool = false ## Whether this level uses settings specific to the school.
+@export var spawn_player: bool = true ## Whether to spawn the [Player] in the level, enabled by default.
 @export_enum(
 			"None",
 			"EvenCare", 
@@ -40,41 +45,41 @@ var wheel_id: int = 0
 			"Cement2", 
 			"Cement3", 
 			"School", 
-			"Sand") var footstep_sound: int = 0
+			"Sand") var footstep_sound: int = 0 ## Footstep sound to use in this level by default.
 @export_category("Starting Textbox Settings")
-@export_multiline var textbox: String = ""
-@export var textbox_preset: TextboxResource
+@export_multiline var textbox: String = "" ## Textbox to be shown when the room starts, if empty, no textbox is shown.
+@export var textbox_preset: TextboxResource ## [TextboxResource] to be used in the textbox spawned if [member Level.textbox] isn't empty.
 @export_subgroup("General Camera Properties")
-@export var spawn_camera_root: bool = true
-@export var focus_on_player: bool = true
-@export var camera_focus: Node3D
-@export_enum("Copy:0", "Follow:1", "Pov:2", "Lerp:3") var camera_mode: int = 1
+@export var spawn_camera_root: bool = true ## Whether to spawn the [CameraMarker], enabled by default.
+@export var focus_on_player: bool = true ## Whether [CameraMarker] should focus on the [Player], enabled by default.
+@export var camera_focus: Node3D ## If [member Level.focus_on_player] is [code]false[/code], object [CameraMarker] should focus on.
+@export_enum("Copy:0", "Follow:1", "Pov:2", "Lerp:3") var camera_mode: int = 1 ## Camera mode the [Level] spawned [CameraMarker] should use.
 @export_subgroup("Camera_Properties")
-@export var place_camera_at: Vector3 = Vector3.ZERO
-@export var camera_offset: Vector3 = Vector3.ZERO
-@export var allow_horizontal_movement: bool = true
-@export var allow_front_movement: bool = true
-@export var allow_vertical_movement = true
-@export var camera_height: float = 4.0
-@export var camera_distance: float = 12.0
-@export var camera_angle: float = -18.0
-@export var camera_root_offset_y: float = 0.0
+@export var place_camera_at: Vector3 = Vector3.ZERO ## Where to place the [CameraMarker] upon spawn.
+@export var camera_offset: Vector3 = Vector3.ZERO ## Placement offset of the [CameraMarker] in relation to it's default spawn position and the [member Level.place_camera_at] position.
+@export var allow_horizontal_movement: bool = true ## Whether to allow horizontal movement of the [Level] spawned [CameraMarker], default value is [code]true[/code], enabled by default.
+@export var allow_front_movement: bool = true ## Whether to allow front movement of the [Level] spawned [CameraMarker], default value is [code]true[/code], enabled by default.
+@export var allow_vertical_movement = true ## Whether to allow vertical movement of the [Level] spawned [CameraMarker], enabled by default.
+@export var camera_height: float = 4.0 ## The vertical position the camera is placed on, default value is [code]4.0[/code].
+@export var camera_distance: float = 12.0 ## The horizontal position the camera is placed on, default value is [code]12.0[/code].
+@export var camera_angle: float = -18.0 ## The camera angle in degrees, default value is [code]-18.0[/code].
+@export var camera_root_offset_y: float = 0.0 ## Offset of the camera's vertical placement in relation to [member Level.camera_height].
 @export_subgroup("Limit Camera")
-@export var limit_camera_horizontal: bool = false
-@export var horizontal_limit: Vector2 = Vector2.ZERO
-@export var limit_camera_front: bool = false
-@export var front_limit: Vector2 = Vector2.ZERO
-@export var limit_camera_vertical: bool = false
-@export var vertical_limit: Vector2 = Vector2.ZERO
-@export var max_distance_from_guardian: Vector3 = Vector3(2.0, 2.0, 2.0)
+@export var limit_camera_horizontal: bool = false ## Whether to limit the [Level] spawned [CameraMarker] horizontal movement.
+@export var horizontal_limit: Vector2 = Vector2.ZERO ## The horizontal movement limits of the the [Level] spawned [CameraMarker].
+@export var limit_camera_front: bool = false ## Whether to limit the [Level] spawned [CameraMarker] front movement.
+@export var front_limit: Vector2 = Vector2.ZERO ## The front movement limits of the the [Level] spawned [CameraMarker].
+@export var limit_camera_vertical: bool = false ## Whether to limit the [Level] spawned [CameraMarker] vertical movement.
+@export var vertical_limit: Vector2 = Vector2.ZERO ## The vertical movement limits of the the [Level] spawned [CameraMarker].
+@export var max_distance_from_guardian: Vector3 = Vector3(2.0, 2.0, 2.0) ## Maximum distance the [Level] spawned [CameraMarker] should be from the [Player] or [member Level.camera_focus]
 @export_subgroup("Environment_properties")
-@export var environment_settings: EnvironmentResource
-@export var fog_focus_on_player: bool = true
-@export var fog_focus: Node3D
-@export var fog_offset: Vector3 = Vector3.ZERO
+@export var environment_settings: EnvironmentResource ## Pre-made for the [Level] background, uses [EnvironmentResource].
+@export var fog_focus_on_player: bool = true ## Whether the [Level] fog should follow the [Player].
+@export var fog_focus: Node3D ## If [member Level.fog_focus_on_player] is [code]false[/code], the object the fog should focus on.
+@export var fog_offset: Vector3 = Vector3.ZERO ## Offset of the fog's placement.
 @export_subgroup("Misc_properties")
-@export var bucket_spawn_offset: Vector3 = Vector3.ZERO
-@export var hardcoded_properties: HardcodedProperties = HardcodedProperties.NONE
+@export var bucket_spawn_offset: Vector3 = Vector3.ZERO ## The spawn offset of the [Bucket] object when brought from another room.
+@export var hardcoded_properties: HardcodedProperties = HardcodedProperties.NONE ## Hardcoded properties that are room specific.
 
 enum HardcodedProperties {
 	NONE,
@@ -366,7 +371,7 @@ func _process(delta: float) -> void:
 		if Global.can_pause && Global.global_data.gen > 2:
 			var _pause_instance: Control = PAUSE_SCENE.instantiate()
 			
-			if hardcoded_properties == HardcodedProperties.RONETH_ROOM:
+			if hardcoded_properties == HardcodedProperties.RONETH_ROOM and Global.global_data.gen > 5:
 				_pause_instance.secret_code = true
 			
 			_pause_instance.inside_wheel = inside_wheel

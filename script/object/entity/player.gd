@@ -2,8 +2,9 @@
 extends Entity
 class_name Player
 
+## The class used for the player object, inherits the [Entity] class.
 
-const SCHOOL_OVERLAY: PackedScene = preload("res://scene/ui/school_ui.tscn")
+const SCHOOL_OVERLAY: PackedScene = preload("res://scene/ui/school_ui.tscn") ## The [PackedScene] for the school screen overlay.
 const TERRAIN_TYPES: Array[String] = [
 			"None",
 			"EvenCare", 
@@ -13,12 +14,12 @@ const TERRAIN_TYPES: Array[String] = [
 			"Cement3", 
 			"School", 
 			"Sand"
-		]
-const FOOTSTEP_FADEIN_TIMES: Array[float] = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-const FOOTSTEP_FADEOUT_TIMES: Array[float] = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+		] ## The [PackedScene] for the school screen overlay.
+const FOOTSTEP_FADEIN_TIMES: Array[float] = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5] ## The fade-in times for each footstep type available in [member Player.TERRAIN_TYPES]
+const FOOTSTEP_FADEOUT_TIMES: Array[float] = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05] ## The fade-out times for each footstep type available in [member Player.TERRAIN_TYPES]
 
 
-var current_footstep: int = 0:
+var current_footstep: int = 0: ## The current footstep sound from [member Player.TERRAIN_TYPES] currently being used by the player.
 	set(value):
 		current_footstep = value
 		if value != 0:
@@ -31,12 +32,12 @@ var current_footstep: int = 0:
 		else:
 			_footstep_sound.volume_db = -80.0
 
-var control_device: int = 0
-var rotation_direction: Vector3 = Vector3.ZERO
-var current_sheet: String = "res://asset/2d/sprite/player/guardian.png"
+var control_device: int = 0 ## Currently controller being used.
+var rotation_direction: Vector3 = Vector3.ZERO ## Direction of the player's rotation in the school.
+var current_sheet: String = "res://asset/2d/sprite/player/guardian.png" ## Current sprite sheet the player is using.
 
-@export var player_stats: PlayerStats
-@export var p2_talk_component: P2TalkComponent
+@export var player_stats: PlayerStats ## Stores the player data.
+@export var p2_talk_component: P2TalkComponent ## P2 To Talk Component assigned to the player object.
 
 @onready var _terrain_detector: RayCast3D = $TerrainDetector
 @onready var _footstep_sound: AudioStreamPlayer3D = $FootstepSound
@@ -145,7 +146,7 @@ func _physics_process(_delta: float) -> void:
 func _handle_input() -> void:
 	if (
 			Input.is_action_just_pressed("change_mode") 
-			and Global.global_data.gen > 2 
+			and Global.global_data.gen >= 11 
 			and player_stats.p2talk_enabled 
 			and control_mode == 0
 		):
@@ -351,10 +352,12 @@ func _handle_input() -> void:
 		_can_submit = false
 
 
+## Changes the Player's footstep sound to a specific index, check [member Player.TERRAIN_TYPES] for available footstep sounds.
 func set_footstep_sound(sound_id: int = 0) -> void:
 	current_footstep = sound_id
 
 
+## Updates the Player's spritesheet.
 func update_sheet() -> void:
 	if Global.custom_sheet != null:
 		load_sheet(Global.custom_sheet)
@@ -362,6 +365,7 @@ func update_sheet() -> void:
 		change_sheet(current_sheet)
 
 
+## Changes the player's spritesheet.
 func change_sheet(path: String) -> void:
 	_sprite.texture = load(path)
 	_sprite.hframes = _sprite.texture.get_width() / 64
@@ -369,6 +373,7 @@ func change_sheet(path: String) -> void:
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 
 
+## Loads the player's spritesheet.
 func load_sheet(sheet: ImageTexture) -> void:
 	_sprite.texture = sheet
 	_sprite.hframes = 5
@@ -376,6 +381,7 @@ func load_sheet(sheet: ImageTexture) -> void:
 	_sprite_material.set_shader_parameter("albedoTex", _sprite.texture)
 
 
+## Types something into P2 to Talk.
 func _type_p2talk_key(word: String, buttons: String) -> void:
 	p2talk_word = word
 	_p2talk_text.text = buttons

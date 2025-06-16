@@ -1,22 +1,39 @@
 extends Node
 
+## The code for the [RecordingManager], responsible for managing recording and replaying recordings.
+## Recordings are stored as [Resource] files inheriting [RecordingResource] files.
 
+## Stores the current [SaveData] before starting a recording.
 var temp_data: SaveData
 
+## Toggles whether the game is showing a recording via the secret menu or playing a demo.
 var demo: bool = false
+## Toggles whether the game is replaying a recording or not.
 var replay: bool = false
+## Checks whether all proper variables and room have been set up before starting a replay.
 var replay_setup: bool = false
+## Toggles whether a recording is being made.
 var recording: bool = false
+## Checks whether all proper variables and room have been set up before starting a recording.
 var recording_setup: bool = false
+## Checks whether all proper variables and room have been set up after a recording was finished.
 var recording_finished: bool = false
 
+
+## Counts the length of the recording or replay in frames.
 var recording_timer: int = 0
+## Keeps track of the current set of inputs of the player 1 controller of the recording file being played.
 var recording_reader_p1: int = 0
+## Keeps track of the current set of inputs of the player 2 controller of the recording file being played.
 var recording_reader_p2: int = 0
+## [RecordingData] currently loaded.
 var recording_data: RecordingData
+## List of inputs to be cancelled when [PlaybackPlayer] ghosts are replaying the recording.
 var cancel_movement: Array[int]
 
+## [Array] of simulated inputs.
 var input_sim: Array[InputEventAction]
+## [Array] of inputs available in the game.
 var input_array: Array[String] = [
 				"pressed_r1", 
 				"pressed_r2", 
@@ -35,11 +52,14 @@ var input_array: Array[String] = [
 			]
 
 
+## Sets up the signals for loading a recording and pressing a button on P2 to Talk.
 func _ready() -> void:
 	EventBus.p2talk_key.connect(_on_p2talk_pressed)
 	Console.load_recording.connect(load_recording)
 
 
+
+# Processes responsible for recording or replaying recordings.
 func _physics_process(_delta: float) -> void:
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
 	if recording:
@@ -116,6 +136,7 @@ func _physics_process(_delta: float) -> void:
 						Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: " + str(recording_timer) + " Data: [/color][color=red]NONE[/color]")
 
 
+## Replays an individual input according to it's index, check the [member RecordingManager.input_array] variable for the inputs and it's indexes.
 func _parse_input(index: int) -> void:
 	if recording_data.p1_data[recording_reader_p1][index] != 0:
 		var _parsed_button: bool = _number_parser(recording_data.p1_data[recording_reader_p1][index])
@@ -123,6 +144,7 @@ func _parse_input(index: int) -> void:
 		Input.parse_input_event(input_sim[index - 2])
 
 
+## Starts recording.
 func start_recording() -> void:
 	if recording_data == null:
 		recording_data = RecordingData.new()
@@ -130,6 +152,7 @@ func start_recording() -> void:
 		Console.console_log("[color=blue]Recording Started.[/color]")
 
 
+## Finishes the recording and saves it to [code]user://recordings/[/code]
 func stop_recording() -> void:
 	if recording_data != null && recording:
 		recording_data.p1_data.push_back([recording_timer, null])
@@ -144,6 +167,7 @@ func stop_recording() -> void:
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
 
 
+## Stops recording and discards the recording.
 func cancel_recording() -> void:
 	recording = false
 	recording_timer = 0
@@ -153,6 +177,7 @@ func cancel_recording() -> void:
 	Console.console_log("[color=blue]Recording was discarded.[/color]")
 
 
+## Converts 0s 1 and 2s into a boolean value of whether to artificially press a button when replaying a recording. [code]0[/code] does nothing, [code]1[/code] presses the key, [code]2[/code] releases the key.
 func _number_parser(number: int) -> bool:
 	if number==1:
 		return true
@@ -160,6 +185,7 @@ func _number_parser(number: int) -> bool:
 		return false
 
 
+## Checks whether a key was pressed or released [b]at all[/b] during a recording.
 func check_input() -> bool:
 	for action in InputMap.get_actions():
 		if input_array.find(action) != -1:
@@ -169,6 +195,7 @@ func check_input() -> bool:
 	return false
 
 
+## Checks whether a key was [b]specifically[/b] pressed or released during recording.
 func _check_input_type(key: String) -> int:
 	if Input.is_action_just_pressed(key):
 		return 1
@@ -178,11 +205,13 @@ func _check_input_type(key: String) -> int:
 	return 0
 
 
+## Records P2 to Talk inputs.
 func _on_p2talk_pressed(p2talkword: String, p2talkbuttons: String) -> void:
 	if recording:
 		recording_data.p2_data.push_back([recording_timer, p2talkword, p2talkbuttons])
 
 
+## Finishes replaying a recording and returns to previous game state or title screen if in DEMO mode when [member RecordingManager.demo] is enabled.
 func _finish_replay() -> void:
 	Console.console_log("[color=red]RECORDING IS OVER[/color]")
 	InputMap.load_from_project_settings()
@@ -208,6 +237,7 @@ func _finish_replay() -> void:
 	SaveManager.set_data(temp_data)
 
 
+## Loads a recording of filename [code]filename[/code] in a gen set by the [code]gen[/gen] argument.
 func load_recording(filename: String, gen: int = 8) -> void:
 	temp_data = SaveManager.get_data().duplicate(true)
 	
@@ -246,6 +276,7 @@ func load_recording(filename: String, gen: int = 8) -> void:
 		Console.console_log("[color=red]Recording file \"" + filename + "\" was not found![/color]")
 
 
+## Checks whether a recording is being made.
 func is_recording() -> bool:
 	if recording:
 		return true
@@ -253,19 +284,33 @@ func is_recording() -> bool:
 		return false
 
 
+## Generates the recording's name shown in the recording menu.
 func recording_name() -> String:
-	var counter: int = 0
-	var recording_filename: String = ""
-	var letters: Array[String] = [
-									"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
-									"p","q","r","s","t","u","v","w","x","y","z","A","B","C","D",
-									"E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
-									"T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7",
-									"8","9"
-								]
+	var _counter: int = 0
+	var _recording_filename: String = ""
 	
-	while counter < 8:
-		recording_filename += letters.pick_random()
-		counter += 1
+	if Global.global_data.gen < 15:
+		var _letters: Array[String] = [
+										"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+										"p","q","r","s","t","u","v","w","x","y","z","A","B","C","D",
+										"E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
+										"T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7",
+										"8","9"
+									]
+		
+		while _counter < 8:
+			_recording_filename += _letters.pick_random()
+			_counter += 1
+	else:
+		var _recording_list: PackedStringArray = DirAccess.get_files_at("user://recordings")
+		
+		for _filename in _recording_list:
+			_filename.replace(".tres", "")
+		
+		for _recording_name in _recording_list:
+			if _recording_name.begins_with("family"):
+				_counter += 1
+		
+		_recording_filename = "family" + str(_counter)
 	
-	return recording_filename
+	return _recording_filename
