@@ -9,7 +9,7 @@ const ANIM_SPEED: float = 0.75
 
 var sound_id: int = 0:
 	set(value):
-		load_sound(value)
+		update_sound_tag(value)
 		sound_id = value
 var in_menu: bool = false
 var returning: bool = false
@@ -33,6 +33,7 @@ func _ready() -> void:
 	EventBus.return_to_sound_test.connect(_on_return)
 	
 	load_sound(sound_id)
+	update_sound_tag(sound_id)
 	
 	button_anim_0 = create_tween().set_loops()
 	
@@ -64,6 +65,8 @@ func _process(_delta: float) -> void:
 		button_right.play(&"pressed")
 	
 	if Input.is_action_just_pressed("pressed_action"):
+		load_sound(sound_id)
+		
 		if sounds[sound_id] != null:
 			if sounds[sound_id].sound.get_path() == "res://sfx/pets/care_bye_bye.wav":
 				bye_bye_counter += 1
@@ -113,14 +116,26 @@ func recording_menu() -> void:
 	sub_menu.add_child(SECRET_MENU.instantiate())
 
 
-func load_sound(id: int) -> void:
-	if sounds[id] != null and SaveManager.get_data().sounds.find(sounds[id].sound.get_path()) != -1:
+func update_sound_tag(id: int) -> void:
+	if is_sound_available(id):
 		sound_name.text = ("%02X. " % id) + sounds[id].name
+	else:
+		sound_name.text = "%02X. ?????" % id
+
+
+func load_sound(id: int) -> void:
+	if is_sound_available(id):
 		sound_player.volume_db = 0.0
 		sound_player.stream = sounds[id].sound
 	else:
-		sound_name.text = "%02X. ?????" % id
 		sound_player.volume_db = -80.0
+
+
+func is_sound_available(id: int) -> bool:
+	return (
+				sounds[id] != null and 
+				SaveManager.get_data().sounds.find(sounds[id].sound.get_path()) != -1
+			)
 
 
 func _on_return() -> void:
