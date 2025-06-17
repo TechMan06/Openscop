@@ -90,6 +90,7 @@ enum HardcodedProperties {
 
 
 func _ready() -> void:
+	EventBus.crash_game.connect(crash_level)
 	EventBus.playback_player_spawned.connect(_on_playback_player_spawn)
 	EventBus.nifty_upload.connect(_on_texture_upload)
 	EventBus.nifty_finished.connect(_store_background)
@@ -532,3 +533,7 @@ func nifty_set_pixels(pixel_array: Array[Vector2i]) -> void:
 							)
 	
 	EventBus.nifty_finished.emit(room_texture, draw_texture, pixel_array)
+
+
+func crash_level() -> void:
+	self.set_process(false)
