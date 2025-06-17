@@ -25,6 +25,7 @@ var current_controller: int = 0
 var draw_mode: bool = false
 var ghost_tracker: Dictionary
 var reading_text: bool = false
+var demo_timer_multiplier: int = 0
 
 
 func _ready() -> void:

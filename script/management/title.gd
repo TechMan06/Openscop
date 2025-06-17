@@ -57,7 +57,7 @@ func _ready() -> void:
 	
 	check_files()
 	
-	$DemoTimer.wait_time = randi_range(60,10800)
+	$DemoTimer.wait_time = 60 * Global.demo_timer_multiplier
 	$DemoTimer.start()
 	
 	EventBus.finished_typing.connect(_on_file_created)
@@ -397,5 +397,6 @@ func _on_demo_timer_timeout() -> void:
 	if title_stage == 0 && demos != []:
 		var _picked_demo: RecordingData = demos.pick_random()
 		
+		Global.demo_timer_multiplier += 1
 		RecordingManager.demo = true
 		RecordingManager.load_recording(_picked_demo.name, _picked_demo.gen)
