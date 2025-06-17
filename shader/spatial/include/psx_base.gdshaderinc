@@ -48,6 +48,7 @@ group_uniforms;
 
 #ifdef SPRITE
 group_uniforms Sprite_Properties;
+uniform bool fixed_size = false;
 uniform bool billboard = false;
 uniform bool y_billboard = false;
 uniform bool animate;
@@ -125,6 +126,21 @@ void vertex()
 		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
 		//MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
 		//VERTEX.y *= (VIEW_MATRIX[1][2] / 5.0) + 1.0;
+	}
+	
+	if (fixed_size) {
+		if (PROJECTION_MATRIX[3][3] != 0.0) {
+			float h = abs(1.0 / (2.0 * PROJECTION_MATRIX[1][1]));
+			float sc = (h * 2.0); //consistent with Y-fov
+			MODELVIEW_MATRIX[0]*=sc;
+			MODELVIEW_MATRIX[1]*=sc;
+			MODELVIEW_MATRIX[2]*=sc;
+		} else {
+			float sc = -(MODELVIEW_MATRIX)[3].z;
+			MODELVIEW_MATRIX[0]*=sc;
+			MODELVIEW_MATRIX[1]*=sc;
+			MODELVIEW_MATRIX[2]*=sc;
+		}
 	}
 #endif
 

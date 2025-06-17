@@ -1,8 +1,8 @@
-extends Marker2D
+extends Marker3D
 
 var player: Entity
 
-@onready var player_sprite = $PlayerSprite
+@onready var player_sprite = $PlayerViewport/PlayerSprite
 
 
 func _ready() -> void:
@@ -10,7 +10,7 @@ func _ready() -> void:
 	update_sheet()
 	
 	if FileAccess.file_exists("res://asset/2d/ui/misc/school_hud.png"):
-		$SchoolFrame.texture = load("res://asset/2d/ui/misc/school_hud.png")
+		$BackgroundViewport/SchoolFrame.texture = load("res://asset/2d/ui/misc/school_hud.png")
 
 
 func _process(_delta: float) -> void:

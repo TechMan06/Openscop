@@ -1,14 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm1qwyqkdrufs"]
+[gd_scene load_steps=14 format=3 uid="uid://dm1qwyqkdrufs"]
 
 [ext_resource type="Script" path="res://script/ui/school_ui.gd" id="1_e42ru"]
 [ext_resource type="Texture2D" uid="uid://1rw50yu8vi3b" path="res://asset/2d/ui/misc/school_placeholder.png" id="2_8s7iq"]
 [ext_resource type="Shader" path="res://shader/canvas/transparency.gdshader" id="2_ecfd3"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://asset/2d/sprite/player/guardian.png" id="3_kcj32"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_52eow"]
-shader = ExtResource("2_ecfd3")
-shader_parameter/alpha_color = Color(1, 0, 1, 1)
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
+[ext_resource type="Shader" path="res://shader/spatial/psx_lit_sprite.gdshader" id="5_n4iok"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite.gdshader" id="6_uocev"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xovvm"]
 shader = ExtResource("2_ecfd3")
@@ -16,26 +13,83 @@ shader_parameter/alpha_color = Color(1, 0, 1, 1)
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/albedoTex = ExtResource("3_kcj32")
 
-[node name="SchoolUI" type="Marker2D"]
-z_index = -1
-z_as_relative = false
-texture_filter = 1
+[sub_resource type="ViewportTexture" id="ViewportTexture_jxnql"]
+viewport_path = NodePath("BackgroundViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eq5xg"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_n4iok")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = SubResource("ViewportTexture_jxnql")
+shader_parameter/fixed_size = true
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = true
+shader_parameter/depth_offset = Vector3(8, 0, 10)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k2efq"]
+viewport_path = NodePath("BackgroundViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_eh2gx"]
+viewport_path = NodePath("PlayerViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7j6x"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_uocev")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = SubResource("ViewportTexture_eh2gx")
+shader_parameter/fixed_size = true
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = true
+shader_parameter/depth_offset = Vector3(8, 0, 10)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8nq8r"]
+viewport_path = NodePath("PlayerViewport")
+
+[node name="SchoolUI" type="Marker3D"]
 script = ExtResource("1_e42ru")
 
-[node name="SchoolFrame" type="TextureRect" parent="."]
+[node name="BackgroundViewport" type="SubViewport" parent="."]
+size = Vector2i(320, 240)
+
+[node name="SchoolFrame" type="TextureRect" parent="BackgroundViewport"]
 z_index = -1
 z_as_relative = false
-material = SubResource("ShaderMaterial_52eow")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 320.0
-offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_8s7iq")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
+[node name="PlayerViewport" type="SubViewport" parent="."]
+size = Vector2i(320, 240)
+
+[node name="ColorRect" type="ColorRect" parent="PlayerViewport"]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 1)
+
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerViewport"]
 z_index = -1
 material = SubResource("ShaderMaterial_xovvm")
 position = Vector2(160, 181)
@@ -43,3 +97,20 @@ texture = ExtResource("3_kcj32")
 hframes = 5
 vframes = 5
 frame = 3
+
+[node name="SchoolHUD" type="Sprite3D" parent="."]
+transform = Transform3D(0.062404, -0.099743, 0.993054, 0.777186, -0.619394, -0.111051, 0.626169, 0.778718, 0.0388662, -0.005, 0.99, 9.9)
+material_override = SubResource("ShaderMaterial_eq5xg")
+pixel_size = 0.0027
+billboard = 1
+texture_filter = 0
+texture = SubResource("ViewportTexture_k2efq")
+
+[node name="PlayerHUD" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005, 0.99, 3.815)
+material_override = SubResource("ShaderMaterial_g7j6x")
+pixel_size = 0.0027
+billboard = 1
+fixed_size = true
+texture_filter = 0
+texture = SubResource("ViewportTexture_8nq8r")

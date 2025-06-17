@@ -73,7 +73,7 @@ func _ready() -> void:
 		_movement_speed = 5.0
 	
 	if control_mode == 1:
-		var _school_hud: Marker2D = SCHOOL_OVERLAY.instantiate()
+		var _school_hud: Marker3D = SCHOOL_OVERLAY.instantiate()
 		
 		_school_hud.player = self
 		

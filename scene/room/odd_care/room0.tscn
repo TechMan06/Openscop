@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dwwohq6xf6gqd" path="res://odd_care.png" id="5_ss855"]
 [ext_resource type="ArrayMesh" uid="uid://53ncqc45l583" path="res://asset/3d/room/oddcare/oddcare0_grass.obj" id="6_hlvbt"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="7_q2pg3"]
-[ext_resource type="Texture2D" uid="uid://btivirpmmqn8" path="res://asset/3d/room/nmp/grass_placeholder.png" id="8_qs6gj"]
+[ext_resource type="Texture2D" uid="uid://cug5niin5ydjt" path="res://asset/3d/room/nmp/nmp_general_placeholder.png" id="8_4ppyh"]
 [ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="9_tvn4y"]
 [ext_resource type="ArrayMesh" uid="uid://byjo48vj2a2bb" path="res://asset/3d/room/oddcare/oddcare0.obj" id="10_o7kjr"]
 [ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="11_fdobg"]
@@ -36,7 +36,7 @@ render_priority = 0
 shader = ExtResource("7_q2pg3")
 shader_parameter/use_fog = true
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/albedoTex = ExtResource("8_qs6gj")
+shader_parameter/albedoTex = ExtResource("8_4ppyh")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)

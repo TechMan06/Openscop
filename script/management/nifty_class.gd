@@ -6,7 +6,7 @@ class_name NiftyMesh
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if visible && get_surface_override_material(0).get_shader_parameter("use_depth"):
+	if visible && get_surface_override_material(0).get_shader_parameter("per_quad_depth"):
 		self.mesh = Global.sort_mesh(self)
 		print("REBUILDING")
 
