@@ -161,4 +161,5 @@ func _on_hud_destruction() -> void:
 
 
 func crash_hud() -> void:
+	demo_card.set_process_mode(Node.PROCESS_MODE_DISABLED)
 	self.set_process_mode(Node.PROCESS_MODE_DISABLED)

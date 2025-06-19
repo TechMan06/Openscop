@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://s8eudqti5a7c"]
+[gd_scene load_steps=32 format=3 uid="uid://s8eudqti5a7c"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_rwqro"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_s4osq"]
@@ -23,6 +23,8 @@
 [ext_resource type="Resource" uid="uid://bojuxs030ekmt" path="res://resource/face/lina.tres" id="20_1ctcx"]
 [ext_resource type="Resource" uid="uid://dr8r6ueg3xrvw" path="res://resource/face/mike.tres" id="21_ia1k3"]
 [ext_resource type="Resource" uid="uid://ud3oidy3l1oa" path="res://resource/face/mike_no_brows.tres" id="22_2ams3"]
+[ext_resource type="Resource" uid="uid://c2ybn3215t54p" path="res://resource/textbox/dark.tres" id="23_2cpqu"]
+[ext_resource type="AudioStream" uid="uid://c1plqbcwjhm2e" path="res://sfx/object/earthquake.wav" id="24_nk2b3"]
 
 [sub_resource type="Resource" id="Resource_qmc8g"]
 script = ExtResource("3_4ytrn")
@@ -82,6 +84,9 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_jiuuu"]
+plane = Plane(0, 0, 1, 0)
+
 [node name="child_library" type="Node3D"]
 script = ExtResource("1_rwqro")
 room_name = "child-library"
@@ -139,12 +144,25 @@ mesh = ExtResource("16_tckau")
 skeleton = NodePath("../NiftyMesh2")
 surface_material_override/0 = SubResource("ShaderMaterial_i7bq6")
 
-[node name="OverworldChildFace" parent="." instance=ExtResource("17_s5n0o")]
+[node name="OverworldChildFace" parent="." node_paths=PackedStringArray("earthquake_sound") instance=ExtResource("17_s5n0o")]
 transform = Transform3D(1.51554, 0.181923, -0.855878, 0, 1.71176, 0.363845, 0.874998, -0.315099, 1.48242, 1.18477, 1.26313, -4.31794)
+load_from_file = true
 special_faces = Array[Resource("res://script/resource/face_resource.gd")]([ExtResource("18_57x7c"), ExtResource("19_eg8pi"), ExtResource("20_1ctcx"), ExtResource("21_ia1k3"), ExtResource("22_2ams3")])
+textbox_preset = ExtResource("23_2cpqu")
+earthquake_sound = NodePath("../Earthquake")
 
 [node name="CanvasTrigger" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
 script = ExtResource("18_7twwh")
 height_offset = 2.5
 min_distance = 0.75
+
+[node name="Earthquake" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_nk2b3")
+volume_db = -0.5
+
+[node name="Wall" type="StaticBody3D" parent="."]
+
+[node name="WallShape" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.5)
+shape = SubResource("WorldBoundaryShape3D_jiuuu")

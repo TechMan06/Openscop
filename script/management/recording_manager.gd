@@ -237,6 +237,17 @@ func _finish_replay() -> void:
 	SaveManager.set_data(temp_data)
 
 
+func cancel_replay() -> void:
+	Console.console_log("[color=red]RECORDING IS OVER[/color]")
+	InputMap.load_from_project_settings()
+	replay = false
+	replay_setup = false
+	recording_timer = 0
+	recording_reader_p1 = 0
+	recording_reader_p2 = 0
+	Global.is_game_paused = false
+
+
 ## Loads a recording of filename [code]filename[/code] in a gen set by the [code]gen[/gen] argument.
 func load_recording(filename: String, gen: int = 8) -> void:
 	temp_data = SaveManager.get_data().duplicate(true)

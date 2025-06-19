@@ -126,8 +126,9 @@ func _physics_process(delta: float) -> void:
 					land_sound.play()
 					$QuakeTimer.start()
 					EventBus.camera_earthquake.emit(true)
-					EventBus.camera_shake_amount.emit(0.05)
-					EventBus.camera_shake_speed.emit(37.0)
+					EventBus.camera_shake_transition_speed.emit(0.25)
+					EventBus.camera_shake_amount.emit(0.25)
+					EventBus.camera_shake_speed.emit(50.0)
 					amber_state = AmberStates.LAND
 			
 			AmberStates.LAND:

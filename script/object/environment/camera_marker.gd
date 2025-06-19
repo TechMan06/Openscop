@@ -20,14 +20,9 @@ enum CameraModes {
 
 var shake_amount: float = 0.1 ## Amount of camera shake when [member CameraMarker.quake_enabled] is higher than [code]0.0[/code].
 var shake_progress: float = 0.0 ## Amount of time the camera is in earthquake mode.
-var quake_enabled: float = 0.0: ## Enables the camera earthquake.
-	set(value):
-		quake_enabled = value
-		
-		if value < 0.25:
-			shake_amount = 0.1
+var shake_transition: float = 0.0
+var quake_enabled: float = 0.0 ## Enables the camera earthquake.
 var shake_speed: float = 1.0 ## Speed of the earthquake effect.
-
 var focus_node: Node3D ## Node the camera should follow or focus at, set by the [Level] node.
 var marker_rotation: float = 0.0 ## Rotation of the camera marker set by the [Level] node.
 var camera_rotation: float = 0.0 ## Rotation of the camera itself set by the [Level] node.
@@ -49,6 +44,8 @@ func _ready() -> void:
 	EventBus.camera_earthquake.connect(do_earthquake)
 	EventBus.camera_shake_amount.connect(set_shake_amount)
 	EventBus.camera_shake_speed.connect(set_shake_speed)
+	EventBus.camera_shake_transition_speed.connect(set_earthquake_transition_speed)
+	EventBus.camera_shake_stop.connect(stop_earthquake_abruptly)
 	Console.set_camera.connect(set_mode)
 
 
@@ -61,7 +58,7 @@ func _anchor_camera() -> void: ## Responsible for anchoring the camera object to
 func _process(delta: float) -> void:
 	if quake_enabled:
 		shake_progress += 100.0 * delta
-		shake_offset.position.y = (sin(shake_progress * shake_speed) + cos(shake_progress * shake_speed)) * shake_amount * quake_enabled
+		shake_offset.position.y = sin(shake_progress * shake_speed) * shake_amount * quake_enabled
 	
 	if focus_node != null:
 		match camera_mode:
@@ -197,9 +194,10 @@ func _on_camera_zone_spawned(zone: Node3D) -> void: ## Provides self to the [Cam
 
 func do_earthquake(enable: bool) -> void: ## Enables the camera earthquake effect.
 	if enable:
-		create_tween().tween_property(self, "quake_enabled", 1.0, 0.25)
+		if quake_enabled == 0.0:
+			create_tween().tween_property(self, "quake_enabled", 1.0, shake_transition)
 	else:
-		create_tween().tween_property(self, "quake_enabled", 0.0, 0.25)
+		create_tween().tween_property(self, "quake_enabled", 0.0, shake_transition)
 
 
 func set_shake_amount(value: float) -> void: ## Sets the intensity of the camera earhquake effect.
@@ -208,6 +206,14 @@ func set_shake_amount(value: float) -> void: ## Sets the intensity of the camera
 
 func set_shake_speed(value: float) -> void: ## Sets the speed of the camera earthquake effect.
 	shake_speed = value
+
+
+func set_earthquake_transition_speed(value: float) -> void: ## Sets the speed of the earthquake effect transition.
+	shake_transition = value
+
+
+func stop_earthquake_abruptly() -> void:
+	quake_enabled = 0.0
 
 
 func get_camera() -> Camera3D: ## Returns the camera [Camrea3D] node.

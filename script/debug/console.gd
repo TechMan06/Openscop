@@ -150,6 +150,8 @@ func _parse_command(input : Array) -> void:
 					console_log("[color=red]Valid Modes:[/color] [color=yellow]copy[/color], [color=yellow]follow[/color], [color=yellow]pov[/color], [color=yellow]lerp[/color], [color=yellow]no_code[/color], [color=yellow]static[/color], [color=yellow]free[/color].")
 		"!crash_game":
 			Global.crash_game()
+		"!skip_library":
+			EventBus.open_bedroom.emit()
 		"!refresh_scene":
 			Global.warp_to(get_tree().get_current_scene().scene_file_path, get_tree().get_current_scene().loading_preset)
 		_:

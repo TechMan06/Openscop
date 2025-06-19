@@ -62,7 +62,7 @@ func reset_game() -> void:
 	Global.can_pause = true
 	Global.can_unpause = false
 	Global.is_game_paused = false
-	Global.demo_timer_multiplier = 0
+	Global.demo_timer_multiplier = 1
 	
 	Global.warp_to(
 						"res://scene/title/title.tscn", 
@@ -89,7 +89,7 @@ func hard_reset_game() -> void:
 	Global.can_unpause = false
 	Global.is_game_paused = false
 	Global.draw_mode = false
-	Global.demo_timer_multiplier = 0
+	Global.demo_timer_multiplier = 1
 	RecordingManager.demo = false
 	RecordingManager.recording = false
 	RecordingManager.replay = false
@@ -98,6 +98,7 @@ func hard_reset_game() -> void:
 	RecordingManager.recording_timer = 0
 	RecordingManager.recording_reader_p1 = 0
 	RecordingManager.recording_reader_p2 = 0
+	HUD.demo_card.set_process_mode(Node.PROCESS_MODE_ALWAYS)
 	
 	get_tree().change_scene_to_file("res://scene/title/garalina.tscn")
 

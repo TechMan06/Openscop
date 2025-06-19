@@ -49,12 +49,12 @@ func load_game(slot: int = 0) -> void:
 
 
 func save_data(data: SaveData, slot: int) -> void:
-	manage_player_data()
+	manage_data()
 	ResourceSaver.save(data, "user://savedata/save" + str(slot) + ".tres")
 
 
 func save_slot(slot: int = 0) -> void:
-	manage_player_data()
+	manage_data()
 	ResourceSaver.save(_data, "user://savedata/save" + str(slot) + ".tres")
 
 
@@ -71,7 +71,8 @@ func save_odd_care(slot: int = 0) -> void:
 		ResourceSaver.save(old_data, "user://savedata/save" + str(slot) + ".tres")
 
 
-func manage_player_data() -> void:
+func manage_data() -> void:
 	_data.player_data = _data.player_data.duplicate(true)
+	_data.library_face = _data.library_face.duplicate(true)
 	_data.player_data.scene_info = []
 	

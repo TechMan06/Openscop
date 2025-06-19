@@ -3,21 +3,25 @@
 extends Node3D
 class_name WarpClass
 
-var performed_check: bool = false
-var is_ready: bool = false
+## This object is used in the warp.tscn scene for the warp object.
+## The warp object is used to send te player from one [Level] to another.
+
+var performed_check: bool = false ## Checks if the signal for the warp spawning was spawned.
+var is_ready: bool = false ## Checks if the warp is ready for usage, used to prevent instant teleport if the player is spawned at the same place as the warp.
 
 @export_subgroup("Warp_properties")
-@export var all_directions = false
-@export var diagonal_entrance = false
-@export var directions = Vector2i.ZERO
-@export var detect_bucket: bool = true
-@export_range(0, 3) var warp_direction = 0
-@export var y_offset: float
-@export var disable_shadow_monster_man: bool = false
+@export var all_directions = false ## Whether the warp accepts any direction.
+@export var diagonal_entrance = false ## Whether the warp's direction is diagonal.
+@export var directions = Vector2i.ZERO ## Used if [member WarpClass.diagonal_entrance] is [code]true[/code] to set the directions accepted by the warp.
+@export var detect_bucket: bool = true ## Whether this warp allows buckets to go through it.
+@export_range(0, 3) var warp_direction = 0 ## The direction of the warp, used if [code]false[/code].
+@export var y_offset: float ## The Y offset of the [Entity] needed for the warp to be triggered.
+@export var disable_shadow_monster_man: bool = false ## Whether this warp disables the Shadow Monster Man if the [Entity] crossing it is currently using it.
+@export var keep_child_library_face: bool = false ## Whether to reset the [member SaveManager.library_face] variable if the player goes through it.
 @export_subgroup("Warp_to")
-@export_file("*.tscn") var scene
-@export var loading_preset: LoadingPreset
-@export var warp_id: int
+@export_file("*.tscn") var scene ## Scene the warp should send the [Player] to.
+@export var loading_preset: LoadingPreset ## [LoadingPreset] used for the fade effect or the Loading Screen.
+@export var warp_id: int ## Individual warp ID to identify it in the [SpawnClass].
 
 @onready var sprite = $WarpSprite
 @onready var warp_area = $WarpArea/WarpCollision
@@ -71,6 +75,9 @@ func _on_warp_area_body_entered(body: Node3D) -> void:
 			SaveManager.get_data().has_bucket = true
 		
 		if body is Player:
+			if SaveManager.get_data().library_face != null and !keep_child_library_face:
+				SaveManager.get_data().library_face = null
+			
 			if SaveManager.get_data().has_bucket && detect_bucket:
 				SaveManager.get_data().bucket_direction = body.direction
 			

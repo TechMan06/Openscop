@@ -2,30 +2,35 @@ extends Node
 
 signal boot_game
 
-@export var level_slogans: Array[SloganResource]
 
-var global_data: GlobalData = load("res://resource/management/global_data.tres")
-var clock_float: float = 0.0
-var custom_sheet: ImageTexture
-var is_game_paused: bool = false
+## The Global Autoload Node, contains global variables related to the game, functions related to creating folders, managing [GlobalData], math and [Array] functions, and crashing the game.
+
+
+var global_data: GlobalData = load("res://resource/management/global_data.tres") ## The [GlobalData] file used by the game.
+var clock_float: float = 0.0 ## The clock used for animating some Shaders.
+var custom_sheet: ImageTexture ## Custom spritesheet currently being used by the [Player].
+var is_game_paused: bool = false ## Checks whether the game is paused.
 var p2talk_dict: Dictionary = JSON.parse_string(
 								(FileAccess.open("res://json/p2_talk_data.json", 
 								FileAccess.READ)
 								).get_as_text()
-							)
+							) ## JSON dictionary for the P2 to Talk dictionary.
 var dialogue_dict: Dictionary = JSON.parse_string(
 							(FileAccess.open("res://json/dialogue.json", 
 							FileAccess.READ)
 							).get_as_text()
-						)
-var can_pause: bool = true
-var can_unpause: bool = false
-var current_slot: int = 0
-var current_controller: int = 0
-var draw_mode: bool = false
-var ghost_tracker: Dictionary
-var reading_text: bool = false
-var demo_timer_multiplier: int = 0
+						) ## JSON dictionary for the game dialogue.
+var can_pause: bool = true ## Checks whether the game can be paused.
+var can_unpause: bool = false ## Checks whether the game can be unpaused.
+var current_slot: int = 0 ## Current file slot the game will save to.
+var current_controller: int = 0 ## Current controller being used by the player.
+var draw_mode: bool = false ## Checks whether Draw Mode is currently in use.
+var ghost_tracker: Dictionary ## Keeps track of all ghosts spawned within a [Level] Node.
+var reading_text: bool = false ## Checks whether a textbox is open.
+var demo_timer_multiplier: int = 1 ## Multiplies the demo timer on the title screen depending on how many demos were watched.
+
+
+@export var level_slogans: Array[SloganResource] ## The slogans used in the Pause Menu, uses [SloganResource].
 
 
 func _ready() -> void:
@@ -56,11 +61,11 @@ func _ready() -> void:
 	boot_game.emit()
 
 
-func save_global() -> void:
+func save_global() -> void: ## Saves the [GlobalData] to the user's computer.
 	ResourceSaver.save(global_data, "user://savedata/global.tres")
 
 
-func warp_to(scene_path: String, preset, disable_shadow_monster: bool = false) -> void:
+func warp_to(scene_path: String, preset, disable_shadow_monster: bool = false) -> void: ## Sends the game to the scene specified in [code]scene_path[/code] using the [code]preset[/code] [LoadingPreset] and whether to disable the shadow monster man as it does so.
 	var _loading_preset: LoadingPreset = null
 	
 	if preset is String:
@@ -78,25 +83,25 @@ func warp_to(scene_path: String, preset, disable_shadow_monster: bool = false) -
 	get_tree().change_scene_to_file(scene_path)
 
 
-func strip_bbcode(source: String) -> String:
+func strip_bbcode(source: String) -> String: ## Strips BBCode from a [String].
 	var _regex = RegEx.new()
 	_regex.compile("\\[.+?\\]")
 	return _regex.sub(source, "", true)
 
 
-func sort_ascending(a, b) -> bool:
+func sort_ascending(a, b) -> bool: ##  Sorts elements in ascending order.
 	if a[0] < b[0]:
 		return true
 	return false
 
 
-func sort_descending(a, b) -> bool:
+func sort_descending(a, b) -> bool: ##  Sorts elements in descending order.
 	if a[0] > b[0]:
 		return true
 	return false
 
 
-func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
+func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh: ## OBSOLETE, creates sorting values for a [MeshInstance3D] to replicate the per-face sorting method the PSX used.
 	var surface_index: int = 0
 	
 	var new_mesh: ArrayMesh = ArrayMesh.new()
@@ -281,7 +286,7 @@ func sort_mesh(mesh_instance_3d: MeshInstance3D) -> Mesh:
 	return new_mesh
 
 
-func vector3_average(vector_array: Array[Vector3]) -> Vector3:
+func vector3_average(vector_array: Array[Vector3]) -> Vector3: ## Calculates the average of all [Vector3] values in the [code]vector_array[/code] [Array].
 	var x: float = 0.0
 	var y: float = 0.0
 	var z: float = 0.0
@@ -298,9 +303,15 @@ func vector3_average(vector_array: Array[Vector3]) -> Vector3:
 	return Vector3(x, y, z)
 
 
-func crash_game(stop_music: bool = true, stop_sfx: bool = true) -> void:
-	SaveManager.save_odd_care(current_slot)
-	RecordingManager.stop_recording()
+func crash_game(stop_music: bool = true, stop_sfx: bool = true) -> void: ## Crashes the game.
+	if RecordingManager.recording:
+		RecordingManager.stop_recording()
+	
+	if RecordingManager.replay:
+		RecordingManager.cancel_replay()
+	else:
+		SaveManager.save_odd_care(current_slot)
+	
 	EventBus.crash_game.emit()
 	get_tree().paused = true
 	

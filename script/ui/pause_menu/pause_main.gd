@@ -1,21 +1,24 @@
 extends Control
 
-const BUTTON_ANIM_SPEED: float = 1
-const BUTTON_OFFSET: float = 10
-const SCREEN_ANIM_TIME: float = 1.0
-const MINI_SCREEN_SIZE: float = 0.5
-const PETS_MENU: PackedScene = preload("res://scene/ui/pause_menu/pets_menu.tscn")
-const OPTIONS_MENU: PackedScene = preload("res://scene/ui/pause_menu/options_menu.tscn")
-const QUIT_MENU: PackedScene = preload("res://scene/ui/pause_menu/quit_buttons.tscn")
+## The code for the Pause Menu, it is instantiated as an object inside and by the [Level].
 
-var level_slogan: String = ""
-var _in_menu: bool = false
-var _selected_option: int = 0:
+
+const BUTTON_ANIM_SPEED: float = 1 ## Speed of the pause buttons animation.
+const BUTTON_OFFSET: float = 10 ## Distance the button should move when selected in pixels.
+const SCREEN_ANIM_TIME: float = 1.0 ## Speed for the shrinking screen's animation
+const MINI_SCREEN_SIZE: float = 0.5 ## The size of the shrinking screen.
+const PETS_MENU: PackedScene = preload("res://scene/ui/pause_menu/pets_menu.tscn") ## The scene for the Pets menu.
+const OPTIONS_MENU: PackedScene = preload("res://scene/ui/pause_menu/options_menu.tscn") ## The scene for the options menu.
+const QUIT_MENU: PackedScene = preload("res://scene/ui/pause_menu/quit_buttons.tscn") ## The scene for the quit menu, spawned on top of the pause menu.
+
+var level_slogan: String = "" ## Level slonga, provided by the [Level] node.
+var _in_menu: bool = false ## Variable responsible for toggling whether you're in a submenu.
+var _selected_option: int = 0: ## Currently selected option, the set function is responsible for playing the sound.
 	set(value):
 		button_sound.play()
 		_selected_option = value
-var allow_input: bool = true
-var secret_code: bool = true
+var allow_input: bool = true ## Variable responsible for toggling input in the pause menu.
+var secret_code: bool = false ## Variable responsible for toggling whether the secret code is enabled.
 var current_key: int = 0
 var code_array: Array[String] = [
 									"pressed_down", 

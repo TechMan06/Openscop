@@ -43,3 +43,6 @@ render_target_update_mode = 4
 unique_name_in_owner = true
 position = Vector2(24, 32)
 overworld = true
+
+[node name="EarthquakeTimer" type="Timer" parent="."]
+one_shot = true
