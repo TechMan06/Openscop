@@ -4,6 +4,9 @@ var started: bool = true
 var timer: float = 0.0
 var gen: int = 1
 
+@export_file("*.tscn") var wavey_room
+@export_file("*.tscn") var sort_test
+
 @onready var logo: Sprite2D = $LogoAnim
 @onready var logo2: Sprite2D = $Logo
 
@@ -58,11 +61,23 @@ func _on_garalina_anim_animation_finished(anim_name) -> void:
 							load("res://resource/loading_preset/ec_noload.tres")
 						)
 	else:
-		Global.warp_to(
-							"res://scene/title/title.tscn", 
-							load("res://resource/loading_preset/ec_noload.tres")
-						)
-	
-	await get_tree().create_timer(HUD.FADE_SPEED).timeout
-
-	BGMusic.play_stream("res://music/petscop.ogg")
+		if gen > 3:
+			Global.warp_to(
+								"res://scene/title/title.tscn", 
+								load("res://resource/loading_preset/ec_noload.tres")
+							)
+			
+			await get_tree().create_timer(HUD.FADE_SPEED).timeout
+		
+			BGMusic.play_stream("res://music/petscop.ogg")
+		else:
+			if gen > 1:
+				Global.warp_to(
+									wavey_room, 
+									load("res://resource/loading_preset/ec_noload.tres")
+								)
+			else:
+				Global.warp_to(
+									sort_test, 
+									load("res://resource/loading_preset/ec_noload.tres")
+								)

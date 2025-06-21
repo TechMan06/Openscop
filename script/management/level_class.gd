@@ -78,6 +78,7 @@ var wheel_id: int = 0 ## The ID of the wheel the player is currently next to.
 @export var fog_focus: Node3D ## If [member Level.fog_focus_on_player] is [code]false[/code], the object the fog should focus on.
 @export var fog_offset: Vector3 = Vector3.ZERO ## Offset of the fog's placement.
 @export_subgroup("Misc_properties")
+@export var odd_care_room_on_gen_3: bool = false
 @export var bucket_spawn_offset: Vector3 = Vector3.ZERO ## The spawn offset of the [Bucket] object when brought from another room.
 @export var hardcoded_properties: HardcodedProperties = HardcodedProperties.NONE ## Hardcoded properties that are room specific.
 
@@ -100,8 +101,17 @@ func _ready() -> void:
 	
 	match hardcoded_properties:
 		HardcodedProperties.EVEN_CARE:
+			if Global.global_data.gen < 6:
+				loading_preset = load("res://resource/loading_preset/ec_demo.tres")
+			
 			if Global.global_data.gen < 4:
 				loading_preset = load("res://resource/loading_preset/ec_old.tres")
+				
+				if odd_care_room_on_gen_3:
+					room_name = room_name.replace("level1","odd")
+			
+			if SaveManager.get_data().unlocked_odd_care:
+				Global.global_data.gen = 3
 	
 	SaveManager.get_data().room_name = room_name
 	SaveManager.get_data().loading_preset = loading_preset
@@ -146,7 +156,7 @@ func _ready() -> void:
 	if Global.global_data.gen < 5 and background_music == 2:
 		background_music = 3
 	
-	if Global.global_data.gen < 4:
+	if Global.global_data.gen < 4 and !odd_care_room_on_gen_3:
 		if environment_settings != null:
 			environment_settings = null
 		

@@ -1,11 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://b82sbuuf2py8n"]
+[gd_scene load_steps=29 format=3 uid="uid://b82sbuuf2py8n"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_76lug"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_7hqx8"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_kipqm"]
 [ext_resource type="Texture2D" uid="uid://e08u0r7gqgvx" path="res://asset/2d/background/level1_5.png" id="4_eqeuo"]
+[ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="5_55lys"]
 [ext_resource type="ArrayMesh" uid="uid://dswvspb22kdga" path="res://asset/3d/room/evencare/evencare5.obj" id="5_727gj"]
+[ext_resource type="ArrayMesh" uid="uid://c27ua4bu6srqi" path="res://asset/3d/room/oddcare/oddcare5.obj" id="6_6hgeh"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_alpha.gdshader" id="6_28v70"]
+[ext_resource type="Material" uid="uid://bdce4owxtgw6r" path="res://asset/3d/material/evencare.tres" id="7_dvrbq"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_grepj"]
 [ext_resource type="Texture2D" uid="uid://bfjbg622tpn6d" path="res://asset/3d/room/evencare/texture.png" id="7_uck0f"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="8_trsox"]
@@ -31,6 +34,27 @@ environment_darkness = 1.0
 enable_fog = false
 fog_color = Color(1, 1, 1, 1)
 fog_radius = 13.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4mt32"]
+data = PackedVector3Array(-0.7, 1, 1.5, -0.7, 0, -1.5, -0.7, 0, 1.5, 0.7, 1, -1.5, 0.7, 0, 1.5, 0.7, 0, -1.5, 2.5, 1, 1.5, 0.7, 0, 1.5, 0.7, 1, 1.5, -21.5, 1, 7, 2.5, 0, 7, 2.5, 1, 7, 2.5, 1, 7, 2.5, 0, 1.5, 2.5, 1, 1.5, -21.5, 0, 1.5, -0.7, 1, 1.5, -0.7, 0, 1.5, -0.7, 1, -1.5, -0.7, 0, -1.5, -0.7, 1, 1.5, 0.7, 1, 1.5, 0.7, 0, 1.5, 0.7, 1, -1.5, 2.5, 0, 1.5, 0.7, 0, 1.5, 2.5, 1, 1.5, -21.5, 0, 7, 2.5, 0, 7, -21.5, 1, 7, 2.5, 0, 7, 2.5, 0, 1.5, 2.5, 1, 7, -21.5, 1, 1.5, -0.7, 1, 1.5, -21.5, 0, 1.5, -21.5, 0, 1.5, -21.5, 0, 7, -21.5, 1, 1.5, -21.5, 1, 1.5, -21.5, 0, 7, -21.5, 1, 7)
+
+[sub_resource type="GDScript" id="GDScript_lcp4n"]
+resource_name = "crash_trigger"
+script/source = "extends Area3D
+
+@export var treadmill_counter: TreadmillCounter
+
+
+func _on_body_entered(body):
+	if treadmill_counter != null:
+		if body is Player and treadmill_counter.current_value == -1:
+			await get_tree().create_timer(randf_range(0.0, 1.0)).timeout
+			
+			Global.crash_game()
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vejpb"]
+size = Vector3(15, 1, 13)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h08uu"]
 render_priority = 0
@@ -62,17 +86,78 @@ camera_distance = 16.75
 limit_camera_horizontal = true
 horizontal_limit = Vector2(-23, 0)
 environment_settings = SubResource("Resource_thkrr")
+odd_care_room_on_gen_3 = true
 hardcoded_properties = 1
 
-[node name="EvenCareMesh" type="MeshInstance3D" parent="."]
+[node name="GenSpecific" type="Node" parent="."]
+script = ExtResource("5_55lys")
+gens = Array[int]([1, 2, 3])
+
+[node name="OddCareMesh" type="MeshInstance3D" parent="GenSpecific"]
+mesh = ExtResource("6_6hgeh")
+surface_material_override/0 = ExtResource("7_dvrbq")
+script = ExtResource("7_grepj")
+
+[node name="LevelBody" type="StaticBody3D" parent="GenSpecific"]
+
+[node name="LevelCollision" type="CollisionShape3D" parent="GenSpecific/LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_4mt32")
+
+[node name="TreadmillCounter" parent="GenSpecific" node_paths=PackedStringArray("treadmill") instance=ExtResource("16_vmtl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2)
+min_max_value = Vector2i(-1, 16)
+treadmill = NodePath("../../PenTreadmill")
+odd_number_counter = true
+cycle = false
+petal_sounds = true
+save_petals = true
+
+[node name="CrashTrigger" type="Area3D" parent="GenSpecific" node_paths=PackedStringArray("treadmill_counter")]
+script = SubResource("GDScript_lcp4n")
+treadmill_counter = NodePath("../TreadmillCounter")
+
+[node name="TriggerCollision" type="CollisionShape3D" parent="GenSpecific/CrashTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
+shape = SubResource("BoxShape3D_vejpb")
+
+[node name="GenSpecific2" type="Node" parent="."]
+script = ExtResource("5_55lys")
+gens = Array[int]([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="GenSpecific2"]
 mesh = ExtResource("5_727gj")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_h08uu")
 script = ExtResource("7_grepj")
 
-[node name="LevelBody" type="StaticBody3D" parent="."]
+[node name="LevelBody" type="StaticBody3D" parent="GenSpecific2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GenSpecific2/LevelBody"]
 shape = SubResource("ConcavePolygonShape3D_v7jsm")
+
+[node name="PianoArea" parent="GenSpecific2" node_paths=PackedStringArray("camera", "treadmill_counter", "pen") instance=ExtResource("13_yadrb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.435, 0, 5)
+camera = NodePath("Camera3D")
+treadmill_counter = NodePath("../TreadmillCounter")
+pen = NodePath("../Pen")
+
+[node name="Camera3D" type="Marker3D" parent="GenSpecific2/PianoArea"]
+transform = Transform3D(0.707107, -0.165071, 0.687569, 0, 0.97237, 0.233445, -0.707107, -0.165071, 0.687569, 11.4, 6.68, 16.75)
+
+[node name="Sprite3D" type="Sprite3D" parent="GenSpecific2/PianoArea/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.5)
+visible = false
+modulate = Color(1, 1, 1, 0.32549)
+no_depth_test = true
+texture = ExtResource("14_8a0b5")
+
+[node name="Pen" parent="GenSpecific2" node_paths=PackedStringArray("piano") instance=ExtResource("17_cffe0")]
+cry_sound = ExtResource("18_qlkkv")
+piano = NodePath("../PianoArea")
+
+[node name="TreadmillCounter" parent="GenSpecific2" node_paths=PackedStringArray("treadmill") instance=ExtResource("16_vmtl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2)
+treadmill = NodePath("../../PenTreadmill")
 
 [node name="Warp" parent="." instance=ExtResource("8_trsox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
@@ -131,34 +216,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 2)
 [node name="PieceArea12" parent="." instance=ExtResource("12_2qs5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 2)
 
-[node name="PianoArea" parent="." node_paths=PackedStringArray("camera", "treadmill_counter", "pen") instance=ExtResource("13_yadrb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.435, 0, 5)
-camera = NodePath("Camera3D")
-treadmill_counter = NodePath("../TreadmillCounter")
-pen = NodePath("../Pen")
-
-[node name="Camera3D" type="Marker3D" parent="PianoArea"]
-transform = Transform3D(0.707107, -0.165071, 0.687569, 0, 0.97237, 0.233445, -0.707107, -0.165071, 0.687569, 11.4, 6.68, 16.75)
-
-[node name="Sprite3D" type="Sprite3D" parent="PianoArea/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.5)
-visible = false
-modulate = Color(1, 1, 1, 0.32549)
-no_depth_test = true
-texture = ExtResource("14_8a0b5")
-
 [node name="PenTreadmill" parent="." instance=ExtResource("15_03gp8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
-
-[node name="TreadmillCounter" parent="." node_paths=PackedStringArray("treadmill") instance=ExtResource("16_vmtl1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2)
-treadmill = NodePath("../PenTreadmill")
-
-[node name="Pen" parent="." node_paths=PackedStringArray("piano") instance=ExtResource("17_cffe0")]
-cry_sound = ExtResource("18_qlkkv")
-piano = NodePath("../PianoArea")
 
 [node name="SoundChanger" parent="." instance=ExtResource("19_t8y7d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 5.5)
 sound = "EvenCare"
 area_size = Vector2(2, 2)
+
+[connection signal="body_entered" from="GenSpecific/CrashTrigger" to="GenSpecific/CrashTrigger" method="_on_body_entered"]

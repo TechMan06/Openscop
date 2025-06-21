@@ -69,6 +69,8 @@ _data = {
 [node name="Garalina" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_j7o5x")
+wavey_room = "res://scene/room/level1/room6.tscn"
+sort_test = "res://scene/room/sort-test/sort-test.tscn"
 
 [node name="LogoAnim" type="Sprite2D" parent="."]
 z_index = 1

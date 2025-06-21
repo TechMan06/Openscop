@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://734g3y234xfd"]
+[gd_scene load_steps=26 format=3 uid="uid://734g3y234xfd"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_ey0xe"]
 [ext_resource type="Resource" uid="uid://dffkt7417qwye" path="res://resource/loading_preset/ec.tres" id="2_i62f1"]
@@ -9,12 +9,15 @@
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_osfe1"]
 [ext_resource type="Resource" uid="uid://dc48ihsiem03n" path="res://resource/loading_preset/ec_noload.tres" id="9_xp5w7"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="10_motka"]
+[ext_resource type="Script" path="res://script/object/environment/visibility_node.gd" id="13_6qi33"]
 [ext_resource type="PackedScene" uid="uid://db50wvqb2n0b8" path="res://scene/object/interactive/common/piece.tscn" id="13_ao78d"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="14_5d1dj"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="14_gdd85"]
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="14_i1lxw"]
 [ext_resource type="ArrayMesh" uid="uid://briajkjlnb06k" path="res://asset/3d/object/sign2.obj" id="14_ymevh"]
 [ext_resource type="Resource" uid="uid://by8kf70db6lcq" path="res://resource/textbox/default.tres" id="15_h6hy7"]
+[ext_resource type="PackedScene" uid="uid://vj02mjyg4go" path="res://scene/object/interactive/common/door.tscn" id="17_74qs5"]
+[ext_resource type="ArrayMesh" uid="uid://1tydf2jogvkw" path="res://asset/3d/room/oddcare/oddcare2.obj" id="17_alfbv"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("3_b10bs")
@@ -45,6 +48,42 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_doudx"]
+size = Vector3(5.75, 1, 6.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pkyhl"]
+size = Vector3(5.75, 1, 6.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qgwlq"]
+
+[sub_resource type="GDScript" id="GDScript_xri6c"]
+script/source = "extends Node
+
+var first_trigger: bool = false
+var second_trigger: bool = false
+
+@onready var door: Door = $\"../Door\"
+
+
+func _on_first_trigger(body):
+	if body is Player:
+		first_trigger = true
+
+
+func _on_second_trigger(body):
+	if body is Player and first_trigger:
+		door.close()
+		second_trigger = true
+
+
+func _on_third_trigger(body):
+	if body is Player and second_trigger:
+		
+		await get_tree().create_timer(randf_range(0.0, 2.0)).timeout
+		
+		Global.crash_game()
+"
+
 [node name="level1-room2" type="Node3D"]
 script = ExtResource("1_ey0xe")
 room_name = "level1-room2"
@@ -58,12 +97,8 @@ camera_angle = -20.0
 limit_camera_horizontal = true
 horizontal_limit = Vector2(2.5, 15.5)
 environment_settings = SubResource("Resource_thkrr")
+odd_care_room_on_gen_3 = true
 hardcoded_properties = 1
-
-[node name="EvenCareMesh" type="MeshInstance3D" parent="."]
-mesh = ExtResource("5_vy6vx")
-surface_material_override/0 = ExtResource("6_d5kdj")
-script = ExtResource("7_osfe1")
 
 [node name="LevelBody" type="StaticBody3D" parent="."]
 
@@ -120,13 +155,6 @@ transform = Transform3D(0.981627, 0, -0.190809, 0, 1, 0, 0.190809, 0, 0.981627, 
 mesh = ExtResource("14_ymevh")
 surface_material_override/0 = SubResource("ShaderMaterial_u8uj8")
 
-[node name="DialogueTrigger2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
-script = ExtResource("14_i1lxw")
-textbox_preset = ExtResource("15_h6hy7")
-textbox_text = "evencare_2"
-height_offset = 2.5
-
 [node name="DialogueTrigger3" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1)
 script = ExtResource("14_i1lxw")
@@ -134,3 +162,72 @@ textbox_preset = ExtResource("15_h6hy7")
 textbox_text = "evencare_3"
 height_offset = 2.5
 min_distance = 1.0
+
+[node name="GenSpecific" type="Node" parent="."]
+script = ExtResource("13_6qi33")
+gens = Array[int]([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+[node name="DialogueTrigger2" type="Marker3D" parent="GenSpecific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
+script = ExtResource("14_i1lxw")
+textbox_preset = ExtResource("15_h6hy7")
+textbox_text = "evencare_2"
+height_offset = 2.5
+
+[node name="GenSpecific2" type="Node" parent="."]
+script = ExtResource("13_6qi33")
+gens = Array[int]([1, 2, 3])
+
+[node name="DialogueTrigger2" type="Marker3D" parent="GenSpecific2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
+script = ExtResource("14_i1lxw")
+textbox_preset = ExtResource("15_h6hy7")
+textbox_text = "oddcare"
+height_offset = 2.5
+
+[node name="GenSpecific3" type="Node" parent="."]
+script = ExtResource("13_6qi33")
+non_odd_care_exclusive = true
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="GenSpecific3"]
+mesh = ExtResource("5_vy6vx")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("6_d5kdj")
+script = ExtResource("7_osfe1")
+
+[node name="GenSpecific4" type="Node" parent="."]
+script = ExtResource("13_6qi33")
+odd_care_exclusive = true
+
+[node name="Door" parent="GenSpecific4" instance=ExtResource("17_74qs5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.5, 0, -0.5)
+
+[node name="OddCareMesh" type="MeshInstance3D" parent="GenSpecific4"]
+mesh = ExtResource("17_alfbv")
+surface_material_override/0 = ExtResource("6_d5kdj")
+script = ExtResource("7_osfe1")
+
+[node name="ThirdTrigger" type="Area3D" parent="GenSpecific4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 0)
+
+[node name="TriggerCollision" type="CollisionShape3D" parent="GenSpecific4/ThirdTrigger"]
+shape = SubResource("BoxShape3D_doudx")
+
+[node name="SecondTrigger" type="Area3D" parent="GenSpecific4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+
+[node name="TriggerCollision" type="CollisionShape3D" parent="GenSpecific4/SecondTrigger"]
+shape = SubResource("BoxShape3D_pkyhl")
+
+[node name="FirstTrigger" type="Area3D" parent="GenSpecific4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+
+[node name="TriggerCollision" type="CollisionShape3D" parent="GenSpecific4/FirstTrigger"]
+shape = SubResource("BoxShape3D_qgwlq")
+
+[node name="OddCareDoor" type="Node" parent="GenSpecific4"]
+script = SubResource("GDScript_xri6c")
+
+[connection signal="body_entered" from="GenSpecific4/ThirdTrigger" to="GenSpecific4/OddCareDoor" method="_on_third_trigger"]
+[connection signal="body_entered" from="GenSpecific4/SecondTrigger" to="GenSpecific4/OddCareDoor" method="_on_second_trigger"]
+[connection signal="body_entered" from="GenSpecific4/FirstTrigger" to="GenSpecific4/OddCareDoor" method="_on_first_trigger"]

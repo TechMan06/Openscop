@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://e4kh2vguned6"]
+[gd_scene load_steps=23 format=3 uid="uid://e4kh2vguned6"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_lwxw7"]
 [ext_resource type="ArrayMesh" uid="uid://b5knwwiu0fmi" path="res://asset/3d/room/evencare/evencare1.obj" id="2_cx80c"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="15_3ubyt"]
 [ext_resource type="Resource" uid="uid://by8kf70db6lcq" path="res://resource/textbox/default.tres" id="16_0uggr"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="16_1p7qn"]
+[ext_resource type="ArrayMesh" uid="uid://c3xet8otx5hsg" path="res://asset/3d/room/oddcare/oddcare1.obj" id="16_su6gc"]
 
 [sub_resource type="Resource" id="Resource_thkrr"]
 script = ExtResource("2_nd3hv")
@@ -29,9 +30,6 @@ environment_darkness = 1.0
 enable_fog = false
 fog_color = Color(1, 1, 1, 1)
 fog_radius = 13.5
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_35chp"]
-data = PackedVector3Array(-0.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 0, -0.5, 12.5, 0, 1, -0.5, 1, 1, -0.5, 0, 1, 4.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 4.5, 0, -12.5, 4.5, 0, -2.6, 2.5, 1, -0.5, 2.5, 0, -1.5, 2.5, 0, -0.5, 11, 1, -6.5, 14.5, 0, -6.5, 11, 0, -6.5, 17.5, 1, -4, 12.5, 0, -4, 17.5, 0, -4, 14.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 0, -5.5, 14.5, 0, -6.5, 14.5, 1, -5.5, 14.5, 0, -5.5, 12.5, 1, -4, 12.5, 0, -2, 12.5, 0, -4, 2.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 0, -1.5, 5.5, 1, -1.5, 5.5, 0, -2.6, 5.5, 0, -1.5, 5.5, 0, -2.6, 4.5, 1, -2.6, 4.5, 0, -2.6, 12.5, 1, -0.5, 12.5, 0, 1, 12.5, 0, -0.5, 11, 0, -0.5, 12.5, 1, -0.5, 12.5, 0, -0.5, 11, 0, -2, 11, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 12.5, 0, -2, 12.5, 1, -2, 7.5, 1, -5, 11, 0, -5, 7.5, 0, -5, 7.5, 1, -12.5, 7.5, 0, -5, 7.5, 0, -12.5, 11, 0, -5, 11, 1, -6.5, 11, 0, -6.5, 2.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 1, -0.5, 12.5, 1, 1, -0.5, 1, 1, 12.5, 0, 1, 7.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 1, -12.5, 4.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 2.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, -0.5, 14.5, 1, -6.5, 14.5, 0, -6.5, 11, 1, -6.5, 12.5, 1, -4, 12.5, 0, -4, 17.5, 1, -4, 17.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 1, -5.5, 14.5, 1, -6.5, 14.5, 1, -5.5, 14.5, 0, -6.5, 12.5, 1, -2, 12.5, 0, -2, 12.5, 1, -4, 5.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 1, -1.5, 5.5, 1, -2.6, 5.5, 0, -2.6, 5.5, 1, -1.5, 5.5, 1, -2.6, 4.5, 1, -2.6, 5.5, 0, -2.6, 12.5, 1, 1, 12.5, 0, 1, 12.5, 1, -0.5, 11, 1, -0.5, 12.5, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 11, 1, -0.5, 11, 0, -2, 11, 0, -2, 12.5, 0, -2, 11, 1, -2, 11, 1, -5, 11, 0, -5, 7.5, 1, -5, 7.5, 1, -5, 7.5, 0, -5, 7.5, 1, -12.5, 11, 1, -5, 11, 1, -6.5, 11, 0, -5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ymuvl"]
 render_priority = 0
@@ -47,7 +45,13 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[node name="EvenCareRoom1" type="Node3D"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_35chp"]
+data = PackedVector3Array(-0.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 0, -0.5, 12.5, 0, 1, -0.5, 1, 1, -0.5, 0, 1, 4.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 4.5, 0, -12.5, 4.5, 0, -2.6, 2.5, 1, -0.5, 2.5, 0, -1.5, 2.5, 0, -0.5, 11, 1, -6.5, 14.5, 0, -6.5, 11, 0, -6.5, 17.5, 1, -4, 12.5, 0, -4, 17.5, 0, -4, 14.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 0, -5.5, 14.5, 0, -6.5, 14.5, 1, -5.5, 14.5, 0, -5.5, 12.5, 1, -4, 12.5, 0, -2, 12.5, 0, -4, 2.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 0, -1.5, 5.5, 1, -1.5, 5.5, 0, -2.6, 5.5, 0, -1.5, 5.5, 0, -2.6, 4.5, 1, -2.6, 4.5, 0, -2.6, 12.5, 1, -0.5, 12.5, 0, 1, 12.5, 0, -0.5, 11, 0, -0.5, 12.5, 1, -0.5, 12.5, 0, -0.5, 11, 0, -2, 11, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 12.5, 0, -2, 12.5, 1, -2, 7.5, 1, -5, 11, 0, -5, 7.5, 0, -5, 7.5, 1, -12.5, 7.5, 0, -5, 7.5, 0, -12.5, 11, 0, -5, 11, 1, -6.5, 11, 0, -6.5, 2.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 1, -0.5, 12.5, 1, 1, -0.5, 1, 1, 12.5, 0, 1, 7.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 1, -12.5, 4.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 2.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, -0.5, 14.5, 1, -6.5, 14.5, 0, -6.5, 11, 1, -6.5, 12.5, 1, -4, 12.5, 0, -4, 17.5, 1, -4, 17.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 1, -5.5, 14.5, 1, -6.5, 14.5, 1, -5.5, 14.5, 0, -6.5, 12.5, 1, -2, 12.5, 0, -2, 12.5, 1, -4, 5.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 1, -1.5, 5.5, 1, -2.6, 5.5, 0, -2.6, 5.5, 1, -1.5, 5.5, 1, -2.6, 4.5, 1, -2.6, 5.5, 0, -2.6, 12.5, 1, 1, 12.5, 0, 1, 12.5, 1, -0.5, 11, 1, -0.5, 12.5, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 11, 1, -0.5, 11, 0, -2, 11, 0, -2, 12.5, 0, -2, 11, 1, -2, 11, 1, -5, 11, 0, -5, 7.5, 1, -5, 7.5, 1, -5, 7.5, 0, -5, 7.5, 1, -12.5, 11, 1, -5, 11, 1, -6.5, 11, 0, -5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1tlvo"]
+data = PackedVector3Array(12.5, 1, 1, 2.5, 1, 1, 12.5, 0, 1, 6.6, 0, -12.5, 7.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 1, -2.6, 4.5, 0, -12.5, 4.5, 0, -2.6, 2.5, 1, 1, 2.5, 0, -1.5, 2.5, 0, 1, 11, 1, -6.5, 14.5, 0, -6.5, 11, 0, -6.5, 17.5, 1, -4, 12.5, 0, -4, 17.5, 0, -4, 14.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 0, -5.5, 14.5, 0, -6.5, 14.5, 1, -5.5, 14.5, 0, -5.5, 12.5, 1, -4, 12.5, 0, -2, 12.5, 0, -4, 2.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 0, -1.5, 5.5, 1, -1.5, 5.5, 0, -2.6, 5.5, 0, -1.5, 5.5, 0, -2.6, 4.5, 1, -2.6, 4.5, 0, -2.6, 12.5, 1, -0.5, 12.5, 0, 1, 12.5, 0, -0.5, 11, 0, -0.5, 12.5, 1, -0.5, 12.5, 0, -0.5, 11, 0, -2, 11, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 12.5, 0, -2, 12.5, 1, -2, 7.5, 1, -5, 11, 0, -5, 7.5, 0, -5, 7.5, 1, -12.5, 7.5, 0, -5, 7.5, 0, -12.5, 11, 0, -5, 11, 1, -6.5, 11, 0, -6.5, 12.5, 0, 1, 2.5, 1, 1, 2.5, 0, 1, 6.6, 0, -15.5, 6.6, 1, -12.5, 6.6, 0, -12.5, 4.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 2.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, 1, 14.5, 1, -6.5, 14.5, 0, -6.5, 11, 1, -6.5, 12.5, 1, -4, 12.5, 0, -4, 17.5, 1, -4, 17.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 1, -5.5, 14.5, 1, -6.5, 14.5, 1, -5.5, 14.5, 0, -6.5, 12.5, 1, -2, 12.5, 0, -2, 12.5, 1, -4, 5.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 1, -1.5, 5.5, 1, -2.6, 5.5, 0, -2.6, 5.5, 1, -1.5, 5.5, 1, -2.6, 4.5, 1, -2.6, 5.5, 0, -2.6, 12.5, 1, 1, 12.5, 0, 1, 12.5, 1, -0.5, 11, 1, -0.5, 12.5, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 11, 1, -0.5, 11, 0, -2, 11, 0, -2, 12.5, 0, -2, 11, 1, -2, 11, 1, -5, 11, 0, -5, 7.5, 1, -5, 7.5, 1, -5, 7.5, 0, -5, 7.5, 1, -12.5, 11, 1, -5, 11, 1, -6.5, 11, 0, -5, 4.5, 0, -12.5, 5.4, 1, -12.5, 5.4, 0, -12.5, 5.4, 1, -15.5, 5.4, 0, -12.5, 5.4, 1, -12.5, 6.6, 1, -12.5, 7.5, 1, -12.5, 6.6, 0, -12.5, 6.6, 1, -15.5, 6.6, 1, -12.5, 6.6, 0, -15.5, 4.5, 1, -12.5, 5.4, 1, -12.5, 4.5, 0, -12.5, 5.4, 0, -15.5, 5.4, 0, -12.5, 5.4, 1, -15.5)
+
+[node name="level1-room1" type="Node3D"]
 script = ExtResource("1_lwxw7")
 room_name = "level1-room1"
 loading_preset = ExtResource("2_t6id3")
@@ -60,17 +64,8 @@ camera_angle = -20.0
 limit_camera_horizontal = true
 horizontal_limit = Vector2(2.5, 14)
 environment_settings = SubResource("Resource_thkrr")
+odd_care_room_on_gen_3 = true
 hardcoded_properties = 1
-
-[node name="EvenCareMesh" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_cx80c")
-surface_material_override/0 = ExtResource("6_me583")
-script = ExtResource("4_y663b")
-
-[node name="LevelBody" type="StaticBody3D" parent="."]
-
-[node name="LevelCollision" type="CollisionShape3D" parent="LevelBody"]
-shape = SubResource("ConcavePolygonShape3D_35chp")
 
 [node name="FurnitureMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("5_s07sf")
@@ -111,7 +106,7 @@ textbox_text = "evencare_0"
 
 [node name="GenSpecific" type="Node" parent="."]
 script = ExtResource("14_xiwdi")
-gens = Array[int]([1, 2, 3, 4, 5, 6])
+gens = Array[int]([4, 5, 6])
 
 [node name="DialogueTrigger" type="Marker3D" parent="GenSpecific"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
@@ -129,6 +124,48 @@ script = ExtResource("15_3ubyt")
 textbox_preset = ExtResource("16_0uggr")
 textbox_text = "evencare_1"
 
+[node name="GenSpecific3" type="Node" parent="."]
+script = ExtResource("14_xiwdi")
+gens = Array[int]([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+[node name="EvenCareMesh" type="MeshInstance3D" parent="GenSpecific3"]
+mesh = ExtResource("2_cx80c")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("6_me583")
+script = ExtResource("4_y663b")
+
+[node name="Warp" parent="GenSpecific3" instance=ExtResource("7_eccxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+detect_bucket = false
+warp_direction = 2
+scene = "res://scene/room/gift_plane/gift_plane.tscn"
+loading_preset = ExtResource("2_egdq2")
+
+[node name="LevelBody" type="StaticBody3D" parent="GenSpecific3"]
+
+[node name="LevelCollision" type="CollisionShape3D" parent="GenSpecific3/LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_35chp")
+
+[node name="GenSpecific4" type="Node" parent="."]
+script = ExtResource("14_xiwdi")
+gens = Array[int]([1, 2, 3])
+
+[node name="OddCareMesh" type="MeshInstance3D" parent="GenSpecific4"]
+mesh = ExtResource("16_su6gc")
+surface_material_override/0 = ExtResource("6_me583")
+script = ExtResource("4_y663b")
+
+[node name="LevelBody" type="StaticBody3D" parent="GenSpecific4"]
+
+[node name="LevelCollision" type="CollisionShape3D" parent="GenSpecific4/LevelBody"]
+shape = SubResource("ConcavePolygonShape3D_1tlvo")
+
+[node name="Warp" parent="GenSpecific4" instance=ExtResource("7_eccxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -13.5)
+warp_direction = 3
+scene = "res://scene/room/odd_care/room0.tscn"
+loading_preset = ExtResource("13_7ny22")
+
 [node name="SpawnClass" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 script = ExtResource("16_1p7qn")
@@ -139,9 +176,7 @@ transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926
 script = ExtResource("16_1p7qn")
 scene_path = "res://scene/room/level1/room2.tscn"
 
-[node name="Warp" parent="." instance=ExtResource("7_eccxh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-detect_bucket = false
-warp_direction = 2
-scene = "res://scene/room/gift_plane/gift_plane.tscn"
-loading_preset = ExtResource("2_egdq2")
+[node name="SpawnClass3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -13.5)
+script = ExtResource("16_1p7qn")
+scene_path = "res://scene/room/level1/room0.tscn"

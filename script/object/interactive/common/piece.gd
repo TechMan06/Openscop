@@ -11,6 +11,7 @@ const VER_SPEED: int = 5
 var global_data: GlobalData = load("res://resource/management/global_data.tres")
 var current_frame: int = 0
 var collected: bool = false
+var room_name: String = ""
 var type_array: Array[int] = [
 								0,1,2,3,4,
 								4,0,2,1,3,
@@ -24,7 +25,7 @@ var type_array: Array[int] = [
 								1,0,4,2,3
 							]
 
-@onready var room_name: String
+@onready var room: Level
 @onready var piece_id: int = get_tree().get_nodes_in_group("piece").find(self)
 @onready var piece_sprite = $PieceSprite
 @onready var piece_collision = $PieceCollision
@@ -37,7 +38,16 @@ func _ready() -> void:
 		
 		rng.set_seed(PIECE_SEED)
 		
-		room_name = get_tree().get_current_scene().room_name
+		room = get_tree().get_current_scene()
+		
+		room_name = room.room_name
+		
+		if (
+				Global.global_data.gen < 4 and 
+				room.hardcoded_properties == room.HardcodedProperties.EVEN_CARE and
+				room.odd_care_room_on_gen_3
+			):
+			room_name = room.room_name.replace("level1", "odd")
 		
 		if Global.global_data.gen < 3:
 			queue_free()

@@ -69,8 +69,8 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4mci0"]
-data = PackedVector3Array(-1.5, 1, -0.5, -1.5, 0, -0.5, -1.5, 1, -3.5, -1.5, 1, -3.5, -1.5, 0, -0.5, -1.5, 0, -3.5, 2.5, 0, -0.5, 2.5, 1, -0.5, 2.5, 0, -4, 2.5, 0, -4, 2.5, 1, -0.5, 2.5, 1, -4, 2.5, 0, -4, 2.5, 1, -4, -3.5, 0, -4, -3.5, 0, -4, 2.5, 1, -4, -3.5, 1, -4, -3.5, 0, 0.5, -3.5, 0, -4, -3.5, 1, 0.5, -3.5, 1, 0.5, -3.5, 0, -4, -3.5, 1, -4, -3.5, 0, 0.5, -3.5, 1, 0.5, -2.5, 0, 0.5, -2.5, 0, 0.5, -3.5, 1, 0.5, -2.5, 1, 0.5, 2.5, 1, -0.5, 2.5, 0, -0.5, -1.5, 1, -0.5, -1.5, 1, -0.5, 2.5, 0, -0.5, -1.5, 0, -0.5, -2.5, 0, -3.5, -2.5, 0, 0.5, -2.5, 1, -3.5, -2.5, 1, -3.5, -2.5, 0, 0.5, -2.5, 1, 0.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7jjse"]
+data = PackedVector3Array(-1.25, 1, -0.5, -1.25, 0, -0.5, -1.25, 1, -3.5, -1.25, 1, -3.5, -1.25, 0, -0.5, -1.25, 0, -3.5, 2.5, 0, -0.5, 2.5, 1, -0.5, 2.5, 0, -4, 2.5, 0, -4, 2.5, 1, -0.5, 2.5, 1, -4, 2.5, 0, -4, 2.5, 1, -4, -3.5, 0, -4, -3.5, 0, -4, 2.5, 1, -4, -3.5, 1, -4, -3.5, 0, 0.5, -3.5, 0, -4, -3.5, 1, 0.5, -3.5, 1, 0.5, -3.5, 0, -4, -3.5, 1, -4, -3.5, 0, 0.5, -3.5, 1, 0.5, -2.5, 0, 0.5, -2.5, 0, 0.5, -3.5, 1, 0.5, -2.5, 1, 0.5, 2.5, 1, -0.5, 2.5, 0, -0.5, -1.25, 1, -0.5, -1.25, 1, -0.5, 2.5, 0, -0.5, -1.25, 0, -0.5, -2.5, 0, -3.5, -2.5, 0, 0.5, -2.5, 1, -3.5, -2.5, 1, -3.5, -2.5, 0, 0.5, -2.5, 1, 0.5)
 
 [node name="Plane" type="Node3D"]
 script = ExtResource("1_xubgh")
@@ -79,7 +79,7 @@ loading_preset = ExtResource("2_abhgy")
 level_slogan = "Have you found anything weird lately?
 
 There is much to find in this place."
-footstep_sound = 1
+footstep_sound = 2
 environment_settings = ExtResource("2_yoyrk")
 
 [node name="GrassObject" type="Node3D" parent="."]
@@ -230,13 +230,13 @@ protected_texture_path = "res://asset/3d/room/nmp/nmp_general.png"
 
 [node name="EntranceCollision" type="StaticBody3D" parent="GenSpecific2"]
 
-[node name="CollisionMesh" type="CollisionShape3D" parent="GenSpecific2/EntranceCollision"]
-shape = SubResource("ConcavePolygonShape3D_4mci0")
+[node name="LevelCollision" type="CollisionShape3D" parent="GenSpecific2/EntranceCollision"]
+shape = SubResource("ConcavePolygonShape3D_7jjse")
 
 [node name="Warp" parent="GenSpecific2" instance=ExtResource("14_kk8a2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 warp_direction = 3
-scene = "res://scene/room/odd_care/room0.tscn"
+scene = "res://scene/room/level1/room0.tscn"
 loading_preset = ExtResource("15_hqprg")
 
 [node name="Trapdoor" parent="." instance=ExtResource("17_imlju")]

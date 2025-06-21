@@ -156,7 +156,25 @@ func start_recording() -> void:
 func stop_recording() -> void:
 	if recording_data != null && recording:
 		recording_data.p1_data.push_back([recording_timer, null])
-		recording_data.name =  "auto-" + recording_name()
+		
+		if Global.global_data.gen > 14:
+			var _counter: int = 1
+			var _recording_list: PackedStringArray = DirAccess.get_files_at("user://recordings")
+		
+			for _filename in _recording_list:
+				_filename.replace(".tres", "")
+			
+			for _recording_name in _recording_list:
+				if _recording_name.begins_with("family"):
+					_counter += 1
+			
+			if _counter > 1:
+				recording_data.name = "family" + str(_counter)
+			else:
+				recording_data.name = "family"
+		else:
+			recording_data.name =  "auto-" + recording_name()
+		
 		ResourceSaver.save(recording_data, "user://recordings/" + recording_data.name + ".tres")
 	
 	recording = false
@@ -300,31 +318,16 @@ func recording_name() -> String:
 	var _counter: int = 0
 	var _recording_filename: String = ""
 	
-	if Global.global_data.gen < 15:
-		var _letters: Array[String] = [
-										"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
-										"p","q","r","s","t","u","v","w","x","y","z","A","B","C","D",
-										"E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
-										"T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7",
-										"8","9"
-									]
-		
-		while _counter < 8:
-			_recording_filename += _letters.pick_random()
-			_counter += 1
-	else:
-		var _recording_list: PackedStringArray = DirAccess.get_files_at("user://recordings")
-		
-		for _filename in _recording_list:
-			_filename.replace(".tres", "")
-		
-		for _recording_name in _recording_list:
-			if _recording_name.begins_with("family"):
-				_counter += 1
-		
-		if _counter > 0:
-			_recording_filename = "family" + str(_counter)
-		else:
-			return "family"
+	var _letters: Array[String] = [
+									"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+									"p","q","r","s","t","u","v","w","x","y","z","A","B","C","D",
+									"E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
+									"T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7",
+									"8","9"
+								]
+	
+	while _counter < 8:
+		_recording_filename += _letters.pick_random()
+		_counter += 1
 	
 	return _recording_filename
