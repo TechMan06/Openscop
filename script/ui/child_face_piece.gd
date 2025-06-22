@@ -6,6 +6,7 @@ signal finished_load
 const OFFSET_VALUE_HORIZONTAL: int = 3
 const OFFSET_VALUE_VERTICAL: int = 1
 
+var gray: bool = false
 var sent: bool = false
 var face_shader: Shader = load("res://shader/canvas/face_piece.gdshader")
 var extra_offset: Vector2i
@@ -68,6 +69,10 @@ func update() -> void:
 			frame_coords.x = clamp(expression, 0, resource.variations)
 	
 	self.get_material().set_shader_parameter("enabled", selected)
+	
+	if gray:
+		self.get_material().set_shader_parameter("enabled", true)
+		self.get_material().set_shader_parameter("new_color", Vector3(0.5, 0.5, 0.5))
 
 
 func get_left_right(value: int) -> int:

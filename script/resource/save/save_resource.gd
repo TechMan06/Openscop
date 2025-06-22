@@ -25,7 +25,6 @@ class_name SaveData
 @export var trapdoor: Dictionary = {} ## Stores the states of all trapdoors in the game. By default only the trapdoors in the Newmaker Plane are saved to this variable.
 @export var anna_phone: Array[int] ## Stores the states for all the phones in the game. By default only Anna's phone is saved.
 @export var wheel: Dictionary ## Stores the states for all the wheels in the game. By default only the Machine Room and Child Library wheel are saved.
-@export var wheel_pet: Array[String] ## Stores the pets for all the wheels in the game. By default only the Machine Room and Child Library wheels are saved.
 @export var library_pet: Array[String] ## Stores the pets stored in the Child Library.
 @export var library_face: FaceResource = null ## Stores the currently loaded face bedroom in the Child Library. Default value is [code]null[/code]
 #MISC

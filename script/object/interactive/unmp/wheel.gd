@@ -6,10 +6,11 @@ var can_interact: bool = true
 var inside_wheel: bool = false
 var rotation_tween: Tween
 
-@export_category("Phone Properties")
+@export_category("Wheel Properties")
 @export var wheel_id: int
 @export var alt_model: bool = false
 @export var turned: bool = false
+@export var send_to_library: bool = false
 
 @onready var wheel_rot: Marker3D = $WheelRot
 @onready var interaction_symbol: Marker3D = $InteractionSymbol
@@ -81,7 +82,10 @@ func rotate_wheel() -> void:
 			
 			if pet != null:
 				SaveManager.get_data().wheel[str(wheel_id)][1] = null
-				SaveManager.get_data().library_pet.append(pet.pet_id_name)
+				
+				if send_to_library:
+					SaveManager.get_data().library_pet.append(pet.pet_id_name)
+				
 				pet_obj.get_child(0).queue_free()
 				pet_obj.visible = false
 				pet = null

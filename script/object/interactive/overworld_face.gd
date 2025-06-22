@@ -1,6 +1,9 @@
 extends Marker3D
+class_name OverworldFace
 
 @export_category("Overworld Face Settings")
+@export var gray: bool = false
+@export var always_visible: bool = false
 @export var load_from_file: bool = false
 @export var id: int = 0
 @export var use_custom_expression: bool = false
@@ -28,25 +31,26 @@ func _ready() -> void:
 	earthquake_timer.wait_time = wait_time
 	earthquake_timer.timeout.connect(open_bedroom)
 	
+	if gray:
+		face.gray = true
+	
+	if always_visible:
+		face.visible = true
+	
 	if use_custom_expression:
 		face.visible = true
 		face.expression = expression
 		face.horizontal_offsets = horizontal_offsets
 		face.vertical_offsets = vertical_offsets
-		face.update()
 	
-	if load_from_file:
+	if load_from_file and SaveManager.get_data().library_face != null:
 		face.visible = true
-		use_custom_expression == true
-		
-		if SaveManager.get_data().library_face != null:
-			face.expression = SaveManager.get_data().library_face.expression
-			face.horizontal_offsets = SaveManager.get_data().library_face.horizontal_offsets
-			face.vertical_offsets = SaveManager.get_data().library_face.vertical_offsets
-		
-		face.update()
+		face.expression = SaveManager.get_data().library_face.expression
+		face.horizontal_offsets = SaveManager.get_data().library_face.horizontal_offsets
+		face.vertical_offsets = SaveManager.get_data().library_face.vertical_offsets
 	
-	toggle_wall(true)
+	toggle_wall(SaveManager.get_data().library_face == null)
+	face.update()
 
 
 func check_face(
@@ -86,6 +90,9 @@ func check_face(
 
 
 func open_bedroom():
+	EventBus.camera_shake_transition_speed.emit(2.0)
+	EventBus.camera_earthquake.emit(false)
+	
 	if earthquake_sound != null:
 		earthquake_sound.stop()
 	

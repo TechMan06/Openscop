@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlx0cy1oqhle4"]
+
+[ext_resource type="Script" path="res://script/object/environment/child_bedroom_node.gd" id="1_30vci"]
+[ext_resource type="Texture2D" uid="uid://byiv8xpduwfj7" path="res://asset/3d/room/child_library/texture_placeholder.png" id="2_gxqvu"]
+[ext_resource type="Script" path="res://script/debug/sprite_loader.gd" id="3_bybfi"]
+[ext_resource type="Texture2D" uid="uid://dvfa36tvcxi7m" path="res://asset/3d/room/child_library/bedroom_tiles.png" id="3_yrao8"]
+[ext_resource type="Texture2D" uid="uid://bpwvhj31j1rsa" path="res://asset/3d/room/child_library/bedroom_walls.png" id="4_nmeqt"]
+
+[node name="ChildBedroomNode" type="Node"]
+script = ExtResource("1_30vci")
+
+[node name="Texture" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(128, 128)
+
+[node name="BedroomTexture" type="TextureRect" parent="Texture"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_gxqvu")
+
+[node name="TextureRectLoader" type="Node" parent="Texture/BedroomTexture"]
+script = ExtResource("3_bybfi")
+protected_texture_path = "res://asset/3d/room/child_library/texture.png"
+
+[node name="Tile" type="Node" parent="Texture"]
+
+[node name="Tile0" type="Sprite2D" parent="Texture/Tile"]
+position = Vector2(16, 16)
+texture = ExtResource("3_yrao8")
+hframes = 4
+vframes = 4
+
+[node name="Tile1" type="Sprite2D" parent="Texture/Tile"]
+position = Vector2(48, 16)
+texture = ExtResource("3_yrao8")
+hframes = 4
+vframes = 4
+
+[node name="Tile2" type="Sprite2D" parent="Texture/Tile"]
+position = Vector2(16, 48)
+texture = ExtResource("3_yrao8")
+hframes = 4
+vframes = 4
+
+[node name="Tile3" type="Sprite2D" parent="Texture/Tile"]
+position = Vector2(48, 48)
+texture = ExtResource("3_yrao8")
+hframes = 4
+vframes = 4
+
+[node name="Wall" type="Node" parent="Texture"]
+
+[node name="Wall0" type="Sprite2D" parent="Texture/Wall"]
+position = Vector2(80, 16)
+texture = ExtResource("4_nmeqt")
+hframes = 4
+vframes = 4
+
+[node name="Wall1" type="Sprite2D" parent="Texture/Wall"]
+position = Vector2(112, 16)
+texture = ExtResource("4_nmeqt")
+hframes = 4
+vframes = 4
+
+[node name="Wall2" type="Sprite2D" parent="Texture/Wall"]
+position = Vector2(80, 48)
+texture = ExtResource("4_nmeqt")
+hframes = 4
+vframes = 4
+
+[node name="Wall3" type="Sprite2D" parent="Texture/Wall"]
+position = Vector2(112, 48)
+texture = ExtResource("4_nmeqt")
+hframes = 4
+vframes = 4

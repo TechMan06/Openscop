@@ -130,9 +130,28 @@ scene_path = "res://scene/room/unmp/child_library.tscn"
 place_camera = true
 place_camera_at = Vector3(-0.5, 0, 0)
 
+[node name="SpawnClass2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
+script = ExtResource("10_rju4e")
+scene_path = "res://scene/room/child_library/child_library_bedroom.tscn"
+
 [node name="Warp" parent="." instance=ExtResource("11_4oiwd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 scene = "res://scene/room/unmp/gg-aa.tscn"
+loading_preset = ExtResource("12_l2hey")
+
+[node name="Warp2" parent="." instance=ExtResource("11_4oiwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -11)
+warp_direction = 3
+keep_child_library_face = true
+scene = "res://scene/room/child_library/child_library_bedroom.tscn"
+loading_preset = ExtResource("12_l2hey")
+
+[node name="Warp3" parent="." instance=ExtResource("11_4oiwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -13)
+warp_direction = 3
+keep_child_library_face = true
+scene = "res://scene/room/child_library/child_library_bedroom.tscn"
 loading_preset = ExtResource("12_l2hey")
 
 [node name="Easel0" type="MeshInstance3D" parent="."]
@@ -144,9 +163,10 @@ mesh = ExtResource("16_tckau")
 skeleton = NodePath("../NiftyMesh2")
 surface_material_override/0 = SubResource("ShaderMaterial_i7bq6")
 
-[node name="OverworldChildFace" parent="." node_paths=PackedStringArray("earthquake_sound") instance=ExtResource("17_s5n0o")]
+[node name="OverworldChildFace" parent="." node_paths=PackedStringArray("wall", "earthquake_sound") instance=ExtResource("17_s5n0o")]
 transform = Transform3D(1.51554, 0.181923, -0.855878, 0, 1.71176, 0.363845, 0.874998, -0.315099, 1.48242, 1.18477, 1.26313, -4.31794)
 load_from_file = true
+wall = NodePath("../WallBody/WallShape")
 special_faces = Array[Resource("res://script/resource/face_resource.gd")]([ExtResource("18_57x7c"), ExtResource("19_eg8pi"), ExtResource("20_1ctcx"), ExtResource("21_ia1k3"), ExtResource("22_2ams3")])
 textbox_preset = ExtResource("23_2cpqu")
 earthquake_sound = NodePath("../Earthquake")
@@ -161,8 +181,8 @@ min_distance = 0.75
 stream = ExtResource("24_nk2b3")
 volume_db = -0.5
 
-[node name="Wall" type="StaticBody3D" parent="."]
+[node name="WallBody" type="StaticBody3D" parent="."]
 
-[node name="WallShape" type="CollisionShape3D" parent="Wall"]
+[node name="WallShape" type="CollisionShape3D" parent="WallBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.5)
 shape = SubResource("WorldBoundaryShape3D_jiuuu")

@@ -323,3 +323,15 @@ func crash_game(stop_music: bool = true, stop_sfx: bool = true) -> void: ## Cras
 	if stop_sfx:
 		AudioServer.set_bus_mute(1, true)
 		AudioServer.set_bus_mute(2, true)
+
+
+func set_fog_amount(_value: float) -> void: ## Sets the amount of fog to [code]_value[/code].
+	RenderingServer.global_shader_parameter_set("fog_size", _value)
+
+
+func get_frames(_hframes: int, _vframes: int) -> int: ## Gets total frames of a [Sprite2D] or [Sprite3D] Node.
+	return _hframes * _vframes
+
+
+func clamp_frames(_value: int, _hframes: int, _vframes: int) -> int: ## Returns a clamped frame value within a Sprite's [code]hframes[/code] and [code]vframes[/code] values.
+	return clamp(_value, 0, get_frames(_hframes, _vframes))

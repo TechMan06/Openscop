@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dh2aw3bxkf0ty"
+path="res://.godot/imported/lamp.obj-f366dc98dd82e791b3f00d4545de161c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/lamp.obj-f366dc98dd82e791b3f00d4545de161c.mesh"]
+
+source_file="res://asset/3d/room/child_library/lamp.obj"
+dest_files=["res://.godot/imported/lamp.obj-f366dc98dd82e791b3f00d4545de161c.mesh", "res://.godot/imported/lamp.obj-f366dc98dd82e791b3f00d4545de161c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

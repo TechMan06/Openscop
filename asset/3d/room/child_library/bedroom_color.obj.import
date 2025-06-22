@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b14bmfs2xvrf1"
+path="res://.godot/imported/bedroom_color.obj-a3c06e92e4b5d485625effc9ef408252.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bedroom_color.obj-a3c06e92e4b5d485625effc9ef408252.mesh"]
+
+source_file="res://asset/3d/room/child_library/bedroom_color.obj"
+dest_files=["res://.godot/imported/bedroom_color.obj-a3c06e92e4b5d485625effc9ef408252.mesh", "res://.godot/imported/bedroom_color.obj-a3c06e92e4b5d485625effc9ef408252.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
