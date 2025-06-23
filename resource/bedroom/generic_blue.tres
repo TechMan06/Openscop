@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="PredefinedBedroomPreset" load_steps=5 format=3 uid="uid://ffqj7max0v4e"]
+
+[ext_resource type="Script" path="res://script/resource/face_resource.gd" id="1_oe7y3"]
+[ext_resource type="Script" path="res://script/resource/predefined_bedroom.gd" id="1_rk54l"]
+[ext_resource type="Texture2D" uid="uid://dsqv5hov5q04n" path="res://asset/2d/sprite/object/child_library/child0.png" id="2_yn0ft"]
+
+[sub_resource type="Resource" id="Resource_gi2r2"]
+script = ExtResource("1_oe7y3")
+expression = Array[int]([2, 2, 2, 2, 2])
+horizontal_offsets = Array[int]([0, 0])
+vertical_offsets = Array[int]([0, 0, 0, 0, 0])
+textbox = ""
+
+[resource]
+script = ExtResource("1_rk54l")
+assigned_face = SubResource("Resource_gi2r2")
+disable_gray_face = false
+higher_fog = false
+has_entrance = false
+table_object_left_offset = Vector3(0, 0, 0)
+table_object_right_offset = Vector3(0, 0, 0)
+child = ExtResource("2_yn0ft")
+valid_pets = Array[PackedScene]([])
+use_default_colors = true
+color_id = 3
+color = Color(1, 1, 1, 1)
+show_note_sprite = false
+note = ""
+floor_tile_1_id = 5
+floor_tile_1_rotation = 0.0
+floor_tile_2_id = 1
+floor_tile_2_rotation = 0.0
+floor_tile_3_id = 1
+floor_tile_3_rotation = 0.0
+floor_tile_4_id = 0
+floor_tile_4_rotation = 90.0
+wall_tile_1_id = 5
+wall_tile_1_rotation = 180.0
+wall_tile_2_id = 4
+wall_tile_2_rotation = 0.0
+wall_tile_3_id = 4
+wall_tile_3_rotation = 0.0
+wall_tile_4_id = 1
+wall_tile_4_rotation = 90.0

@@ -183,6 +183,38 @@
 	"library_mike": [
 		"Mike is not inside right now. He is dead.",
 		"You may visit his room."
+	],
+
+	"library_lina": [
+		"You found her.",
+		"You may visit her room."
+	],
+	
+	"note_care": [
+		"Your wife says, [color=8f9bbf]\"[color=#e4dc49]Care[/color] isn't \ngrowing eyebrows.\"[/color].",
+		"You say, [color=009419]\"That's a puzzle\"[/color]",
+		"You're secretly very excited to \nhear this news.",
+		"You're in the bathtub thinking \nabout her.",
+		"I have a guess at which child \nyou'll pick next.",
+		"When you find her room, the \npassage to my right will lead to \nher.",
+		"She'll appear from the darkness,\nlimping, and I'll shoot her in the \nhead.",
+		"[color=8a225f]Tiara[/color] says young people can be\npsychologically damaged [color=8a225f]\"beyond rebirthing\"[/color].",
+		"A young person walks into your \nschool building.",
+		"They walk in with you. You're \nholding their hands.",
+		"They come out crying into their \nhands, because nobody will love \nthem, not ever again.",
+		"[color=#e4dc49]\"Nobody loves me!\"[/color]",
+		"They wander the Newmaker \nPlane."
+	],
+
+	"note_lina": [
+		"You must have guessed, but I \nwas looking through your things.",
+		"I found that picture of you from\n1977, standing in front of an \nold windmill with your friend.",
+		"You went there, and it was a bad\n idea. Your friend and the windmill\nboth disappeared into thin air.",
+		"Her sister was holding the \ncamera. She took another \npicture minutes later: just you, \nno windmill, and no friend.",
+		"You married her sister, and \nyears later, your friend was \nreborn as your daughter.",
+		"Your wife won't admit this is \ntrue, but I know it, because I \nfound the evidence.",
+		"Your friend never returned with\nyou, and the windmill was gone. I\nwent to see it myself. Where is \nit? What did you do?",
+		"- Rainer, Newmaker"
 	]
 }
 

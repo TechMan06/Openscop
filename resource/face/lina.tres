@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_remsg")
-expression = Array[int]([1, 1, 0, 0, 0])
+expression = Array[int]([1, 1, 0, 0, 1])
 horizontal_offsets = Array[int]([2, 0])
 vertical_offsets = Array[int]([0, 0, 0, 0, 2])
-textbox = "You found her."
+textbox = "library_lina"

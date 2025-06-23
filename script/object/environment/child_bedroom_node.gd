@@ -9,16 +9,20 @@ var predefined_bedroom: bool = false ## Triggered when the bedroom generated is 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 @export_category("Bedroom Settings:")
-@export var default_colors: Array[Color] = [Color.WHITE]
+@export var predefined_bedrooms: Array[PredefinedBedroomPreset] ## Array of predefined bedrooms, uses [PredefinedBedroomPreset].
+@export var default_colors: Array[BedroomColorPreset] = []
 @export var allowed_random_floor_tiles: Array[int] = [0]
 @export var allowed_random_wall_tiles: Array[int] = [0]
 @export var allowed_random_children: Array[int] = [0]
-@export var has_entrance: bool = false ## Whether the bedroom has an entrance to it's right like Lina's bedroom.
-@export var predefined_bedrooms: Array[PredefinedBedroomPreset] ## Array of predefined bedrooms, uses [PredefinedBedroomPreset].
 @export var floor_texture: CompressedTexture2D ## Floor tiles used in the bedroom.
 @export var floor_texture_frames: Vector2i = Vector2i(1, 1) ## Amount of tiles in [member ChildBedroomNode.floor_texture].
 @export var wall_texture: CompressedTexture2D ## Wall tiles used in the bedroom.
 @export var wall_texture_frames: Vector2i = Vector2i(1, 1) ## Amount of tiles in [member ChildBedroomNode.wall_texture_frames].
+
+@export_category("Table Objects:")
+@export var left_side_objects: Array[CompressedTexture2D] ## Graphics used for the objects on the left side of the table.
+@export var right_side_objects: Array[CompressedTexture2D] ## Graphics used for the objects on the right side of the table.
+@export var use_left_side_for_both: bool = false  ## Whether to use the same graphics as the left object for the right object.
 
 @export_category("Bedroom Objects:")
 
@@ -155,27 +159,18 @@ func _ready():
 				wall_4.rotation = deg_to_rad(_bedroom.wall_tile_4_rotation)
 				
 				if child != null:
-					child.frame = Global.clamp_frames(
-														_bedroom.child, 
-														child.hframes, 
-														child.vframes
-													)
+					if _bedroom.child != null:
+						child.texture = _bedroom.child
+					else:
+						child.queue_free()
 				
 				if table_object_left != null:
-					table_object_left.frame = Global.clamp_frames(
-																		_bedroom.table_object_left, 
-																		table_object_left.hframes, 
-																		table_object_left.vframes
-																	)
+					table_object_left.texture = _bedroom.table_object_left
 					
 					table_object_left.position += _bedroom.table_object_left_offset
 				
 				if table_object_right != null:
-					table_object_right.frame = Global.clamp_frames(
-																		_bedroom.table_object_right, 
-																		table_object_right.hframes, 
-																		table_object_right.vframes
-																	)
+					table_object_right.texture = _bedroom.table_object_right
 					
 					table_object_right.position += _bedroom.table_object_right_offset
 				
@@ -183,32 +178,32 @@ func _ready():
 					Global.set_fog_amount(6.25)
 				
 				if _bedroom.valid_pets.size() > 0:
-					var _pet_instance: Marker3D = _bedroom.pet.instantiate()
 					var _library_pets: Array[String] = SaveManager.get_data().library_pet
 					
 					for _bedroom_pet in _bedroom.valid_pets:
+						var _pet_instance: Marker3D = _bedroom_pet.instantiate()
+						
 						if _bedroom_pet == null:
 							break
 						
-						if (
-								_pet_instance.get_child(0) is Pet and 
-								_library_pets.find(_pet_instance.get_child(0).pet_name) != -1
-							):
-							pet_spawner.add_child(_pet_instance)
-							break
+						if (_pet_instance.get_child(0) is Pet):
+							if _library_pets.find(_pet_instance.get_child(0).pet_name) != -1:
+								pet_spawner.add_child(_pet_instance)
+								break
+						
 						else:
-							if (
-									_pet_instance.has("pet_name") and 
-									_library_pets.find(_pet_instance.pet_name) != -1
-								):
-									pet_spawner.add_child(_pet_instance)
-									break
+							if _library_pets.find(_pet_instance.pet_name) != -1:
+								pet_spawner.add_child(_pet_instance)
+								break
 				
 				if _bedroom.note != "" and note_trigger != null:
+					if _bedroom.note_textbox_preset != null:
+						note_trigger.textbox_preset = _bedroom.note_textbox_preset
+					
 					note_trigger.textbox_text = _bedroom.note
 				
 				if note_sprite != null:
-					note_sprite.visible = _bedroom.note != ""
+					note_sprite.visible = _bedroom.show_note_sprite
 				
 				if _bedroom.use_default_colors:
 					var _color: Color = default_colors[
@@ -217,7 +212,7 @@ func _ready():
 																		0, 
 																		default_colors.size() - 1
 																)
-														]
+														].color
 					
 					bedroom_color = Vector3(_color.r, _color.g, _color.b)
 				else:
@@ -266,24 +261,53 @@ func _ready():
 			wall_2.rotation = random_tile_rotation()
 			wall_3.rotation = random_tile_rotation()
 			wall_4.rotation = random_tile_rotation()
-
-			if child != null:
-				child.frame = rand_from_array(allowed_random_children)
 			
-			var _random_bedroom_color: Color = rand_from_array(default_colors)
+			if table_object_left != null:
+				table_object_left.texture = rand_from_array(left_side_objects)
+				
+			if table_object_right != null:
+				if use_left_side_for_both:
+					table_object_right.texture = rand_from_array(left_side_objects)
+				else:
+					table_object_right.texture = rand_from_array(right_side_objects)
 			
-			bedroom_color = Vector3(
-										_random_bedroom_color.r,
-										_random_bedroom_color.g,
-										_random_bedroom_color.b,
-									)
+			if default_colors.size() > 0:
+				var _random_bedroom_color: BedroomColorPreset = rand_from_array(default_colors)
+			
+				if _random_bedroom_color != null:
+					if child != null:
+						child.texture = _random_bedroom_color.child
+					
+					bedroom_color = Vector3(
+												_random_bedroom_color.color.r,
+												_random_bedroom_color.color.g,
+												_random_bedroom_color.color.b,
+											)
 			
 			if note_sprite != null:
 				note_sprite.queue_free()
 			
 			if note_trigger != null:
 				note_trigger.queue_free()
-
+	
+	if child != null and child.get_material_override() != null:
+		child.get_material_override().set_shader_parameter(
+																"albedoTex", 
+																child.texture
+															)
+	
+	if table_object_right != null and table_object_left.get_material_override() != null:
+		table_object_left.get_material_override().set_shader_parameter(
+																		"albedoTex", 
+																		table_object_left.texture
+																	)
+	
+	if table_object_right != null and table_object_right.get_material_override() != null:
+		table_object_right.get_material_override().set_shader_parameter(
+																			"albedoTex", 
+																			table_object_right.texture
+																		)
+	
 	for _textured_mesh in textured_meshes:
 		if _textured_mesh is MeshInstance3D:
 			_textured_mesh.get_surface_override_material(0).set_shader_parameter(

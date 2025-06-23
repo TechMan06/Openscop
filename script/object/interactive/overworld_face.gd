@@ -83,10 +83,12 @@ func check_face(
 		EventBus.camera_earthquake.emit(true)
 		
 		if earthquake_sound != null and !earthquake_sound.playing:
+			create_tween().tween_property(earthquake_sound, "volume_db", 0.0, 0.0)
 			earthquake_sound.play()
 		
 		earthquake_timer.start()
-		toggle_wall(true)
+	
+	toggle_wall(true)
 
 
 func open_bedroom():
@@ -94,7 +96,7 @@ func open_bedroom():
 	EventBus.camera_earthquake.emit(false)
 	
 	if earthquake_sound != null:
-		earthquake_sound.stop()
+		create_tween().tween_property(earthquake_sound, "volume_db", -80.0, 5.0)
 	
 	toggle_wall(false)
 

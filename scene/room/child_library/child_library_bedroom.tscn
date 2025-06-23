@@ -1,9 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://mskhe0dyhjbs"]
+[gd_scene load_steps=53 format=3 uid="uid://mskhe0dyhjbs"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_jntc8"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_iy70q"]
-[ext_resource type="Texture2D" uid="uid://3rmvpbt3qnl8" path="res://vlcsnap-2025-06-21-11h38m33s414.png" id="3_c8iwm"]
 [ext_resource type="Script" path="res://script/resource/environment_resource.gd" id="3_q4vub"]
+[ext_resource type="Texture2D" uid="uid://dq40tibd6hpn4" path="res://vlcsnap-2025-06-23-11h13m21s729.png" id="4_dqb2j"]
 [ext_resource type="Texture2D" uid="uid://1wcxg6xdjwwb" path="res://vlcsnap-2025-06-21-12h46m23s000.png" id="4_tsotb"]
 [ext_resource type="ArrayMesh" uid="uid://b14bmfs2xvrf1" path="res://asset/3d/room/child_library/bedroom_color.obj" id="4_x18x4"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="5_0wh13"]
@@ -19,11 +19,24 @@
 [ext_resource type="PackedScene" uid="uid://dlx0cy1oqhle4" path="res://scene/object/environment/child_bedroom_node.tscn" id="14_l3aij"]
 [ext_resource type="Texture2D" uid="uid://dvfa36tvcxi7m" path="res://asset/3d/room/child_library/bedroom_tiles.png" id="17_cvgx6"]
 [ext_resource type="Texture2D" uid="uid://bpwvhj31j1rsa" path="res://asset/3d/room/child_library/bedroom_walls.png" id="18_4f7x6"]
-[ext_resource type="Resource" uid="uid://5745c1x12tb2" path="res://resource/bedroom/care.tres" id="19_h3gcm"]
+[ext_resource type="Resource" uid="uid://c2ybn3215t54p" path="res://resource/textbox/dark.tres" id="18_rrcwq"]
 [ext_resource type="Script" path="res://script/object/trigger/dialogue_trigger.gd" id="19_lqwop"]
+[ext_resource type="Texture2D" uid="uid://38vensi4pxrw" path="res://asset/2d/sprite/object/child_library/child4.png" id="19_oas6f"]
+[ext_resource type="Script" path="res://script/resource/bedroom_color_preset.gd" id="20_12y6r"]
+[ext_resource type="Resource" uid="uid://wv8ilcot1slr" path="res://resource/bedroom/lina.tres" id="21_tng3i"]
+[ext_resource type="Texture2D" uid="uid://crf4ue8hbkpx5" path="res://asset/2d/sprite/object/child_library/child3.png" id="21_yico0"]
+[ext_resource type="Resource" uid="uid://cuxy8vl6qitij" path="res://resource/bedroom/care.tres" id="22_caxlx"]
+[ext_resource type="Texture2D" uid="uid://cq8i0iwcihtad" path="res://asset/2d/sprite/object/child_library/child1.png" id="22_kthn3"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="22_rhaia"]
+[ext_resource type="Resource" uid="uid://cii5l4cwwk3wh" path="res://resource/bedroom/mike.tres" id="22_tx3pq"]
+[ext_resource type="Resource" uid="uid://5745c1x12tb2" path="res://resource/bedroom/care_brows.tres" id="23_10u3o"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="23_nc6i6"]
+[ext_resource type="Texture2D" uid="uid://dsqv5hov5q04n" path="res://asset/2d/sprite/object/child_library/child0.png" id="23_pa7me"]
+[ext_resource type="Resource" uid="uid://yr2l7sjdanl4" path="res://resource/bedroom/mike_no_brows.tres" id="23_pvxpe"]
 [ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="24_3fpas"]
+[ext_resource type="Texture2D" uid="uid://cnamkitn20mhs" path="res://asset/2d/sprite/object/child_library/child2.png" id="24_d6gwm"]
+[ext_resource type="Resource" uid="uid://ffqj7max0v4e" path="res://resource/bedroom/generic_blue.tres" id="25_r1wcf"]
+[ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite_blend.gdshader" id="31_tlhrx"]
 
 [sub_resource type="Resource" id="Resource_qdytq"]
 script = ExtResource("3_q4vub")
@@ -117,11 +130,53 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
 
+[sub_resource type="Resource" id="Resource_m8uy1"]
+script = ExtResource("20_12y6r")
+color = Color(1, 1, 0.25098, 1)
+child = ExtResource("19_oas6f")
+
+[sub_resource type="Resource" id="Resource_lr1ay"]
+script = ExtResource("20_12y6r")
+color = Color(1, 0.25, 0.6875, 1)
+child = ExtResource("21_yico0")
+
+[sub_resource type="Resource" id="Resource_2m5jd"]
+script = ExtResource("20_12y6r")
+color = Color(0.25, 1, 0.25, 1)
+child = ExtResource("22_kthn3")
+
+[sub_resource type="Resource" id="Resource_am2pw"]
+script = ExtResource("20_12y6r")
+color = Color(0.5, 1, 1, 1)
+child = ExtResource("23_pa7me")
+
+[sub_resource type="Resource" id="Resource_v0vvt"]
+script = ExtResource("20_12y6r")
+color = Color(0.411765, 0, 0.74902, 1)
+child = ExtResource("24_d6gwm")
+
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5wq3g"]
 plane = Plane(0, 0, 1, 0)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ix6x0"]
-data = PackedVector3Array(-1.25, -0.5, -6, -1.25, -0.5, -2.5, -1.25, 0.5, -6, -1.25, 0.5, -6, -1.25, -0.5, -2.5, -1.25, 0.5, -2.5, 4.5, -0.5, 1, 4.5, -0.5, -1.5, 4.5, 0.5, 1, 4.5, 0.5, 1, 4.5, -0.5, -1.5, 4.5, 0.5, -1.5, -3.5, -0.5, 1, 2.375, -0.5, 1, -3.5, 0.5, 1, -3.5, 0.5, 1, 2.375, -0.5, 1, 2.375, 0.5, 1, 3.625, -0.5, 1, 4.5, -0.5, 1, 3.625, 0.5, 1, 3.625, 0.5, 1, 4.5, -0.5, 1, 4.5, 0.5, 1, 2.375, 0.5, 1, 2.375, -0.5, 1, 2.375, 0.5, 4.5, 2.375, 0.5, 4.5, 2.375, -0.5, 1, 2.375, -0.5, 4.5, 3.625, -0.5, 1, 3.625, 0.5, 1, 3.625, -0.5, 4.5, 3.625, -0.5, 4.5, 3.625, 0.5, 1, 3.625, 0.5, 4.5, 1.5, -0.5, -14.5, 1.5, -0.5, -7.5, 1.5, 0.5, -14.5, 1.5, 0.5, -14.5, 1.5, -0.5, -7.5, 1.5, 0.5, -7.5, -1.25, -0.5, -2.5, -3.5, -0.5, -2.5, -1.25, 0.5, -2.5, -1.25, 0.5, -2.5, -3.5, -0.5, -2.5, -3.5, 0.5, -2.5, -3.5, -0.5, -2.5, -3.5, -0.5, 1, -3.5, 0.5, -2.5, -3.5, 0.5, -2.5, -3.5, -0.5, 1, -3.5, 0.5, 1, 1, -0.5, -1.5, 1, -0.5, -3.5, 1, 0.5, -1.5, 1, 0.5, -1.5, 1, -0.5, -3.5, 1, 0.5, -3.5, 4.5, -0.5, -1.5, 1, -0.5, -1.5, 4.5, 0.5, -1.5, 4.5, 0.5, -1.5, 1, -0.5, -1.5, 1, 0.5, -1.5, 1, -0.5, -3.5, 4.5, -0.5, -3.5, 1, 0.5, -3.5, 1, 0.5, -3.5, 4.5, -0.5, -3.5, 4.5, 0.5, -3.5, 4.5, -0.5, -3.5, 4.5, -0.5, -14.5, 4.5, 0.5, -3.5, 4.5, 0.5, -3.5, 4.5, -0.5, -14.5, 4.5, 0.5, -14.5, -3.5, -0.5, -7.5, -3.5, -0.5, -6, -3.5, 0.5, -7.5, -3.5, 0.5, -7.5, -3.5, -0.5, -6, -3.5, 0.5, -6, -1.25, -0.5, -6, -1.25, 0.5, -6, -3.5, -0.5, -6, -3.5, -0.5, -6, -1.25, 0.5, -6, -3.5, 0.5, -6, -3.5, 0.5, -7.5, 1.5, 0.5, -7.5, -3.5, -0.5, -7.5, -3.5, -0.5, -7.5, 1.5, 0.5, -7.5, 1.5, -0.5, -7.5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7c0ge"]
+data = PackedVector3Array(-1.25, -0.5, -5.5, -1.25, -0.5, -2.5, -1.25, 0.5, -5.5, -1.25, 0.5, -5.5, -1.25, -0.5, -2.5, -1.25, 0.5, -2.5, 4.5, -0.5, 1, 4.5, -0.5, -1.5, 4.5, 0.5, 1, 4.5, 0.5, 1, 4.5, -0.5, -1.5, 4.5, 0.5, -1.5, -3.5, -0.5, 1, 2.375, -0.5, 1, -3.5, 0.5, 1, -3.5, 0.5, 1, 2.375, -0.5, 1, 2.375, 0.5, 1, 3.625, -0.5, 1, 4.5, -0.5, 1, 3.625, 0.5, 1, 3.625, 0.5, 1, 4.5, -0.5, 1, 4.5, 0.5, 1, 2.375, 0.5, 1, 2.375, -0.5, 1, 2.375, 0.5, 4.5, 2.375, 0.5, 4.5, 2.375, -0.5, 1, 2.375, -0.5, 4.5, 3.625, -0.5, 1, 3.625, 0.5, 1, 3.625, -0.5, 4.5, 3.625, -0.5, 4.5, 3.625, 0.5, 1, 3.625, 0.5, 4.5, 1.5, -0.5, -14.5, 1.5, -0.5, -7.5, 1.5, 0.5, -14.5, 1.5, 0.5, -14.5, 1.5, -0.5, -7.5, 1.5, 0.5, -7.5, -1.25, -0.5, -2.5, -3.5, -0.5, -2.5, -1.25, 0.5, -2.5, -1.25, 0.5, -2.5, -3.5, -0.5, -2.5, -3.5, 0.5, -2.5, -3.5, -0.5, -2.5, -3.5, -0.5, 1, -3.5, 0.5, -2.5, -3.5, 0.5, -2.5, -3.5, -0.5, 1, -3.5, 0.5, 1, 1, -0.5, -1.5, 1, -0.5, -3.5, 1, 0.5, -1.5, 1, 0.5, -1.5, 1, -0.5, -3.5, 1, 0.5, -3.5, 4.5, -0.5, -1.5, 1, -0.5, -1.5, 4.5, 0.5, -1.5, 4.5, 0.5, -1.5, 1, -0.5, -1.5, 1, 0.5, -1.5, 1, -0.5, -3.5, 4.5, -0.5, -3.5, 1, 0.5, -3.5, 1, 0.5, -3.5, 4.5, -0.5, -3.5, 4.5, 0.5, -3.5, 4.5, -0.5, -3.5, 4.5, -0.5, -14.5, 4.5, 0.5, -3.5, 4.5, 0.5, -3.5, 4.5, -0.5, -14.5, 4.5, 0.5, -14.5, -3.5, -0.5, -7.5, -3.5, -0.5, -5.5, -3.5, 0.5, -7.5, -3.5, 0.5, -7.5, -3.5, -0.5, -5.5, -3.5, 0.5, -5.5, -1.25, -0.5, -5.5, -1.25, 0.5, -5.5, -3.5, -0.5, -5.5, -3.5, -0.5, -5.5, -1.25, 0.5, -5.5, -3.5, 0.5, -5.5, -3.5, 0.5, -7.5, 1.5, 0.5, -7.5, -3.5, -0.5, -7.5, -3.5, -0.5, -7.5, 1.5, 0.5, -7.5, 1.5, -0.5, -7.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5prj4"]
+render_priority = 0
+shader = ExtResource("31_tlhrx")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/alpha_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("23_pa7me")
+shader_parameter/fixed_size = false
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/animate = null
+shader_parameter/animation_frames = null
+shader_parameter/animation_speed = null
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
 
 [node name="child-library-bedroom" type="Node3D" node_paths=PackedStringArray("fog_focus")]
 script = ExtResource("1_jntc8")
@@ -140,9 +195,9 @@ fov = 35.0
 [node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 7.15256e-07, -11.5)
 visible = false
-modulate = Color(1, 1, 1, 0.968627)
+modulate = Color(1, 1, 1, 0.992157)
 no_depth_test = true
-texture = ExtResource("3_c8iwm")
+texture = ExtResource("4_dqb2j")
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 2.45, 2.75, 1.5)
@@ -182,6 +237,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_oaduq")
 
 [node name="OverworldChildFace" parent="." instance=ExtResource("8_wyb1l")]
 transform = Transform3D(-1.09278e-07, 0, -2.5, 0, 2.5, 0, 2.5, 0, -1.09278e-07, 3.85, 2.225, -3.512)
+gray = true
 always_visible = true
 load_from_file = true
 update_on_signal = false
@@ -192,18 +248,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, -3)
 [node name="DialogueTrigger" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 script = ExtResource("19_lqwop")
+textbox_preset = ExtResource("18_rrcwq")
 min_distance = 0.5
 
-[node name="ChildBedroomNode" parent="." node_paths=PackedStringArray("overworld_face", "note_sprite", "note_trigger", "textured_meshes", "colored_meshes") instance=ExtResource("14_l3aij")]
-default_colors = Array[Color]([Color(1, 1, 0.25098, 1), Color(1, 0.25, 0.625, 1), Color(0.1875, 0.75, 0.1875, 1), Color(0.1875, 0.75, 0.75, 1), Color(1, 0.5, 0.5, 1), Color(0.498039, 0.188235, 0.74902, 1), Color(0.411765, 0, 0.74902, 1)])
+[node name="ChildBedroomNode" parent="." node_paths=PackedStringArray("overworld_face", "child", "note_sprite", "note_trigger", "textured_meshes", "colored_meshes") instance=ExtResource("14_l3aij")]
+predefined_bedrooms = Array[Resource("res://script/resource/predefined_bedroom.gd")]([ExtResource("21_tng3i"), ExtResource("22_tx3pq"), ExtResource("23_pvxpe"), ExtResource("22_caxlx"), ExtResource("23_10u3o"), ExtResource("25_r1wcf")])
+default_colors = Array[ExtResource("20_12y6r")]([SubResource("Resource_m8uy1"), SubResource("Resource_lr1ay"), SubResource("Resource_2m5jd"), SubResource("Resource_am2pw"), SubResource("Resource_v0vvt")])
 allowed_random_floor_tiles = Array[int]([0, 1, 3, 4, 7, 8])
 allowed_random_wall_tiles = Array[int]([0, 1, 3, 4, 7, 8])
-predefined_bedrooms = Array[Resource("res://script/resource/predefined_bedroom.gd")]([ExtResource("19_h3gcm")])
 floor_texture = ExtResource("17_cvgx6")
 floor_texture_frames = Vector2i(4, 4)
 wall_texture = ExtResource("18_4f7x6")
 wall_texture_frames = Vector2i(4, 4)
 overworld_face = NodePath("../OverworldChildFace")
+child = NodePath("../Child")
 note_sprite = NodePath("../BedroomNote")
 note_trigger = NodePath("../DialogueTrigger")
 textured_meshes = [NodePath("../BedroomTop"), NodePath("../BedroomConcrete")]
@@ -218,7 +276,7 @@ shape = SubResource("WorldBoundaryShape3D_5wq3g")
 [node name="LevelCollision" type="StaticBody3D" parent="."]
 
 [node name="LevelShape" type="CollisionShape3D" parent="LevelCollision"]
-shape = SubResource("ConcavePolygonShape3D_ix6x0")
+shape = SubResource("ConcavePolygonShape3D_7c0ge")
 
 [node name="SpawnClass" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
@@ -228,5 +286,12 @@ player_direction = 3
 
 [node name="Warp" parent="." instance=ExtResource("23_nc6i6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2.6)
+keep_child_library_face = true
 scene = "res://scene/room/unmp/child_library.tscn"
 loading_preset = ExtResource("24_3fpas")
+
+[node name="Child" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 1.3, -3.6)
+material_override = SubResource("ShaderMaterial_5prj4")
+pixel_size = 0.03
+texture = ExtResource("23_pa7me")

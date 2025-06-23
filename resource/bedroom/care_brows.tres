@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="PredefinedBedroomPreset" load_steps=4 format=3 uid="uid://5745c1x12tb2"]
+
+[ext_resource type="Resource" uid="uid://h6qf08dyv220" path="res://resource/face/care_brows.tres" id="1_lbtvd"]
+[ext_resource type="Texture2D" uid="uid://dawjq0epucq72" path="res://asset/2d/sprite/object/child_library/child5.png" id="2_sluxa"]
+[ext_resource type="Script" path="res://script/resource/predefined_bedroom.gd" id="3_jxe65"]
+
+[resource]
+script = ExtResource("3_jxe65")
+assigned_face = ExtResource("1_lbtvd")
+disable_gray_face = false
+higher_fog = false
+has_entrance = false
+table_object_left_offset = Vector3(0, 0, 0)
+table_object_right_offset = Vector3(0, 0, 0)
+child = ExtResource("2_sluxa")
+valid_pets = Array[PackedScene]([])
+use_default_colors = false
+color_id = 0
+color = Color(0.4675, 0, 0.85, 1)
+show_note_sprite = false
+note = ""
+floor_tile_1_id = 11
+floor_tile_1_rotation = 0.0
+floor_tile_2_id = 2
+floor_tile_2_rotation = 90.0
+floor_tile_3_id = 2
+floor_tile_3_rotation = 90.0
+floor_tile_4_id = 7
+floor_tile_4_rotation = 0.0
+wall_tile_1_id = 13
+wall_tile_1_rotation = 0.0
+wall_tile_2_id = 13
+wall_tile_2_rotation = 0.0
+wall_tile_3_id = 7
+wall_tile_3_rotation = 0.0
+wall_tile_4_id = 9
+wall_tile_4_rotation = 0.0

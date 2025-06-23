@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="PredefinedBedroomPreset" load_steps=4 format=3 uid="uid://wv8ilcot1slr"]
+
+[ext_resource type="Script" path="res://script/resource/predefined_bedroom.gd" id="1_6ksng"]
+[ext_resource type="Resource" uid="uid://bojuxs030ekmt" path="res://resource/face/lina.tres" id="1_hugyv"]
+[ext_resource type="Resource" uid="uid://81sxacg2bro0" path="res://resource/textbox/lina_note.tres" id="2_t3fst"]
+
+[resource]
+script = ExtResource("1_6ksng")
+assigned_face = ExtResource("1_hugyv")
+disable_gray_face = true
+higher_fog = true
+has_entrance = true
+table_object_left_offset = Vector3(0, 0, 0)
+table_object_right_offset = Vector3(0, 0, 0)
+valid_pets = Array[PackedScene]([])
+use_default_colors = false
+color_id = 0
+color = Color(1, 1, 1, 1)
+show_note_sprite = true
+note = "note_lina"
+note_textbox_preset = ExtResource("2_t3fst")
+floor_tile_1_id = 12
+floor_tile_1_rotation = 0.0
+floor_tile_2_id = 11
+floor_tile_2_rotation = 0.0
+floor_tile_3_id = 7
+floor_tile_3_rotation = 0.0
+floor_tile_4_id = 11
+floor_tile_4_rotation = 0.0
+wall_tile_1_id = 7
+wall_tile_1_rotation = 0.0
+wall_tile_2_id = 11
+wall_tile_2_rotation = 0.0
+wall_tile_3_id = 11
+wall_tile_3_rotation = 0.0
+wall_tile_4_id = 7
+wall_tile_4_rotation = 0.0

@@ -1,26 +1,28 @@
-[gd_resource type="Resource" script_class="PredefinedBedroomPreset" load_steps=3 format=3 uid="uid://5745c1x12tb2"]
+[gd_resource type="Resource" script_class="PredefinedBedroomPreset" load_steps=4 format=3 uid="uid://cuxy8vl6qitij"]
 
-[ext_resource type="Script" path="res://script/resource/predefined_bedroom.gd" id="1_j3qgc"]
-[ext_resource type="Resource" uid="uid://o52j6g1fncmi" path="res://resource/face/care.tres" id="1_sh2ld"]
+[ext_resource type="Resource" uid="uid://o52j6g1fncmi" path="res://resource/face/care.tres" id="1_0pquw"]
+[ext_resource type="Script" path="res://script/resource/predefined_bedroom.gd" id="2_m613k"]
+[ext_resource type="PackedScene" uid="uid://drmqy27s0nhr5" path="res://scene/object/pet/care_nlm.tscn" id="3_lu7xn"]
 
 [resource]
-script = ExtResource("1_j3qgc")
-assigned_face = ExtResource("1_sh2ld")
-table_object_left = 0
+script = ExtResource("2_m613k")
+assigned_face = ExtResource("1_0pquw")
+disable_gray_face = false
+higher_fog = false
+has_entrance = false
 table_object_left_offset = Vector3(0, 0, 0)
-table_object_right = 0
 table_object_right_offset = Vector3(0, 0, 0)
-child = 0
-valid_pets = Array[PackedScene]([])
+valid_pets = Array[PackedScene]([ExtResource("3_lu7xn")])
 use_default_colors = false
 color_id = 0
 color = Color(0.75, 0.75, 0.75, 1)
-note = ""
+show_note_sprite = true
+note = "note_care"
 floor_tile_1_id = 9
 floor_tile_1_rotation = 0.0
-floor_tile_2_id = 0
+floor_tile_2_id = 6
 floor_tile_2_rotation = 0.0
-floor_tile_3_id = 0
+floor_tile_3_id = 6
 floor_tile_3_rotation = 0.0
 floor_tile_4_id = 9
 floor_tile_4_rotation = 180.0
