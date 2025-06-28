@@ -147,13 +147,6 @@ keep_child_library_face = true
 scene = "res://scene/room/child_library/child_library_bedroom.tscn"
 loading_preset = ExtResource("12_l2hey")
 
-[node name="Warp3" parent="." instance=ExtResource("11_4oiwd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -13)
-warp_direction = 3
-keep_child_library_face = true
-scene = "res://scene/room/child_library/child_library_bedroom.tscn"
-loading_preset = ExtResource("12_l2hey")
-
 [node name="Easel0" type="MeshInstance3D" parent="."]
 mesh = ExtResource("13_wph35")
 surface_material_override/0 = SubResource("ShaderMaterial_rnmuh")

@@ -4,16 +4,18 @@ class_name ChildBedroomNode
 ## Node used for managing the bedrooms in the Child Library.
 ## This node is responsible for generating the textures for the bedroom and displaying objects in the bedroom depending on the face combination.
 
-var bedroom_color: Vector3 = Vector3(1., 1., 1.)
+var bedroom_primary_color: Vector3 = Vector3(1., 1., 1.)
+var bedroom_secondary_color: Vector3 = Vector3(1., 1., 1.)
 var predefined_bedroom: bool = false ## Triggered when the bedroom generated is a pre-defined bedroom from the [member ChildBedroomNode.predefined_bedrooms] variable.
-var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var rng: RandomNumberGenerator = RandomNumberGenerator.new() ## [RandomNumberGenerator] that generates a bedroom using the number generated out of the [FaceResource] inputted as Seed.
+var higher_fog: bool = false ## Whether to use the special bigger fog seen in Lina's room.
+var primary_color_on_all_furniture: bool = true ## Whether all furniture will use the [member PredefinedBedroomPreset.color].
 
 @export_category("Bedroom Settings:")
 @export var predefined_bedrooms: Array[PredefinedBedroomPreset] ## Array of predefined bedrooms, uses [PredefinedBedroomPreset].
-@export var default_colors: Array[BedroomColorPreset] = []
-@export var allowed_random_floor_tiles: Array[int] = [0]
-@export var allowed_random_wall_tiles: Array[int] = [0]
-@export var allowed_random_children: Array[int] = [0]
+@export var default_colors: Array[BedroomColorPreset] = [] ## The default color presets used for generic bedrooms or some predefined bedrooms, uses [BedroomColorPreset].
+@export var allowed_random_floor_tiles: Array[int] = [0] ## Floor tiles that are allowed to be used on generic bedrooms.
+@export var allowed_random_wall_tiles: Array[int] = [0] ## Wall tiles that are allowed to be used on generic bedrooms.
 @export var floor_texture: CompressedTexture2D ## Floor tiles used in the bedroom.
 @export var floor_texture_frames: Vector2i = Vector2i(1, 1) ## Amount of tiles in [member ChildBedroomNode.floor_texture].
 @export var wall_texture: CompressedTexture2D ## Wall tiles used in the bedroom.
@@ -38,9 +40,14 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 @export_category("Bedroom Meshes:")
 
 @export var textured_meshes: Array[MeshInstance3D] ## [MeshInstance3D] or [NiftyMesh] Nodes that will use the generated texture.
-@export var colored_meshes: Array[MeshInstance3D] ## [MeshInstance3D] or [NiftyMesh] Nodes that will use the generated vertex colors.
+@export var primary_colored_meshes: Array[MeshInstance3D] ## [MeshInstance3D] or [NiftyMesh] Nodes that will use the primary generated vertex colors.
+@export var secondary_colored_meshes: Array[MeshInstance3D] ## [MeshInstance3D] or [NiftyMesh] Nodes that will use the secondary generated vertex colors.
 
 @onready var generated_texture: SubViewport = $Texture ## The generated texture.
+@onready var tile: Node = $Texture/Tile ## The [Node] that groups the floor tiles' [Sprite2D]s together.
+@onready var wall: Node = $Texture/Wall ## The [Node] that groups the wall tiles' [Sprite2D]s together.
+@onready var tint_layer: Node = $Texture/TintLayer ## The [Node] that groups the tint layers' [ColorRect]s together.
+
 @onready var tile_1: Sprite2D = $Texture/Tile/Tile0 ## The [Sprite2D] Node for the first floor tile of the generated texture.
 @onready var tile_2: Sprite2D = $Texture/Tile/Tile1 ## The [Sprite2D] Node for the second floor tile of the generated texture.
 @onready var tile_3: Sprite2D = $Texture/Tile/Tile2 ## The [Sprite2D] Node for the third floor tile of the generated texture.
@@ -59,9 +66,6 @@ func _ready():
 	
 	if allowed_random_wall_tiles.size() < 0:
 		allowed_random_wall_tiles.resize(1)
-	
-	if allowed_random_children.size() < 0:
-		allowed_random_children.resize(1)
 	
 	if default_colors.size() < 0:
 		default_colors.append(Color.WHITE)
@@ -93,6 +97,8 @@ func _ready():
 			if wall_texture_frames.x > 0 and wall_texture_frames.y > 1:
 				_wall_tile.hframes = wall_texture_frames.x
 				_wall_tile.vframes = wall_texture_frames.y
+	
+	toggle_wall(true)
 	
 	if SaveManager.get_data().library_face != null:
 		for _bedroom in predefined_bedrooms:
@@ -127,10 +133,22 @@ func _ready():
 													floor_texture_frames.y
 												)
 				
+				if !_bedroom.only_use_primary_color_on_furniture:
+					primary_color_on_all_furniture = false
+				
 				tile_1.rotation = deg_to_rad(_bedroom.floor_tile_1_rotation)
 				tile_2.rotation = deg_to_rad(_bedroom.floor_tile_2_rotation)
 				tile_3.rotation = deg_to_rad(_bedroom.floor_tile_3_rotation)
 				tile_4.rotation = deg_to_rad(_bedroom.floor_tile_4_rotation)
+				
+				tile_1.flip_h = _bedroom.flip_floor_tile_1_h
+				tile_1.flip_v = _bedroom.flip_floor_tile_1_v
+				tile_2.flip_h = _bedroom.flip_floor_tile_2_h
+				tile_2.flip_v = _bedroom.flip_floor_tile_2_v
+				tile_3.flip_h = _bedroom.flip_floor_tile_3_h
+				tile_3.flip_v = _bedroom.flip_floor_tile_3_v
+				tile_4.flip_h = _bedroom.flip_floor_tile_4_h
+				tile_4.flip_v = _bedroom.flip_floor_tile_4_v
 				
 				wall_1.frame = Global.clamp_frames(
 													_bedroom.wall_tile_1_id, 
@@ -158,11 +176,23 @@ func _ready():
 				wall_3.rotation = deg_to_rad(_bedroom.wall_tile_3_rotation)
 				wall_4.rotation = deg_to_rad(_bedroom.wall_tile_4_rotation)
 				
+				wall_1.flip_h = _bedroom.flip_wall_tile_1_h
+				wall_1.flip_v = _bedroom.flip_wall_tile_1_v
+				wall_2.flip_h = _bedroom.flip_wall_tile_2_h
+				wall_2.flip_v = _bedroom.flip_wall_tile_2_v
+				wall_3.flip_h = _bedroom.flip_wall_tile_3_h
+				wall_3.flip_v = _bedroom.flip_wall_tile_3_v
+				wall_4.flip_h = _bedroom.flip_wall_tile_4_h
+				wall_4.flip_v = _bedroom.flip_wall_tile_4_v
+				
 				if child != null:
 					if _bedroom.child != null:
 						child.texture = _bedroom.child
 					else:
 						child.queue_free()
+				
+				if _bedroom.has_entrance:
+					toggle_wall(false)
 				
 				if table_object_left != null:
 					table_object_left.texture = _bedroom.table_object_left
@@ -175,7 +205,7 @@ func _ready():
 					table_object_right.position += _bedroom.table_object_right_offset
 				
 				if _bedroom.higher_fog:
-					Global.set_fog_amount(6.25)
+					higher_fog = true
 				
 				if _bedroom.valid_pets.size() > 0:
 					var _library_pets: Array[String] = SaveManager.get_data().library_pet
@@ -201,22 +231,32 @@ func _ready():
 						note_trigger.textbox_preset = _bedroom.note_textbox_preset
 					
 					note_trigger.textbox_text = _bedroom.note
+				else:
+					note_trigger.queue_free()
 				
 				if note_sprite != null:
 					note_sprite.visible = _bedroom.show_note_sprite
 				
 				if _bedroom.use_default_colors:
-					var _color: Color = default_colors[
+					var _primary_color: Color = default_colors[
 															clamp(
 																		_bedroom.color_id, 
 																		0, 
 																		default_colors.size() - 1
 																)
 														].color
+					var _secondary_color: Color = default_colors[
+															clamp(
+																		_bedroom.color_id, 
+																		0, 
+																		default_colors.size() - 1
+																)
+														].secondary_color
 					
-					bedroom_color = Vector3(_color.r, _color.g, _color.b)
+					bedroom_primary_color = Vector3(_primary_color.r, _primary_color.g, _primary_color.b)
+					bedroom_secondary_color = Vector3(_secondary_color.r, _secondary_color.g, _secondary_color.b)
 				else:
-					bedroom_color = Vector3(_bedroom.color.r, _bedroom.color.g, _bedroom.color.b)
+					bedroom_primary_color = Vector3(_bedroom.color.r, _bedroom.color.g, _bedroom.color.b)
 				
 				
 				predefined_bedroom = true
@@ -242,25 +282,19 @@ func _ready():
 			_face_seed_int = int(_face_seed_string)
 			rng.set_seed(_face_seed_int)
 			
-			tile_1.frame = rand_from_array(allowed_random_floor_tiles)
-			tile_2.frame = rand_from_array(allowed_random_floor_tiles)
-			tile_3.frame = rand_from_array(allowed_random_floor_tiles)
-			tile_4.frame = rand_from_array(allowed_random_floor_tiles)
-
-			tile_1.rotation = random_tile_rotation()
-			tile_2.rotation = random_tile_rotation()
-			tile_3.rotation = random_tile_rotation()
-			tile_4.rotation = random_tile_rotation()
-
-			wall_1.frame = rand_from_array(allowed_random_wall_tiles)
-			wall_2.frame = rand_from_array(allowed_random_wall_tiles)
-			wall_3.frame = rand_from_array(allowed_random_wall_tiles)
-			wall_4.frame = rand_from_array(allowed_random_wall_tiles)
-
-			wall_1.rotation = random_tile_rotation()
-			wall_2.rotation = random_tile_rotation()
-			wall_3.rotation = random_tile_rotation()
-			wall_4.rotation = random_tile_rotation()
+			
+			for _tile in tile.get_children():
+				_tile.frame = rand_from_array(allowed_random_floor_tiles)
+				_tile.rotation = random_tile_rotation()
+				_tile.flip_h = bool(randi_range(0, 1))
+				_tile.flip_v = bool(randi_range(0, 1))
+			
+			for _wall in wall.get_children():
+				_wall.frame = rand_from_array(allowed_random_wall_tiles)
+				_wall.rotation = random_tile_rotation()
+				_wall.flip_h = bool(randi_range(0, 1))
+				_wall.flip_v = bool(randi_range(0, 1))
+			
 			
 			if table_object_left != null:
 				table_object_left.texture = rand_from_array(left_side_objects)
@@ -278,10 +312,18 @@ func _ready():
 					if child != null:
 						child.texture = _random_bedroom_color.child
 					
-					bedroom_color = Vector3(
+					if _random_bedroom_color.primary_color_on_all_furniture:
+						primary_color_on_all_furniture = true
+					
+					bedroom_primary_color = Vector3(
 												_random_bedroom_color.color.r,
 												_random_bedroom_color.color.g,
 												_random_bedroom_color.color.b,
+											)
+					bedroom_secondary_color = Vector3(
+												_random_bedroom_color.secondary_color.r,
+												_random_bedroom_color.secondary_color.g,
+												_random_bedroom_color.secondary_color.b,
 											)
 			
 			if note_sprite != null:
@@ -289,6 +331,10 @@ func _ready():
 			
 			if note_trigger != null:
 				note_trigger.queue_free()
+	
+	for _layer in tint_layer.get_children():
+		_layer.get_material().set_shader_parameter("primary_color", bedroom_primary_color)
+		_layer.get_material().set_shader_parameter("secondary_color", bedroom_secondary_color)
 	
 	if child != null and child.get_material_override() != null:
 		child.get_material_override().set_shader_parameter(
@@ -315,12 +361,33 @@ func _ready():
 																					generated_texture.get_texture()
 																				)
 
-	for _colored_mesh in colored_meshes:
+	for _colored_mesh in primary_colored_meshes:
 		if _colored_mesh is MeshInstance3D:
 			_colored_mesh.get_surface_override_material(0).set_shader_parameter(
 																					"modulate_color", 
-																					bedroom_color
+																					bedroom_primary_color
 																				)
+	
+	if !primary_color_on_all_furniture:
+		for _colored_mesh in secondary_colored_meshes:
+			if _colored_mesh is MeshInstance3D:
+				_colored_mesh.get_surface_override_material(0).set_shader_parameter(
+																						"modulate_color", 
+																						bedroom_secondary_color
+																					)
+	else:
+		for _colored_mesh in secondary_colored_meshes:
+			if _colored_mesh is MeshInstance3D:
+				_colored_mesh.get_surface_override_material(0).set_shader_parameter(
+																						"modulate_color", 
+																						bedroom_primary_color
+																					)
+
+
+func _process(_delta: float) -> void:
+	if higher_fog:
+		Global.set_fog_amount(6.25)
+		higher_fog = false
 
 
 func random_tile_rotation() -> float: ## Rotates a [Node2D] randomly while snapping to 90º angles, use result with [code]deg_to_rad[/code] using the seeded [RandomNumberGenerator] from this node.
@@ -333,3 +400,8 @@ func random_sprite_frame(_hframes: int, _vframes: int) -> int: ## Picks a random
 
 func rand_from_array(_array: Array) -> Variant: ## Picks a random value from [code]_array[/code] using the seeded [RandomNumberGenerator] from this node.
 	return _array[rng.randi_range(0, _array.size() - 1)]
+
+
+func toggle_wall(value: bool) -> void:
+	if entrance_wall != null:
+		entrance_wall.disabled = !value

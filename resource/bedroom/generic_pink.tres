@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="PredefinedBedroomPreset" load_steps=5 format=3 uid="uid://du3rkysdlxx1m"]
+
+[ext_resource type="Script" path="res://script/resource/predefined_bedroom.gd" id="1_2nsn6"]
+[ext_resource type="Script" path="res://script/resource/face_resource.gd" id="1_hdew5"]
+[ext_resource type="Texture2D" uid="uid://crf4ue8hbkpx5" path="res://asset/2d/sprite/object/child_library/child3.png" id="2_4bgmd"]
+
+[sub_resource type="Resource" id="Resource_85geo"]
+script = ExtResource("1_hdew5")
+expression = Array[int]([2, 1, 1, 1, 2])
+horizontal_offsets = Array[int]([2, 0])
+vertical_offsets = Array[int]([0, 0, 1, 1, 1])
+textbox = ""
+
+[resource]
+script = ExtResource("1_2nsn6")
+assigned_face = SubResource("Resource_85geo")
+disable_gray_face = false
+higher_fog = false
+has_entrance = false
+table_object_left_offset = Vector3(0, 0, 0)
+table_object_right_offset = Vector3(0, 0, 0)
+child = ExtResource("2_4bgmd")
+valid_pets = Array[PackedScene]([])
+use_default_colors = true
+color_id = 1
+color = Color(1, 1, 1, 1)
+secondary_color = Color(1, 1, 1, 1)
+only_use_primary_color_on_furniture = false
+show_note_sprite = false
+note = ""
+floor_tile_1_id = 7
+floor_tile_1_rotation = 0.0
+flip_floor_tile_1_h = false
+flip_floor_tile_1_v = false
+floor_tile_2_id = 7
+floor_tile_2_rotation = 0.0
+flip_floor_tile_2_h = false
+flip_floor_tile_2_v = false
+floor_tile_3_id = 3
+floor_tile_3_rotation = 0.0
+flip_floor_tile_3_h = false
+flip_floor_tile_3_v = false
+floor_tile_4_id = 9
+floor_tile_4_rotation = 0.0
+flip_floor_tile_4_h = false
+flip_floor_tile_4_v = false
+wall_tile_1_id = 7
+wall_tile_1_rotation = 0.0
+flip_wall_tile_1_h = false
+flip_wall_tile_1_v = false
+wall_tile_2_id = 8
+wall_tile_2_rotation = 0.0
+flip_wall_tile_2_h = true
+flip_wall_tile_2_v = false
+wall_tile_3_id = 7
+wall_tile_3_rotation = 0.0
+flip_wall_tile_3_h = false
+flip_wall_tile_3_v = false
+wall_tile_4_id = 8
+wall_tile_4_rotation = 0.0
+flip_wall_tile_4_h = true
+flip_wall_tile_4_v = false

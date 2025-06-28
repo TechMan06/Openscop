@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://mskhe0dyhjbs"]
+[gd_scene load_steps=58 format=3 uid="uid://mskhe0dyhjbs"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_jntc8"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_iy70q"]
@@ -8,7 +8,6 @@
 [ext_resource type="ArrayMesh" uid="uid://b14bmfs2xvrf1" path="res://asset/3d/room/child_library/bedroom_color.obj" id="4_x18x4"]
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="5_0wh13"]
 [ext_resource type="ArrayMesh" uid="uid://dlebf07ebpebh" path="res://asset/3d/room/child_library/bedroom_concrete.obj" id="6_4tgri"]
-[ext_resource type="ArrayMesh" uid="uid://bife0p1g4ed8u" path="res://asset/3d/room/child_library/furniture.obj" id="7_7uc02"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha.gdshader" id="7_455tg"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit.gdshader" id="8_55nmx"]
 [ext_resource type="Texture2D" uid="uid://byiv8xpduwfj7" path="res://asset/3d/room/child_library/texture_placeholder.png" id="8_bop7h"]
@@ -16,7 +15,9 @@
 [ext_resource type="Shader" path="res://shader/spatial/psx_lit_alpha_blend.gdshader" id="10_f5yhi"]
 [ext_resource type="ArrayMesh" uid="uid://dh2aw3bxkf0ty" path="res://asset/3d/room/child_library/lamp.obj" id="10_rht1x"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit.gdshader" id="11_kaert"]
+[ext_resource type="ArrayMesh" uid="uid://bmbxaobt1hb8a" path="res://asset/3d/room/child_library/furniture_primary.obj" id="12_v8iph"]
 [ext_resource type="PackedScene" uid="uid://dlx0cy1oqhle4" path="res://scene/object/environment/child_bedroom_node.tscn" id="14_l3aij"]
+[ext_resource type="ArrayMesh" uid="uid://r6b4k6g4doe0" path="res://asset/3d/room/child_library/furniture_secondary.obj" id="14_uepgs"]
 [ext_resource type="Texture2D" uid="uid://dvfa36tvcxi7m" path="res://asset/3d/room/child_library/bedroom_tiles.png" id="17_cvgx6"]
 [ext_resource type="Texture2D" uid="uid://bpwvhj31j1rsa" path="res://asset/3d/room/child_library/bedroom_walls.png" id="18_4f7x6"]
 [ext_resource type="Resource" uid="uid://c2ybn3215t54p" path="res://resource/textbox/dark.tres" id="18_rrcwq"]
@@ -36,6 +37,9 @@
 [ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="24_3fpas"]
 [ext_resource type="Texture2D" uid="uid://cnamkitn20mhs" path="res://asset/2d/sprite/object/child_library/child2.png" id="24_d6gwm"]
 [ext_resource type="Resource" uid="uid://ffqj7max0v4e" path="res://resource/bedroom/generic_blue.tres" id="25_r1wcf"]
+[ext_resource type="Resource" uid="uid://du3rkysdlxx1m" path="res://resource/bedroom/generic_pink.tres" id="26_pip2u"]
+[ext_resource type="Resource" uid="uid://b80cgqflhqjs" path="res://resource/bedroom/generic_green.tres" id="27_t1aqo"]
+[ext_resource type="Resource" uid="uid://ddh8lbomcby21" path="res://resource/bedroom/generic_purple.tres" id="29_pvs7g"]
 [ext_resource type="Shader" path="res://shader/spatial/psx_unlit_sprite_blend.gdshader" id="31_tlhrx"]
 
 [sub_resource type="Resource" id="Resource_qdytq"]
@@ -102,6 +106,20 @@ shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = Vector3(0, 0, 0)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ojjsy"]
+render_priority = 0
+shader = ExtResource("8_55nmx")
+shader_parameter/use_fog = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/tile_mode = false
+shader_parameter/tile = Vector2i(0, 0)
+shader_parameter/per_quad_depth = false
+shader_parameter/adjustable_depth = false
+shader_parameter/depth_offset = null
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ycs2"]
 render_priority = 0
 shader = ExtResource("8_55nmx")
@@ -133,27 +151,37 @@ shader_parameter/depth_offset = null
 [sub_resource type="Resource" id="Resource_m8uy1"]
 script = ExtResource("20_12y6r")
 color = Color(1, 1, 0.25098, 1)
+secondary_color = Color(1, 1, 0.25098, 1)
 child = ExtResource("19_oas6f")
+primary_color_on_all_furniture = true
 
 [sub_resource type="Resource" id="Resource_lr1ay"]
 script = ExtResource("20_12y6r")
-color = Color(1, 0.25, 0.6875, 1)
+color = Color(1, 0.5, 0.9, 1)
+secondary_color = Color(1, 0.5, 0.583333, 1)
 child = ExtResource("21_yico0")
+primary_color_on_all_furniture = false
 
 [sub_resource type="Resource" id="Resource_2m5jd"]
 script = ExtResource("20_12y6r")
-color = Color(0.25, 1, 0.25, 1)
+color = Color(0.5, 1, 0.5, 1)
+secondary_color = Color(0.75, 0.421875, 0.1875, 1)
 child = ExtResource("22_kthn3")
+primary_color_on_all_furniture = false
 
 [sub_resource type="Resource" id="Resource_am2pw"]
 script = ExtResource("20_12y6r")
-color = Color(0.5, 1, 1, 1)
+color = Color(0.75, 1, 1, 1)
+secondary_color = Color(0.1875, 0.5625, 0.75, 1)
 child = ExtResource("23_pa7me")
+primary_color_on_all_furniture = true
 
 [sub_resource type="Resource" id="Resource_v0vvt"]
 script = ExtResource("20_12y6r")
-color = Color(0.411765, 0, 0.74902, 1)
+color = Color(0.611765, 0.25098, 1, 1)
+secondary_color = Color(1, 0.25, 1, 1)
 child = ExtResource("24_d6gwm")
+primary_color_on_all_furniture = true
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5wq3g"]
 plane = Plane(0, 0, 1, 0)
@@ -226,8 +254,12 @@ mesh = ExtResource("6_4tgri")
 surface_material_override/0 = SubResource("ShaderMaterial_pduwi")
 script = ExtResource("5_0wh13")
 
-[node name="Furniture" type="MeshInstance3D" parent="."]
-mesh = ExtResource("7_7uc02")
+[node name="FurniturePrimary" type="MeshInstance3D" parent="."]
+mesh = ExtResource("12_v8iph")
+surface_material_override/0 = SubResource("ShaderMaterial_ojjsy")
+
+[node name="FurnitureSecondary" type="MeshInstance3D" parent="."]
+mesh = ExtResource("14_uepgs")
 surface_material_override/0 = SubResource("ShaderMaterial_1ycs2")
 
 [node name="Lamp" type="MeshInstance3D" parent="."]
@@ -251,11 +283,11 @@ script = ExtResource("19_lqwop")
 textbox_preset = ExtResource("18_rrcwq")
 min_distance = 0.5
 
-[node name="ChildBedroomNode" parent="." node_paths=PackedStringArray("overworld_face", "child", "note_sprite", "note_trigger", "textured_meshes", "colored_meshes") instance=ExtResource("14_l3aij")]
-predefined_bedrooms = Array[Resource("res://script/resource/predefined_bedroom.gd")]([ExtResource("21_tng3i"), ExtResource("22_tx3pq"), ExtResource("23_pvxpe"), ExtResource("22_caxlx"), ExtResource("23_10u3o"), ExtResource("25_r1wcf")])
+[node name="ChildBedroomNode" parent="." node_paths=PackedStringArray("overworld_face", "child", "note_sprite", "note_trigger", "entrance_wall", "textured_meshes", "primary_colored_meshes", "secondary_colored_meshes") instance=ExtResource("14_l3aij")]
+predefined_bedrooms = Array[Resource("res://script/resource/predefined_bedroom.gd")]([ExtResource("21_tng3i"), ExtResource("22_tx3pq"), ExtResource("23_pvxpe"), ExtResource("22_caxlx"), ExtResource("23_10u3o"), ExtResource("25_r1wcf"), ExtResource("26_pip2u"), ExtResource("27_t1aqo"), ExtResource("29_pvs7g")])
 default_colors = Array[ExtResource("20_12y6r")]([SubResource("Resource_m8uy1"), SubResource("Resource_lr1ay"), SubResource("Resource_2m5jd"), SubResource("Resource_am2pw"), SubResource("Resource_v0vvt")])
-allowed_random_floor_tiles = Array[int]([0, 1, 3, 4, 7, 8])
-allowed_random_wall_tiles = Array[int]([0, 1, 3, 4, 7, 8])
+allowed_random_floor_tiles = Array[int]([0, 1, 2, 3, 4, 7, 8, 9])
+allowed_random_wall_tiles = Array[int]([0, 1, 2, 3, 4, 7, 8, 9])
 floor_texture = ExtResource("17_cvgx6")
 floor_texture_frames = Vector2i(4, 4)
 wall_texture = ExtResource("18_4f7x6")
@@ -264,8 +296,10 @@ overworld_face = NodePath("../OverworldChildFace")
 child = NodePath("../Child")
 note_sprite = NodePath("../BedroomNote")
 note_trigger = NodePath("../DialogueTrigger")
+entrance_wall = NodePath("../LevelCollision/LevelShape")
 textured_meshes = [NodePath("../BedroomTop"), NodePath("../BedroomConcrete")]
-colored_meshes = [NodePath("../BedroomTop"), NodePath("../Furniture"), NodePath("../Lamp")]
+primary_colored_meshes = [NodePath("../FurniturePrimary")]
+secondary_colored_meshes = [NodePath("../FurnitureSecondary")]
 
 [node name="WallBody" type="StaticBody3D" parent="."]
 

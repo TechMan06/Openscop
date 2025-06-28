@@ -260,12 +260,16 @@ common/max_physics_steps_per_frame=16
 
 [rendering]
 
+shading/overrides/force_vertex_shading=true
 camera/depth_of_field/depth_of_field_bokeh_shape=0
 camera/depth_of_field/depth_of_field_bokeh_quality=0
 environment/ssao/quality=0
 environment/ssil/quality=0
+anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/glow/upscale_mode=0
 environment/volumetric_fog/use_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
 
 [shader_globals]
 

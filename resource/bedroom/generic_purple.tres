@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="PredefinedBedroomPreset" load_steps=5 format=3 uid="uid://ddh8lbomcby21"]
+
+[ext_resource type="Script" path="res://script/resource/predefined_bedroom.gd" id="1_2e7un"]
+[ext_resource type="Script" path="res://script/resource/face_resource.gd" id="1_mw2ay"]
+[ext_resource type="Texture2D" uid="uid://cnamkitn20mhs" path="res://asset/2d/sprite/object/child_library/child2.png" id="2_qkrwy"]
+
+[sub_resource type="Resource" id="Resource_6ewn0"]
+script = ExtResource("1_mw2ay")
+expression = Array[int]([2, 2, 2, 2, 2])
+horizontal_offsets = Array[int]([0, 0])
+vertical_offsets = Array[int]([0, 0, 1, 0, 0])
+textbox = ""
+
+[resource]
+script = ExtResource("1_2e7un")
+assigned_face = SubResource("Resource_6ewn0")
+disable_gray_face = false
+higher_fog = false
+has_entrance = false
+table_object_left_offset = Vector3(0, 0, 0)
+table_object_right_offset = Vector3(0, 0, 0)
+child = ExtResource("2_qkrwy")
+valid_pets = Array[PackedScene]([])
+use_default_colors = true
+color_id = 4
+color = Color(1, 1, 1, 1)
+secondary_color = Color(1, 1, 1, 1)
+only_use_primary_color_on_furniture = true
+show_note_sprite = false
+note = ""
+floor_tile_1_id = 5
+floor_tile_1_rotation = 180.0
+flip_floor_tile_1_h = false
+flip_floor_tile_1_v = false
+floor_tile_2_id = 4
+floor_tile_2_rotation = 0.0
+flip_floor_tile_2_h = false
+flip_floor_tile_2_v = false
+floor_tile_3_id = 5
+floor_tile_3_rotation = 180.0
+flip_floor_tile_3_h = false
+flip_floor_tile_3_v = false
+floor_tile_4_id = 8
+floor_tile_4_rotation = 90.0
+flip_floor_tile_4_h = false
+flip_floor_tile_4_v = false
+wall_tile_1_id = 4
+wall_tile_1_rotation = 270.0
+flip_wall_tile_1_h = false
+flip_wall_tile_1_v = false
+wall_tile_2_id = 3
+wall_tile_2_rotation = 0.0
+flip_wall_tile_2_h = false
+flip_wall_tile_2_v = false
+wall_tile_3_id = 8
+wall_tile_3_rotation = 0.0
+flip_wall_tile_3_h = false
+flip_wall_tile_3_v = true
+wall_tile_4_id = 8
+wall_tile_4_rotation = 90.0
+flip_wall_tile_4_h = false
+flip_wall_tile_4_v = false

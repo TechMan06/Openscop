@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlx0cy1oqhle4"]
+[gd_scene load_steps=9 format=3 uid="uid://dlx0cy1oqhle4"]
 
 [ext_resource type="Script" path="res://script/object/environment/child_bedroom_node.gd" id="1_30vci"]
 [ext_resource type="Texture2D" uid="uid://byiv8xpduwfj7" path="res://asset/3d/room/child_library/texture_placeholder.png" id="2_gxqvu"]
 [ext_resource type="Script" path="res://script/debug/sprite_loader.gd" id="3_bybfi"]
 [ext_resource type="Texture2D" uid="uid://dvfa36tvcxi7m" path="res://asset/3d/room/child_library/bedroom_tiles.png" id="3_yrao8"]
 [ext_resource type="Texture2D" uid="uid://bpwvhj31j1rsa" path="res://asset/3d/room/child_library/bedroom_walls.png" id="4_nmeqt"]
+[ext_resource type="Shader" path="res://shader/canvas/child_bedroom.gdshader" id="6_wj65r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4ogl"]
+shader = ExtResource("6_wj65r")
+shader_parameter/threshold = 1.6
+shader_parameter/primary_color = Color(0, 0, 1, 1)
+shader_parameter/secondary_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uaiuh"]
+shader = ExtResource("6_wj65r")
+shader_parameter/threshold = 1.22
+shader_parameter/primary_color = Color(1, 1, 1, 1)
+shader_parameter/secondary_color = Color(1, 1, 1, 1)
 
 [node name="ChildBedroomNode" type="Node"]
 script = ExtResource("1_30vci")
@@ -73,3 +86,16 @@ position = Vector2(112, 48)
 texture = ExtResource("4_nmeqt")
 hframes = 4
 vframes = 4
+
+[node name="TintLayer" type="Node" parent="Texture"]
+
+[node name="FloorTint" type="ColorRect" parent="Texture/TintLayer"]
+material = SubResource("ShaderMaterial_o4ogl")
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="WallTint" type="ColorRect" parent="Texture/TintLayer"]
+material = SubResource("ShaderMaterial_uaiuh")
+offset_left = 64.0
+offset_right = 128.0
+offset_bottom = 64.0

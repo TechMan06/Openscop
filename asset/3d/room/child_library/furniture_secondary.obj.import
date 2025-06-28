@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://r6b4k6g4doe0"
+path="res://.godot/imported/furniture_secondary.obj-192a21a6f981ecb7f198e7a031b6c8d5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/furniture_secondary.obj-192a21a6f981ecb7f198e7a031b6c8d5.mesh"]
+
+source_file="res://asset/3d/room/child_library/furniture_secondary.obj"
+dest_files=["res://.godot/imported/furniture_secondary.obj-192a21a6f981ecb7f198e7a031b6c8d5.mesh", "res://.godot/imported/furniture_secondary.obj-192a21a6f981ecb7f198e7a031b6c8d5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
