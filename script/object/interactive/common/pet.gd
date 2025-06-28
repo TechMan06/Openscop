@@ -8,6 +8,7 @@ signal caught
 const CAUGHT_SCENE: PackedScene = preload("res://scene/management/caught.tscn")
 
 var despawn: bool = true
+var trigger: PetTrigger = PetTrigger.new()
 
 @export_category("General Settings")
 @export var pet_name: String
@@ -16,6 +17,7 @@ var despawn: bool = true
 @export var disable_collection: bool = false
 @export var hitbox_size: float = 1.0
 @export var was_caught: bool = false
+@export var in_bed: bool = false
 @export_category("Sprite Settings")
 @export var sprite_size: float = 0.03:
 	set(value):
@@ -76,6 +78,13 @@ func _ready() -> void:
 		
 		if SaveManager.get_data().pet.find(pet_name) != -1 and despawn:
 			queue_free()
+			
+		if in_bed:
+			trigger.pet = self
+			trigger.min_distance = 1.5
+			trigger.height_offset = 1.8
+			
+			get_parent().add_child.call_deferred(trigger)
 
 
 func _process(_delta: float) -> void:
@@ -88,39 +97,51 @@ func _process(_delta: float) -> void:
 func _on_pet_area_body_entered(body: Node3D) -> void:
 	if !Engine.is_editor_hint():
 		if body is Entity && !disable_collection:
-			caught.emit()
-			was_caught = true
-			cry_sound.play()
-			
-			if SaveManager.get_data().sounds.find(cry_sound.get_stream().get_path()) == -1:
-				SaveManager.get_data().sounds.append(cry_sound.get_stream().get_path())
-			
-			pet_sprite3d.get_material_override().set_shader_parameter("billboard", false)
 			
 			if body is Player:
 				$CaughtTimer.start()
 				SaveManager._data.pet.append(pet_name)
 			
-			pet_area.queue_free()
-			
-			var _shrink_animator: Tween = create_tween().set_parallel()
-			
-			_shrink_animator.tween_property(pet_sprite3d, "scale", Vector3.ZERO,2.5)
-			
-			var _original_offset: int = pet_sprite3d.offset.y
-			
-			_shrink_animator.tween_property(
-												pet_sprite3d, 
-												"offset:y", 
-												_original_offset * 2, 
-												2.5
-											).set_trans(Tween.TRANS_LINEAR)
-			
-			_shrink_animator.tween_property(pet_sprite3d, "rotation:y", deg_to_rad(360), 2.5)
+			catch()
+
+
+func catch() -> void:
+	caught.emit()
+	was_caught = true
+	cry_sound.play()
+	
+	if SaveManager.get_data().sounds.find(cry_sound.get_stream().get_path()) == -1:
+		SaveManager.get_data().sounds.append(cry_sound.get_stream().get_path())
+	
+	pet_sprite3d.get_material_override().set_shader_parameter("billboard", false)
+	
+	if in_bed:
+		trigger.pet = null
+		$CaughtTimer.start()
+		SaveManager._data.pet.append(pet_name)
+		SaveManager.get_data().library_pet.erase(pet_name)
+	
+	pet_area.queue_free()
+	
+	var _shrink_animator: Tween = create_tween().set_parallel()
+	
+	_shrink_animator.tween_property(pet_sprite3d, "scale", Vector3.ZERO,2.5)
+	
+	var _original_offset: int = pet_sprite3d.offset.y
+	
+	_shrink_animator.tween_property(
+										pet_sprite3d, 
+										"offset:y", 
+										_original_offset * 2, 
+										2.5
+									).set_trans(Tween.TRANS_LINEAR)
+	
+	_shrink_animator.tween_property(pet_sprite3d, "rotation:y", deg_to_rad(360), 2.5)
 
 
 func _on_caught_timer_timeout() -> void:
 	var _caught_instance: Marker2D = CAUGHT_SCENE.instantiate()
+	
 	add_child(_caught_instance)
 
 

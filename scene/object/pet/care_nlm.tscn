@@ -4,12 +4,13 @@
 [ext_resource type="AudioStream" uid="uid://bhv24j7g7gu3i" path="res://sfx/pets/care_nlm_cry.wav" id="2_ja781"]
 [ext_resource type="Texture2D" uid="uid://duw5swpgogfv2" path="res://asset/2d/sprite/object/pet/care_nlm.png" id="3_q8h8t"]
 
-[node name="care_b" type="Marker3D"]
+[node name="care_nlm" type="Marker3D"]
 
 [node name="PetObject" parent="." instance=ExtResource("1_ek5to")]
-pet_name = "care_b"
+pet_name = "care_nlm"
 cry_sound_file = ExtResource("2_ja781")
 pet_sprite = ExtResource("3_q8h8t")
+in_bed = null
 frames = Vector2(2, 1)
 sprite_offset = Vector2(0, 32)
 animate = true

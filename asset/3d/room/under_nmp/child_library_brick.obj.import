@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://fbkmqtll661i"
+path="res://.godot/imported/child_library_brick.obj-5a8a1b189b8c562d95c408150a99a4b5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/child_library_brick.obj-5a8a1b189b8c562d95c408150a99a4b5.mesh"]
+
+source_file="res://asset/3d/room/under_nmp/child_library_brick.obj"
+dest_files=["res://.godot/imported/child_library_brick.obj-5a8a1b189b8c562d95c408150a99a4b5.mesh", "res://.godot/imported/child_library_brick.obj-5a8a1b189b8c562d95c408150a99a4b5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

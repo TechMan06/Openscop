@@ -207,22 +207,21 @@ func _ready():
 				if _bedroom.higher_fog:
 					higher_fog = true
 				
-				if _bedroom.valid_pets.size() > 0:
+				if _bedroom.valid_pets.size() > 0 and pet_spawner != null:
 					var _library_pets: Array[String] = SaveManager.get_data().library_pet
 					
 					for _bedroom_pet in _bedroom.valid_pets:
 						var _pet_instance: Marker3D = _bedroom_pet.instantiate()
 						
-						if _bedroom_pet == null:
-							break
-						
 						if (_pet_instance.get_child(0) is Pet):
 							if _library_pets.find(_pet_instance.get_child(0).pet_name) != -1:
+								_pet_instance.get_child(0).in_bed = true
 								pet_spawner.add_child(_pet_instance)
 								break
 						
 						else:
 							if _library_pets.find(_pet_instance.pet_name) != -1:
+								_pet_instance.in_bed = true
 								pet_spawner.add_child(_pet_instance)
 								break
 				
@@ -257,6 +256,7 @@ func _ready():
 					bedroom_secondary_color = Vector3(_secondary_color.r, _secondary_color.g, _secondary_color.b)
 				else:
 					bedroom_primary_color = Vector3(_bedroom.color.r, _bedroom.color.g, _bedroom.color.b)
+					bedroom_secondary_color = Vector3(_bedroom.secondary_color.r, _bedroom.secondary_color.g, _bedroom.secondary_color.b)
 				
 				
 				predefined_bedroom = true
@@ -264,7 +264,7 @@ func _ready():
 				break
 		
 		if !predefined_bedroom:
-			var _face_seed_string: String
+			var _face_seed_string: String = ""
 			var _face_seed_int: int
 			
 			if _save_file_face != null:
@@ -312,8 +312,8 @@ func _ready():
 					if child != null:
 						child.texture = _random_bedroom_color.child
 					
-					if _random_bedroom_color.primary_color_on_all_furniture:
-						primary_color_on_all_furniture = true
+					if !_random_bedroom_color.primary_color_on_all_furniture:
+						primary_color_on_all_furniture = false
 					
 					bedroom_primary_color = Vector3(
 												_random_bedroom_color.color.r,

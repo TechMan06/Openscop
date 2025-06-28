@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://s8eudqti5a7c"]
+[gd_scene load_steps=36 format=3 uid="uid://s8eudqti5a7c"]
 
 [ext_resource type="Script" path="res://script/management/level_class.gd" id="1_rwqro"]
 [ext_resource type="Resource" uid="uid://c4x5yp1d8vfh" path="res://resource/loading_preset/unmp_entrance.tres" id="2_s4osq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://script/management/nifty_class.gd" id="7_jhkia"]
 [ext_resource type="Script" path="res://script/debug/texture_loader.gd" id="8_1tapf"]
 [ext_resource type="PackedScene" uid="uid://81irwd2lletp" path="res://scene/object/interactive/unmp/wheel.tscn" id="9_06lja"]
+[ext_resource type="ArrayMesh" uid="uid://fbkmqtll661i" path="res://asset/3d/room/under_nmp/child_library_brick.obj" id="10_1l2nc"]
 [ext_resource type="Script" path="res://script/object/interactive/level/spawn.gd" id="10_rju4e"]
 [ext_resource type="PackedScene" uid="uid://dn6hdyapwjmyp" path="res://scene/object/interactive/level/warp.tscn" id="11_4oiwd"]
 [ext_resource type="Resource" uid="uid://be8ufsmpisef4" path="res://resource/loading_preset/nmp_noload.tres" id="12_l2hey"]
@@ -52,6 +53,44 @@ shader_parameter/tile = Vector2i(0, 0)
 shader_parameter/per_quad_depth = false
 shader_parameter/adjustable_depth = false
 shader_parameter/depth_offset = null
+
+[sub_resource type="Animation" id="Animation_faciu"]
+resource_name = "scroll"
+length = 0.300003
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(6, 4.5, -11.5), Vector3(6, 4, -11.5), Vector3(6, 3.5, -11.5), Vector3(6, 3, -11.5), Vector3(6, 2.5, -11.5), Vector3(6, 2, -11.5), Vector3(6, 1.5, -11.5), Vector3(6, 1, -11.5), Vector3(6, 0.5, -11.5), Vector3(6, 5, -11.5)]
+}
+
+[sub_resource type="Animation" id="Animation_p6fh0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(6, 5, -11.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6bas"]
+_data = {
+"RESET": SubResource("Animation_p6fh0"),
+"scroll": SubResource("Animation_faciu")
+}
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xpq6b"]
 data = PackedVector3Array(8.5, -0.5, -10.5, 6.625, -0.5, -10.5, 8.5, 0.5, -10.5, 8.5, 0.5, -10.5, 6.625, -0.5, -10.5, 6.625, 0.5, -10.5, 0.625, -0.5, 1.5, 0.625, -0.5, -1, 0.625, 0.5, 1.5, 0.625, 0.5, 1.5, 0.625, -0.5, -1, 0.625, 0.5, -1, -0.625, -0.5, -1, -0.625, -0.5, 1.5, -0.625, 0.5, -1, -0.625, 0.5, -1, -0.625, -0.5, 1.5, -0.625, 0.5, 1.5, -3.5, -0.5, -8.5, -3.5, -0.5, -3, -3.5, 0.5, -8.5, -3.5, 0.5, -8.5, -3.5, -0.5, -3, -3.5, 0.5, -3, 0.625, -0.5, -1, 2.5, -0.5, -1, 0.625, 0.5, -1, 0.625, 0.5, -1, 2.5, -0.5, -1, 2.5, 0.5, -1, -3.5, -0.5, -3, -2.5, -0.5, -3, -3.5, 0.5, -3, -3.5, 0.5, -3, -2.5, -0.5, -3, -2.5, 0.5, -3, -1.5, -0.5, -1, -0.625, -0.5, -1, -1.5, 0.5, -1, -1.5, 0.5, -1, -0.625, -0.5, -1, -0.625, 0.5, -1, -2.5, -0.5, -3, -2.5, -0.5, -2, -2.5, 0.5, -3, -2.5, 0.5, -3, -2.5, -0.5, -2, -2.5, 0.5, -2, -2.5, -0.5, -2, -1.5, -0.5, -2, -2.5, 0.5, -2, -2.5, 0.5, -2, -1.5, -0.5, -2, -1.5, 0.5, -2, -1.5, -0.5, -2, -1.5, -0.5, -1, -1.5, 0.5, -2, -1.5, 0.5, -2, -1.5, -0.5, -1, -1.5, 0.5, -1, 2.5, -0.5, -1, 2.5, -0.5, -3.5, 2.5, 0.5, -1, 2.5, 0.5, -1, 2.5, -0.5, -3.5, 2.5, 0.5, -3.5, 0.5, -0.5, -4.5, 2.5, -0.5, -4.5, 0.5, 0.5, -4.5, 0.5, 0.5, -4.5, 2.5, -0.5, -4.5, 2.5, 0.5, -4.5, 8.5, -0.5, -5.5, 8.5, -0.5, -10.5, 8.5, 0.5, -5.5, 8.5, 0.5, -5.5, 8.5, -0.5, -10.5, 8.5, 0.5, -10.5, 5.375, -0.5, -10.5, 5.375, 0.5, -10.5, 5.375, -0.5, -13.5, 5.375, -0.5, -13.5, 5.375, 0.5, -10.5, 5.375, 0.5, -13.5, 5.375, -0.5, -10.5, 0, -0.5, -10.5, 5.375, 0.5, -10.5, 5.375, 0.5, -10.5, 0, -0.5, -10.5, 0, 0.5, -10.5, 6.625, 0.5, -10.5, 6.625, -0.5, -10.5, 6.625, 0.5, -13.5, 6.625, 0.5, -13.5, 6.625, -0.5, -10.5, 6.625, -0.5, -13.5, 0, -0.5, -8.5, -3.5, -0.5, -8.5, 0, 0.5, -8.5, 0, 0.5, -8.5, -3.5, -0.5, -8.5, -3.5, 0.5, -8.5, 0, -0.5, -10.5, 0, -0.5, -8.5, 0, 0.5, -10.5, 0, 0.5, -10.5, 0, -0.5, -8.5, 0, 0.5, -8.5, 0.5, -0.5, -3.5, 0.5, -0.5, -4.5, 0.5, 0.5, -3.5, 0.5, 0.5, -3.5, 0.5, -0.5, -4.5, 0.5, 0.5, -4.5, 2.5, -0.5, -3.5, 0.5, -0.5, -3.5, 2.5, 0.5, -3.5, 2.5, 0.5, -3.5, 0.5, -0.5, -3.5, 0.5, 0.5, -3.5, 2.5, -0.5, -5.5, 8.5, -0.5, -5.5, 2.5, 0.5, -5.5, 2.5, 0.5, -5.5, 8.5, -0.5, -5.5, 8.5, 0.5, -5.5, 2.5, -0.5, -4.5, 2.5, -0.5, -5.5, 2.5, 0.5, -4.5, 2.5, 0.5, -4.5, 2.5, -0.5, -5.5, 2.5, 0.5, -5.5)
@@ -115,6 +154,21 @@ script = ExtResource("7_jhkia")
 script = ExtResource("8_1tapf")
 protected_texture_path = "res://asset/3d/room/under_nmp/child_library.png"
 
+[node name="NiftyMesh3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -11.5)
+mesh = ExtResource("10_1l2nc")
+surface_material_override/0 = SubResource("ShaderMaterial_7x8ii")
+script = ExtResource("7_jhkia")
+
+[node name="TextureLoader" type="Node" parent="NiftyMesh3"]
+script = ExtResource("8_1tapf")
+protected_texture_path = "res://asset/3d/room/under_nmp/child_library.png"
+
+[node name="BrickAnimation" type="AnimationPlayer" parent="NiftyMesh3"]
+libraries = {
+"": SubResource("AnimationLibrary_f6bas")
+}
+
 [node name="LevelCollision" type="StaticBody3D" parent="."]
 
 [node name="LevelShape" type="CollisionShape3D" parent="LevelCollision"]
@@ -156,10 +210,12 @@ mesh = ExtResource("16_tckau")
 skeleton = NodePath("../NiftyMesh2")
 surface_material_override/0 = SubResource("ShaderMaterial_i7bq6")
 
-[node name="OverworldChildFace" parent="." node_paths=PackedStringArray("wall", "earthquake_sound") instance=ExtResource("17_s5n0o")]
+[node name="OverworldChildFace" parent="." node_paths=PackedStringArray("wall", "wall_animation", "earthquake_sound") instance=ExtResource("17_s5n0o")]
 transform = Transform3D(1.51554, 0.181923, -0.855878, 0, 1.71176, 0.363845, 0.874998, -0.315099, 1.48242, 1.18477, 1.26313, -4.31794)
 load_from_file = true
 wall = NodePath("../WallBody/WallShape")
+wall_animation = NodePath("../NiftyMesh3/BrickAnimation")
+wall_animation_name = "scroll"
 special_faces = Array[Resource("res://script/resource/face_resource.gd")]([ExtResource("18_57x7c"), ExtResource("19_eg8pi"), ExtResource("20_1ctcx"), ExtResource("21_ia1k3"), ExtResource("22_2ams3")])
 textbox_preset = ExtResource("23_2cpqu")
 earthquake_sound = NodePath("../Earthquake")
