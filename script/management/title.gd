@@ -245,6 +245,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("pressed_action"):
 			if cont_option:
 				title_stage = -1
+				Global.current_slot = selected_file
 				$PressedStart.play()
 				
 				SaveManager.load_game(selected_file)

@@ -73,6 +73,9 @@ func save_odd_care(slot: int = 0) -> void:
 
 func manage_data() -> void:
 	_data.player_data = _data.player_data.duplicate(true)
-	_data.library_face = _data.library_face.duplicate(true)
+	
+	if _data.library_face != null:
+		_data.library_face = _data.library_face.duplicate(true)
+	
 	_data.player_data.scene_info = []
 	

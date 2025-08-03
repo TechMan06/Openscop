@@ -240,7 +240,10 @@ func _ready() -> void:
 		
 		if _player_instance.player_stats.scene_info != []:
 			for spawn in get_tree().get_nodes_in_group("spawn"):
-				if [spawn.scene_path, spawn.warp_id] == _player_instance.player_stats.scene_info:
+				if (
+						spawn.scene_path == _player_instance.player_stats.scene_info[0] and
+						spawn.warp_id == _player_instance.player_stats.scene_info[1]
+					):
 					spawn_pos = spawn.global_position
 					
 					match SaveManager.get_data().bucket_direction:
