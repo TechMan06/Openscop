@@ -38,6 +38,9 @@ NMP Door Hatch: https://www.textures.com/download/doorswoodsingleold0204/88137
 NMP Dirt: https://www.textures.com/download/gravel-0209/2930
 Download the "Seamless" Version
 
+Windmill: https://www.textures.com/download/stone-round-0121/117080
+Download the "Seamless-X" Version
+
 
 Cellar:
 
@@ -53,6 +56,7 @@ Under the Newmaker Plane:
 Road: https://www.textures.com/download/roads-0156/107028
 
 GG-AA Room Floor: https://www.textures.com/download/concrete-new-0012/11262
+Download the "Seamless" Version
 
 GG-AA Wheel: https://www.textures.com/download/heavy-rust-pbr0704/140642
 Download the "Albedo"
